@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
-import { Camera, ShieldCheck, Bell } from "lucide-react";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Bell, Camera, ShieldCheck } from "lucide-react";
 
 const steps = [
   {
@@ -47,8 +46,9 @@ export function QualityProcess() {
               key={step.number}
               variant="fadeUp"
               delay={index * 0.2}
+              className="h-full"
             >
-              <div className="relative bg-navy-950 border border-navy-700 rounded-xl p-8 text-center">
+              <div className="relative bg-navy-950 border border-navy-700 rounded-xl p-8 text-center h-full flex flex-col">
                 {/* Step Number Badge */}
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold text-navy-950 font-display text-2xl font-bold mb-6">
                   {step.number}
@@ -63,7 +63,7 @@ export function QualityProcess() {
                 </h3>
 
                 {/* Description */}
-                <p className="font-body text-muted">
+                <p className="font-body text-muted flex-grow">
                   {step.description}
                 </p>
               </div>

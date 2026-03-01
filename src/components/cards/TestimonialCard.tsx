@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Star } from "lucide-react";
 import { Testimonial } from "@/types";
+import { Star } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 interface TestimonialCardProps {
   testimonial: Testimonial;
@@ -22,7 +22,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
   const initials = getInitials(testimonial.name);
 
   return (
-    <div className="bg-navy-800 border border-navy-700 rounded-xl p-6 h-full hover:border-gold transition-all duration-300">
+    <div className="bg-navy-800 border border-navy-700 rounded-xl p-6 h-full hover:border-gold transition-all duration-300 flex flex-col">
       {/* Stars */}
       <div className="flex gap-1 mb-4">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -35,21 +35,22 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
       </div>
 
       {/* Quote */}
-      <p className="font-body text-muted italic mb-6">
+      <p className="font-body text-muted italic mb-6 flex-grow">
         &quot;{testimonial.content}&quot;
       </p>
 
       {/* Author Info */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 mt-auto">
         {/* Avatar */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 w-12 h-12 relative">
           {!imgError ? (
             <Image
               src={testimonial.avatar}
               alt={testimonial.name}
               width={48}
               height={48}
-              className="rounded-full object-cover ring-2 ring-gold"
+              className="w-12 h-12 rounded-full object-cover ring-2 ring-gold"
+              style={{ aspectRatio: "1 / 1" }}
               onError={() => setImgError(true)}
             />
           ) : (

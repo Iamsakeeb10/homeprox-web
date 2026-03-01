@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { ContactFormData } from "@/types";
-import { validateForm } from "@/lib/utils/formValidation";
 import { Button } from "@/components/ui/Button";
 import { services } from "@/lib/data/services";
+import { validateForm } from "@/lib/utils/formValidation";
+import { ContactFormData } from "@/types";
+import { ChevronDown } from "lucide-react";
+import React, { useState } from "react";
 
 const propertyTypes = [
   "Residential",
@@ -199,24 +200,30 @@ export function QuoteForm() {
         <label htmlFor="propertyType" className="block font-body text-sm font-medium text-white mb-2">
           Property Type <span className="text-gold">*</span>
         </label>
-        <select
-          id="propertyType"
-          name="propertyType"
-          value={formData.propertyType}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 bg-navy-800 border ${
-            errors.propertyType ? "border-red-500" : "border-navy-700"
-          } rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300`}
-          aria-describedby={errors.propertyType ? "propertyType-error" : undefined}
-          aria-invalid={errors.propertyType ? "true" : "false"}
-        >
-          <option value="" disabled>Select Property Type</option>
-          {propertyTypes.map((type) => (
-            <option key={type} value={type} className="bg-navy-800">
-              {type}
-            </option>
-          ))}
-        </select>
+        <div className="relative">
+          <select
+            id="propertyType"
+            name="propertyType"
+            value={formData.propertyType}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 pr-10 bg-navy-800 border ${
+              errors.propertyType ? "border-red-500" : "border-navy-700"
+            } rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
+            aria-describedby={errors.propertyType ? "propertyType-error" : undefined}
+            aria-invalid={errors.propertyType ? "true" : "false"}
+          >
+            <option value="" disabled>Select Property Type</option>
+            {propertyTypes.map((type) => (
+              <option key={type} value={type} className="bg-navy-800">
+                {type}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none"
+            aria-hidden="true"
+          />
+        </div>
         {errors.propertyType && (
           <p id="propertyType-error" className="mt-1 text-sm text-red-400" role="alert">
             {errors.propertyType}
@@ -229,27 +236,33 @@ export function QuoteForm() {
         <label htmlFor="serviceNeeded" className="block font-body text-sm font-medium text-white mb-2">
           Service Needed <span className="text-gold">*</span>
         </label>
-        <select
-          id="serviceNeeded"
-          name="serviceNeeded"
-          value={formData.serviceNeeded}
-          onChange={handleChange}
-          className={`w-full px-4 py-3 bg-navy-800 border ${
-            errors.serviceNeeded ? "border-red-500" : "border-navy-700"
-          } rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300`}
-          aria-describedby={errors.serviceNeeded ? "serviceNeeded-error" : undefined}
-          aria-invalid={errors.serviceNeeded ? "true" : "false"}
-        >
-          <option value="" disabled>Select a Service</option>
-          {services.map((service) => (
-            <option key={service.id} value={service.title} className="bg-navy-800">
-              {service.title}
+        <div className="relative">
+          <select
+            id="serviceNeeded"
+            name="serviceNeeded"
+            value={formData.serviceNeeded}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 pr-10 bg-navy-800 border ${
+              errors.serviceNeeded ? "border-red-500" : "border-navy-700"
+            } rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
+            aria-describedby={errors.serviceNeeded ? "serviceNeeded-error" : undefined}
+            aria-invalid={errors.serviceNeeded ? "true" : "false"}
+          >
+            <option value="" disabled>Select a Service</option>
+            {services.map((service) => (
+              <option key={service.id} value={service.title} className="bg-navy-800">
+                {service.title}
+              </option>
+            ))}
+            <option value="Multiple Services" className="bg-navy-800">
+              Multiple Services
             </option>
-          ))}
-          <option value="Multiple Services" className="bg-navy-800">
-            Multiple Services
-          </option>
-        </select>
+          </select>
+          <ChevronDown
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none"
+            aria-hidden="true"
+          />
+        </div>
         {errors.serviceNeeded && (
           <p id="serviceNeeded-error" className="mt-1 text-sm text-red-400" role="alert">
             {errors.serviceNeeded}
