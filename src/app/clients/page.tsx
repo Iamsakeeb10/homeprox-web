@@ -18,10 +18,13 @@ import {
   Mail
 } from "lucide-react";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = generatePageMetadata({
   title: "Our Clients | MEGAFIXX Home Services LLC",
   description: "Trusted by property managers, investors, financial institutions, and real estate professionals across Texas.",
-};
+  path: "/clients"
+});
 
 export default function ClientsPage() {
   const heroImageUrl = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80";

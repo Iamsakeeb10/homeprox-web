@@ -13,10 +13,13 @@ import {
   Award
 } from "lucide-react";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = generatePageMetadata({
   title: "About MEGAFIXX Home Services LLC | Texas Statewide Property Maintenance",
   description: "Learn about MEGAFIXX Home Services LLC and our commitment to professional property maintenance across Texas. Texas-based. Statewide reach. Built for serious property operators.",
-};
+  path: "/about"
+});
 
 const serviceCategories = [
   {

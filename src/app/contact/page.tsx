@@ -13,10 +13,13 @@ import {
   ShieldCheck
 } from "lucide-react";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = generatePageMetadata({
   title: "Contact Us | MEGAFIXX Home Services LLC",
   description: "Get in touch with MEGAFIXX for professional property maintenance services. Serving all of Texas statewide.",
-};
+  path: "/contact"
+});
 
 export default function ContactPage() {
   const heroImageUrl = "https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80";

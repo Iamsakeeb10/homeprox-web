@@ -5,11 +5,13 @@ import { services } from "@/lib/data/services";
 import { ServiceCard } from "@/components/cards/ServiceCard";
 import { Button } from "@/components/ui/Button";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { generatePageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata({
   title: "Our Services | MEGAFIXX Home Services LLC",
   description: "Professional property maintenance services across Texas including plumbing, gutter cleaning, painting, landscaping, and more.",
-};
+  path: "/services"
+});
 
 export default function ServicesPage() {
   const heroImageUrl = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80";
