@@ -26,7 +26,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="relative min-h-[50vh] flex items-center justify-center">
+      <section className="relative min-h-[50vh] flex items-center justify-center bg-navy-950 pt-20">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image

@@ -143,7 +143,7 @@ const termsContent = [
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-navy-950">
+    <div className="min-h-screen bg-navy-950 pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         {/* Header */}
         <div className="mb-12">

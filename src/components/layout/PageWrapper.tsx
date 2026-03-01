@@ -23,20 +23,20 @@ export function PageWrapper({ children }: PageWrapperProps) {
     return <div key={pathname}>{children}</div>;
   }
 
-  // Other pages: use AnimatePresence with smooth animations
-  // Remove mode="wait" to prevent blocking - pages render immediately
-  // Keep smooth animations: fade + slide up on entry, fade + slide down on exit
+  // Other pages: use AnimatePresence with mode="wait" for smooth transitions
+  // Uniform variants for all pages: gentle fade + slide
   return (
-    <AnimatePresence initial={false}>
+    <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={pathname}
-        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -20 }}
+        exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -8 }}
         transition={{
-          duration: shouldReduceMotion ? 0 : 0.15,
+          duration: shouldReduceMotion ? 0 : 0.25,
           ease: "easeInOut"
         }}
+        style={{ willChange: "opacity, transform" }}
       >
         {children}
       </motion.div>

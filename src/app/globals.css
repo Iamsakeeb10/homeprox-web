@@ -24,6 +24,12 @@
   --animate-float:   float 3s ease-in-out infinite;
 }
 
+/* Prevent flash of unstyled content */
+html,
+body {
+  background-color: #0A0F1E;
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
