@@ -4,47 +4,59 @@ import { TestimonialCard } from "@/components/cards/TestimonialCard";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { testimonials } from "@/lib/data/testimonials";
-import { motion, useReducedMotion } from "framer-motion";
+import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel from "embla-carousel-react";
+import { useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-play functionality
+  // Embla carousel setup for mobile
+  const autoplayOptions = Autoplay({ 
+    delay: 5000, 
+    stopOnInteraction: true,
+    stopOnMouseEnter: true 
+  });
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true, 
+      align: 'center', 
+      skipSnaps: false,
+      duration: shouldReduceMotion ? 0 : 20
+    },
+    shouldReduceMotion ? [] : [autoplayOptions]
+  );
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
   useEffect(() => {
-    if (shouldReduceMotion || isPaused) {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-      return;
-    }
+    if (!emblaApi) return;
 
-    intervalRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    setScrollSnaps(emblaApi.scrollSnapList());
+    
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on('select', onSelect);
+    onSelect(); // Set initial index
 
     return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
+      emblaApi.off('select', onSelect);
     };
-  }, [isPaused, shouldReduceMotion]);
+  }, [emblaApi]);
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
+  const scrollPrev = useCallback(() => {
+    emblaApi?.scrollPrev();
+  }, [emblaApi]);
 
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
+  const scrollNext = useCallback(() => {
+    emblaApi?.scrollNext();
+  }, [emblaApi]);
 
   return (
     <section className="py-20 lg:py-28 bg-navy-950">
@@ -57,6 +69,58 @@ export function Testimonials() {
           />
         </AnimatedSection>
 
+        {/* Mobile: Embla Carousel */}
+        <div className="lg:hidden">
+          {/* Embla viewport */}
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {testimonials.map((testimonial) => (
+                <div
+                  key={testimonial.id}
+                  className="flex-[0_0_100%] min-w-0 pl-4 pr-4"
+                >
+                  <TestimonialCard testimonial={testimonial} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation arrows and indicator dots */}
+          <div className="flex justify-between items-center mt-6 px-2">
+            <button
+              onClick={scrollPrev}
+              className="w-10 h-10 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gold hover:border-gold transition-colors duration-200"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
+            </button>
+
+            {/* Indicator dots */}
+            <div className="flex items-center gap-2">
+              {scrollSnaps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => emblaApi?.scrollTo(index)}
+                  aria-label={`Go to testimonial ${index + 1}`}
+                  className={`rounded-full transition-all duration-300 ${
+                    index === selectedIndex
+                      ? "bg-gold w-4 h-3"
+                      : "bg-navy-700 w-2 h-2"
+                  }`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={scrollNext}
+              className="w-10 h-10 rounded-full bg-navy-800 border border-navy-700 flex items-center justify-center text-gold hover:border-gold transition-colors duration-200"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-5 h-5" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+
         {/* Desktop: 3-column grid */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
@@ -68,90 +132,6 @@ export function Testimonials() {
               <TestimonialCard testimonial={testimonial} />
             </AnimatedSection>
           ))}
-        </div>
-
-        {/* Mobile: Carousel */}
-        <div className="lg:hidden relative">
-          <div
-            className="overflow-hidden w-full"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onTouchStart={() => setIsPaused(true)}
-            onTouchEnd={() => setIsPaused(false)}
-          >
-            <motion.div
-              className="flex transition-transform duration-300 ease-in-out"
-              drag="x"
-              dragConstraints={{
-                left: -(testimonials.length - 1) * 100,
-                right: 0
-              }}
-              dragElastic={0.2}
-              onDragEnd={(_, info) => {
-                const threshold = 50;
-                if (info.offset.x < -threshold && currentIndex < testimonials.length - 1) {
-                  goToNext();
-                } else if (info.offset.x > threshold && currentIndex > 0) {
-                  goToPrevious();
-                }
-              }}
-              animate={{
-                x: shouldReduceMotion ? 0 : `-${currentIndex * 100}%`
-              }}
-              transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 30
-              }}
-              style={{ width: `${testimonials.length * 100}%` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div
-                  key={testimonial.id}
-                  className="w-full flex-shrink-0 px-2"
-                  style={{ width: `${100 / testimonials.length}%`, minWidth: `${100 / testimonials.length}%` }}
-                >
-                  <TestimonialCard testimonial={testimonial} />
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Navigation Arrows - Positioned below card */}
-          <div className="flex justify-between items-center mt-4">
-            <button
-              onClick={goToPrevious}
-              disabled={currentIndex === 0}
-              className="w-10 h-10 rounded-full bg-navy-800 hover:bg-navy-700 border border-navy-700 flex items-center justify-center text-gold hover:text-orange transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft className="w-5 h-5" aria-hidden="true" />
-            </button>
-            <button
-              onClick={goToNext}
-              disabled={currentIndex === testimonials.length - 1}
-              className="w-10 h-10 rounded-full bg-navy-800 hover:bg-navy-700 border border-navy-700 flex items-center justify-center text-gold hover:text-orange transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight className="w-5 h-5" aria-hidden="true" />
-            </button>
-          </div>
-
-          {/* Indicator Dots */}
-          <div className="flex justify-center gap-2 mt-4">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "bg-gold w-3 h-3"
-                    : "bg-navy-700 w-2 h-2 hover:bg-navy-600"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </div>
     </section>
