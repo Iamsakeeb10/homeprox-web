@@ -39,7 +39,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center relative inline-block">
             {/* Background layer - matches logo size exactly */}
-            <div 
+            <motion.div 
               className="absolute inset-0 bg-white/80 backdrop-blur-md rounded-lg -z-10"
               style={{ 
                 width: '100%', 
@@ -49,13 +49,21 @@ export function Navbar() {
                 right: 0,
                 bottom: 0
               }}
+              initial={{ opacity: 1 }}
+              animate={{ 
+                opacity: isScrolled ? 0 : 1,
+                scale: isScrolled ? 0.95 : 1
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             />
             <Image
               src="/images/logo.png"
               alt="MEGAFIXX Home Services LLC"
               width={220}
               height={66}
-              className="relative z-10 h-12 w-auto sm:h-16 object-contain brightness-110 contrast-110"
+              className={`relative z-10 w-auto object-contain brightness-110 contrast-110 transition-all duration-300 ${
+                isScrolled ? "h-16 sm:h-[88px]" : "h-12 sm:h-16"
+              }`}
               priority
             />
           </Link>
