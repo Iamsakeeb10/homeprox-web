@@ -9,7 +9,7 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Our Services | MEGAFIXX Home Services LLC",
-  description: "Professional property maintenance services across Texas including plumbing, gutter cleaning, painting, landscaping, and more.",
+  description: "Professional property maintenance services across Texas including plumbing, gutter cleaning, drywall repair, landscaping, and more.",
   path: "/services"
 });
 
@@ -36,19 +36,6 @@ export default function ServicesPage() {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
-          {/* Breadcrumb */}
-          <nav className="mb-6" aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm">
-              <li>
-                <Link href="/" className="font-body text-muted hover:text-gold transition-colors duration-300">
-                  Home
-                </Link>
-              </li>
-              <li className="text-muted">/</li>
-              <li className="font-body text-gold">Services</li>
-            </ol>
-          </nav>
-
           {/* H1 */}
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Our Services

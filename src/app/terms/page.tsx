@@ -147,17 +147,6 @@ export default function TermsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         {/* Header */}
         <div className="mb-12">
-          <nav className="mb-6" aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm">
-              <li>
-                <Link href="/" className="font-body text-muted hover:text-gold transition-colors duration-300">
-                  Home
-                </Link>
-              </li>
-              <li className="text-muted">/</li>
-              <li className="font-body text-gold">Terms & Conditions</li>
-            </ol>
-          </nav>
           <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
             Terms & Conditions
           </h1>

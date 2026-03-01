@@ -22,7 +22,7 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Our Clients | MEGAFIXX Home Services LLC",
-  description: "Trusted by property managers, investors, financial institutions, and real estate professionals across Texas.",
+  description: "Trusted property maintenance partner for property managers, financial institutions, real estate professionals, and investors across Texas.",
   path: "/clients"
 });
 

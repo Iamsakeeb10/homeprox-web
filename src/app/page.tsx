@@ -12,7 +12,7 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "MEGAFIXX Home Services LLC | Texas Statewide Property Maintenance",
-  description: "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide. Reliable, insured, and scalable.",
+  description: "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide.",
   path: "/"
 });
 

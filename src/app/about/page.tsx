@@ -1,24 +1,23 @@
+import { TeamPhoto } from "@/components/cards/TeamPhoto";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { Button } from "@/components/ui/Button";
+import {
+  Award,
+  Clock,
+  Home,
+  Paintbrush,
+  ShieldCheck,
+  Trash2
+} from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { Button } from "@/components/ui/Button";
-import { TeamPhoto } from "@/components/cards/TeamPhoto";
-import {
-  Wrench,
-  Paintbrush,
-  Home,
-  Trash2,
-  ShieldCheck,
-  Clock,
-  Award
-} from "lucide-react";
 
 import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "About Us | MEGAFIXX Home Services LLC",
-  description: "Texas-based statewide property maintenance company serving property managers, investors, banks, and real estate professionals across Texas. Reliable, insured, and professional.",
+  description: "Texas-based statewide property maintenance company serving property managers, investors, banks, and real estate professionals across Texas.",
   path: "/about"
 });
 
@@ -90,18 +89,6 @@ export default function AboutPage() {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
-          {/* Breadcrumb */}
-          <nav className="mb-6" aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm">
-              <li>
-                <Link href="/" className="font-body text-muted hover:text-gold transition-colors duration-300">
-                  Home
-                </Link>
-              </li>
-              <li className="text-muted">/</li>
-              <li className="font-body text-gold">About</li>
-            </ol>
-          </nav>
           <div className="text-center">
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
               About MEGAFIXX Home Services LLC

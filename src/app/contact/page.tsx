@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { QuoteForm } from "@/components/forms/QuoteForm";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import {
@@ -17,7 +16,7 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Contact Us | MEGAFIXX Home Services LLC",
-  description: "Contact MEGAFIXX Home Services LLC for professional property maintenance across Texas. Call (469) 378-9262 or email info@megafixxhomeservices.com for a free estimate.",
+  description: "Contact MEGAFIXX Home Services LLC for a free estimate. Call (469) 378-9262 or email info@megafixxhomeservices.com.",
   path: "/contact"
 });
 
@@ -44,19 +43,6 @@ export default function ContactPage() {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
-          {/* Breadcrumb */}
-          <nav className="mb-6" aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm">
-              <li>
-                <Link href="/" className="font-body text-muted hover:text-gold transition-colors duration-300">
-                  Home
-                </Link>
-              </li>
-              <li className="text-muted">/</li>
-              <li className="font-body text-gold">Contact</li>
-            </ol>
-          </nav>
-
           {/* H1 */}
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
             Contact MEGAFIXX
