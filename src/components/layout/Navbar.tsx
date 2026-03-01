@@ -38,7 +38,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20 w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="relative flex items-center justify-center rounded-lg bg-white backdrop-blur-sm border border-white/30 shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]">
+            <div className="relative inline-flex items-center justify-center rounded-lg bg-white backdrop-blur-sm border border-white/30 shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.2)]">
               <Image
                 src="/images/logo.png"
                 alt="MEGAFIXX Home Services LLC"
