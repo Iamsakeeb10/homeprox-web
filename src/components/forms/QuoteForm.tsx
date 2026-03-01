@@ -30,6 +30,7 @@ export function QuoteForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -49,34 +50,46 @@ export function QuoteForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSuccess(false);
 
-    // Validate form
     const validationErrors = validateForm(formData);
-    
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate form submission (no backend)
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormData({
-        fullName: "",
-        companyName: "",
-        email: "",
-        phone: "",
-        propertyType: "",
-        serviceNeeded: "",
-        location: "",
-        message: ""
-      });
-      setErrors({});
-    }, 1000);
+    setSubmitError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await res.json()
+
+      if (res.ok && data.success) {
+        setIsSuccess(true)
+        setFormData({
+          fullName: '',
+          companyName: '',
+          email: '',
+          phone: '',
+          propertyType: '',
+          serviceNeeded: '',
+          location: '',
+          message: '',
+        })
+        setErrors({})
+      } else {
+        setSubmitError(data.error || 'Something went wrong. Please call us directly at (469) 378-9262.')
+      }
+    } catch {
+      setSubmitError('Network error. Please check your connection or call us at (469) 378-9262.')
+    } finally {
+      setIsSubmitting(false)
+    }
   };
 
   return (
@@ -330,6 +343,9 @@ export function QuoteForm() {
       >
         Send Request
       </Button>
+      {submitError && (
+        <p className="text-red-400 text-sm text-center mt-2" role="alert">{submitError}</p>
+      )}
     </form>
   );
 }

@@ -32,10 +32,17 @@ npm install
 cp .env.local.example .env.local
 ```
 
-4. Update `.env.local` with your site URL:
+4. Update `.env.local` with your site URL and (for the contact form) email settings:
 
 ```
 NEXT_PUBLIC_SITE_URL=https://megafixxhomeservices.com
+
+# Contact form (Nodemailer)
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=465
+EMAIL_USER=your-gmail@gmail.com
+EMAIL_PASS=your-app-password
+CONTACT_EMAIL=your-gmail@gmail.com
 ```
 
 5. Run the development server:
@@ -88,6 +95,11 @@ src/
 ## Environment Variables
 
 - `NEXT_PUBLIC_SITE_URL` - The public URL of your site (used for metadata and SEO)
+- `EMAIL_HOST` - SMTP host (e.g. `smtp.gmail.com`)
+- `EMAIL_PORT` - SMTP port (e.g. `465` for TLS)
+- `EMAIL_USER` - SMTP auth email (e.g. your Gmail)
+- `EMAIL_PASS` - SMTP auth password (use a Gmail App Password, not your account password)
+- `CONTACT_EMAIL` - Address where contact form submissions are sent
 
 ## Design System
 
