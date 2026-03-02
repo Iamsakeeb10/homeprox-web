@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 interface StatItem {
   value: string;
@@ -12,7 +12,7 @@ const stats: StatItem[] = [
   { value: "10+", label: "Years Experience" },
   { value: "500+", label: "Properties" },
   { value: "Statewide", label: "Coverage" },
-  { value: "100%", label: "Insured" }
+  { value: "100%", label: "Insured" },
 ];
 
 function CountUpNumber({ value, label }: StatItem) {
@@ -57,8 +57,8 @@ function CountUpNumber({ value, label }: StatItem) {
     <div ref={ref} className="text-center">
       <div className="text-4xl md:text-5xl font-display font-bold text-gold mb-2">
         {displayValue}
-        {value.includes("+") && "+"}
-        {value.includes("%") && "%"}
+        {value.includes("+") && !displayValue.includes("+") && "+"}
+        {value.includes("%") && !displayValue.includes("%") && "%"}
       </div>
       <div className="font-body text-white text-sm md:text-base">{label}</div>
     </div>
@@ -75,8 +75,12 @@ export function StatsBar() {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-              whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              initial={
+                shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }
+              }
+              whileInView={
+                shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
+              }
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="border-t-2 border-gold pt-4"
