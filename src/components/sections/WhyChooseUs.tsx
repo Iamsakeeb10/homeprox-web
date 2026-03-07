@@ -37,7 +37,7 @@ const stats = [
 
 export function WhyChooseUs() {
   return (
-    <section id="why-us" className="py-20 lg:py-28 bg-cream-50">
+    <section id="why-us" className="py-20 lg:py-28 bg-surface-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
@@ -55,12 +55,12 @@ export function WhyChooseUs() {
               variant="fadeUp"
               delay={index * 0.1}
             >
-              <div className="bg-cream-200 border border-cream-300 rounded-xl p-6 h-full">
-                <feature.icon className="w-10 h-10 text-gold mb-4" aria-hidden="true" />
-                <h3 className="font-display text-xl font-bold text-stone-900 mb-3">
+              <div className="bg-white border border-surface-200 rounded-xl p-6 h-full shadow-card">
+                <feature.icon className="w-10 h-10 text-blue mb-4" aria-hidden="true" />
+                <h3 className="font-display text-xl font-bold text-navy mb-3">
                   {feature.title}
                 </h3>
-                <p className="font-body text-muted">
+                <p className="font-body text-text-body">
                   {feature.description}
                 </p>
               </div>
@@ -70,19 +70,19 @@ export function WhyChooseUs() {
 
         {/* Stats Row */}
         <AnimatedSection variant="fadeUp" delay={0.5}>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 pt-8 border-t border-cream-300">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 pt-8 border-t border-surface-200">
             {stats.map((stat, index) => (
               <React.Fragment key={stat.value}>
                 <div className="text-center">
-                  <div className="font-display text-2xl md:text-3xl font-bold text-gold mb-1">
+                  <div className="font-display text-2xl md:text-3xl font-bold text-navy mb-1">
                     {stat.value}
                   </div>
-                  <div className="font-body text-muted text-sm">
+                  <div className="font-body text-text-muted text-sm">
                     {stat.label}
                   </div>
                 </div>
                 {index < stats.length - 1 && (
-                  <div className="hidden md:block w-px h-12 bg-cream-300" />
+                  <div className="hidden md:block w-px h-12 bg-surface-300" />
                 )}
               </React.Fragment>
             ))}

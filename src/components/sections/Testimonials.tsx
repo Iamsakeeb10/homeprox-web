@@ -59,7 +59,7 @@ export function Testimonials() {
   }, [emblaApi]);
 
   return (
-    <section className="py-20 lg:py-28 bg-cream-50">
+    <section className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
@@ -89,7 +89,7 @@ export function Testimonials() {
           <div className="flex justify-between items-center mt-6 px-2">
             <button
               onClick={scrollPrev}
-              className="w-10 h-10 rounded-full bg-cream-200 border border-cream-300 flex items-center justify-center text-gold hover:border-gold transition-colors duration-200"
+              className="w-10 h-10 rounded-full bg-surface-100 border border-surface-200 flex items-center justify-center text-blue hover:border-blue transition-colors duration-200"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5" aria-hidden="true" />
@@ -104,8 +104,8 @@ export function Testimonials() {
                   aria-label={`Go to testimonial ${index + 1}`}
                   className={`rounded-full transition-all duration-300 ${
                     index === selectedIndex
-                      ? "bg-gold w-4 h-3"
-                      : "bg-cream-300 w-2 h-2"
+                      ? "bg-blue w-4 h-3"
+                      : "bg-surface-200 w-2 h-2"
                   }`}
                 />
               ))}
@@ -113,7 +113,7 @@ export function Testimonials() {
 
             <button
               onClick={scrollNext}
-              className="w-10 h-10 rounded-full bg-cream-200 border border-cream-300 flex items-center justify-center text-gold hover:border-gold transition-colors duration-200"
+              className="w-10 h-10 rounded-full bg-surface-100 border border-surface-200 flex items-center justify-center text-blue hover:border-blue transition-colors duration-200"
               aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5" aria-hidden="true" />

@@ -12,11 +12,11 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cream-50 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
       {/* Animated Background Element */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-dark rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-surface-100 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-surface-200 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
       </div>
 
       {/* Content */}
@@ -31,13 +31,13 @@ export default function NotFound() {
             priority
           />
         </div>
-        <h1 className="font-display text-9xl font-bold text-gold mb-4">
+        <h1 className="font-display text-9xl font-bold text-surface-100 mb-4">
           404
         </h1>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-stone-900 mb-4">
+        <h2 className="font-display text-3xl md:text-4xl font-bold text-navy mb-4">
           Page Not Found
         </h2>
-        <p className="font-body text-muted text-lg mb-8 max-w-md mx-auto">
+        <p className="font-body text-text-muted text-lg mb-8 max-w-md mx-auto">
           The property you&apos;re looking for doesn&apos;t exist or has moved.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

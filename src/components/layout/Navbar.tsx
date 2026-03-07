@@ -29,33 +29,14 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full overflow-x-hidden ${
         isScrolled
-          ? "bg-cream-50/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+          ? "bg-white/98 backdrop-blur-md shadow-navbar border-b border-surface-200"
+          : "bg-white/90 backdrop-blur-md border-b border-transparent"
       }`}
     >
-      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex items-center justify-between h-20 w-full">
-          {/* Logo */}
+          {/* Logo — no background pill */}
           <Link href="/" className="flex items-center relative inline-block">
-            {/* Background layer - matches logo size exactly */}
-            <motion.div 
-              className="absolute inset-0 bg-cream-50/80 backdrop-blur-md rounded-lg -z-10"
-              style={{ 
-                width: '100%', 
-                height: '100%',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0
-              }}
-              initial={{ opacity: 1 }}
-              animate={{ 
-                opacity: isScrolled ? 0 : 1,
-                scale: isScrolled ? 0.95 : 1
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            />
             <Image
               src="/images/logo.png"
               alt="MEGAFIXX Home Services LLC"
@@ -76,13 +57,13 @@ export function Navbar() {
                 href={link.href}
                 className={`font-accent text-base transition-colors duration-300 relative group ${
                   pathname === link.href
-                    ? "text-gold"
-                    : "text-stone-900 hover:text-gold"
+                    ? "text-blue"
+                    : "text-navy hover:text-blue"
                 }`}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-gold transition-all duration-300 ${
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-blue transition-all duration-300 ${
                     pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />
@@ -96,7 +77,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-stone-900 hover:text-gold transition-colors duration-300 p-2 flex-shrink-0 ml-2"
+            className="lg:hidden text-navy hover:text-blue transition-colors duration-300 p-2 flex-shrink-0 ml-2"
             aria-label="Toggle mobile menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -117,7 +98,7 @@ export function Navbar() {
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, height: "auto" }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-cream-50 border-t border-cream-300"
+            className="lg:hidden bg-white border-t border-surface-200"
           >
             <div className="px-4 py-6 space-y-4">
               {navLinks.map((link) => (
@@ -127,8 +108,8 @@ export function Navbar() {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block font-accent text-lg py-2 transition-colors duration-300 ${
                     pathname === link.href
-                      ? "text-gold"
-                      : "text-stone-900 hover:text-gold"
+                      ? "text-blue"
+                      : "text-navy hover:text-blue"
                   }`}
                 >
                   {link.label}

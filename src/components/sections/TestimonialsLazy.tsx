@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 // Loading fallback component
 const TestimonialsSkeleton = () => (
-  <section className="py-20 lg:py-28 bg-cream-50">
+  <section className="py-20 lg:py-28 bg-white">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
         <Skeleton width="100%" height={60} variant="text" className="max-w-2xl mx-auto mb-4" />

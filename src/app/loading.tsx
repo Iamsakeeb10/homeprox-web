@@ -10,7 +10,7 @@ export default function Loading() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className="fixed inset-0 bg-cream-50 z-50 flex items-center justify-center"
+      className="fixed inset-0 bg-white z-50 flex items-center justify-center"
       style={{ minHeight: "100dvh" }}
     >
       <div className="text-center">
@@ -35,8 +35,8 @@ export default function Loading() {
           transition={{ duration: 0.3, delay: 0.2 }}
           className="relative w-24 h-24 mx-auto"
         >
-          <div className="absolute inset-0 border-4 border-gold/30 rounded-full" />
-          <div className="absolute inset-0 border-4 border-transparent border-t-gold rounded-full animate-spin" />
+          <div className="absolute inset-0 border-4 border-surface-200 rounded-full" />
+          <div className="absolute inset-0 border-4 border-transparent border-t-blue rounded-full animate-spin" />
         </motion.div>
       </div>
     </motion.div>

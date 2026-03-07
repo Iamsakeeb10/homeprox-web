@@ -66,17 +66,17 @@ export function Hero() {
             onError={() => setHeroImgError(true)}
           />
         ) : (
-          <div className="w-full h-full bg-cream-200 flex items-center justify-center">
-            <span className="text-gold text-sm">Professional Property Maintenance</span>
+          <div className="w-full h-full bg-surface-100 border border-surface-200 flex items-center justify-center">
+            <span className="text-blue text-sm">Professional Property Maintenance</span>
           </div>
         )}
       </div>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-cream-50/75 z-10" />
+      {/* Overlay — navy for contrast and legibility */}
+      <div className="absolute inset-0 bg-navy/65 z-10" />
 
-      {/* Gold Accent Diagonal Line (Right Side) */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-1 bg-gradient-to-l from-gold/40 to-transparent z-20 hidden lg:block" />
+      {/* Accent line (Right Side) */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-1 bg-gradient-to-l from-blue/30 to-transparent z-20 hidden lg:block" />
 
       {/* Content */}
       <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -93,7 +93,7 @@ export function Hero() {
               variants={itemVariants}
               className="inline-block mb-6"
             >
-              <span className="inline-flex items-center px-4 py-2 border-2 border-gold rounded-full font-accent text-xs uppercase tracking-wider text-gold">
+              <span className="inline-flex items-center px-4 py-2 bg-blue/10 border border-blue/30 rounded-full font-accent text-xs uppercase tracking-wide text-blue font-medium">
                 Texas Statewide Property Maintenance
               </span>
             </motion.div>
@@ -101,7 +101,7 @@ export function Hero() {
             {/* Main Headline */}
             <motion.h1
               variants={itemVariants}
-              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-stone-900 mb-4"
+              className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4"
             >
               Professional Property Maintenance
             </motion.h1>
@@ -109,7 +109,7 @@ export function Hero() {
             {/* Sub Headline */}
             <motion.p
               variants={itemVariants}
-              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gold mb-6"
+              className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-blue-light mb-6"
             >
               Across Texas
             </motion.p>
@@ -117,7 +117,7 @@ export function Hero() {
             {/* Body Text */}
             <motion.p
               variants={itemVariants}
-              className="font-body text-lg text-muted max-w-xl mx-auto lg:mx-0 mb-8"
+              className="font-body text-lg text-surface-200 max-w-xl mx-auto lg:mx-0 mb-8"
             >
               Trusted by property managers, investors, and financial institutions statewide.
               Reliable. Scalable. Professional.
@@ -142,19 +142,19 @@ export function Hero() {
               className="flex flex-wrap justify-center lg:justify-start gap-6 text-sm"
             >
               <div className="flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-gold" aria-hidden="true" />
-                <span className="font-bold text-gold">500+</span>
-                <span className="text-muted">Properties Maintained</span>
+                <Building2 className="w-5 h-5 text-blue" aria-hidden="true" />
+                <span className="font-bold text-blue">500+</span>
+                <span className="text-surface-200">Properties Maintained</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-gold" aria-hidden="true" />
-                <span className="font-bold text-gold">Texas</span>
-                <span className="text-muted">Statewide</span>
+                <ShieldCheck className="w-5 h-5 text-blue" aria-hidden="true" />
+                <span className="font-bold text-blue">Texas</span>
+                <span className="text-surface-200">Statewide</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-gold" aria-hidden="true" />
-                <span className="font-bold text-gold">Fully</span>
-                <span className="text-muted">Insured</span>
+                <ShieldCheck className="w-5 h-5 text-blue" aria-hidden="true" />
+                <span className="font-bold text-blue">Fully</span>
+                <span className="text-surface-200">Insured</span>
               </div>
             </motion.div>
           </motion.div>
@@ -180,8 +180,8 @@ export function Hero() {
                   onError={() => setCardImgError(true)}
                 />
               ) : (
-                <div className="bg-cream-200 rounded-2xl shadow-2xl aspect-[4/3] flex items-center justify-center">
-                  <Wrench className="w-16 h-16 text-gold" aria-hidden="true" />
+                <div className="bg-surface-100 border border-surface-200 rounded-2xl shadow-2xl aspect-[4/3] flex items-center justify-center">
+                  <Wrench className="w-16 h-16 text-blue" aria-hidden="true" />
                 </div>
               )}
             </motion.div>

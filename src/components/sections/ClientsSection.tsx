@@ -13,7 +13,7 @@ export function ClientsSection() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="clients" className="py-20 lg:py-28 bg-cream-200">
+    <section id="clients" className="py-20 lg:py-28 bg-surface-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
@@ -43,7 +43,7 @@ export function ClientsSection() {
           <div className="text-center">
             <Link
               href="/clients"
-              className="inline-flex items-center gap-2 font-accent text-gold hover:text-gold-dark hover:underline transition-colors duration-300 text-lg"
+              className="inline-flex items-center gap-2 font-accent text-blue hover:text-blue-dark hover:underline transition-colors duration-300 text-lg"
             >
               Learn More About Our Clients
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />

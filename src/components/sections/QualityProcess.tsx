@@ -27,7 +27,7 @@ const steps = [
 
 export function QualityProcess() {
   return (
-    <section className="py-20 lg:py-28 bg-cream-200">
+    <section className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
@@ -39,7 +39,7 @@ export function QualityProcess() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           {/* Connecting Line (Desktop Only) */}
-          <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 border-t border-gold/30" />
+          <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 border-t border-surface-200" />
 
           {steps.map((step, index) => (
             <AnimatedSection
@@ -48,22 +48,22 @@ export function QualityProcess() {
               delay={index * 0.2}
               className="h-full"
             >
-              <div className="relative bg-cream-50 border border-cream-300 rounded-xl p-8 text-center h-full flex flex-col">
+              <div className="relative bg-surface-50 border border-surface-200 rounded-xl p-8 text-center h-full flex flex-col hover:border-blue/30 hover:shadow-card transition-all duration-300">
                 {/* Step Number Badge */}
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold text-cream-50 font-display text-2xl font-bold mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-navy text-white font-display text-2xl font-bold mb-6">
                   {step.number}
                 </div>
 
                 {/* Icon */}
-                <step.icon className="w-10 h-10 text-gold mx-auto mb-4" aria-hidden="true" />
+                <step.icon className="w-10 h-10 text-blue mx-auto mb-4" aria-hidden="true" />
 
                 {/* Title */}
-                <h3 className="font-display text-xl font-bold text-stone-900 mb-3">
+                <h3 className="font-display text-xl font-bold text-navy mb-3">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="font-body text-muted flex-grow">
+                <p className="font-body text-text-muted flex-grow">
                   {step.description}
                 </p>
               </div>

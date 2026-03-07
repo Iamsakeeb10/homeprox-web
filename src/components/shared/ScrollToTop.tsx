@@ -40,7 +40,7 @@ export function ScrollToTop() {
           exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 flex items-center justify-center w-12 h-12 bg-gold text-stone-900 rounded-full shadow-lg hover:bg-gold-dark hover:shadow-gold-glow transition-all duration-300 hover:scale-110"
+          className="fixed bottom-8 right-8 z-50 flex items-center justify-center w-12 h-12 bg-blue text-white rounded-full shadow-md hover:bg-blue-dark hover:shadow-blue-glow transition-all duration-300 hover:scale-110"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-6 h-6" aria-hidden="true" />

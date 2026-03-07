@@ -143,14 +143,14 @@ const termsContent = [
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-cream-50 pt-20">
+    <div className="min-h-screen bg-white pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-stone-900 mb-4">
+          <h1 className="font-display text-4xl md:text-5xl font-bold text-navy mb-4">
             Terms & Conditions
           </h1>
-          <p className="font-body text-muted text-lg">
+          <p className="font-body text-text-muted text-lg">
             Last Updated: February 24, 2026
           </p>
         </div>
@@ -159,13 +159,13 @@ export default function TermsPage() {
           {/* Table of Contents Sidebar (Desktop) */}
           <aside className="hidden lg:block lg:col-span-1">
             <div className="sticky top-24">
-              <h2 className="font-display text-xl font-bold text-stone-900 mb-4">Table of Contents</h2>
+              <h2 className="font-display text-xl font-bold text-navy mb-4">Table of Contents</h2>
               <nav className="space-y-2">
                 {termsContent.map((term, index) => (
                   <a
                     key={term.id}
                     href={`#${term.id}`}
-                    className="block font-body text-sm text-muted hover:text-gold transition-colors duration-300 py-1"
+                    className="block font-body text-sm text-text-muted hover:text-blue transition-colors duration-300 py-1"
                   >
                     {index + 1}. {term.title}
                   </a>
@@ -176,13 +176,13 @@ export default function TermsPage() {
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            <div className="bg-cream-200 border border-cream-300 rounded-xl p-8 md:p-12 space-y-12">
+            <div className="bg-surface-100 border border-surface-200 rounded-xl p-8 md:p-12 space-y-12">
               {termsContent.map((term, index) => (
                 <section key={term.id} id={term.id} className="scroll-mt-24">
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-stone-900 mb-4">
+                  <h2 className="font-display text-2xl md:text-3xl font-bold text-navy mb-4">
                     {index + 1}. {term.title}
                   </h2>
-                  <div className="font-body text-muted leading-relaxed space-y-3">
+                  <div className="font-body text-text-muted leading-relaxed space-y-3">
                     {term.content.map((paragraph, pIndex) => {
                       if (paragraph.startsWith("•")) {
                         return (
@@ -196,34 +196,34 @@ export default function TermsPage() {
                       );
                     })}
                     {term.contactInfo && (
-                      <div className="mt-4 bg-cream-50 border border-cream-300 rounded-lg p-6">
+                      <div className="mt-4 bg-white border border-surface-200 rounded-lg p-6">
                         <table className="w-full">
                           <tbody className="space-y-2">
                             <tr>
-                              <td className="font-body text-muted font-medium pr-4 py-2">Email</td>
-                              <td className="font-body text-stone-900 py-2">
+                              <td className="font-body text-text-muted font-medium pr-4 py-2">Email</td>
+                              <td className="font-body text-navy py-2">
                                 <a
                                   href="mailto:info@megafixxhomeservices.com"
-                                  className="text-gold hover:text-gold-dark transition-colors duration-300"
+                                  className="text-blue hover:text-blue-dark transition-colors duration-300"
                                 >
                                   info@megafixxhomeservices.com
                                 </a>
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-body text-muted font-medium pr-4 py-2">Phone</td>
-                              <td className="font-body text-stone-900 py-2">
+                              <td className="font-body text-text-muted font-medium pr-4 py-2">Phone</td>
+                              <td className="font-body text-navy py-2">
                                 <a
                                   href="tel:4693789262"
-                                  className="text-gold hover:text-gold-dark transition-colors duration-300"
+                                  className="text-blue hover:text-blue-dark transition-colors duration-300"
                                 >
                                   (469) 378-9262
                                 </a>
                               </td>
                             </tr>
                             <tr>
-                              <td className="font-body text-muted font-medium pr-4 py-2">Location</td>
-                              <td className="font-body text-stone-900 py-2">Collin County, Texas</td>
+                              <td className="font-body text-text-muted font-medium pr-4 py-2">Location</td>
+                              <td className="font-body text-navy py-2">Collin County, Texas</td>
                             </tr>
                           </tbody>
                         </table>
@@ -238,7 +238,7 @@ export default function TermsPage() {
             <div className="mt-8 text-center">
               <Link
                 href="/"
-                className="font-body text-gold hover:text-gold-dark transition-colors duration-300"
+                className="font-body text-blue hover:text-blue-dark transition-colors duration-300"
               >
                 ← Back to Home
               </Link>

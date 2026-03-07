@@ -17,15 +17,18 @@ export function SectionHeading({
 
   return (
     <div className={`flex flex-col gap-3 mb-12 ${alignmentClasses} ${className}`}>
-      <h2 className="font-display text-4xl md:text-5xl font-bold text-stone-900">
+      <h2 className="font-display text-4xl md:text-5xl font-bold text-navy">
         {title}
       </h2>
       {subtitle && (
-        <p className="font-body text-lg text-muted max-w-2xl">
+        <p className="font-body text-lg text-text-muted max-w-2xl">
           {subtitle}
         </p>
       )}
-      <div className="w-20 h-1 bg-gold rounded-full" />
+      <div className="mt-4 flex items-center gap-3">
+        <span className="block h-0.5 w-12 bg-blue rounded-full" />
+        <span className="block h-0.5 w-4 bg-surface-300 rounded-full" />
+      </div>
     </div>
   );
 }

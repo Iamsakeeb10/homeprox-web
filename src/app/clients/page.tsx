@@ -32,7 +32,7 @@ export default function ClientsPage() {
   return (
     <>
       {/* Page Hero */}
-      <section className="relative min-h-[40vh] md:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center bg-cream-50 pt-16 sm:pt-20">
+      <section className="relative min-h-[40vh] md:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center bg-white pt-16 sm:pt-20">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -45,59 +45,59 @@ export default function ClientsPage() {
         </div>
 
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-cream-50/75 z-10" />
+        <div className="absolute inset-0 bg-navy/70 z-10" />
 
         {/* Content */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 sm:py-16 lg:py-20 text-center">
-          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 mb-4">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-4">
             Our Clients
           </h1>
-          <p className="font-body text-base sm:text-lg lg:text-xl text-muted max-w-2xl mx-auto">
+          <p className="font-body text-base sm:text-lg lg:text-xl text-text-muted max-w-2xl mx-auto">
             Trusted Property Maintenance Partner Across Texas
           </p>
         </div>
       </section>
 
       {/* Intro Section */}
-      <section className="py-20 lg:py-28 bg-cream-50">
+      <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection variant="fadeLeft">
               <div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-stone-900 mb-6">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-navy mb-6">
                   Building Long-Term Partnerships
                 </h2>
-                <p className="font-body text-lg text-muted mb-4">
+                <p className="font-body text-lg text-text-muted mb-4">
                   At MEGAFIXX Home Services LLC, we take pride in building long-term partnerships with clients across Texas. Our reputation is built on reliability, professional execution, and consistent performance across residential and commercial properties.
                 </p>
-                <p className="font-body text-lg text-muted mb-4">
+                <p className="font-body text-lg text-text-muted mb-4">
                   We understand that every property represents an investment — and we treat it accordingly. Many of our clients rely on us to manage routine property maintenance, emergency service calls, turnover repairs, preservation services, and compliance inspections.
                 </p>
-                <p className="font-body text-lg text-gold italic font-medium">
+                <p className="font-body text-lg text-blue italic font-medium">
                   &quot;We build relationships based on performance, accountability, and trust.&quot;
                 </p>
               </div>
             </AnimatedSection>
 
             <AnimatedSection variant="fadeRight">
-              <div className="bg-cream-200 border border-cream-300 rounded-xl p-8">
-                <h3 className="font-display text-2xl font-bold text-stone-900 mb-6">By The Numbers</h3>
+              <div className="bg-surface-100 border border-surface-200 rounded-xl p-8">
+                <h3 className="font-display text-2xl font-bold text-navy mb-6">By The Numbers</h3>
                 <div className="space-y-6">
                   <div>
-                    <div className="text-4xl font-display font-bold text-gold mb-2">500+</div>
-                    <div className="font-body text-muted">Properties Maintained</div>
+                    <div className="text-4xl font-display font-bold text-blue mb-2">500+</div>
+                    <div className="font-body text-text-muted">Properties Maintained</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-display font-bold text-gold mb-2">Texas</div>
-                    <div className="font-body text-muted">Statewide Coverage</div>
+                    <div className="text-4xl font-display font-bold text-blue mb-2">Texas</div>
+                    <div className="font-body text-text-muted">Statewide Coverage</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-display font-bold text-gold mb-2">100%</div>
-                    <div className="font-body text-muted">Fully Insured</div>
+                    <div className="text-4xl font-display font-bold text-blue mb-2">100%</div>
+                    <div className="font-body text-text-muted">Fully Insured</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-display font-bold text-gold mb-2">10+</div>
-                    <div className="font-body text-muted">Years Experience</div>
+                    <div className="text-4xl font-display font-bold text-blue mb-2">10+</div>
+                    <div className="font-body text-text-muted">Years Experience</div>
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export default function ClientsPage() {
         return (
           <section
             key={client.id}
-            className={`py-20 lg:py-28 ${index % 2 === 0 ? "bg-cream-200" : "bg-cream-50"}`}
+            className={`py-20 lg:py-28 ${index % 2 === 0 ? "bg-surface-100" : "bg-white"}`}
           >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
@@ -140,14 +140,14 @@ export default function ClientsPage() {
       })}
 
       {/* Why Clients Choose MEGAFIXX Section */}
-      <section className="py-20 lg:py-28 bg-cream-50">
+      <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection variant="fadeUp">
             <div className="text-center mb-12">
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 mb-4">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-navy mb-4">
                 Why Clients Choose MEGAFIXX
               </h2>
-              <div className="w-20 h-1 bg-gold rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-blue rounded-full mx-auto" />
             </div>
           </AnimatedSection>
 
@@ -179,12 +179,12 @@ export default function ClientsPage() {
                 variant="fadeUp"
                 delay={index * 0.1}
               >
-                <div className="bg-cream-200 border border-cream-300 rounded-xl p-6 h-full">
-                  <feature.icon className="w-10 h-10 text-gold mb-4" aria-hidden="true" />
-                  <h3 className="font-display text-xl font-bold text-stone-900 mb-3">
+                <div className="bg-surface-100 border border-surface-200 rounded-xl p-6 h-full">
+                  <feature.icon className="w-10 h-10 text-blue mb-4" aria-hidden="true" />
+                  <h3 className="font-display text-xl font-bold text-navy mb-3">
                     {feature.title}
                   </h3>
-                  <p className="font-body text-muted">
+                  <p className="font-body text-text-muted">
                     {feature.description}
                   </p>
                 </div>
@@ -195,20 +195,20 @@ export default function ClientsPage() {
       </section>
 
       {/* Quality Assurance Process Section */}
-      <section className="py-20 lg:py-28 bg-cream-200">
+      <section className="py-20 lg:py-28 bg-surface-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection variant="fadeUp">
             <div className="text-center mb-12">
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-stone-900 mb-4">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-navy mb-4">
                 Quality Assurance Process
               </h2>
-              <div className="w-20 h-1 bg-gold rounded-full mx-auto" />
+              <div className="w-20 h-1 bg-blue rounded-full mx-auto" />
             </div>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
             {/* Connecting Line (Desktop Only) */}
-            <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 border-t border-gold/30" />
+            <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 border-t border-blue/30" />
 
             {[
               {
@@ -236,22 +236,22 @@ export default function ClientsPage() {
                 delay={index * 0.2}
                 className="h-full"
               >
-                <div className="relative bg-cream-50 border border-cream-300 rounded-xl p-8 text-center h-full flex flex-col">
+                <div className="relative bg-white border border-surface-200 rounded-xl p-8 text-center h-full flex flex-col">
                   {/* Step Number Badge */}
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold text-cream-50 font-display text-2xl font-bold mb-6">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue text-white font-display text-2xl font-bold mb-6">
                     {step.number}
                   </div>
 
                   {/* Icon */}
-                  <step.icon className="w-10 h-10 text-gold mx-auto mb-4" aria-hidden="true" />
+                  <step.icon className="w-10 h-10 text-blue mx-auto mb-4" aria-hidden="true" />
 
                   {/* Title */}
-                  <h3 className="font-display text-xl font-bold text-stone-900 mb-3">
+                  <h3 className="font-display text-xl font-bold text-navy mb-3">
                     {step.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="font-body text-muted flex-grow">
+                  <p className="font-body text-text-muted flex-grow">
                     {step.description}
                   </p>
                 </div>
@@ -262,29 +262,29 @@ export default function ClientsPage() {
       </section>
 
       {/* Ready to Partner CTA Banner */}
-      <section className="py-20 lg:py-28 bg-cream-100 border-t-2 border-gold/20">
+      <section className="py-20 lg:py-28 bg-surface-50 border-t-2 border-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection variant="fadeUp">
-            <div className="bg-cream-200 border border-gold/30 rounded-2xl p-8 md:p-12 text-center">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-stone-900 mb-6">
+            <div className="bg-surface-100 border border-blue/30 rounded-2xl p-8 md:p-12 text-center">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-navy mb-6">
                 Ready to Partner with MEGAFIXX?
               </h2>
-              <p className="font-body text-lg text-muted mb-8 max-w-2xl mx-auto">
+              <p className="font-body text-lg text-text-muted mb-8 max-w-2xl mx-auto">
                 At MEGAFIXX Home Services LLC, our clients are at the center of everything we do. We are committed to exceeding expectations and delivering consistent, professional property maintenance services across Texas.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
                 <a
                   href="tel:4693789262"
-                  className="flex items-center gap-2 font-body text-stone-900 hover:text-gold transition-colors duration-300"
+                  className="flex items-center gap-2 font-body text-navy hover:text-blue transition-colors duration-300"
                 >
-                  <Phone className="w-5 h-5 text-gold" aria-hidden="true" />
+                  <Phone className="w-5 h-5 text-blue" aria-hidden="true" />
                   (469) 378-9262
                 </a>
                 <a
                   href="mailto:info@megafixxhomeservices.com"
-                  className="flex items-center gap-2 font-body text-stone-900 hover:text-gold transition-colors duration-300"
+                  className="flex items-center gap-2 font-body text-navy hover:text-blue transition-colors duration-300"
                 >
-                  <Mail className="w-5 h-5 text-gold" aria-hidden="true" />
+                  <Mail className="w-5 h-5 text-blue" aria-hidden="true" />
                   info@megafixxhomeservices.com
                 </a>
               </div>

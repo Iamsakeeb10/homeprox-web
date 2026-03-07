@@ -22,8 +22,8 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
   const initials = getInitials(testimonial.name);
 
   return (
-    <div className="bg-cream-200 border border-cream-300 rounded-xl p-4 sm:p-6 h-full hover:border-gold transition-all duration-300 flex flex-col">
-      {/* Stars */}
+    <div className="bg-white border border-surface-200 rounded-xl shadow-card p-4 sm:p-6 h-full hover:border-blue/40 hover:shadow-card-hover transition-all duration-300 flex flex-col">
+      {/* Stars — gold kept for prestige accent */}
       <div className="flex gap-1 mb-4">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
@@ -35,7 +35,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
       </div>
 
       {/* Quote */}
-      <p className="font-body text-sm sm:text-base text-muted italic mb-6 flex-grow">
+      <p className="font-body text-sm sm:text-base text-text-muted italic mb-6 flex-grow">
         &quot;{testimonial.content}&quot;
       </p>
 
@@ -49,13 +49,13 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
               alt={testimonial.name}
               width={48}
               height={48}
-              className="w-12 h-12 rounded-full object-cover ring-2 ring-gold"
+              className="w-12 h-12 rounded-full object-cover ring-2 ring-blue/30"
               style={{ aspectRatio: "1 / 1" }}
               onError={() => setImgError(true)}
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center ring-2 ring-gold">
-              <span className="font-display text-sm font-bold text-stone-900">
+            <div className="w-12 h-12 rounded-full bg-surface-100 flex items-center justify-center ring-2 ring-blue/30">
+              <span className="font-display text-sm font-bold text-navy">
                 {initials}
               </span>
             </div>
@@ -64,10 +64,10 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
         {/* Name and Role */}
         <div className="flex-grow">
-          <p className="font-body text-stone-900 font-bold">
+          <p className="font-body text-navy font-semibold">
             {testimonial.name}
           </p>
-          <p className="font-body text-muted text-sm">
+          <p className="font-body text-text-muted text-sm">
             {testimonial.role}
             {testimonial.company && `, ${testimonial.company}`}
           </p>

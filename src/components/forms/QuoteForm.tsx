@@ -97,7 +97,7 @@ export function QuoteForm() {
       {/* Success Message */}
       {isSuccess && (
         <div
-          className="bg-gold/20 border border-gold rounded-lg p-4 text-gold"
+          className="bg-blue/10 border border-blue/30 rounded-lg p-4 text-blue"
           role="alert"
           aria-live="polite"
         >
@@ -119,8 +119,8 @@ export function QuoteForm() {
 
       {/* Full Name */}
       <div>
-        <label htmlFor="fullName" className="block font-body text-sm font-medium text-stone-900 mb-2">
-          Full Name <span className="text-gold">*</span>
+        <label htmlFor="fullName" className="block font-body text-sm font-medium text-navy mb-2">
+          Full Name <span className="text-blue">*</span>
         </label>
         <input
           type="text"
@@ -128,15 +128,15 @@ export function QuoteForm() {
           name="fullName"
           value={formData.fullName}
           onChange={handleChange}
-          className={`w-full px-4 py-3 bg-cream-200 border ${
-            errors.fullName ? "border-red-500" : "border-cream-300"
-          } rounded-lg text-stone-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300`}
+          className={`w-full px-4 py-3 bg-white border ${
+            errors.fullName ? "border-error" : "border-surface-200"
+          } rounded-lg text-navy placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300`}
           placeholder="John Doe"
           aria-describedby={errors.fullName ? "fullName-error" : undefined}
           aria-invalid={errors.fullName ? "true" : "false"}
         />
         {errors.fullName && (
-          <p id="fullName-error" className="mt-1 text-sm text-red-400" role="alert">
+          <p id="fullName-error" className="mt-1 text-sm text-error" role="alert">
             {errors.fullName}
           </p>
         )}
@@ -144,7 +144,7 @@ export function QuoteForm() {
 
       {/* Company Name */}
       <div>
-        <label htmlFor="companyName" className="block font-body text-sm font-medium text-stone-900 mb-2">
+        <label htmlFor="companyName" className="block font-body text-sm font-medium text-navy mb-2">
           Company Name (Optional)
         </label>
         <input
@@ -153,15 +153,15 @@ export function QuoteForm() {
           name="companyName"
           value={formData.companyName}
           onChange={handleChange}
-          className="w-full px-4 py-3 bg-cream-200 border border-cream-300 rounded-lg text-stone-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300"
+          className="w-full px-4 py-3 bg-white border border-surface-200 rounded-lg text-navy placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300"
           placeholder="ABC Property Management"
         />
       </div>
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block font-body text-sm font-medium text-stone-900 mb-2">
-          Email Address <span className="text-gold">*</span>
+        <label htmlFor="email" className="block font-body text-sm font-medium text-navy mb-2">
+          Email Address <span className="text-blue">*</span>
         </label>
         <input
           type="email"
@@ -169,15 +169,15 @@ export function QuoteForm() {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className={`w-full px-4 py-3 bg-cream-200 border ${
-            errors.email ? "border-red-500" : "border-cream-300"
-          } rounded-lg text-stone-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300`}
+          className={`w-full px-4 py-3 bg-white border ${
+            errors.email ? "border-error" : "border-surface-200"
+          } rounded-lg text-navy placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300`}
           placeholder="john@example.com"
           aria-describedby={errors.email ? "email-error" : undefined}
           aria-invalid={errors.email ? "true" : "false"}
         />
         {errors.email && (
-          <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">
+          <p id="email-error" className="mt-1 text-sm text-error" role="alert">
             {errors.email}
           </p>
         )}
@@ -185,8 +185,8 @@ export function QuoteForm() {
 
       {/* Phone */}
       <div>
-        <label htmlFor="phone" className="block font-body text-sm font-medium text-stone-900 mb-2">
-          Phone Number <span className="text-gold">*</span>
+        <label htmlFor="phone" className="block font-body text-sm font-medium text-navy mb-2">
+          Phone Number <span className="text-blue">*</span>
         </label>
         <input
           type="tel"
@@ -194,15 +194,15 @@ export function QuoteForm() {
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className={`w-full px-4 py-3 bg-cream-200 border ${
-            errors.phone ? "border-red-500" : "border-cream-300"
-          } rounded-lg text-stone-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300`}
+          className={`w-full px-4 py-3 bg-white border ${
+            errors.phone ? "border-error" : "border-surface-200"
+          } rounded-lg text-navy placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300`}
           placeholder="(469) 555-1234"
           aria-describedby={errors.phone ? "phone-error" : undefined}
           aria-invalid={errors.phone ? "true" : "false"}
         />
         {errors.phone && (
-          <p id="phone-error" className="mt-1 text-sm text-red-400" role="alert">
+          <p id="phone-error" className="mt-1 text-sm text-error" role="alert">
             {errors.phone}
           </p>
         )}
@@ -210,8 +210,8 @@ export function QuoteForm() {
 
       {/* Property Type */}
       <div>
-        <label htmlFor="propertyType" className="block font-body text-sm font-medium text-stone-900 mb-2">
-          Property Type <span className="text-gold">*</span>
+        <label htmlFor="propertyType" className="block font-body text-sm font-medium text-navy mb-2">
+          Property Type <span className="text-blue">*</span>
         </label>
         <div className="relative">
           <select
@@ -219,26 +219,26 @@ export function QuoteForm() {
             name="propertyType"
             value={formData.propertyType}
             onChange={handleChange}
-            className={`w-full px-4 py-3 pr-10 bg-cream-200 border ${
-              errors.propertyType ? "border-red-500" : "border-cream-300"
-            } rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
+            className={`w-full px-4 py-3 pr-10 bg-white border ${
+              errors.propertyType ? "border-error" : "border-surface-200"
+            } rounded-lg text-navy focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
             aria-describedby={errors.propertyType ? "propertyType-error" : undefined}
             aria-invalid={errors.propertyType ? "true" : "false"}
           >
             <option value="" disabled>Select Property Type</option>
             {propertyTypes.map((type) => (
-              <option key={type} value={type} className="bg-cream-200">
+              <option key={type} value={type} className="bg-white">
                 {type}
               </option>
             ))}
           </select>
           <ChevronDown
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted pointer-events-none"
             aria-hidden="true"
           />
         </div>
         {errors.propertyType && (
-          <p id="propertyType-error" className="mt-1 text-sm text-red-400" role="alert">
+          <p id="propertyType-error" className="mt-1 text-sm text-error" role="alert">
             {errors.propertyType}
           </p>
         )}
@@ -246,8 +246,8 @@ export function QuoteForm() {
 
       {/* Service Needed */}
       <div>
-        <label htmlFor="serviceNeeded" className="block font-body text-sm font-medium text-stone-900 mb-2">
-          Service Needed <span className="text-gold">*</span>
+        <label htmlFor="serviceNeeded" className="block font-body text-sm font-medium text-navy mb-2">
+          Service Needed <span className="text-blue">*</span>
         </label>
         <div className="relative">
           <select
@@ -255,29 +255,29 @@ export function QuoteForm() {
             name="serviceNeeded"
             value={formData.serviceNeeded}
             onChange={handleChange}
-            className={`w-full px-4 py-3 pr-10 bg-cream-200 border ${
-              errors.serviceNeeded ? "border-red-500" : "border-cream-300"
-            } rounded-lg text-stone-900 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
+            className={`w-full px-4 py-3 pr-10 bg-white border ${
+              errors.serviceNeeded ? "border-error" : "border-surface-200"
+            } rounded-lg text-navy focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
             aria-describedby={errors.serviceNeeded ? "serviceNeeded-error" : undefined}
             aria-invalid={errors.serviceNeeded ? "true" : "false"}
           >
             <option value="" disabled>Select a Service</option>
             {services.map((service) => (
-              <option key={service.id} value={service.title} className="bg-cream-200">
+              <option key={service.id} value={service.title} className="bg-white">
                 {service.title}
               </option>
             ))}
-            <option value="Multiple Services" className="bg-cream-200">
+            <option value="Multiple Services" className="bg-white">
               Multiple Services
             </option>
           </select>
           <ChevronDown
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none"
+            className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted pointer-events-none"
             aria-hidden="true"
           />
         </div>
         {errors.serviceNeeded && (
-          <p id="serviceNeeded-error" className="mt-1 text-sm text-red-400" role="alert">
+          <p id="serviceNeeded-error" className="mt-1 text-sm text-error" role="alert">
             {errors.serviceNeeded}
           </p>
         )}
@@ -285,8 +285,8 @@ export function QuoteForm() {
 
       {/* Location */}
       <div>
-        <label htmlFor="location" className="block font-body text-sm font-medium text-stone-900 mb-2">
-          Property Location / City, TX <span className="text-gold">*</span>
+        <label htmlFor="location" className="block font-body text-sm font-medium text-navy mb-2">
+          Property Location / City, TX <span className="text-blue">*</span>
         </label>
         <input
           type="text"
@@ -294,15 +294,15 @@ export function QuoteForm() {
           name="location"
           value={formData.location}
           onChange={handleChange}
-          className={`w-full px-4 py-3 bg-cream-200 border ${
-            errors.location ? "border-red-500" : "border-cream-300"
-          } rounded-lg text-stone-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300`}
+          className={`w-full px-4 py-3 bg-white border ${
+            errors.location ? "border-error" : "border-surface-200"
+          } rounded-lg text-navy placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300`}
           placeholder="Dallas, TX"
           aria-describedby={errors.location ? "location-error" : undefined}
           aria-invalid={errors.location ? "true" : "false"}
         />
         {errors.location && (
-          <p id="location-error" className="mt-1 text-sm text-red-400" role="alert">
+          <p id="location-error" className="mt-1 text-sm text-error" role="alert">
             {errors.location}
           </p>
         )}
@@ -310,8 +310,8 @@ export function QuoteForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block font-body text-sm font-medium text-stone-900 mb-2">
-          Message / Project Details <span className="text-gold">*</span>
+        <label htmlFor="message" className="block font-body text-sm font-medium text-navy mb-2">
+          Message / Project Details <span className="text-blue">*</span>
         </label>
         <textarea
           id="message"
@@ -319,15 +319,15 @@ export function QuoteForm() {
           value={formData.message}
           onChange={handleChange}
           rows={5}
-          className={`w-full px-4 py-3 bg-cream-200 border ${
-            errors.message ? "border-red-500" : "border-cream-300"
-          } rounded-lg text-stone-900 placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-300 resize-none`}
+          className={`w-full px-4 py-3 bg-white border ${
+            errors.message ? "border-error" : "border-surface-200"
+          } rounded-lg text-navy placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-blue focus:border-transparent transition-all duration-300 resize-none`}
           placeholder="Tell us about your property maintenance needs..."
           aria-describedby={errors.message ? "message-error" : undefined}
           aria-invalid={errors.message ? "true" : "false"}
         />
         {errors.message && (
-          <p id="message-error" className="mt-1 text-sm text-red-400" role="alert">
+          <p id="message-error" className="mt-1 text-sm text-error" role="alert">
             {errors.message}
           </p>
         )}
@@ -344,7 +344,7 @@ export function QuoteForm() {
         Send Request
       </Button>
       {submitError && (
-        <p className="text-red-400 text-sm text-center mt-2" role="alert">{submitError}</p>
+        <p className="text-error text-sm text-center mt-2" role="alert">{submitError}</p>
       )}
     </form>
   );

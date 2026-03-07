@@ -44,7 +44,7 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
       <motion.div
         whileHover={shouldReduceMotion ? undefined : { y: -4 }}
         transition={{ duration: 0.3 }}
-        className="group bg-cream-200 border border-cream-300 rounded-xl overflow-hidden flex flex-col h-full hover:border-gold hover:shadow-gold-glow transition-all duration-300 focus-within:ring-2 focus-within:ring-gold focus-within:outline-none"
+        className="group bg-white border border-surface-200 rounded-xl overflow-hidden flex flex-col h-full shadow-card hover:border-blue/40 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 focus-within:ring-2 focus-within:ring-blue focus-within:outline-none"
       >
         {/* Image */}
         <div className="relative w-full h-48 overflow-hidden">
@@ -57,8 +57,8 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
               onError={() => setImgError(true)}
             />
           ) : (
-            <div className="w-full h-full bg-cream-300 flex items-center justify-center">
-              <IconComponent className="w-12 h-12 text-gold" aria-hidden="true" />
+            <div className="w-full h-full bg-surface-200 flex items-center justify-center">
+              <IconComponent className="w-12 h-12 text-blue" aria-hidden="true" />
             </div>
           )}
         </div>
@@ -67,16 +67,16 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
         <div className="p-6 flex flex-col flex-grow">
           {/* Icon */}
           <div className="mb-4">
-            <IconComponent className="w-8 h-8 text-gold" aria-hidden="true" />
+            <IconComponent className="w-8 h-8 text-blue" aria-hidden="true" />
           </div>
 
           {/* Title */}
-          <h3 className="font-display text-xl font-bold text-stone-900 mb-2">
+          <h3 className="font-display text-xl font-bold text-navy mb-2">
             {service.title}
           </h3>
 
           {/* Description */}
-          <p className="font-body text-muted text-sm mb-4 line-clamp-2">
+          <p className="font-body text-text-muted text-sm mb-4 line-clamp-2">
             {service.description}
           </p>
 
@@ -84,8 +84,8 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
           <ul className="space-y-2 mb-4 flex-grow">
             {service.features.slice(0, 3).map((feature, index) => (
               <li key={index} className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <span className="font-body text-muted text-sm">{feature}</span>
+                <CheckCircle className="w-4 h-4 text-blue mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <span className="font-body text-text-muted text-sm">{feature}</span>
               </li>
             ))}
           </ul>
@@ -93,10 +93,10 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
           {/* Learn More Link */}
           <Link
             href={`/services#${service.slug}`}
-            className="mt-auto font-accent text-gold hover:text-gold-dark hover:underline transition-colors duration-300 flex items-center gap-1 group/link focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-cream-200 rounded"
+            className="mt-auto font-accent text-blue hover:text-blue-dark font-medium hover:underline transition-colors duration-300 flex items-center gap-1 group/link focus:outline-none focus:ring-2 focus:ring-blue focus:ring-offset-2 focus:ring-offset-surface-100 rounded"
           >
             Learn More
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true" />
+            <ArrowRight className="w-4 h-4 text-blue transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden="true" />
           </Link>
         </div>
       </motion.div>
@@ -108,7 +108,7 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
       <motion.div
         whileHover={shouldReduceMotion ? undefined : { y: -4 }}
         transition={{ duration: 0.3 }}
-        className="group bg-cream-200 border border-cream-300 rounded-xl overflow-hidden flex flex-col h-full hover:border-gold hover:shadow-gold-glow transition-all duration-300 focus-within:ring-2 focus-within:ring-gold focus-within:outline-none"
+        className="group bg-white border border-surface-200 rounded-xl overflow-hidden flex flex-col h-full shadow-card hover:border-blue/40 hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 focus-within:ring-2 focus-within:ring-blue focus-within:outline-none"
       >
         {/* Image */}
         <div className="relative w-full h-64 overflow-hidden">
@@ -121,8 +121,8 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
               onError={() => setImgError(true)}
             />
           ) : (
-            <div className="w-full h-full bg-cream-300 flex items-center justify-center">
-              <IconComponent className="w-16 h-16 text-gold" aria-hidden="true" />
+            <div className="w-full h-full bg-surface-200 flex items-center justify-center">
+              <IconComponent className="w-16 h-16 text-blue" aria-hidden="true" />
             </div>
           )}
         </div>
@@ -131,22 +131,22 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
         <div className="p-6 flex flex-col flex-grow">
           {/* Icon */}
           <div className="mb-4">
-            <IconComponent className="w-10 h-10 text-gold" aria-hidden="true" />
+            <IconComponent className="w-10 h-10 text-blue" aria-hidden="true" />
           </div>
 
           {/* Title */}
-          <h3 className="font-display text-2xl font-bold text-stone-900 mb-3">
+          <h3 className="font-display text-2xl font-bold text-navy mb-3">
             {service.title}
           </h3>
 
           {/* Description */}
-          <p className="font-body text-muted mb-4">
+          <p className="font-body text-text-muted mb-4">
             {service.description}
           </p>
 
-          {/* Coverage Note */}
+          {/* Coverage Note — prestige badge */}
           <div className="mb-4">
-            <span className="inline-flex items-center px-3 py-1 bg-cream-300 rounded-full text-xs font-accent text-gold">
+            <span className="inline-flex items-center px-3 py-1 bg-gold-light rounded-full text-xs font-accent text-gold">
               Available Statewide Across Texas
             </span>
           </div>
@@ -155,8 +155,8 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
           <ul className="space-y-2 mb-6 flex-grow">
             {service.features.map((feature, index) => (
               <li key={index} className="flex items-start gap-2">
-                <CheckCircle className="w-5 h-5 text-gold mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <span className="font-body text-muted">{feature}</span>
+                <CheckCircle className="w-5 h-5 text-blue mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <span className="font-body text-text-muted">{feature}</span>
               </li>
             ))}
           </ul>
@@ -172,7 +172,7 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
 
   // List variant (for future use)
   return (
-    <div className="bg-cream-200 border border-cream-300 rounded-xl p-6 flex flex-col md:flex-row gap-6">
+    <div className="bg-white border border-surface-200 rounded-xl shadow-card p-6 flex flex-col md:flex-row gap-6">
       <div className="relative w-full md:w-64 h-48 md:h-auto flex-shrink-0">
         {!imgError ? (
           <Image
@@ -183,33 +183,33 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
             onError={() => setImgError(true)}
           />
         ) : (
-          <div className="w-full h-full bg-cream-300 flex items-center justify-center rounded-xl">
-            <IconComponent className="w-12 h-12 text-gold" aria-hidden="true" />
+          <div className="w-full h-full bg-surface-200 flex items-center justify-center rounded-xl">
+            <IconComponent className="w-12 h-12 text-blue" aria-hidden="true" />
           </div>
         )}
       </div>
       <div className="flex flex-col flex-grow">
         <div className="flex items-start gap-4 mb-4">
-          <IconComponent className="w-8 h-8 text-gold flex-shrink-0" aria-hidden="true" />
-          <h3 className="font-display text-2xl font-bold text-stone-900">
+          <IconComponent className="w-8 h-8 text-blue flex-shrink-0" aria-hidden="true" />
+          <h3 className="font-display text-2xl font-bold text-navy">
             {service.title}
           </h3>
         </div>
-        <p className="font-body text-muted mb-4">{service.description}</p>
+        <p className="font-body text-text-muted mb-4">{service.description}</p>
         <ul className="space-y-2 mb-4">
           {service.features.map((feature, index) => (
             <li key={index} className="flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" aria-hidden="true" />
-              <span className="font-body text-muted text-sm">{feature}</span>
+              <CheckCircle className="w-4 h-4 text-blue mt-0.5 flex-shrink-0" aria-hidden="true" />
+              <span className="font-body text-text-muted text-sm">{feature}</span>
             </li>
           ))}
         </ul>
         <Link
           href={`/services#${service.slug}`}
-          className="mt-auto font-accent text-gold hover:text-gold-dark hover:underline transition-colors duration-300 flex items-center gap-1"
+          className="mt-auto font-accent text-blue hover:text-blue-dark font-medium hover:underline transition-colors duration-300 flex items-center gap-1"
         >
           Learn More
-          <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          <ArrowRight className="w-4 h-4 text-blue" aria-hidden="true" />
         </Link>
       </div>
     </div>
