@@ -32,7 +32,7 @@ export default function ClientsPage() {
   return (
     <>
       {/* Page Hero — same overlay and font styles as CTABanner */}
-      <section className="relative min-h-[40vh] md:min-h-[50vh] lg:min-h-[55vh] flex items-center justify-center overflow-hidden pt-28 sm:pt-32">
+      <section className="relative h-[40vh] min-h-[320px] md:h-[50vh] lg:h-[55vh] flex items-center justify-center overflow-hidden pt-28 sm:pt-32">
         <div className="absolute inset-0 z-0">
           <Image
             src={heroImageUrl}
