@@ -2,27 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
-const HERO_ILLUSTRATION_URL = "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80";
+const HERO_CARD_IMAGES = [
+  {
+    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=720&q=80",
+    alt: "Plumbing and pipe repair"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1628348070889-cb656235b4eb?auto=format&fit=crop&w=720&q=80",
+    alt: "Electrical work"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=720&q=80",
+    alt: "General repairs and handyman"
+  }
+];
 
 export function Hero() {
-  const [imgError, setImgError] = useState(false);
-
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-hero-bg">
-      {/* Texture overlay */}
-      <div className="hero-texture absolute inset-0 opacity-30 pointer-events-none" aria-hidden="true" />
-
-      {/* Teal top-left glow */}
-      <div
-        className="absolute top-0 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(46,204,143,0.06)_0%,transparent_70%)] pointer-events-none"
-        aria-hidden="true"
-      />
-
       {/* Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-32 sm:pt-32 sm:pb-36">
-        <div className="grid grid-cols-1 min-[1131px]:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 min-[1131px]:grid-cols-2 min-[1131px]:gap-16 min-[1131px]:items-center">
           {/* Left: Text — centered below 1130px */}
           <div className="flex flex-col items-center min-[1131px]:items-start text-center min-[1131px]:text-left">
             <h1 className="font-display text-4xl sm:text-5xl min-[1131px]:text-6xl font-bold text-hero-text leading-tight mb-6">
@@ -63,24 +64,65 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Right: Illustration — visible from 1131px up */}
-          <div className="hidden min-[1131px]:flex items-center justify-center">
-            <div className="relative drop-shadow-2xl">
-              {!imgError ? (
+          {/* Hero Cards Collage — full-image cards, pushed down, visible only at min-[1131px] */}
+          <div className="hidden min-[1131px]:flex items-center justify-end pt-16">
+            <div className="relative w-[480px] xl:w-[520px] h-[480px] xl:h-[520px]">
+              {/* Card 1 — back, top-right (full image) */}
+              <div
+                className="absolute top-0 right-0 w-[340px] xl:w-[360px] h-[200px] xl:h-[220px] rounded-2xl border border-white/10 shadow-2xl z-10 overflow-hidden animate-float"
+                style={{ animationDelay: "0s" }}
+              >
                 <Image
-                  src={HERO_ILLUSTRATION_URL}
-                  alt="Property maintenance illustration"
-                  width={560}
-                  height={560}
-                  className="object-contain w-full max-w-[520px] xl:max-w-[580px] animate-float"
-                  priority
-                  onError={() => setImgError(true)}
+                  src={HERO_CARD_IMAGES[0].src}
+                  alt={HERO_CARD_IMAGES[0].alt}
+                  fill
+                  className="object-cover"
+                  sizes="360px"
                 />
-              ) : (
-                <div className="w-full max-w-[520px] aspect-square bg-hero-bg-dark rounded-2xl flex items-center justify-center border border-white/10">
-                  <span className="font-body text-hero-muted text-sm">Property Maintenance</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 px-4 py-3">
+                  <span className="font-accent font-bold text-white text-sm tracking-wide uppercase">Plumbing</span>
+                  <p className="text-white/80 text-xs font-body mt-0.5">Leak detection, pipe repair & installation</p>
                 </div>
-              )}
+              </div>
+
+              {/* Card 2 — middle (full image) */}
+              <div
+                className="absolute top-[120px] right-[60px] w-[340px] xl:w-[360px] h-[200px] xl:h-[220px] rounded-2xl border border-white/10 shadow-2xl z-20 overflow-hidden animate-float"
+                style={{ animationDelay: "0.7s" }}
+              >
+                <Image
+                  src={HERO_CARD_IMAGES[1].src}
+                  alt={HERO_CARD_IMAGES[1].alt}
+                  fill
+                  className="object-cover"
+                  sizes="360px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 px-4 py-3">
+                  <span className="font-accent font-bold text-white text-sm tracking-wide uppercase">Electrical</span>
+                  <p className="text-white/80 text-xs font-body mt-0.5">Wiring, panel upgrades & fixture installs</p>
+                </div>
+              </div>
+
+              {/* Card 3 — front, bottom-left (full image) */}
+              <div
+                className="absolute top-[240px] right-[120px] w-[340px] xl:w-[360px] h-[200px] xl:h-[220px] rounded-2xl border border-white/10 shadow-2xl z-30 overflow-hidden animate-float"
+                style={{ animationDelay: "1.4s" }}
+              >
+                <Image
+                  src={HERO_CARD_IMAGES[2].src}
+                  alt={HERO_CARD_IMAGES[2].alt}
+                  fill
+                  className="object-cover"
+                  sizes="360px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 px-4 py-3">
+                  <span className="font-accent font-bold text-white text-sm tracking-wide uppercase">General Repairs</span>
+                  <p className="text-white/80 text-xs font-body mt-0.5">Drywall, doors, flooring & handyman services</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
