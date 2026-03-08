@@ -48,7 +48,7 @@ export const services: Service[] = [
   },
   {
     id: "property-cleaning",
-    title: "Property Cleaning Services",
+    title: "Pest Control",
     description: "Professional cleaning solutions for landlords, commercial spaces, and property managers across Texas.",
     icon: "Sparkles",
     image: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=80",
@@ -62,7 +62,7 @@ export const services: Service[] = [
   },
   {
     id: "landscaping-exterior",
-    title: "Landscaping & Exterior Property Maintenance",
+    title: "Landscaping & Lawn Care",
     description: "Improve curb appeal and long-term property value with professional exterior maintenance.",
     icon: "Leaf",
     image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80",

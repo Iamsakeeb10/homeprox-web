@@ -842,7 +842,7 @@ bg-navy-800 card with left border border-l-4 border-gold:
 - Email: info@megafixxhomeservices.com — Mail icon, clickable mailto: link
 - Location: Collin County, Texas — MapPin icon
 - Serving: "All of Texas Statewide" — Map icon
-- Hours: Mon–Fri 8AM–6PM | Sat 9AM–4PM | Sun Closed
+- Hours: Monday – Friday: 8:00 AM – 6:00 PM | Saturday: closed | Sunday: Closed
 - "Fully Insured" badge + "Licensed Professionals" badge in text-gold
 
 c) Bottom: 3 horizontal info cards

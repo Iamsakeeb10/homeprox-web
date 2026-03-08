@@ -620,7 +620,7 @@ Only update text content.
     Serving: "All of Texas Statewide"
     Hours:
       Monday – Friday: 8:00 AM – 6:00 PM
-      Saturday: 9:00 AM – 4:00 PM
+      Saturday: closed
       Sunday: Closed
     Badges: "Fully Insured" | "Licensed Professionals"
 

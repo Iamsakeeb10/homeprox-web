@@ -98,7 +98,7 @@ export default function ContactPage() {
                       <div className="flex items-start gap-3">
                         <MapPin className="w-5 h-5 text-orange mt-1 flex-shrink-0" aria-hidden="true" />
                         <div>
-                          <p className="font-body text-charcoal">Collin County, Texas</p>
+                          <p className="font-body text-charcoal">815 Table Rock ST, Princeton, TX 75407</p>
                         </div>
                       </div>
                     </div>
@@ -119,7 +119,7 @@ export default function ContactPage() {
                         <Clock className="w-5 h-5 text-orange mt-1 flex-shrink-0" aria-hidden="true" />
                         <div>
                           <p className="font-body text-charcoal mb-1">Monday – Friday: 8:00 AM – 6:00 PM</p>
-                          <p className="font-body text-charcoal mb-1">Saturday: 9:00 AM – 4:00 PM</p>
+                          <p className="font-body text-charcoal mb-1">Saturday: closed</p>
                           <p className="font-body text-charcoal">Sunday: Closed</p>
                         </div>
                       </div>

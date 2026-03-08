@@ -35,7 +35,7 @@ export async function POST(req: Request) {
             </div>
           </div>
           <div style="background: #F5EFE0; padding: 16px; text-align: center;">
-            <p style="color: #7A6A52; margin: 0; font-size: 12px;">MEGAFIXX Home Services LLC — Collin County, Texas</p>
+            <p style="color: #7A6A52; margin: 0; font-size: 12px;">MEGAFIXX Home Services LLC — 815 Table Rock ST, Princeton, TX 75407</p>
           </div>
         </div>
       `,
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
             <p style="margin: 8px 0;"><a href="mailto:info@megafixxhomeservices.com" style="color: #C89B3C; text-decoration: none;">✉️ info@megafixxhomeservices.com</a></p>
           </div>
           <div style="background: #F5EFE0; padding: 16px; text-align: center;">
-            <p style="color: #7A6A52; margin: 0; font-size: 12px;">© 2026 MEGAFIXX Home Services LLC — Collin County, Texas. All rights reserved.</p>
+            <p style="color: #7A6A52; margin: 0; font-size: 12px;">© 2026 MEGAFIXX Home Services LLC — 815 Table Rock ST, Princeton, TX 75407. All rights reserved.</p>
           </div>
         </div>
       `,

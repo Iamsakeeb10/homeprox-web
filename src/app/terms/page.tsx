@@ -4,7 +4,7 @@ import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Terms & Conditions | MEGAFIXX Home Services LLC",
-  description: "Terms and Conditions for MEGAFIXX Home Services LLC. Governing use of our website and services. Collin County, Texas.",
+  description: "Terms and Conditions for MEGAFIXX Home Services LLC. Governing use of our website and services. 815 Table Rock ST, Princeton, TX 75407.",
   path: "/terms"
 });
 
@@ -223,7 +223,7 @@ export default function TermsPage() {
                             </tr>
                             <tr>
                               <td className="font-body text-text-muted font-medium pr-4 py-2">Location</td>
-                              <td className="font-body text-charcoal py-2">Collin County, Texas</td>
+                              <td className="font-body text-charcoal py-2">815 Table Rock ST, Princeton, TX 75407</td>
                             </tr>
                           </tbody>
                         </table>
