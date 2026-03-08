@@ -5,6 +5,7 @@ import { services } from "@/lib/data/services";
 import { validateForm } from "@/lib/utils/formValidation";
 import { ContactFormData } from "@/types";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const propertyTypes = [
@@ -24,7 +25,8 @@ export function QuoteForm() {
     propertyType: "",
     serviceNeeded: "",
     location: "",
-    message: ""
+    message: "",
+    agreeToTerms: false
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -35,10 +37,13 @@ export function QuoteForm() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    
-    // Clear error for this field when user starts typing
+    const { name, value, type } = e.target;
+    const checked = type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value
+    }));
+
     if (errors[name]) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -80,6 +85,7 @@ export function QuoteForm() {
           serviceNeeded: '',
           location: '',
           message: '',
+          agreeToTerms: false,
         })
         setErrors({})
       } else {
@@ -329,6 +335,37 @@ export function QuoteForm() {
         {errors.message && (
           <p id="message-error" className="mt-1 text-sm text-error" role="alert">
             {errors.message}
+          </p>
+        )}
+      </div>
+
+      {/* Terms and Conditions */}
+      <div>
+        <div className="flex items-start gap-3">
+          <input
+            type="checkbox"
+            id="agreeToTerms"
+            name="agreeToTerms"
+            checked={formData.agreeToTerms}
+            onChange={handleChange}
+            className="mt-1 h-4 w-4 rounded border-surface-300 text-orange focus:ring-orange focus:ring-offset-0 cursor-pointer"
+            aria-describedby={errors.agreeToTerms ? "agreeToTerms-error" : undefined}
+            aria-invalid={errors.agreeToTerms ? "true" : "false"}
+          />
+          <label htmlFor="agreeToTerms" className="font-body text-sm text-charcoal cursor-pointer">
+            I agree to the{" "}
+            <Link
+              href="/terms"
+              className="text-orange hover:text-orange-dark underline underline-offset-2"
+            >
+              Terms and Conditions
+            </Link>{" "}
+            provided by the company. By providing my phone number, I agree to receive text messages from MEGAFIXX Home Services LLC.
+          </label>
+        </div>
+        {errors.agreeToTerms && (
+          <p id="agreeToTerms-error" className="mt-1 text-sm text-error" role="alert">
+            {errors.agreeToTerms}
           </p>
         )}
       </div>

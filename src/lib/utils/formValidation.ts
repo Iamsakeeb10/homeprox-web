@@ -83,5 +83,10 @@ export function validateForm(formData: ContactFormData): Record<string, string> 
     errors.message = "Message must be at least 10 characters";
   }
 
+  // Terms and Conditions
+  if (!formData.agreeToTerms) {
+    errors.agreeToTerms = "You must agree to the Terms and Conditions to submit.";
+  }
+
   return errors;
 }

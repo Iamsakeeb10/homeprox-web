@@ -42,4 +42,5 @@ export interface ContactFormData {
   serviceNeeded: string;
   location: string;
   message: string;
+  agreeToTerms: boolean;
 }

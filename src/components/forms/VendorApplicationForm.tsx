@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useRef } from "react";
 import { Upload, X, CheckCircle2, ChevronRight, ChevronLeft, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -38,6 +39,7 @@ const INITIAL_DATA: VendorFormData = {
   license: null,
   w9Form: null,
   backgroundCheckAuth: null,
+  agreeToTerms: false,
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -153,7 +155,7 @@ export default function VendorApplicationForm() {
   const [submitError, setSubmitError] = useState("");
 
   // ── Field helpers ──
-  const handleChange = (field: keyof VendorFormData, value: string | File | null) => {
+  const handleChange = (field: keyof VendorFormData, value: string | File | null | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field as keyof VendorFormErrors]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -191,6 +193,10 @@ export default function VendorApplicationForm() {
     const stepErrors = validateStep(3, formData);
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
+      return;
+    }
+    if (!formData.agreeToTerms) {
+      setErrors((prev) => ({ ...prev, agreeToTerms: "You must agree to the Terms and Conditions to submit." }));
       return;
     }
 
@@ -629,6 +635,36 @@ export default function VendorApplicationForm() {
                 >
                   Edit
                 </button>
+              </div>
+
+              {/* Terms and Conditions */}
+              <div>
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    id="vendor-agreeToTerms"
+                    checked={formData.agreeToTerms}
+                    onChange={(e) => handleChange("agreeToTerms", e.target.checked)}
+                    className="mt-1 h-4 w-4 rounded border-surface-300 text-orange focus:ring-orange focus:ring-offset-0 cursor-pointer"
+                    aria-describedby={errors.agreeToTerms ? "vendor-agreeToTerms-error" : undefined}
+                    aria-invalid={errors.agreeToTerms ? "true" : "false"}
+                  />
+                  <label htmlFor="vendor-agreeToTerms" className="font-body text-sm text-charcoal cursor-pointer">
+                    I agree to the{" "}
+                    <Link
+                      href="/terms"
+                      className="text-orange hover:text-orange-dark underline underline-offset-2"
+                    >
+                      Terms and Conditions
+                    </Link>{" "}
+                    provided by the company. By providing my phone number, I agree to receive text messages from MEGAFIXX Home Services LLC.
+                  </label>
+                </div>
+                {errors.agreeToTerms && (
+                  <p id="vendor-agreeToTerms-error" className="mt-1 text-sm text-error" role="alert">
+                    {errors.agreeToTerms}
+                  </p>
+                )}
               </div>
 
               {/* Confirmation notice */}

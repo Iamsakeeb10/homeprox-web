@@ -17,6 +17,9 @@ export interface VendorFormData {
   license: File | null;
   w9Form: File | null;
   backgroundCheckAuth: File | null;
+
+  // Terms acceptance (required before submit)
+  agreeToTerms: boolean;
 }
 
 export interface VendorFormErrors {
@@ -29,6 +32,7 @@ export interface VendorFormErrors {
   coverageAreas?: string;
   serviceRadius?: string;
   insuranceCertificate?: string;
+  agreeToTerms?: string;
   general?: string;
 }
 
