@@ -21,6 +21,7 @@ const STEPS = [
   { id: 1, title: "Company Information", description: "Tell us about your business" },
   { id: 2, title: "Services Offered", description: "What you do and where you work" },
   { id: 3, title: "Compliance & Docs", description: "Insurance, licenses, and documents" },
+  { id: 4, title: "Review & Submit", description: "Confirm your details before submitting" },
 ];
 
 const INITIAL_DATA: VendorFormData = {
@@ -124,6 +125,19 @@ function FileUploadField({
         className="sr-only"
         onChange={(e) => onChange(fieldName, e.target.files?.[0] ?? null)}
       />
+    </div>
+  );
+}
+
+function ReviewRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-3 border-b border-surface-100 last:border-0">
+      <span className="font-body text-xs uppercase tracking-wider text-text-muted sm:w-44 flex-shrink-0 pt-0.5">
+        {label}
+      </span>
+      <span className="font-body text-sm text-charcoal font-medium break-words">
+        {value || <span className="text-text-muted italic font-normal">Not provided</span>}
+      </span>
     </div>
   );
 }
@@ -521,12 +535,112 @@ export default function VendorApplicationForm() {
                 file={formData.backgroundCheckAuth}
                 onChange={handleChange}
               />
+            </div>
+          )}
 
+          {/* ── Step 4: Review & Submit ──────────────────────── */}
+          {currentStep === 4 && (
+            <div className="space-y-6">
+
+              {/* Company Information */}
+              <div>
+                <h4 className="font-display text-base font-bold text-charcoal mb-1 flex items-center gap-2">
+                  <span className="w-1.5 h-5 rounded-full bg-orange inline-block" />
+                  Company Information
+                </h4>
+                <div className="bg-surface-50 rounded-xl border border-surface-200 px-5 py-1 mt-3">
+                  <ReviewRow label="Company Name" value={formData.companyName} />
+                  <ReviewRow label="Contact Person" value={formData.contactPerson} />
+                  <ReviewRow label="Phone" value={formData.phone} />
+                  <ReviewRow label="Email" value={formData.email} />
+                  <ReviewRow label="Website" value={formData.website} />
+                  <ReviewRow label="Years in Business" value={formData.yearsInBusiness} />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { setErrors({}); setCurrentStep(1); }}
+                  className="mt-2 font-accent text-xs text-orange hover:text-orange-dark hover:underline transition-colors"
+                >
+                  Edit
+                </button>
+              </div>
+
+              {/* Services Offered */}
+              <div>
+                <h4 className="font-display text-base font-bold text-charcoal mb-1 flex items-center gap-2">
+                  <span className="w-1.5 h-5 rounded-full bg-orange inline-block" />
+                  Services Offered
+                </h4>
+                <div className="bg-surface-50 rounded-xl border border-surface-200 px-5 py-1 mt-3">
+                  <ReviewRow
+                    label="Service Categories"
+                    value={
+                      formData.serviceCategories.length > 0
+                        ? formData.serviceCategories.join(", ")
+                        : ""
+                    }
+                  />
+                  <ReviewRow label="Coverage Areas" value={formData.coverageAreas} />
+                  <ReviewRow label="Service Radius" value={formData.serviceRadius} />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { setErrors({}); setCurrentStep(2); }}
+                  className="mt-2 font-accent text-xs text-orange hover:text-orange-dark hover:underline transition-colors"
+                >
+                  Edit
+                </button>
+              </div>
+
+              {/* Compliance & Documents */}
+              <div>
+                <h4 className="font-display text-base font-bold text-charcoal mb-1 flex items-center gap-2">
+                  <span className="w-1.5 h-5 rounded-full bg-orange inline-block" />
+                  Compliance & Documents
+                </h4>
+                <div className="bg-surface-50 rounded-xl border border-surface-200 px-5 py-1 mt-3">
+                  <ReviewRow
+                    label="Certificate of Insurance"
+                    value={formData.insuranceCertificate?.name ?? ""}
+                  />
+                  <ReviewRow
+                    label="Business License"
+                    value={formData.license?.name ?? ""}
+                  />
+                  <ReviewRow
+                    label="W9 Form"
+                    value={formData.w9Form?.name ?? ""}
+                  />
+                  <ReviewRow
+                    label="Background Check Auth"
+                    value={formData.backgroundCheckAuth?.name ?? ""}
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { setErrors({}); setCurrentStep(3); }}
+                  className="mt-2 font-accent text-xs text-orange hover:text-orange-dark hover:underline transition-colors"
+                >
+                  Edit
+                </button>
+              </div>
+
+              {/* Confirmation notice */}
+              <div className="flex items-start gap-3 p-4 bg-orange-muted border border-orange/20 rounded-xl">
+                <CheckCircle2 className="w-5 h-5 text-orange mt-0.5 flex-shrink-0" />
+                <p className="font-body text-sm text-charcoal">
+                  By submitting this application you confirm that all information provided
+                  is accurate and that you meet MEGAFIXX&apos;s vendor requirements.
+                </p>
+              </div>
+
+              {/* Submit error */}
               {submitError && (
                 <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
                   <p className="font-body text-sm text-error">{submitError}</p>
                 </div>
               )}
+
             </div>
           )}
 
@@ -549,7 +663,7 @@ export default function VendorApplicationForm() {
             <div>
               {currentStep < STEPS.length ? (
                 <Button variant="primary" size="md" onClick={handleNext}>
-                  Continue
+                  {currentStep === 3 ? "Review Application" : "Continue"}
                   <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               ) : (
