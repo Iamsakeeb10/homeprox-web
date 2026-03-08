@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Upload, X, CheckCircle2, ChevronRight, ChevronLeft } from "lucide-react";
+import { Upload, X, CheckCircle2, ChevronRight, ChevronLeft, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { VendorFormData, VendorFormErrors } from "@/types/vendor";
@@ -179,7 +179,6 @@ export default function VendorApplicationForm() {
     }
     setErrors({});
     setCurrentStep((prev) => prev + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBack = () => {
@@ -301,7 +300,7 @@ export default function VendorApplicationForm() {
         align="center"
       />
 
-      <div className="mt-10 max-w-3xl mx-auto">
+      <div className="mt-10 max-w-3xl mx-auto" suppressHydrationWarning>
         <StepIndicator />
 
         <div className="bg-white border border-surface-200 rounded-2xl shadow-card p-8 sm:p-10">
@@ -378,6 +377,7 @@ export default function VendorApplicationForm() {
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
                     className={inputClass("email")}
+                    suppressHydrationWarning
                   />
                   {errors.email && (
                     <p className="mt-1 text-xs text-error">{errors.email}</p>
@@ -403,18 +403,21 @@ export default function VendorApplicationForm() {
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
                     Years in Business <span className="text-orange">*</span>
                   </label>
-                  <select
-                    value={formData.yearsInBusiness}
-                    onChange={(e) => handleChange("yearsInBusiness", e.target.value)}
-                    className={inputClass("yearsInBusiness")}
-                  >
-                    <option value="">Select...</option>
-                    <option value="Less than 1 year">Less than 1 year</option>
-                    <option value="1–2 years">1–2 years</option>
-                    <option value="3–5 years">3–5 years</option>
-                    <option value="6–10 years">6–10 years</option>
-                    <option value="10+ years">10+ years</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      value={formData.yearsInBusiness}
+                      onChange={(e) => handleChange("yearsInBusiness", e.target.value)}
+                      className={`${inputClass("yearsInBusiness")} appearance-none pr-12`}
+                    >
+                      <option value="">Select...</option>
+                      <option value="Less than 1 year">Less than 1 year</option>
+                      <option value="1–2 years">1–2 years</option>
+                      <option value="3–5 years">3–5 years</option>
+                      <option value="6–10 years">6–10 years</option>
+                      <option value="10+ years">10+ years</option>
+                    </select>
+                    <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted pointer-events-none" aria-hidden />
+                  </div>
                   {errors.yearsInBusiness && (
                     <p className="mt-1 text-xs text-error">{errors.yearsInBusiness}</p>
                   )}
@@ -483,17 +486,20 @@ export default function VendorApplicationForm() {
                 <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
                   Service Radius <span className="text-orange">*</span>
                 </label>
-                <select
-                  value={formData.serviceRadius}
-                  onChange={(e) => handleChange("serviceRadius", e.target.value)}
-                  className={inputClass("serviceRadius")}
-                >
-                  <option value="">Select radius...</option>
-                  <option value="Up to 25 miles">Up to 25 miles</option>
-                  <option value="Up to 50 miles">Up to 50 miles</option>
-                  <option value="Up to 100 miles">Up to 100 miles</option>
-                  <option value="Statewide">Statewide (Texas)</option>
-                </select>
+                <div className="relative">
+                  <select
+                    value={formData.serviceRadius}
+                    onChange={(e) => handleChange("serviceRadius", e.target.value)}
+                    className={`${inputClass("serviceRadius")} appearance-none pr-12`}
+                  >
+                    <option value="">Select radius...</option>
+                    <option value="Up to 25 miles">Up to 25 miles</option>
+                    <option value="Up to 50 miles">Up to 50 miles</option>
+                    <option value="Up to 100 miles">Up to 100 miles</option>
+                    <option value="Statewide">Statewide (Texas)</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted pointer-events-none" aria-hidden />
+                </div>
                 {errors.serviceRadius && (
                   <p className="mt-1 text-xs text-error">{errors.serviceRadius}</p>
                 )}
