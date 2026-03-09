@@ -134,6 +134,26 @@ src/
 | **/terms** | Terms & Conditions | Text hero | TOC + content | — |
 | **404** | Not found | — | Message + Home / Contact buttons | — |
 
+### 3.1 Clients Page (`/clients`)
+
+- **Purpose:** Explain who MEGAFIXX serves (property managers, financial institutions, real estate professionals, investors) and provide a tailored onboarding path for new client partners.
+- **Hero:** Background image with dark charcoal overlay, h1 "Our Clients" and subtitle "Trusted Property Maintenance Partner Across Texas".
+- **Main sections:**
+  - **Intro:** Two-column layout with narrative about long-term partnerships and a "By The Numbers" stats card (properties maintained, statewide coverage, insurance, years of experience).
+  - **Client Types:** Alternating sections for each `ClientType` (text + `ClientTypeCard` on one side, `ClientImage` on the other) with `AnimatedSection` fadeLeft/fadeRight variants.
+  - **Why Clients Choose MEGAFIXX:** Four feature cards (Reliability, Quality Workmanship, Scalable Solutions, Professional Communication).
+  - **Quality Assurance Process:** Three-step process cards (Detailed Documentation, Vendor & Team Screening, Proactive Communication) with a connecting line on desktop.
+  - **Ready to Partner CTA:** Card with headline, supporting copy, phone and email links, and a primary button **"Get Started"**.
+  - **Client Onboarding Section:** Anchored at `#client-onboarding`, includes:
+    - A charcoal **benefits strip** ("Reliable Vendor Network", "Fast Response Times", "Work Order Transparency", "Photo Documentation", "Scalable Property Maintenance Solutions") with CheckCircle2 icons.
+    - Centered `SectionHeading` titled **"Become a MEGAFIXX Client"**.
+    - A white card containing the `ClientOnboardingForm`:
+      - Captures company info, company type, website, service needs (multi-select checkboxes), portfolio size (pills), property locations, optional notes, and terms consent.
+      - Submits via `POST /api/contact` with `formSource: "client-onboarding"`, mapping fields into `ContactFormData`.
+- **CTA behavior:**
+  - Navbar **"Our Clients"** link routes here.
+  - The "Ready to Partner" button uses `Button` with `asChild` + `Link href="#client-onboarding"` so clicking it scrolls to the onboarding form section.
+
 **Inner-page hero pattern (About, Services, Clients, Contact, Vendors):**  
 `section` with `h-[40vh] min-h-[320px] md:h-[50vh] lg:h-[55vh]`, `bg-hero-bg`, `pt-28 sm:pt-32`. Content: `text-white` heading, `text-surface-200` subtitle, centered. No background image; solid color only.
 

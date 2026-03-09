@@ -137,7 +137,13 @@ function validateClientOnboarding(
   return errors;
 }
 
-export function ClientOnboardingForm() {
+interface ClientOnboardingFormProps {
+  onSuccess?: () => void;
+}
+
+export default function ClientOnboardingForm({
+  onSuccess,
+}: ClientOnboardingFormProps) {
   const [form, setForm] = useState<ClientOnboardingFormData>(INITIAL_DATA);
   const [errors, setErrors] = useState<ClientOnboardingFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -241,6 +247,9 @@ export function ClientOnboardingForm() {
       if (res.ok && data.success) {
         setIsSuccess(true);
         setErrors({});
+        if (onSuccess) {
+          onSuccess();
+        }
       } else {
         setSubmitError(
           data?.error ??
