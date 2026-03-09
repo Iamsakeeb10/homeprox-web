@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useRef } from "react";
-import { Upload, X, CheckCircle2, ChevronRight, ChevronLeft, ChevronDown } from "lucide-react";
+import { Upload, X, FileText, CheckCircle2, ChevronRight, ChevronLeft, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { VendorFormData, VendorFormErrors } from "@/types/vendor";
@@ -21,7 +21,7 @@ const SERVICE_CATEGORIES = [
 const STEPS = [
   { id: 1, title: "Company Information", description: "Tell us about your business" },
   { id: 2, title: "Services Offered", description: "What you do and where you work" },
-  { id: 3, title: "Compliance & Docs", description: "Insurance, licenses, and documents" },
+  { id: 3, title: "Documents & Attachments", description: "Upload any relevant documents (optional)" },
   { id: 4, title: "Review & Submit", description: "Confirm your details before submitting" },
 ];
 
@@ -35,10 +35,7 @@ const INITIAL_DATA: VendorFormData = {
   serviceCategories: [],
   coverageAreas: "",
   serviceRadius: "",
-  insuranceCertificate: null,
-  license: null,
-  w9Form: null,
-  backgroundCheckAuth: null,
+  attachments: [],
   agreeToTerms: false,
 };
 
@@ -65,81 +62,42 @@ function validateStep(step: number, data: VendorFormData): VendorFormErrors {
       errors.serviceRadius = "Service radius is required.";
   }
   if (step === 3) {
-    if (!data.insuranceCertificate)
-      errors.insuranceCertificate = "Certificate of Insurance is required.";
+    // Attachments are optional — no validation required
+    return {};
   }
   return errors;
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function FileUploadField({
+function ReviewRow({
   label,
-  fieldName,
-  file,
-  required,
-  onChange,
+  value,
+  onEdit,
 }: {
   label: string;
-  fieldName: keyof VendorFormData;
-  file: File | null;
-  required?: boolean;
-  onChange: (field: keyof VendorFormData, file: File | null) => void;
+  value: string;
+  onEdit?: () => void;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  return (
-    <div>
-      <label className="block font-body text-sm font-medium text-charcoal mb-2">
-        {label}
-        {required && <span className="text-orange ml-1">*</span>}
-        {!required && <span className="text-text-muted ml-1 font-normal">(Optional)</span>}
-      </label>
-      {file ? (
-        <div className="flex items-center gap-3 p-3 bg-orange-muted border border-orange/30 rounded-lg">
-          <CheckCircle2 className="w-5 h-5 text-orange flex-shrink-0" />
-          <span className="font-body text-sm text-charcoal flex-1 truncate">{file.name}</span>
-          <button
-            type="button"
-            onClick={() => onChange(fieldName, null)}
-            className="text-text-muted hover:text-error transition-colors"
-            aria-label="Remove file"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={() => inputRef.current?.click()}
-          className="w-full flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed border-surface-200 rounded-lg hover:border-orange/60 hover:bg-orange-muted/40 transition-all duration-200 cursor-pointer"
-        >
-          <Upload className="w-6 h-6 text-orange" />
-          <span className="font-body text-sm text-text-muted">
-            Click to upload (PDF, JPG, PNG — max 10MB)
-          </span>
-        </button>
-      )}
-      <input
-        ref={inputRef}
-        type="file"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="sr-only"
-        onChange={(e) => onChange(fieldName, e.target.files?.[0] ?? null)}
-      />
-    </div>
-  );
-}
-
-function ReviewRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-3 border-b border-surface-100 last:border-0">
       <span className="font-body text-xs uppercase tracking-wider text-text-muted sm:w-44 flex-shrink-0 pt-0.5">
         {label}
       </span>
-      <span className="font-body text-sm text-charcoal font-medium break-words">
-        {value || <span className="text-text-muted italic font-normal">Not provided</span>}
-      </span>
+      <div className="flex items-center gap-2 min-w-0 flex-1">
+        <span className="font-body text-sm text-charcoal font-medium break-words">
+          {value || <span className="text-text-muted italic font-normal">Not provided</span>}
+        </span>
+        {onEdit && (
+          <button
+            type="button"
+            onClick={onEdit}
+            className="font-accent text-xs text-orange hover:text-orange-dark hover:underline transition-colors shrink-0"
+          >
+            Edit
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -170,6 +128,43 @@ export default function VendorApplicationForm() {
         : [...prev.serviceCategories, cat],
     }));
     if (errors.serviceCategories) setErrors((prev) => ({ ...prev, serviceCategories: undefined }));
+  };
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFiles = Array.from(e.target.files || []);
+    addAttachments(newFiles);
+    e.target.value = "";
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    addAttachments(droppedFiles);
+  };
+
+  const addAttachments = (newFiles: File[]) => {
+    const oversized = newFiles.filter((f) => f.size > 10 * 1024 * 1024);
+    if (oversized.length > 0) {
+      setErrors((prev) => ({
+        ...prev,
+        attachments: `Some files exceed the 10 MB limit: ${oversized.map((f) => f.name).join(", ")}`,
+      }));
+      return;
+    }
+    setErrors((prev) => ({ ...prev, attachments: undefined }));
+    setFormData((prev) => ({
+      ...prev,
+      attachments: [...(prev.attachments || []), ...newFiles],
+    }));
+  };
+
+  const removeAttachment = (index: number) => {
+    setFormData((prev) => ({
+      ...prev,
+      attachments: (prev.attachments || []).filter((_, i) => i !== index),
+    }));
   };
 
   // ── Navigation ──
@@ -216,13 +211,9 @@ export default function VendorApplicationForm() {
       });
       body.append("serviceCategories", formData.serviceCategories.join(", "));
 
-      // File attachments
-      const fileFields: (keyof VendorFormData)[] = [
-        "insuranceCertificate", "license", "w9Form", "backgroundCheckAuth",
-      ];
-      fileFields.forEach((key) => {
-        const file = formData[key] as File | null;
-        if (file) body.append(key, file);
+      // Bulk attachments
+      (formData.attachments || []).forEach((file, i) => {
+        body.append(`attachment_${i}`, file, file.name);
       });
 
       const res = await fetch("/api/vendor", { method: "POST", body });
@@ -513,40 +504,81 @@ export default function VendorApplicationForm() {
             </div>
           )}
 
-          {/* ── Step 3: Compliance & Documentation ──────────── */}
+          {/* ── Step 3: Documents & Attachments (optional) ─────── */}
           {currentStep === 3 && (
             <div className="space-y-6">
-              <FileUploadField
-                label="Certificate of Insurance"
-                fieldName="insuranceCertificate"
-                file={formData.insuranceCertificate}
-                required
-                onChange={handleChange}
-              />
-              {errors.insuranceCertificate && (
-                <p className="-mt-4 text-xs text-error">{errors.insuranceCertificate}</p>
+              <div
+                role="button"
+                tabIndex={0}
+                className="border-2 border-dashed border-surface-300 rounded-xl p-8 text-center hover:border-orange/50 transition-colors cursor-pointer"
+                onClick={() => fileInputRef.current?.click()}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    fileInputRef.current?.click();
+                  }
+                }}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={handleDrop}
+              >
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  multiple
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+                <div className="flex flex-col items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-orange-muted flex items-center justify-center">
+                    <Upload className="w-6 h-6 text-orange" />
+                  </div>
+                  <div>
+                    <p className="font-body font-medium text-charcoal">
+                      Click to upload or drag &amp; drop files
+                    </p>
+                    <p className="font-body text-sm text-text-muted mt-1">
+                      PDF, JPG, PNG — up to 10 MB per file
+                    </p>
+                  </div>
+                  <span className="inline-block text-xs font-accent text-text-muted bg-surface-100 border border-surface-200 rounded-full px-3 py-1">
+                    Optional
+                  </span>
+                </div>
+              </div>
+
+              {formData.attachments && formData.attachments.length > 0 && (
+                <ul className="space-y-2">
+                  {formData.attachments.map((file, index) => (
+                    <li
+                      key={index}
+                      className="flex items-center justify-between bg-surface-50 border border-surface-200 rounded-lg px-4 py-3"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <FileText className="w-4 h-4 text-orange shrink-0" />
+                        <span className="font-body text-sm text-charcoal truncate">
+                          {file.name}
+                        </span>
+                        <span className="font-body text-xs text-text-muted shrink-0">
+                          {(file.size / 1024 / 1024).toFixed(2)} MB
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeAttachment(index)}
+                        className="ml-3 text-text-muted hover:text-error transition-colors shrink-0"
+                        aria-label={`Remove ${file.name}`}
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               )}
 
-              <FileUploadField
-                label="Business License"
-                fieldName="license"
-                file={formData.license}
-                onChange={handleChange}
-              />
-
-              <FileUploadField
-                label="W9 Form"
-                fieldName="w9Form"
-                file={formData.w9Form}
-                onChange={handleChange}
-              />
-
-              <FileUploadField
-                label="Background Check Authorization"
-                fieldName="backgroundCheckAuth"
-                file={formData.backgroundCheckAuth}
-                onChange={handleChange}
-              />
+              {errors.attachments && (
+                <p className="text-sm text-error font-body">{errors.attachments}</p>
+              )}
             </div>
           )}
 
@@ -604,37 +636,23 @@ export default function VendorApplicationForm() {
                 </button>
               </div>
 
-              {/* Compliance & Documents */}
+              {/* Documents & Attachments */}
               <div>
                 <h4 className="font-display text-base font-bold text-charcoal mb-1 flex items-center gap-2">
                   <span className="w-1.5 h-5 rounded-full bg-orange inline-block" />
-                  Compliance & Documents
+                  Documents & Attachments
                 </h4>
                 <div className="bg-surface-50 rounded-xl border border-surface-200 px-5 py-1 mt-3">
                   <ReviewRow
-                    label="Certificate of Insurance"
-                    value={formData.insuranceCertificate?.name ?? ""}
-                  />
-                  <ReviewRow
-                    label="Business License"
-                    value={formData.license?.name ?? ""}
-                  />
-                  <ReviewRow
-                    label="W9 Form"
-                    value={formData.w9Form?.name ?? ""}
-                  />
-                  <ReviewRow
-                    label="Background Check Auth"
-                    value={formData.backgroundCheckAuth?.name ?? ""}
+                    label="Attachments"
+                    value={
+                      formData.attachments && formData.attachments.length > 0
+                        ? `${formData.attachments.length} file(s) attached`
+                        : "No attachments added"
+                    }
+                    onEdit={() => { setErrors({}); setCurrentStep(3); }}
                   />
                 </div>
-                <button
-                  type="button"
-                  onClick={() => { setErrors({}); setCurrentStep(3); }}
-                  className="mt-2 font-accent text-xs text-orange hover:text-orange-dark hover:underline transition-colors"
-                >
-                  Edit
-                </button>
               </div>
 
               {/* Terms and Conditions */}

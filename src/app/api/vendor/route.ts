@@ -5,14 +5,6 @@ import { transporter } from "@/lib/utils/mailer";
 // File size guard (10 MB per file)
 const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
-// Label map for readable email display
-const FILE_FIELD_LABELS: Record<string, string> = {
-  insuranceCertificate: "Certificate of Insurance",
-  license: "Business License",
-  w9Form: "W9 Form",
-  backgroundCheckAuth: "Background Check Authorization",
-};
-
 export async function POST(request: NextRequest) {
   try {
     const data = await request.formData();
@@ -36,12 +28,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // ── Extract file attachments ─────────────────────────────
+    // ── Extract file attachments (attachment_0, attachment_1, ...) ─────────
     const attachments: nodemailer.SendMailOptions["attachments"] = [];
-    const fileFields = ["insuranceCertificate", "license", "w9Form", "backgroundCheckAuth"];
-
-    for (const field of fileFields) {
-      const file = data.get(field) as File | null;
+    let i = 0;
+    while (data.get(`attachment_${i}`)) {
+      const file = data.get(`attachment_${i}`) as File;
       if (file && file.size > 0) {
         if (file.size > MAX_FILE_BYTES) {
           return NextResponse.json(
@@ -51,11 +42,12 @@ export async function POST(request: NextRequest) {
         }
         const buffer = Buffer.from(await file.arrayBuffer());
         attachments.push({
-          filename: `[${FILE_FIELD_LABELS[field] ?? field}] ${file.name}`,
+          filename: file.name,
           content: buffer,
           contentType: file.type,
         });
       }
+      i++;
     }
 
     // ── Build email HTML ─────────────────────────────────────

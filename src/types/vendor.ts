@@ -12,11 +12,8 @@ export interface VendorFormData {
   coverageAreas: string;
   serviceRadius: string;
 
-  // Step 3 — Compliance & Documentation
-  insuranceCertificate: File | null;
-  license: File | null;
-  w9Form: File | null;
-  backgroundCheckAuth: File | null;
+  // Step 3 — Documents & Attachments (optional)
+  attachments?: File[];
 
   // Terms acceptance (required before submit)
   agreeToTerms: boolean;
@@ -31,7 +28,7 @@ export interface VendorFormErrors {
   serviceCategories?: string;
   coverageAreas?: string;
   serviceRadius?: string;
-  insuranceCertificate?: string;
+  attachments?: string;
   agreeToTerms?: string;
   general?: string;
 }
