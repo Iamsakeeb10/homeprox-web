@@ -138,7 +138,7 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-orange mt-1 flex-shrink-0" aria-hidden="true" />
                 <span className="font-body text-surface-300 text-sm">
-                  815 Table Rock ST, Princeton, TX 75407<br />
+                  815 Table Rock ST, Princeton, TX,75407<br />
                   <span className="text-orange">Serving All of Texas</span>
                 </span>
               </li>

@@ -66,8 +66,8 @@ const regions = [
 ];
 
 export default function AboutPage() {
-  const heroImageUrl = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80";
-  const coverageImageUrl = "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80";
+  const heroImageUrl = "/images/heroes/hero-about.jpg";
+  const coverageImageUrl = "/images/about/coverage-bg.jpg";
 
   return (
     <>

@@ -14,7 +14,7 @@ export const metadata: Metadata = generatePageMetadata({
 });
 
 export default function ServicesPage() {
-  const heroImageUrl = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80";
+  const heroImageUrl = "/images/heroes/hero-services.jpg";
 
   return (
     <>

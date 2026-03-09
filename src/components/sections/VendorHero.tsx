@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 
-const VENDOR_HERO_IMAGE =
-  "https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1920&q=80";
+const VENDOR_HERO_IMAGE = "/images/heroes/hero-vendor.jpg";
 
 export default function VendorHero() {
   return (

@@ -12,7 +12,7 @@ interface CTABannerProps {
 
 export function CTABanner({ variant = "dark" }: CTABannerProps) {
   const [imgError, setImgError] = useState(false);
-  const backgroundImageUrl = "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1920&q=80";
+  const backgroundImageUrl = "/images/cta/cta-banner-bg.jpg";
 
   if (variant === "light") {
     return (

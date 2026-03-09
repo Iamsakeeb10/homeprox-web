@@ -14,8 +14,7 @@ export const metadata: Metadata = generatePageMetadata({
 });
 
 export default function QuotePage() {
-  const heroImageUrl =
-    "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80";
+  const heroImageUrl = "/images/heroes/hero-quote.jpg";
 
   return (
     <>
@@ -93,7 +92,7 @@ export default function QuotePage() {
                         <MapPin className="w-5 h-5 text-orange mt-1 flex-shrink-0" aria-hidden="true" />
                         <div>
                           <p className="font-body text-charcoal">
-                            815 Table Rock ST, Princeton, TX 75407
+                            815 Table Rock ST, Princeton, TX,75407
                           </p>
                         </div>
                       </div>

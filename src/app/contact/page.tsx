@@ -24,8 +24,7 @@ export const metadata: Metadata = generatePageMetadata({
   path: "/contact",
 });
 
-const CONTACT_HERO_IMAGE =
-  "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80";
+const CONTACT_HERO_IMAGE = "/images/heroes/hero-contact.jpg";
 
 const TRUST_ITEMS = [
   "Reliable Property Maintenance",
@@ -128,10 +127,11 @@ export default function ContactPage() {
                     <p className="font-accent text-xs font-semibold text-text-muted uppercase tracking-wider mb-0.5">
                       Business Hours
                     </p>
-                    <p className="font-body text-charcoal font-medium">Monday – Friday</p>
-                    <p className="font-body text-text-muted text-sm">8:00 AM – 5:00 PM</p>
-                    <p className="font-body text-charcoal font-medium mt-2">Saturday – Sunday</p>
-                    <p className="font-body text-text-muted text-sm">Closed</p>
+                    <p className="font-body text-charcoal font-medium">
+                      Monday – Friday: 8:00 AM – 6:00 PM
+                    </p>
+                    <p className="font-body text-charcoal font-medium mt-2">Saturday: closed</p>
+                    <p className="font-body text-charcoal font-medium">Sunday: Closed</p>
                   </div>
                 </div>
               </div>
@@ -226,7 +226,7 @@ export default function ContactPage() {
               (469) 378-9262
             </a>
             <p className="font-body text-surface-300 mt-2 text-sm">
-              Monday – Friday &nbsp;·&nbsp; 8:00 AM – 5:00 PM
+              Monday – Friday: 8:00 AM – 6:00 PM &nbsp;·&nbsp; Saturday: closed &nbsp;·&nbsp; Sunday: Closed
             </p>
           </div>
         </AnimatedSection>

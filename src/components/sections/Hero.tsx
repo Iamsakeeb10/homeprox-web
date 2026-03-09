@@ -5,15 +5,15 @@ import Link from "next/link";
 
 const HERO_CARD_IMAGES = [
   {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=720&q=80",
+    src: "/images/hero/hero-card-maintenance.jpg",
     alt: "General property maintenance and minor plumbing"
   },
   {
-    src: "https://images.unsplash.com/photo-1628348070889-cb656235b4eb?auto=format&fit=crop&w=720&q=80",
+    src: "/images/hero/hero-card-gutter.jpg",
     alt: "Gutter cleaning and preventative maintenance"
   },
   {
-    src: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=720&q=80",
+    src: "/images/hero/hero-card-painting.jpg",
     alt: "Drywall repair and interior painting"
   }
 ];

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function TeamPhoto() {
   const [imgError, setImgError] = useState(false);
-  const teamImageUrl = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80";
+  const teamImageUrl = "/images/about/team-photo.jpg";
 
   return (
     <div className="relative w-full h-full min-h-[500px] rounded-2xl shadow-xl overflow-hidden">
