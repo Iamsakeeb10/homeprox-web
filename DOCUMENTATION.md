@@ -50,8 +50,9 @@ src/
 │   ├── about/page.tsx          # About: hero, mission, categories, regions, values, CTA
 │   ├── services/page.tsx       # Services: hero, featured service grid, CTA
 │   ├── clients/page.tsx        # Clients: hero, intro, client types, process, CTA
-│   ├── contact/page.tsx        # Contact: hero, QuoteForm + contact info cards
-│   ├── vendors/page.tsx       # Vendors: hero, why partner, onboarding, requirements, services, 4-step application form, FAQ, CTA
+│   ├── contact/page.tsx        # Contact: hero, ContactForm + contact info cards, trust strip, final CTA
+│   ├── quote/page.tsx          # Get a Quote: hero, QuoteForm + side contact info panel, bottom info cards
+│   ├── vendors/page.tsx        # Vendors: hero, why partner, onboarding, requirements, services, 4-step application form, FAQ, CTA
 │   ├── terms/page.tsx          # Terms & Conditions
 │   ├── not-found.tsx           # 404 page
 │   ├── loading.tsx             # Global loading spinner
@@ -79,7 +80,7 @@ src/
 │   │   ├── QualityProcess.tsx  # SectionHeading + 3-step process cards (Documentation, Screening, Communication)
 │   │   ├── Testimonials.tsx    # SectionHeading + carousel (mobile) / 3-col grid (desktop); dots + arrows
 │   │   ├── CTABanner.tsx       # Dark (image + overlay) or light variant; heading, CTA buttons
-│   │   ├── ContactSection.tsx  # SectionHeading + contact info + QuoteForm
+│   │   ├── ContactSection.tsx  # Home footer CTA: contact info + primary button linking to /quote
 │   │   ├── ServicesPageHero.tsx # Optional hero wrapper for services page (image + overlay)
 │   │   ├── TestimonialsLazy.tsx # Lazy placeholder for testimonials
 │   │   ├── VendorHero.tsx      # Vendors page hero: bg-hero-bg, Apply Now / Vendor Login → #vendor-application
@@ -96,8 +97,9 @@ src/
 │   │   ├── ClientImage.tsx     # Client image with fallback
 │   │   └── TeamPhoto.tsx       # Team/avatar placeholder
 │   ├── forms/
-│   │   ├── QuoteForm.tsx       # Full quote/contact form: fullName, companyName, email, phone, propertyType, serviceNeeded, location, message
-│   │   └── VendorApplicationForm.tsx # 4-step vendor form: Company Info, Services Offered, Compliance & Docs, Review & Submit; file uploads; POST /api/vendor
+│   │   ├── QuoteForm.tsx       # Full quote form: fullName, companyName, email, phone, propertyType, serviceNeeded, location, message, agreeToTerms
+│   │   ├── ContactForm.tsx     # Compact contact form: name, email, optional phone, inquiryType, message, agreeToTerms
+│   │   └── VendorApplicationForm.tsx # 4-step vendor form: Company Info, Services Offered, Documents & Attachments, Review & Submit; file uploads; POST /api/vendor
 │   └── shared/
 │       └── ScrollToTop.tsx     # Fixed bottom-right button; visible after 400px scroll; smooth scroll to top
 ├── hooks/
@@ -110,7 +112,7 @@ src/
 │   ├── metadata.ts            # defaultMetadata, generatePageMetadata(), SITE_URL, Open Graph, Twitter, robots
 │   └── utils/
 │       ├── formValidation.ts  # validateForm(ContactFormData), validateEmail, validatePhone, validateRequired
-│       └── mailer.ts          # Email sending utility for contact API
+│       └── mailer.ts          # Nodemailer transporter shared by contact and vendor APIs
 └── types/
     ├── index.ts                # Service, ClientType, NavLink, Testimonial, ContactFormData
     └── vendor.ts               # VendorFormData, VendorFormErrors, VendorFormStep (vendor application)
@@ -126,7 +128,8 @@ src/
 | **/services** | Services overview | Solid `bg-hero-bg`, h1 "Our Services", intro paragraph | Featured service grid (ServiceCard featured), "View All Services" button | Bottom CTA area |
 | **/clients** | Who we serve | Solid `bg-hero-bg`, h1 "Our Clients", tagline | Intro, client type cards, process steps, "Ready to Partner" CTA | Learn more link; CTA section with phone/email + Get Started |
 | **/about** | About company | Solid `bg-hero-bg`, h1 "About MEGAFIXX...", tagline | Mission, service categories, coverage map (image + overlay), regions, values, CTA block | Buttons in CTA block |
-| **/contact** | Contact & quote | Solid `bg-hero-bg`, h1 "Contact MEGAFIXX", tagline | QuoteForm + contact info cards (phone, email, location, hours) | Form submit; contact links |
+| **/contact** | General contact | Hero with background image + dark overlay, h1 "Contact MEGAFIXX", tagline | Two-column layout: contact details (phone, email, coverage, hours) + `ContactForm` card; trust strip; final CTA strip | Contact links; contact form submit; phone CTA in final strip |
+| **/quote** | Dedicated quote request | Hero with background image + dark overlay, h1 "Get a Quote", tagline | Split layout: `QuoteForm` (left) + contact info panel (right); bottom info cards | QuoteForm submit; phone/email CTAs in side panel |
 | **/vendors** | Vendor partners | Solid `bg-hero-bg`, h1 "Join the MEGAFIXX Property Maintenance Network", Apply Now / Vendor Login | Subtext strip, Why Partner (4 cards), 3-step Onboarding, Requirements (required/preferred), Services We Assign (6 icons), **Vendor Application** (4-step form in `#vendor-application`), FAQ accordion, dark CTA banner | Hero + CTA banner → #vendor-application; form Submit on Step 4 |
 | **/terms** | Terms & Conditions | Text hero | TOC + content | — |
 | **404** | Not found | — | Message + Home / Contact buttons | — |
@@ -144,8 +147,8 @@ src/
 
 - Fixed, full width; `z-50`. Background: `bg-white/98 backdrop-blur-md shadow-navbar border-b border-surface-200`.
 - Logo: `/images/logo.png`, `h-14 sm:h-20`, link to `/`.
-- Links: Home, Services, Our Clients, Vendors, About, Contact — `text-charcoal hover:text-orange`; active route: `h-0.5 bg-orange` underline.
-- CTA: "Get Started" → `/contact`, `bg-orange text-white hover:bg-orange-dark`, rounded-full, `px-6 py-2`.
+- Links: Home, Services, Our Clients, Vendor, About, Contact — `text-charcoal hover:text-orange`; active route: `h-0.5 bg-orange` underline.
+- CTA: "Get a Quote" → `/quote`, `bg-orange text-white hover:bg-orange-dark`, rounded-full, `px-6 py-2`.
 - Mobile: Hamburger (Menu/X); drawer with same links + CTA; `lg:hidden` / `hidden lg:flex`.
 - Uses `usePathname()`; no scroll state in current implementation (navbar always solid).
 
@@ -363,19 +366,43 @@ Loaded in `layout.tsx` via `next/font/google`: `Outfit`, `Plus_Jakarta_Sans`; ap
 - **Type:** `Testimonial[]` — `id`, `name`, `role`, `company`, `content`, `rating` (1–5), `clientType`, `avatar` (Pexels URL).
 - **Count:** 6. All 5-star. Avatars: Pexels; fallback to initials in UI.
 
-### 7.4 Contact / Quote Form
+### 7.4 Quote & Contact Forms
 
-- **Fields:** fullName, companyName, email, phone, propertyType (Residential, Commercial, Multi-Unit, REO/Bank Owned, Other), serviceNeeded (from services list), location, message.
-- **Validation:** `validateForm()` in `src/lib/utils/formValidation.ts` — required checks, email regex, phone min 10 digits, message min 10 characters.
-- **Submit:** POST `/api/contact`; success shows orange-muted success block; errors per field + optional submit error message.
-- **Labels:** `text-charcoal font-medium`; required asterisk `text-orange`. Inputs: `border-surface-200 focus:ring-orange focus:border-orange`; error: `border-error text-error`.
+**QuoteForm** (`src/components/forms/QuoteForm.tsx`)
+
+- **Location:** Used on `/quote` and can be embedded in sections if needed.
+- **Fields:** `fullName`, `companyName`, `email`, `phone`, `propertyType` (Residential, Commercial, Multi-Unit, REO/Bank Owned, Other), `serviceNeeded` (from services list + "Multiple Services"), `location`, `message`, `agreeToTerms`, `formSource?: "quote"`.
+- **Validation:** `validateForm()` in `src/lib/utils/formValidation.ts` — required checks, email regex, phone min 10 digits, propertyType/serviceNeeded/location non-empty, message min 10 characters, terms acceptance.
+- **Submit:** `POST /api/contact` with JSON body `{ ...formData, formSource: "quote" }`; success shows orange-muted success block; errors per field + optional submit error message.
+- **UX:** Full-width card layout, field-level error messages, accessible labels/ARIA attributes; terms checkbox links to `/terms`.
+
+**ContactForm** (`src/components/forms/ContactForm.tsx`)
+
+- **Location:** Used on `/contact` inside a card on the right side of the contact layout.
+- **Fields:** `name`, `email`, optional `phone`, `inquiryType` (Property Maintenance Service, Client Partnership, Vendor Application, General Inquiry, Support), `message`, `agreeToTerms`.
+- **Validation:** Inline validation — required `name`, valid `email` (regex), selected `inquiryType`, message present and at least 10 characters, and terms acceptance.
+- **Submit:** Maps to `ContactFormData` shape and sends `POST /api/contact` with:
+  - `fullName` from `name`
+  - `serviceNeeded` from the selected inquiry label
+  - other fields (e.g. `propertyType`, `location`) left empty
+  - `agreeToTerms` from checkbox, `formSource: "contact"`
+- **UX:** Compact layout with success state (icon + thank-you text), field errors, and a Terms & Conditions checkbox mirroring the quote form.
+
+**/api/contact** (`src/app/api/contact/route.ts`)
+
+- **Input:** `ContactFormData` including optional `formSource?: "quote" | "contact"`.
+- **Owner email:** Uses `formSource` to set subject:
+  - Quote requests: `"New Quote Request from {fullName}"` with "New Quote Request Received" header.
+  - Contact messages: `"New Contact Message from {fullName}"` with "New Contact Message Received" header.
+- **Client email:** Confirmation subject/body changes based on `formSource` ("request" vs "message") and includes a short summary (service, propertyType, location).
+- **Transport:** Uses shared `transporter` from `@/lib/utils/mailer` and `process.env.CONTACT_EMAIL` / `EMAIL_USER`.
 
 ### 7.5 Vendor Application
 
-- **Types:** `src/types/vendor.ts` — `VendorFormData` (companyName, contactPerson, phone, email, website, yearsInBusiness, serviceCategories, coverageAreas, serviceRadius, insuranceCertificate, license, w9Form, backgroundCheckAuth), `VendorFormErrors`, `VendorFormStep`.
-- **Form steps:** (1) Company Information, (2) Services Offered (categories match VendorServices labels), (3) Compliance & Documentation (PDF/JPG/PNG, max 10MB per file), (4) Review & Submit. In-form validation via `validateStep(step, data)`; Step 3 requires Certificate of Insurance.
-- **Submit:** POST `/api/vendor` with `multipart/form-data`; text fields + optional file attachments. API uses `transporter` from `@/lib/utils/mailer`; sends to `CONTACT_EMAIL` (fallback `EMAIL_USER`). Env: `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_USER`, `EMAIL_PASS`, `CONTACT_EMAIL` (same as contact form).
-- **Email:** HTML body with company info, services & coverage, attachment list; attachments sent as Nodemailer attachments. Success log: `[/api/vendor] Vendor application email sent to <address>`.
+- **Types:** `src/types/vendor.ts` — `VendorFormData` (companyName, contactPerson, phone, email, website, yearsInBusiness, serviceCategories, coverageAreas, serviceRadius, optional `attachments`, `agreeToTerms`), `VendorFormErrors`, `VendorFormStep`.
+- **Form steps:** (1) Company Information, (2) Services Offered (categories match VendorServices labels), (3) Documents & Attachments (PDF/JPG/PNG up to 10MB each, all optional), (4) Review & Submit. In-form validation via `validateStep(step, data)`; Step 4 also validates terms acceptance.
+- **Submit:** POST `/api/vendor` with `multipart/form-data`; text fields + any uploaded files appended as `attachment_{index}`. API uses `transporter` from `@/lib/utils/mailer`; sends to `CONTACT_EMAIL` (fallback `EMAIL_USER`). Env: `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_USER`, `EMAIL_PASS`, `CONTACT_EMAIL` (same as contact form).
+- **Email:** HTML body with company info, services & coverage, and attachment summary; attachments are sent as Nodemailer attachments. Success log: `[/api/vendor] Vendor application email sent to <address>`.
 
 ---
 
@@ -537,10 +564,10 @@ Loaded in `layout.tsx` via `next/font/google`: `Outfit`, `Plus_Jakarta_Sans`; ap
 ```tsx
 import { QuoteForm } from "@/components/forms/QuoteForm";
 
-// In ContactSection or contact page:
+// In the dedicated quote page or any CTA section:
 <QuoteForm />
-// Form includes: fullName, companyName, email, phone, propertyType, serviceNeeded, location, message
-// Validates via validateForm(); submits to POST /api/contact
+// Form includes: fullName, companyName, email, phone, propertyType, serviceNeeded, location, message, agreeToTerms
+// Validates via validateForm(); submits to POST /api/contact with formSource="quote"
 // Success: orange-muted box with thank-you message
 ```
 
@@ -592,7 +619,7 @@ layout (Navbar + PageWrapper(main) + Footer + ScrollToTop)
               ├── QualityProcess (SectionHeading + step cards)
               ├── Testimonials (SectionHeading + carousel/grid TestimonialCard)
               ├── CTABanner (dark or light)
-              └── ContactSection (SectionHeading + info + QuoteForm)
+              └── ContactSection (info + CTA button linking to /quote)
 ```
 
 **Vendors (`/vendors`):**
