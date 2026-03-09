@@ -124,7 +124,7 @@ src/
 
 | Route | Purpose | Hero | Key sections | CTA placement |
 |-------|---------|------|----------------|----------------|
-| **/** | Home | Full-screen hero: solid `bg-hero-bg`, headline + 3 pill CTAs, stacked image cards (Plumbing, Electrical, General Repairs) | StatsBar, Services, Clients, WhyChooseUs, QualityProcess, Testimonials, CTABanner (dark), ContactSection | Hero (Get a Free Quote, View Our Services, Learn More); each section links; CTABanner; ContactSection |
+| **/** | Home | Full-screen hero: solid `bg-hero-bg`, headline + 3 pill CTAs, stacked image cards (Plumbing, Electrical, General Repairs) | StatsBar, Services, Clients, WhyChooseUs, QualityProcess, Testimonials, CTABanner (dark), ContactSection | Hero (Get a Free Quote, View Our Services, Our Clients); each section links; CTABanner; ContactSection |
 | **/services** | Services overview | Solid `bg-hero-bg`, h1 "Our Services", intro paragraph | Featured service grid (ServiceCard featured), "View All Services" button | Bottom CTA area |
 | **/clients** | Who we serve | Solid `bg-hero-bg`, h1 "Our Clients", tagline | Intro, client type cards, process steps, "Ready to Partner" CTA | Learn more link; CTA section with phone/email + Get Started |
 | **/about** | About company | Solid `bg-hero-bg`, h1 "About MEGAFIXX...", tagline | Mission, service categories, coverage map (image + overlay), regions, values, CTA block | Buttons in CTA block |

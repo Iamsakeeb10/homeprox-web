@@ -56,10 +56,10 @@ export function Hero() {
                 View Our Services
               </Link>
               <Link
-                href="/about"
+                href="/clients"
                 className="bg-orange text-white px-8 py-3 rounded-full font-accent font-medium text-base hover:bg-orange-dark hover:scale-105 transition-all duration-300 shadow-md"
               >
-                Learn More
+                Our Clients
               </Link>
             </div>
           </div>
