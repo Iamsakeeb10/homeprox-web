@@ -1,12 +1,11 @@
 import { ClientImage } from "@/components/cards/ClientImage";
 import { ClientTypeCard } from "@/components/cards/ClientTypeCard";
-import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import ClientsPageInteractive from "@/components/sections/ClientsPageInteractive";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { clients } from "@/lib/data/clients";
 import { Award, BarChart, Bell, Camera, Clock, MessageSquare, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
 import { generatePageMetadata } from "@/lib/metadata";
 
@@ -17,7 +16,7 @@ export const metadata: Metadata = generatePageMetadata({
 });
 
 export default function ClientsPage() {
-  const heroImageUrl = "/images/heroes/hero-clients.jpg";
+  const heroImageUrl = "/images/heroes/hero-clients-2.jpg";
 
   return (
     <>

@@ -11,9 +11,9 @@ import {
   Phone,
   Wrench,
 } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 import { generatePageMetadata } from "@/lib/metadata";
 
@@ -24,7 +24,7 @@ export const metadata: Metadata = generatePageMetadata({
   path: "/contact",
 });
 
-const CONTACT_HERO_IMAGE = "/images/heroes/hero-contact.jpg";
+const CONTACT_HERO_IMAGE = "/images/about/team-photo.jpg";
 
 const TRUST_ITEMS = [
   "Reliable Property Maintenance",
