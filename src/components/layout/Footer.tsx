@@ -128,11 +128,11 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:info@megafixxhomeservices.com"
+                  href="mailto:info@megafixxx.com"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 flex items-center gap-2"
                 >
                   <Mail className="w-4 h-4 text-orange" aria-hidden="true" />
-                  info@megafixxhomeservices.com
+                  info@megafixxx.com
                 </a>
               </li>
               <li className="flex items-start gap-2">

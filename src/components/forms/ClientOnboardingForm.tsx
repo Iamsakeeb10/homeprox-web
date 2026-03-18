@@ -253,12 +253,12 @@ export default function ClientOnboardingForm({
       } else {
         setSubmitError(
           data?.error ??
-            "Something went wrong. Please try again or contact us directly at info@megafixxhomeservices.com",
+            "Something went wrong. Please try again or contact us directly at info@megafixxx.com",
         );
       }
     } catch {
       setSubmitError(
-        "Something went wrong. Please try again or contact us directly at info@megafixxhomeservices.com",
+        "Something went wrong. Please try again or contact us directly at info@megafixxx.com",
       );
     } finally {
       setIsSubmitting(false);

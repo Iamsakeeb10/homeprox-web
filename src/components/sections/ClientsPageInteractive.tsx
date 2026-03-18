@@ -89,11 +89,11 @@ export default function ClientsPageInteractive() {
                   (469) 378-9262
                 </a>
                 <a
-                  href="mailto:info@megafixxhomeservices.com"
+                  href="mailto:info@megafixxx.com"
                   className="flex items-center gap-2 font-body text-charcoal hover:text-orange transition-colors duration-300"
                 >
                   <Mail className="w-5 h-5 text-orange" aria-hidden="true" />
-                  info@megafixxhomeservices.com
+                  info@megafixxx.com
                 </a>
               </div>
               <Button variant="primary" size="lg" onClick={handleGetStarted}>

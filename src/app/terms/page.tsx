@@ -203,10 +203,10 @@ export default function TermsPage() {
                               <td className="font-body text-text-muted font-medium pr-4 py-2">Email</td>
                               <td className="font-body text-charcoal py-2">
                                 <a
-                                  href="mailto:info@megafixxhomeservices.com"
+                                  href="mailto:info@megafixxx.com"
                                   className="text-orange hover:text-orange-dark transition-colors duration-300"
                                 >
-                                  info@megafixxhomeservices.com
+                                  info@megafixxx.com
                                 </a>
                               </td>
                             </tr>

@@ -79,11 +79,11 @@ export default function QuotePage() {
 
                     <div>
                       <a
-                        href="mailto:info@megafixxhomeservices.com"
+                        href="mailto:info@megafixxx.com"
                         className="flex items-center gap-3 font-body text-charcoal hover:text-orange transition-colors duration-300"
                       >
                         <Mail className="w-5 h-5 text-orange flex-shrink-0" aria-hidden="true" />
-                        <span>info@megafixxhomeservices.com</span>
+                        <span>info@megafixxx.com</span>
                       </a>
                     </div>
 

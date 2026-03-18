@@ -105,7 +105,7 @@ export async function POST(req: Request) {
             </div>
             <p style="color: #7A6A52; line-height: 1.7;">If you need to reach us sooner, don't hesitate to call or email directly:</p>
             <p style="margin: 8px 0;"><a href="tel:4693789262" style="color: #C89B3C; text-decoration: none; font-weight: bold;">📞 (469) 378-9262</a></p>
-            <p style="margin: 8px 0;"><a href="mailto:info@megafixxhomeservices.com" style="color: #C89B3C; text-decoration: none;">✉️ info@megafixxhomeservices.com</a></p>
+            <p style="margin: 8px 0;"><a href="mailto:info@megafixxx.com" style="color: #C89B3C; text-decoration: none;">✉️ info@megafixxx.com</a></p>
           </div>
           <div style="background: #F5EFE0; padding: 16px; text-align: center;">
             <p style="color: #7A6A52; margin: 0; font-size: 12px;">© 2026 MEGAFIXX Home Services LLC — 815 Table Rock ST, Princeton, TX,75407. All rights reserved.</p>

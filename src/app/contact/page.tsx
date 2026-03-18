@@ -96,10 +96,10 @@ export default function ContactPage() {
                       Email
                     </p>
                     <a
-                      href="mailto:info@megafixxhomeservices.com"
+                      href="mailto:info@megafixxx.com"
                       className="font-body text-charcoal font-medium hover:text-orange transition-colors"
                     >
-                      info@megafixxhomeservices.com
+                      info@megafixxx.com
                     </a>
                   </div>
                 </div>

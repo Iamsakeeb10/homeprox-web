@@ -68,7 +68,7 @@ export default function ServicesPage() {
                 <Link href="/quote">Get a Free Quote</Link>
               </Button>
               <p className="font-body text-text-muted mt-6 text-sm">
-                📞 (469) 378-9262  |  📧 info@megafixxhomeservices.com
+                📞 (469) 378-9262  |  📧 info@megafixxx.com
               </p>
             </div>
           </AnimatedSection>
