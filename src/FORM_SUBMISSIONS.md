@@ -1,4 +1,4 @@
-## Form Submission Flows (MEGAFIXX)
+## Form Submission Flows (HomeProX)
 
 This document explains **how each form submits data**, **where the request goes**, and **what happens on the server**.
 
@@ -38,9 +38,9 @@ This document explains **how each form submits data**, **where the request goes*
   - `isClientOnboarding = source === "client-onboarding"`
 - For quote forms (`formSource: "quote"`):
   - `ownerSubject` becomes `New Quote Request from ${fullName}`.
-  - `clientSubject` becomes `We received your request — MEGAFIXX Home Services LLC`.
+  - `clientSubject` becomes `We received your request — HomeProX Home Services LLC`.
   - `headerLine` becomes `New Quote Request Received`.
-- **Email 1 (to MEGAFIXX owner)**:
+- **Email 1 (to HomeProX owner)**:
   - Sent via shared `transporter` from `@/lib/utils/mailer`.
   - Contains a table with the quote details: full name, company, email, phone, property type, service needed, location, and message.
   - Footer includes the business address.
@@ -89,7 +89,7 @@ This document explains **how each form submits data**, **where the request goes*
 - Uses the same route handler as the quote form.
 - For contact submissions (`formSource: "contact"`):
   - `ownerSubject`: `New Contact Message from ${fullName}`.
-  - `clientSubject`: `We received your message — MEGAFIXX Home Services LLC`.
+  - `clientSubject`: `We received your message — HomeProX Home Services LLC`.
   - `headerLine`: `New Contact Message Received`.
 - Both owner and client confirmation emails are structured like the quote emails, but messaging is adjusted to reflect a **contact message** instead of a quote or client application.
 
@@ -134,7 +134,7 @@ This document explains **how each form submits data**, **where the request goes*
 
 - For client onboarding (`formSource: "client-onboarding"`):
   - `ownerSubject`: `New Client Application from ${fullName} — ${companyName || 'Unknown Company'}`.
-  - `clientSubject`: `We received your MEGAFIXX client application`.
+  - `clientSubject`: `We received your HomeProX client application`.
   - `headerLine`: `New Client Application Received`.
 - Owner email:
   - Uses “Company Type” and “Property Locations” labels for `propertyType` and `location`.
@@ -202,7 +202,7 @@ This document explains **how each form submits data**, **where the request goes*
   - Determines the target address from `CONTACT_EMAIL` (fallback `EMAIL_USER`).
 - Sending:
   - Uses the shared `transporter` for `sendMail`, with:
-    - `from`: `"MEGAFIXX Vendor Portal" <EMAIL_USER>`
+    - `from`: `"HomeProX Vendor Portal" <EMAIL_USER>`
     - `to`: the configured contact email
     - `replyTo`: vendor’s email
     - `subject`: `New Vendor Application — ${companyName}`
@@ -222,11 +222,11 @@ This document explains **how each form submits data**, **where the request goes*
     - General contact messages (`ContactForm`, `formSource: "contact"`)
     - Client onboarding / new client applications (`ClientOnboardingForm`, `formSource: "client-onboarding"`)
   - Sends:
-    - One email to MEGAFIXX (owner/admin).
+    - One email to HomeProX (owner/admin).
     - One confirmation email back to the submitter.
 
 - **`POST /api/vendor`**
   - Accepts `multipart/form-data` with text fields and optional file attachments.
   - Used **only** by the `VendorApplicationForm`.
-  - Sends a single email with application details and any attached files to MEGAFIXX.
+  - Sends a single email with application details and any attached files to HomeProX.
 

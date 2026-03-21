@@ -1,4 +1,4 @@
-# MEGAFIXX Home Services LLC — Cursor-Ready Chunked Prompts
+# HomeProX Home Services LLC — Cursor-Ready Chunked Prompts
 ### Next.js 16 | TypeScript | Tailwind CSS v4 | App Router | Production Grade
 
 ---
@@ -20,7 +20,7 @@ PROJECT CONTEXT — READ THIS BEFORE STARTING:
 
 We are building a production-grade, fully responsive Next.js 16 website for:
 
-Company: MEGAFIXX Home Services LLC
+Company: HomeProX Services LLC
 Industry: Statewide Property Maintenance | Texas
 Target Clients: Property managers, banks, asset managers, real estate investors, REO specialists, portfolio owners
 
@@ -55,7 +55,7 @@ https://www.verisk.com/
 ## CHUNK 1 — Project Structure, Global Layout & Design System
 
 ```
-We are building the MEGAFIXX Home Services LLC website.
+We are building the HomeProX Home Services LLC website.
 Refer to the project context already provided and the reference website/images attached.
 
 IMPORTANT COMPATIBILITY NOTES — READ BEFORE WRITING ANY CODE:
@@ -180,7 +180,7 @@ Wrap children in the PageWrapper component.
 - Fixed top, full width
 - Background: transparent on top of hero → transitions to bg-navy-950 with
   backdrop-blur on scroll (use useScrollPosition hook)
-- Logo: "MEGAFIXX" in font-display bold + "Home Services LLC" smaller below
+- Logo: "HomeProX" in font-display bold + "Home Services LLC" smaller below
 - Nav Links: Home | Services | Our Clients | About | Contact
 - CTA Button right side: "Get a Quote" — bg-gold, rounded, hover fill effect
 - Mobile: hamburger icon (lucide-react Menu/X), animated slide-down drawer menu
@@ -406,7 +406,7 @@ IMPORTANT RULES:
 ## CHUNK 2 — Hero Section & Homepage Above the Fold
 
 ```
-We are continuing the MEGAFIXX Home Services LLC Next.js 16 website.
+We are continuing the HomeProX Home Services LLC Next.js 16 website.
 All existing project structure, design system, Navbar, and Footer from Chunk 1 are already in place.
 
 COMPATIBILITY REMINDER:
@@ -457,7 +457,7 @@ Right Side (desktop only):
 - Use Next.js <Image /> — rounded-2xl, shadow-2xl, object-cover
 - Image URL:
   https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80
-  Alt: "MEGAFIXX property maintenance professional"
+  Alt: "HomeProX property maintenance professional"
 - Implement imgError fallback (solid dark card with Wrench icon centered)
 - Subtle floating animation (gentle up-down loop using Framer Motion animate)
 
@@ -486,7 +486,7 @@ In src/app/page.tsx, import and render:
 
 RULES:
 - Hero must look premium and B2B professional, not like a local handyman site
-- No lorem ipsum — use real MEGAFIXX content from the project context
+- No lorem ipsum — use real HomeProX content from the project context
 - Fully responsive: test breakpoints sm, md, lg, xl, 2xl
 - All images follow global image rules from Chunk 1
 ```
@@ -496,7 +496,7 @@ RULES:
 ## CHUNK 3 — Services Section (Homepage) & Full Services Page
 
 ```
-Continuing MEGAFIXX Home Services LLC. Chunks 1 & 2 are complete.
+Continuing HomeProX Home Services LLC. Chunks 1 & 2 are complete.
 
 COMPATIBILITY REMINDER:
 - Tailwind v4 — use @theme {} classes only, no tailwind.config.ts
@@ -559,7 +559,7 @@ Page hero with background image:
 - Dark overlay: absolute inset-0 bg-navy-950/75
 - H1: "Our Services" (z-10, relative)
 - Breadcrumb: Home > Services
-- Intro paragraph: professional description of MEGAFIXX's offerings
+- Intro paragraph: professional description of HomeProX's offerings
 
 Services grid:
 - All 7 ServiceCard components (featured variant)
@@ -567,7 +567,7 @@ Services grid:
 
 Bottom CTA: "Need a Custom Maintenance Plan?" with Button variant="primary"
 generateMetadata for SEO:
-  title: "Our Services | MEGAFIXX Home Services LLC"
+  title: "Our Services | HomeProX Home Services LLC"
   description: "Professional property maintenance services across Texas..."
 
 RULES:
@@ -583,7 +583,7 @@ RULES:
 ## CHUNK 4 — "Who We Serve" / Our Clients Section & Full Clients Page
 
 ```
-Continuing MEGAFIXX Home Services LLC. Chunks 1–3 are complete.
+Continuing HomeProX Home Services LLC. Chunks 1–3 are complete.
 
 COMPATIBILITY REMINDER:
 - Tailwind v4 — use @theme {} classes only, no tailwind.config.ts
@@ -629,7 +629,7 @@ a) Page Hero with background image:
 - Subtitle: "Trusted Property Maintenance Partner Across Texas"
 
 b) Intro Section
-- "At MEGAFIXX Home Services LLC, we take pride in building long-term partnerships..."
+- "At HomeProX Home Services LLC, we take pride in building long-term partnerships..."
 - Left: text content; Right: dark stat card with key numbers
 
 c) Client Type Sections — alternating left-right layout with real photos:
@@ -642,7 +642,7 @@ For each client type:
 - Alternates layout: odd = text left / photo right, even = photo left / text right
   (stacked on mobile)
 
-d) "Why Clients Choose MEGAFIXX" Section
+d) "Why Clients Choose HomeProX" Section
 4-column feature grid:
 Reliability | Quality Workmanship | Scalable Solutions | Professional Communication
 Each: lucide icon (text-gold), title, description paragraph
@@ -658,7 +658,7 @@ Stagger animate in left-to-right on scroll
 
 f) "Ready to Partner?" CTA Banner
 - bg-navy-900 with gold accent border or gradient
-- "Ready to Partner with MEGAFIXX?"
+- "Ready to Partner with HomeProX?"
 - Phone + email displayed prominently
 - Button variant="primary": "Get Started"
 
@@ -681,7 +681,7 @@ RULES:
 ## CHUNK 5 — "Why Choose Us" Section, About Page & Trust Elements
 
 ```
-Continuing MEGAFIXX Home Services LLC. Chunks 1–4 are complete.
+Continuing HomeProX Home Services LLC. Chunks 1–4 are complete.
 
 COMPATIBILITY REMINDER:
 - Tailwind v4 — use @theme {} classes only, no tailwind.config.ts
@@ -699,7 +699,7 @@ FILES:
 
 1. WHY CHOOSE US SECTION (WhyChooseUs.tsx)
 Layout: bg-navy-950 with subtle CSS pattern overlay
-- SectionHeading centered: title="Why Choose MEGAFIXX"
+- SectionHeading centered: title="Why Choose HomeProX"
   subtitle="Built on reliability, quality, and long-term partnerships"
 
 4 feature cards in 2x2 grid (desktop), 1 column (mobile):
@@ -732,10 +732,10 @@ Scroll-triggered: stagger animate left-to-right
 a) Page Hero with background image:
 - Image URL:
   https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80
-  Alt: "MEGAFIXX professional team at work"
+  Alt: "HomeProX professional team at work"
 - Next.js <Image /> fill + object-cover, priority={true}
 - Dark overlay: absolute inset-0 bg-navy-950/75
-- H1: "About MEGAFIXX Home Services LLC"
+- H1: "About HomeProX Home Services LLC"
 - Subtitle: "Texas-based. Statewide reach. Built for serious property operators."
 
 b) Mission Statement Section — split layout with real photo:
@@ -748,7 +748,7 @@ Left (60%):
 Right (40%): real team photo
   Image URL:
   https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80
-  Alt: "MEGAFIXX professional team"
+  Alt: "HomeProX professional team"
   Styling: rounded-2xl, shadow-xl, object-cover, full height
   Implement imgError fallback: dark card with "M" initial badge in text-gold
 
@@ -787,7 +787,7 @@ RULES:
 ## CHUNK 6 — Contact Page, Quote Form & Contact Components
 
 ```
-Continuing MEGAFIXX Home Services LLC. Chunks 1–5 are complete.
+Continuing HomeProX Home Services LLC. Chunks 1–5 are complete.
 
 COMPATIBILITY REMINDER:
 - Tailwind v4 — use @theme {} classes only, no tailwind.config.ts
@@ -808,10 +808,10 @@ FILES:
 a) Page Hero with background image:
 - Image URL:
   https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80
-  Alt: "Contact MEGAFIXX Home Services"
+  Alt: "Contact HomeProX Home Services"
 - Next.js <Image /> fill + object-cover, priority={true}
 - Dark overlay: absolute inset-0 bg-navy-950/75
-- H1: "Contact MEGAFIXX"
+- H1: "Contact HomeProX"
 - Subtitle: "Let's talk about your property needs"
 - Breadcrumb: Home > Contact
 
@@ -839,7 +839,7 @@ Form behavior:
 RIGHT — Contact Info Panel:
 bg-navy-800 card with left border border-l-4 border-gold:
 - Phone: (469) 378-9262 — Phone icon, clickable tel: link
-- Email: info@megafixxhomeservices.com — Mail icon, clickable mailto: link
+- Email: info@homeproxsvcs.com — Mail icon, clickable mailto: link
 - Location: Collin County, Texas — MapPin icon
 - Serving: "All of Texas Statewide" — Map icon
 - Hours: Monday – Friday: 8:00 AM – 6:00 PM | Saturday: closed | Sunday: Closed
@@ -877,7 +877,7 @@ RULES:
 ## CHUNK 7 — Testimonials, CTA Banner & Homepage Assembly
 
 ```
-Continuing MEGAFIXX Home Services LLC. Chunks 1–6 are complete.
+Continuing HomeProX Home Services LLC. Chunks 1–6 are complete.
 
 COMPATIBILITY REMINDER:
 - Tailwind v4 — use @theme {} classes only, no tailwind.config.ts
@@ -903,19 +903,19 @@ Avatar URLs (Pexels headshots):
 
 Sarah M. — Property Operations Manager — property-manager:
   avatar: "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=150"
-  content: "MEGAFIXX has been an outstanding maintenance partner. They reduced our vacancy turnaround by 40% and the quality is consistently excellent across all our properties."
+  content: "HomeProX has been an outstanding maintenance partner. They reduced our vacancy turnaround by 40% and the quality is consistently excellent across all our properties."
 
 David K. — REO Asset Manager, Regional Bank — financial:
   avatar: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150"
-  content: "Handling REO properties requires a vendor we can trust completely. MEGAFIXX delivers detailed documentation and reliable work every single time."
+  content: "Handling REO properties requires a vendor we can trust completely. HomeProX delivers detailed documentation and reliable work every single time."
 
 Jennifer L. — Real Estate Broker — real-estate:
   avatar: "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=150"
-  content: "Pre-listing prep has never been easier. MEGAFIXX gets properties show-ready fast and the results speak for themselves at closing."
+  content: "Pre-listing prep has never been easier. HomeProX gets properties show-ready fast and the results speak for themselves at closing."
 
 Marcus T. — Portfolio Investor — investor:
   avatar: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150"
-  content: "Managing a portfolio across Texas used to mean juggling multiple vendors. MEGAFIXX handles everything with one point of contact and consistent results."
+  content: "Managing a portfolio across Texas used to mean juggling multiple vendors. HomeProX handles everything with one point of contact and consistent results."
 
 Rachel C. — Property Manager — property-manager:
   avatar: "https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=150"
@@ -923,7 +923,7 @@ Rachel C. — Property Manager — property-manager:
 
 Brian W. — Real Estate Agent — real-estate:
   avatar: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=150"
-  content: "I refer MEGAFIXX to every investor client I work with. Fast, reliable, and they make properties look great for the market."
+  content: "I refer HomeProX to every investor client I work with. Fast, reliable, and they make properties look great for the market."
 
 2. TESTIMONIAL CARD (TestimonialCard.tsx)
 - bg-navy-800, border border-navy-700
@@ -982,7 +982,7 @@ Render all sections in order:
 Consistent section padding: py-20 lg:py-28
 
 generateMetadata:
-  title: "MEGAFIXX Home Services LLC | Texas Statewide Property Maintenance"
+  title: "HomeProX Home Services LLC | Texas Statewide Property Maintenance"
   description: "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide."
 
 RULES:
@@ -998,7 +998,7 @@ RULES:
 ## CHUNK 8 — 404 Page, Loading States, SEO & Performance Polish
 
 ```
-Continuing MEGAFIXX Home Services LLC. Chunks 1–7 are complete.
+Continuing HomeProX Home Services LLC. Chunks 1–7 are complete.
 
 COMPATIBILITY REMINDER:
 - Tailwind v4 — use @theme {} classes only, no tailwind.config.ts
@@ -1026,7 +1026,7 @@ FILES:
 2. LOADING STATES
 
 loading.tsx:
-- Full-screen bg-navy-950 overlay with "MEGAFIXX" logo centered
+- Full-screen bg-navy-950 overlay with "HomeProX" logo centered
 - Pulsing gold ring animation (CSS animate-pulse or custom keyframe)
 
 Skeleton.tsx:
@@ -1109,7 +1109,7 @@ FINAL CHECKLIST:
 ## CHUNK 9 — Final Integration, Responsive QA & Production Readiness
 
 ```
-Continuing MEGAFIXX Home Services LLC. Chunks 1–8 are complete.
+Continuing HomeProX Home Services LLC. Chunks 1–8 are complete.
 
 TASK: Final integration pass, full responsive QA, and production readiness check.
 Do NOT add new features — only fix, refine, and verify.
@@ -1168,7 +1168,7 @@ src/app/terms/page.tsx:
 5. FINAL PRODUCTION READINESS
 
 a) .env.local.example:
-  NEXT_PUBLIC_SITE_URL=https://megafixxhomeservices.com
+  NEXT_PUBLIC_SITE_URL=https://homeproxsvcs.com
 
 b) next.config.ts verify:
   - remotePatterns for images.unsplash.com and images.pexels.com present
@@ -1192,7 +1192,7 @@ d) README.md:
 - Add subtle SVG noise texture overlay to hero (CSS only)
 - All hover states: transition-all duration-300
 - CTABanner has unique visual treatment vs other sections
-- Navbar "MEGAFIXX" logo crisp at all scroll states
+- Navbar "HomeProX" logo crisp at all scroll states
 - All hover image scale effects contained by overflow-hidden wrappers
 
 FINAL DELIVERABLE CHECK:

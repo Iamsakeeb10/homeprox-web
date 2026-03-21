@@ -1,8 +1,8 @@
-# MEGAFIXX Nodemailer Integration Documentation
+# HomeProX Nodemailer Integration Documentation
 
 ## Overview
 
-This document provides a comprehensive guide to how **nodemailer** is integrated throughout the MEGAFIXX application to handle email sending for three primary workflows:
+This document provides a comprehensive guide to how **nodemailer** is integrated throughout the HomeProX application to handle email sending for three primary workflows:
 
 1. **Contact Form** - General inquiries and customer messages
 2. **Quote Form** - Service quote requests from potential clients
@@ -15,12 +15,12 @@ This document provides a comprehensive guide to how **nodemailer** is integrated
 The email system is powered by Gmail's SMTP server. All credentials are stored in `.env.local`:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://megafixxhomeservices.com
+NEXT_PUBLIC_SITE_URL=https://homeproxsvcs.com
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=465
-EMAIL_USER=client@megafixxhomeservices.com
+EMAIL_USER=client@homeproxsvcs.com
 EMAIL_PASS=MegaFixx@2025
-CONTACT_EMAIL=client@megafixxhomeservices.com
+CONTACT_EMAIL=client@homeproxsvcs.com
 ```
 
 ### Environment Variables Breakdown
@@ -99,7 +99,7 @@ interface ContactFormData {
 
 **1. OWNER NOTIFICATION EMAIL**
 - **Recipient:** `process.env.CONTACT_EMAIL` (client@megafixxhomeservices.com)
-- **From:** `"MEGAFIXX Website" <client@megafixxhomeservices.com>`
+- **From:** `"HomeProX Website" <client@megafixxhomeservices.com>`
 - **Subject:** Dynamic based on form type:
   - Contact: `"New Contact Message from {fullName}"`
   - Quote: `"New Quote Request from {fullName}"`
@@ -113,11 +113,11 @@ interface ContactFormData {
 
 **2. CLIENT CONFIRMATION EMAIL**
 - **Recipient:** User's email address (from form submission)
-- **From:** `"MEGAFIXX Home Services LLC" <client@megafixxhomeservices.com>`
+- **From:** `"HomeProX Home Services LLC" <client@megafixxhomeservices.com>`
 - **Subject:** Dynamic based on form type:
-  - Contact: `"We received your message — MEGAFIXX Home Services LLC"`
-  - Quote: `"We received your request — MEGAFIXX Home Services LLC"`
-  - Client Onboarding: `"We received your MEGAFIXX client application"`
+  - Contact: `"We received your message — HomeProX Home Services LLC"`
+  - Quote: `"We received your request — HomeProX Home Services LLC"`
+  - Client Onboarding: `"We received your HomeProX client application"`
 
 **Email Content:**
 - Personalized greeting with user's first name
@@ -149,7 +149,7 @@ const ownerSubject = isClientOnboarding
 
 // 4. Send owner notification
 await transporter.sendMail({
-  from: `"MEGAFIXX Website" <${process.env.EMAIL_USER}>`,
+  from: `"HomeProX Website" <${process.env.EMAIL_USER}>`,
   to: process.env.CONTACT_EMAIL,
   subject: ownerSubject,
   html: /* formatted HTML */
@@ -157,7 +157,7 @@ await transporter.sendMail({
 
 // 5. Send client confirmation
 await transporter.sendMail({
-  from: `"MEGAFIXX Home Services LLC" <${process.env.EMAIL_USER}>`,
+  from: `"HomeProX Home Services LLC" <${process.env.EMAIL_USER}>`,
   to: email,
   subject: clientSubject,
   html: /* formatted HTML */
@@ -229,7 +229,7 @@ while (data.get(`attachment_${i}`)) {
 #### Email Delivery
 
 - **Recipient:** `process.env.CONTACT_EMAIL`
-- **From:** `"MEGAFIXX Vendor Portal" <client@megafixxhomeservices.com>`
+- **From:** `"HomeProX Vendor Portal" <client@megafixxhomeservices.com>`
 - **ReplyTo:** Vendor's email (allows direct response)
 - **Subject:** `New Vendor Application — {companyName}`
 - **Attachments:** All uploaded files included in email
@@ -238,7 +238,7 @@ while (data.get(`attachment_${i}`)) {
 
 **Header Section (Dark Theme #1C1C1E):**
 - Title: "New Vendor Application"
-- Subtitle: "MEGAFIXX Property Maintenance Network" (Orange accent #E8621A)
+- Subtitle: "HomeProX Property Maintenance Network" (Orange accent #E8621A)
 
 **Content Section (Light Background #f9f9f9):**
 
@@ -461,7 +461,7 @@ const res = await fetch('/api/contact', {
          ▼
 ┌──────────────────────────────┐
 │  Send via Nodemailer         │
-│  - From: MEGAFIXX Portal     │
+│  - From: HomeProX Portal     │
 │  - To: CONTACT_EMAIL         │
 │  - ReplyTo: vendor's email   │
 │  - Attachments: files[]      │
@@ -569,7 +569,7 @@ All emails follow a consistent structure:
 
   <!-- Footer Section -->
   <div style="background: [COLOR]; padding: 16px; text-align: center;">
-    <p style="color: [TEXT]; margin: 0; font-size: 12px;">MEGAFIXX Home Services LLC</p>
+    <p style="color: [TEXT]; margin: 0; font-size: 12px;">HomeProX Home Services LLC</p>
   </div>
 </div>
 ```
@@ -630,7 +630,7 @@ console.error("[/api/contact] Missing env: CONTACT_EMAIL or EMAIL_USER")
 
 ## Summary
 
-The MEGAFIXX email system is a well-integrated solution using:
+The HomeProX email system is a well-integrated solution using:
 
 - **Nodemailer** for SMTP email delivery via Gmail
 - **Environment-based configuration** for secure credential management

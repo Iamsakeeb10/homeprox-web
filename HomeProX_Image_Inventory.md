@@ -1,4 +1,4 @@
-# MEGAFIXX Image Inventory
+# HomeProX Image Inventory
 
 Comprehensive reference of all images currently used in the project codebase. This is documentation only; no code has been modified.
 
@@ -10,7 +10,7 @@ Comprehensive reference of all images currently used in the project codebase. Th
 
 - **Location:** `src/components/layout/Navbar.tsx`
 - **Code Reference:**
-  - `Image src="/images/logo.png" alt="MEGAFIXX Home Services LLC" width={220} height={66} ...`
+  - `Image src="/images/logo.png" alt="HomeProX Services LLC" width={220} height={66} ...`
 - **Source:** `/images/logo.png` (local asset)
 - **UI Section:** Navbar logo (all pages)
 
@@ -18,7 +18,7 @@ Comprehensive reference of all images currently used in the project codebase. Th
 
 - **Location:** `src/components/layout/Footer.tsx`
 - **Code Reference:**
-  - `Image src="/images/logo.png" alt="MEGAFIXX Home Services LLC" width={220} height={66} ...`
+  - `Image src="/images/logo.png" alt="HomeProX Services LLC" width={220} height={66} ...`
 - **Source:** `/images/logo.png` (local asset)
 - **UI Section:** Footer logo (all pages)
 
@@ -26,7 +26,7 @@ Comprehensive reference of all images currently used in the project codebase. Th
 
 - **Location:** `src/app/loading.tsx`
 - **Code Reference:**
-  - `Image src="/images/logo.png" alt="MEGAFIXX Home Services LLC" width={220} height={66} ...`
+  - `Image src="/images/logo.png" alt="HomeProX Services LLC" width={220} height={66} ...`
 - **Source:** `/images/logo.png` (local asset)
 - **UI Section:** Global loading overlay
 
@@ -34,7 +34,7 @@ Comprehensive reference of all images currently used in the project codebase. Th
 
 - **Location:** `src/app/not-found.tsx`
 - **Code Reference:**
-  - `Image src="/images/logo.png" alt="MEGAFIXX Home Services LLC" width={220} height={66} ...`
+  - `Image src="/images/logo.png" alt="HomeProX Services LLC" width={220} height={66} ...`
 - **Source:** `/images/logo.png` (local asset)
 - **UI Section:** Not-found page header
 
@@ -252,7 +252,7 @@ These are large hero/banner images for various top-level pages.
 - **Location:** `src/app/about/page.tsx`
 - **Code Reference:**
   - `const heroImageUrl = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80";`
-  - `<Image src={heroImageUrl} alt="MEGAFIXX professional team at work" fill ... />`
+  - `<Image src={heroImageUrl} alt="HomeProX professional team at work" fill ... />`
 - **Source:** `https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80`
 - **UI Section:** `/about` page hero background
 
@@ -261,7 +261,7 @@ These are large hero/banner images for various top-level pages.
 - **Location:** `src/app/quote/page.tsx`
 - **Code Reference:**
   - `const heroImageUrl = "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80";`
-  - `<Image src={heroImageUrl} alt="Get a quote from MEGAFIXX Home Services" fill ... />`
+  - `<Image src={heroImageUrl} alt="Get a quote from HomeProX Home Services" fill ... />`
 - **Source:** `https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80`
 - **UI Section:** `/quote` page hero background
 
@@ -270,7 +270,7 @@ These are large hero/banner images for various top-level pages.
 - **Location:** `src/app/contact/page.tsx`
 - **Code Reference:**
   - `const CONTACT_HERO_IMAGE = "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80";`
-  - `<Image src={CONTACT_HERO_IMAGE} alt="Contact MEGAFIXX Home Services" fill ... />`
+  - `<Image src={CONTACT_HERO_IMAGE} alt="Contact HomeProX Home Services" fill ... />`
 - **Source:** `https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80`
 - **UI Section:** `/contact` page hero background
 
@@ -288,7 +288,7 @@ These are large hero/banner images for various top-level pages.
 - **Location:** `src/components/sections/ServicesPageHero.tsx`
 - **Code Reference:**
   - `const SERVICES_HERO_IMAGE = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80";`
-  - `<Image src={SERVICES_HERO_IMAGE} alt="MEGAFIXX Home Services — property maintenance in Texas" fill ... />`
+  - `<Image src={SERVICES_HERO_IMAGE} alt="HomeProX Home Services — property maintenance in Texas" fill ... />`
 - **Source:** `https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80`
 - **UI Section:** Optional/alternate services hero (if used)
 
@@ -301,7 +301,7 @@ These are large hero/banner images for various top-level pages.
 - **Location:** `src/components/cards/TeamPhoto.tsx`
 - **Code Reference:**
   - `const teamImageUrl = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80";`
-  - `<Image src={teamImageUrl} alt="MEGAFIXX property maintenance team" fill ... />`
+  - `<Image src={teamImageUrl} alt="HomeProX property maintenance team" fill ... />`
 - **Source:** `https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80`
 - **UI Section:** About page “team”/side image card
 
