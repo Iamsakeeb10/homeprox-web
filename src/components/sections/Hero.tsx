@@ -1,163 +1,160 @@
 "use client";
 
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  Building2,
+  CalendarCheck,
+  ShieldCheck,
+  Wrench,
+  MapPin,
+  Clock,
+} from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
-const HERO_CARD_IMAGES = [
-  {
-    src: "/images/hero/hero-card-maintenance-2.jpg",
-    alt: "General property maintenance and minor plumbing",
-  },
-  {
-    src: "/images/hero/gutter-cleaning.jpg",
-    alt: "Gutter cleaning and preventative maintenance",
-  },
-  {
-    src: "/images/hero/hero-card-wall-painting-2.jpg",
-    alt: "Drywall repair and interior painting",
-  },
+const HERO_STATS = [
+  { icon: Building2, value: "500+", label: "Properties Maintained Statewide" },
+  { icon: CalendarCheck, value: "10+", label: "Years of Trusted Service" },
+  { icon: ShieldCheck, value: "100%", label: "Insured & Licensed Operations" },
+  { icon: Wrench, value: "7", label: "Core Maintenance Services" },
 ];
 
 export function Hero() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-hero-bg">
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-32 sm:pt-32 sm:pb-36">
-        <div className="grid grid-cols-1 min-[1131px]:grid-cols-2 min-[1131px]:gap-16 min-[1131px]:items-center">
-          {/* Left: Text — centered below 1130px */}
-          <div className="flex flex-col items-center min-[1131px]:items-start text-center min-[1131px]:text-left">
-            <h1 className="font-display text-4xl sm:text-5xl min-[1131px]:text-6xl font-bold text-hero-text leading-tight mb-6">
-              Professional Property
-              <br />
-              Maintenance has never
-              <br />
-              been so{" "}
-              <span className="relative inline-block text-teal">
-                Simple
-                <span className="absolute -bottom-1 left-0 right-0 h-[3px] bg-teal rounded-full" />
-              </span>
-            </h1>
+    <section className="relative min-h-screen flex flex-col bg-hero-bg overflow-hidden pt-20">
+      {/* Subtle texture overlay — diagonal lines, low opacity */}
+      <div className="hero-texture absolute inset-0 pointer-events-none" />
 
-            <p className="font-body text-lg text-hero-muted mb-10 max-w-md leading-relaxed mx-auto min-[1131px]:mx-0">
-              We are a team of talented professionals supporting your
-              residential and commercial property management across Texas.
-            </p>
+      {/* Teal top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-teal to-transparent opacity-60" />
 
-            <div className="flex flex-row flex-wrap gap-4 justify-center min-[1131px]:justify-start">
-              <Link
-                href="/quote"
-                className="bg-teal text-white px-8 py-3 rounded-full font-accent font-medium text-base hover:bg-teal-dark hover:scale-105 transition-all duration-300 shadow-md"
-              >
-                Get a Free Quote
-              </Link>
-              <Link
-                href="/services"
-                className="bg-teal text-white px-8 py-3 rounded-full font-accent font-medium text-base hover:bg-teal-dark hover:scale-105 transition-all duration-300 shadow-md"
-              >
-                View Our Services
-              </Link>
-              <Link
-                href="/clients"
-                className="bg-teal text-white px-8 py-3 rounded-full font-accent font-medium text-base hover:bg-teal-dark hover:scale-105 transition-all duration-300 shadow-md"
-              >
-                Our Clients
-              </Link>
+      {/* Main content grid */}
+      <div className="relative z-10 flex-1 flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 sm:py-20 lg:py-24">
+          <div className="grid grid-cols-1 min-[1131px]:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* LEFT: Text column */}
+            <div className="flex flex-col gap-6 text-center min-[1131px]:text-left">
+              {/* Eyebrow badge */}
+              <div className="inline-flex items-center gap-2 self-center min-[1131px]:self-start bg-teal/15 border border-teal/30 rounded-full px-4 py-1.5">
+                <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
+                <span className="font-accent text-sm font-medium text-teal tracking-wide uppercase">
+                  Texas Statewide Property Maintenance
+                </span>
+              </div>
+
+              {/* H1 */}
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                Professional Property Care,{" "}
+                <span className="text-teal">Across All of Texas</span>
+              </h1>
+
+              {/* Body copy */}
+              <p className="font-body text-lg text-hero-muted max-w-xl mx-auto min-[1131px]:mx-0 leading-relaxed">
+                HomeProX delivers reliable maintenance, fast turnarounds, and full
+                documentation for property managers, banks, investors, and real
+                estate professionals — statewide.
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4 justify-center min-[1131px]:justify-start mt-2">
+                <Button size="lg" asChild>
+                  <Link href="/quote">Get a Free Quote</Link>
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  asChild
+                  className="border-white/30 text-white hover:bg-white/10 hover:border-white/60"
+                >
+                  <Link href="/services">View Our Services</Link>
+                </Button>
+              </div>
+
+              {/* Trust micro-row: icons + short labels */}
+              <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center min-[1131px]:justify-start mt-2">
+                {[
+                  { icon: ShieldCheck, label: "Fully Insured & Licensed" },
+                  { icon: MapPin, label: "All Texas Markets" },
+                  { icon: Clock, label: "Fast Response" },
+                ].map(({ icon: Icon, label }) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-2 text-sm text-surface-300"
+                  >
+                    <Icon className="w-4 h-4 text-teal flex-shrink-0" />
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Hero Cards Collage — full-image cards, pushed down slightly */}
-          <div className="hidden min-[1131px]:flex items-center justify-end pt-[38px]">
-            <div className="relative w-[480px] xl:w-[520px] h-[440px] xl:h-[460px]">
-              {/* Card 1 — back, top-right (full image) */}
-              <div
-                className="absolute top-0 right-0 w-[340px] xl:w-[360px] h-[200px] xl:h-[220px] rounded-2xl border border-white/10 shadow-2xl z-10 overflow-hidden animate-float"
-                style={{ animationDelay: "0s" }}
-              >
-                <Image
-                  src={HERO_CARD_IMAGES[0].src}
-                  alt={HERO_CARD_IMAGES[0].alt}
-                  fill
-                  className="object-cover"
-                  sizes="360px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 to-transparent" />
-                <div className="absolute top-0 left-0 right-0 px-4 py-3">
-                  <span className="font-accent font-bold text-white text-sm tracking-wide uppercase">
-                    General Property Maintenance
-                  </span>
-                  <p className="text-white/80 text-xs font-body mt-0.5">
-                    Prevent costly repairs with routine, responsive
-                    maintenance...
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 2 — middle (full image) */}
-              <div
-                className="absolute top-[120px] right-[60px] w-[340px] xl:w-[360px] h-[200px] xl:h-[220px] rounded-2xl border border-white/10 shadow-2xl z-20 overflow-hidden animate-float"
-                style={{ animationDelay: "0.7s" }}
-              >
-                <Image
-                  src={HERO_CARD_IMAGES[1].src}
-                  alt={HERO_CARD_IMAGES[1].alt}
-                  fill
-                  className="object-cover"
-                  sizes="360px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 to-transparent" />
-                <div className="absolute top-0 left-0 right-0 px-4 py-3">
-                  <span className="font-accent font-bold text-white text-sm tracking-wide uppercase">
-                    Gutter Cleaning
-                  </span>
-                  <p className="text-white/80 text-xs font-body mt-0.5">
-                    Protect against water damage and foundation issues...
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 3 — front, bottom-left (full image) */}
-              <div
-                className="absolute top-[240px] right-[120px] w-[340px] xl:w-[360px] h-[200px] xl:h-[220px] rounded-2xl border border-white/10 shadow-2xl z-30 overflow-hidden animate-float"
-                style={{ animationDelay: "1.4s" }}
-              >
-                <Image
-                  src={HERO_CARD_IMAGES[2].src}
-                  alt={HERO_CARD_IMAGES[2].alt}
-                  fill
-                  className="object-cover"
-                  sizes="360px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 to-transparent" />
-                <div className="absolute top-0 left-0 right-0 px-4 py-3">
-                  <span className="font-accent font-bold text-white text-sm tracking-wide uppercase">
-                    Drywall & Interior Painting
-                  </span>
-                  <p className="text-white/80 text-xs font-body mt-0.5">
-                    Maintain a clean, professional interior for rentals...
-                  </p>
-                </div>
-              </div>
+            {/* RIGHT: Stat cards grid */}
+            <div className="grid grid-cols-2 gap-4 lg:gap-5">
+              {HERO_STATS.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={
+                    prefersReducedMotion
+                      ? {}
+                      : { opacity: 0, y: 24 }
+                  }
+                  animate={
+                    prefersReducedMotion
+                      ? {}
+                      : { opacity: 1, y: 0 }
+                  }
+                  transition={{
+                    delay: 0.15 + i * 0.1,
+                    duration: 0.55,
+                    ease: "easeOut",
+                  }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-5 lg:p-6 flex flex-col gap-3 hover:bg-white/10 hover:border-teal/30 transition-all duration-300 group"
+                >
+                  {/* Icon circle */}
+                  <div className="w-10 h-10 rounded-xl bg-teal/15 flex items-center justify-center group-hover:bg-teal/25 transition-colors">
+                    <stat.icon className="w-5 h-5 text-teal" />
+                  </div>
+                  {/* Big number */}
+                  <div className="font-display text-3xl lg:text-4xl font-bold text-white">
+                    {stat.value}
+                  </div>
+                  {/* Label */}
+                  <div className="font-body text-sm text-surface-300 leading-snug">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom wave — transitions into white section below */}
-      <div
-        className="absolute bottom-0 left-0 right-0 leading-none z-10"
-        aria-hidden="true"
-      >
-        <svg
-          viewBox="0 0 1440 80"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          className="w-full h-16 sm:h-20 md:h-24"
-        >
-          <path
-            d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,20 1440,40 L1440,80 L0,80 Z"
-            fill="#FFFFFF"
-          />
-        </svg>
+      {/* BOTTOM: Trust strip */}
+      <div className="relative z-10 border-t border-white/10 bg-charcoal/60 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-surface-300">
+            <span className="font-accent font-semibold text-white tracking-wide">
+              HomeProX
+            </span>
+            <span className="hidden sm:block w-px h-4 bg-white/20" />
+            {[
+              "Statewide Texas Coverage",
+              "Residential & Commercial",
+              "REO & Bank-Owned Properties",
+              "Property Manager Preferred",
+            ].map((item, i) => (
+              <React.Fragment key={item}>
+                {i > 0 && (
+                  <span className="hidden sm:block w-px h-4 bg-white/20" />
+                )}
+                <span>{item}</span>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
