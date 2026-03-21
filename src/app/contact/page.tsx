@@ -27,9 +27,9 @@ export const metadata: Metadata = generatePageMetadata({
 const CONTACT_HERO_IMAGE = "/images/about/team-photo.jpg";
 
 const TRUST_ITEMS = [
-  "Reliable Property Maintenance",
-  "Fast Response Times",
-  "Serving Residential & Investment Properties",
+  "Professional Property Services",
+  "Quick Turnaround",
+  "Supporting Residential & Commercial Properties",
 ];
 
 export default function ContactPage() {
@@ -55,7 +55,7 @@ export default function ContactPage() {
             <div className="h-px w-16 bg-teal/50" />
           </div>
           <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
-            Questions about services, business opportunities, or partnership possibilities? Connect with our team—we're ready to discuss your property maintenance needs.
+            Questions about available services, business development, or partnership opportunities? Reach out to discuss your property care requirements.
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />

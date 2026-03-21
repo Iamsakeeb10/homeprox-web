@@ -5,7 +5,7 @@ export const services: Service[] = [
     id: "maintenance-plumbing",
     title: "General Property Maintenance & Minor Plumbing",
     description:
-      "Prevent costly repairs with routine and responsive property maintenance. We keep residential and commercial properties operating efficiently year-round.",
+      "Avoid expensive restoration with proactive and responsive maintenance. We maintain residential and commercial properties in peak condition year after year.",
     icon: "Wrench",
     image: "/images/services/service-maintenance.jpg",
     slug: "general-maintenance",
@@ -22,7 +22,7 @@ export const services: Service[] = [
     id: "gutter-cleaning",
     title: "Gutter Cleaning & Preventative Maintenance",
     description:
-      "Protect your property from water damage and foundation issues. Texas weather demands proactive property care.",
+      "Safeguard your property against water damage and structural problems. Texas climate demands active property protection.",
     icon: "Droplets",
     image: "/images/hero/gutter-cleaning.jpg",
     slug: "gutter-cleaning",
@@ -37,7 +37,7 @@ export const services: Service[] = [
     id: "drywall-painting",
     title: "Drywall Repair & Interior Painting",
     description:
-      "Maintain a clean, professional interior. Ideal for rental turnovers and investment properties.",
+      "Maintain professional-grade interior conditions. Perfect for property turnovers and investment asset upgrades.",
     icon: "Paintbrush",
     image: "/images/hero/hero-card-wall-painting-2.jpg",
     slug: "drywall-painting",
@@ -53,7 +53,7 @@ export const services: Service[] = [
     id: "property-cleaning",
     title: "Pest control",
     description:
-      "Professional cleaning solutions for landlords, commercial spaces, and property managers across Texas.",
+      "Specialized cleaning services for property managers, commercial operators, and real estate professionals statewide.",
     icon: "Sparkles",
     image: "/images/services/pest-control.jpg",
     slug: "property-cleaning",
@@ -68,7 +68,7 @@ export const services: Service[] = [
     id: "landscaping-exterior",
     title: "Landscaping & Lawn Care",
     description:
-      "Improve curb appeal and long-term property value with professional exterior maintenance.",
+      "Enhance visual appeal and build long-term property equity with strategic exterior maintenance.",
     icon: "Leaf",
     image: "/images/services/service-landscaping.jpg",
     slug: "landscaping",
@@ -83,7 +83,7 @@ export const services: Service[] = [
     id: "siding-exterior-repairs",
     title: "Siding & Exterior Repairs",
     description:
-      "Durable solutions designed for Texas conditions. Protect your investment with professional exterior repair.",
+      "Resilient restoration engineered for Texas environments. Protect and maintain your investment with expert exterior care.",
     icon: "Home",
     image: "/images/services/siding-repair.jpg",
     slug: "siding-exterior",
@@ -98,7 +98,7 @@ export const services: Service[] = [
     id: "property-cleanouts",
     title: "Property Cleanouts & Debris Removal",
     description:
-      "Fast, reliable cleanout service across Texas for rental turnovers, foreclosures, and general junk removal.",
+      "Dependable and efficient cleanout service throughout Texas for property transitions, bank-owned assets, and general junk removal.",
     icon: "Trash2",
     image: "/images/services/service-cleanout.jpg",
     slug: "property-cleanouts",

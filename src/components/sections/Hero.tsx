@@ -15,9 +15,9 @@ import { Button } from "@/components/ui/Button";
 
 const HERO_STATS = [
   { icon: Building2, value: "500+", label: "Properties Maintained Statewide" },
-  { icon: CalendarCheck, value: "10+", label: "Years of Trusted Service" },
-  { icon: ShieldCheck, value: "100%", label: "Insured & Licensed Operations" },
-  { icon: Wrench, value: "7", label: "Core Maintenance Services" },
+  { icon: CalendarCheck, value: "10+", label: "Years of Industry Leadership" },
+  { icon: ShieldCheck, value: "100%", label: "Fully Certified & Bonded" },
+  { icon: Wrench, value: "7", label: "Specialized Service Categories" },
 ];
 
 export function Hero() {
@@ -47,13 +47,13 @@ export function Hero() {
 
               {/* H1 */}
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Property Maintenance Excellence{" "}
-                <span className="text-teal">From North to South Texas</span>
+                Reliable Maintenance Solutions{" "}
+                <span className="text-teal">Across the Entire State</span>
               </h1>
 
               {/* Body copy */}
               <p className="font-body text-lg text-hero-muted max-w-xl mx-auto min-[1131px]:mx-0 leading-relaxed">
-                Expert property care backed by transparency, accountability, and proven results. We support investors, landlords, financial institutions, and property managers with comprehensive maintenance solutions.
+                Comprehensive property care with dedication to excellence, customer satisfaction, and dependable service. Partnering with property owners, asset managers, institutional investors, and commercial operators throughout Texas.
               </p>
 
               {/* CTA Buttons */}
@@ -74,9 +74,9 @@ export function Hero() {
               {/* Trust micro-row: icons + short labels */}
               <div className="flex flex-wrap gap-x-6 gap-y-2 justify-center min-[1131px]:justify-start mt-2">
                 {[
-                  { icon: ShieldCheck, label: "Fully Insured & Licensed" },
-                  { icon: MapPin, label: "All Texas Markets" },
-                  { icon: Clock, label: "Fast Response" },
+                  { icon: ShieldCheck, label: "Fully Protected & Bonded" },
+                  { icon: MapPin, label: "Complete State Coverage" },
+                  { icon: Clock, label: "Prompt Service Delivery" },
                 ].map(({ icon: Icon, label }) => (
                   <div
                     key={label}
@@ -139,10 +139,10 @@ export function Hero() {
             </span>
             <span className="hidden sm:block w-px h-4 bg-white/20" />
             {[
-              "Complete Texas Service Area",
-              "Residential & Commercial Solutions",
-              "Investment Property Specialists",
-              "Institutional-Grade Standards",
+              "Comprehensive Regional Coverage",
+              "Custom Property Solutions",
+              "Professional Portfolio Management",
+              "Institutional Quality Standards",
             ].map((item, i) => (
               <React.Fragment key={item}>
                 {i > 0 && (

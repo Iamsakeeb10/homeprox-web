@@ -34,10 +34,10 @@ export function ContactSection() {
           <div className="max-w-3xl mx-auto">
             <div className="bg-white border border-surface-200 rounded-2xl shadow-card p-8 sm:p-10">
               <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal mb-4 text-center">
-                Let's Discuss Your Property Needs
+                Tell Us About Your Property Maintenance Requirements
               </h2>
               <p className="font-body text-text-muted mb-8 text-center">
-                Reach out with questions, requirements, or partnership inquiries. Our team responds promptly and works within your timeline.
+                Contact our team with questions, project details, or collaboration ideas. We respond quickly and adapt to your schedule.
               </p>
               
               {/* Contact Info with Left Border Accents */}

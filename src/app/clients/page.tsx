@@ -55,16 +55,16 @@ export default function ClientsPage() {
             <AnimatedSection variant="fadeLeft">
               <div>
                 <h2 className="font-display text-3xl md:text-4xl font-bold text-charcoal mb-6">
-                  Partnerships Built on Results
+                  Excellence Through Collaboration
                 </h2>
                 <p className="font-body text-lg text-text-muted mb-4">
-                  HomeProX Home Services LLC collaborates with Texas operators and institutions who demand reliable maintenance, measurable outcomes, and predictable service performance. Our reputation stems from consistent execution, accountability, and transparent operations across hundreds of properties.
+                  HomeProX Home Services LLC partners with Texas business leaders and institutions seeking consistent maintenance, measurable results, and reliable service delivery. Our track record centers on dependable operations, transparent communication, and proven success managing hundreds of properties.
                 </p>
                 <p className="font-body text-lg text-text-muted mb-4">
-                  Property managers, financial entities, real estate professionals, and portfolio investors trust us for everything from routine upkeep to emergency interventions, asset preservation, and compliance certifications.
+                  Property professionals, banking organizations, real estate specialists, and asset managers depend on us for maintenance, emergency support, asset care, and property compliance.
                 </p>
                 <p className="font-body text-lg text-teal italic font-medium">
-                  &quot;Success is measured in dependability, precision, and lasting partnerships.&quot;
+                  &quot;Real outcomes create lasting partnerships.&quot;
                 </p>
               </div>
             </AnimatedSection>

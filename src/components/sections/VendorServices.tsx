@@ -24,8 +24,8 @@ export default function VendorServices() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
-            title="Services We Assign"
-            subtitle="Vendors may receive work in the following categories."
+            title="Available Work Categories"
+            subtitle="Vendors can work in these areas based on qualifications."
             align="center"
           />
         </AnimatedSection>

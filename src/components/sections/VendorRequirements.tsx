@@ -22,8 +22,8 @@ export default function VendorRequirements() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
-            title="What We Look For in Vendors"
-            subtitle="We partner with licensed and insured professionals who meet our service standards."
+            title="Vendor Partner Criteria"
+            subtitle="We work with certified and bonded experts who deliver our quality standards."
             align="center"
           />
         </AnimatedSection>

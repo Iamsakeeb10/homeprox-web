@@ -68,8 +68,8 @@ export function Testimonials() {
             </span>
           </div>
           <SectionHeading
-            title="What Our Clients Say"
-            subtitle="Trusted by property professionals across Texas"
+            title="Client Testimonials"
+            subtitle="Feedback from satisfied professionals across Texas"
             align="center"
           />
         </AnimatedSection>

@@ -18,8 +18,8 @@ export function ServicesSection() {
         <AnimatedSection variant="fadeUp">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <SectionHeading
-              title="Core Services"
-              subtitle="Seven specialized maintenance categories designed to address every property need statewide"
+              title="Service Offerings"
+              subtitle="Specialized maintenance solutions tailored to address comprehensive property requirements across Texas"
               align="left"
             />
             <Link

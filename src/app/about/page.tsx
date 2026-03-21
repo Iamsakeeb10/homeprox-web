@@ -25,35 +25,35 @@ const serviceCategories = [
   {
     icon: Paintbrush,
     title: "Interior Services",
-    description: "Drywall repair, interior painting, property cleaning, and minor plumbing maintenance for residential and commercial properties."
+    description: "Drywall restoration, interior painting, property cleaning, and plumbing support for homes and commercial operations."
   },
   {
     icon: Home,
     title: "Exterior Services",
-    description: "Gutter cleaning, siding repair, landscaping, and exterior maintenance to protect and enhance property curb appeal."
+    description: "Gutter systems, siding solutions, landscaping services, and exterior maintenance protecting property curb appeal."
   },
   {
     icon: Trash2,
     title: "Property Cleanouts",
-    description: "Full property cleanouts, debris removal, and junk hauling for rental turnovers, foreclosures, and estate properties."
+    description: "Complete property cleanouts, unwanted item removal, and debris hauling for transitions, bank properties, and general cleanup."
   }
 ];
 
 const values = [
   {
     icon: ShieldCheck,
-    title: "Integrity",
-    description: "We operate with full transparency — honest pricing, clear timelines, and no hidden fees."
+    title: "Honesty",
+    description: "We practice complete transparency — straightforward pricing, realistic timelines, and no unexpected charges."
   },
   {
     icon: Clock,
-    title: "Reliability",
-    description: "We show up, meet deadlines, and deliver what we promise. Every time, on every property."
+    title: "Dependability",
+    description: "We show up on schedule, fulfill our commitments, and deliver results consistently across all properties."
   },
   {
     icon: Award,
-    title: "Quality",
-    description: "We take pride in our work. Every job is completed to a professional standard with lasting results."
+    title: "Excellence",
+    description: "We maintain high standards on every project. Every task receives professional-level execution with proven durability."
   }
 ];
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
               <div className="h-px w-16 bg-teal/50" />
             </div>
           <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
-            Texas-rooted. Statewide reach. Engineered for professional operations.
+            Rooted in Texas. Serving statewide. Engineered for professional operations.
           </p>
           </div>
         </div>
@@ -106,17 +106,17 @@ export default function AboutPage() {
             <AnimatedSection variant="fadeLeft" className="lg:col-span-3">
               <div>
                 <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-charcoal mb-6">
-                  Our Mission
+                  Our Purpose
                 </h2>
                 <p className="font-body text-base sm:text-lg text-text-muted mb-4">
-                  HomeProX Services LLC is a Texas-based statewide property maintenance partner built for property managers, investors, financial institutions, and real estate professionals. We provide reliable, affordable, and professional maintenance services throughout Texas — designed to protect, preserve, and enhance property value.
+                  HomeProX Services LLC operates as a Texas-based statewide maintenance provider serving property owners, asset managers, institutional partners, and commercial clients. We deliver consistent, affordable, and professional maintenance solutions throughout Texas — designed to safeguard, maintain, and grow property investments.
                 </p>
                 <p className="font-body text-base sm:text-lg text-text-muted mb-6">
-                  Many of our clients rely on us to manage routine property maintenance, emergency service calls, turnover repairs, preservation services, and compliance inspections.
+                  Our clients depend on us to handle regular maintenance duties, urgent service needs, transition preparations, asset preservation, and property inspections.
                 </p>
                 <div className="bg-surface-100 border-l-4 border-teal rounded-lg p-4 sm:p-6 mb-8">
                   <p className="font-body text-base sm:text-lg text-teal italic font-medium">
-                    &quot;We understand that every property represents an investment — and we treat it accordingly.&quot;
+                    &quot;We view every property as a valued investment — and we manage it that way.&quot;
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -143,11 +143,11 @@ export default function AboutPage() {
           <AnimatedSection variant="fadeUp">
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal mb-4">
-                What We Do
+                Our Capabilities
               </h2>
               <div className="w-20 h-1 bg-teal rounded-full mx-auto mb-4" />
               <p className="font-body text-base sm:text-lg text-text-muted max-w-3xl mx-auto">
-                Integrated property care across Texas—delivering specialized expertise in interior work, exterior solutions, and property cleanout services.
+                Complete property maintenance systems throughout Texas—providing targeted expertise in interior solutions, exterior offerings, and property cleanout services.
               </p>
             </div>
           </AnimatedSection>
@@ -194,13 +194,13 @@ export default function AboutPage() {
           <AnimatedSection variant="fadeUp">
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                Throughout the Lone Star State
+                Across the Entire Lone Star State
               </h2>
               <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto mb-6">
-                From tip to top, HomeProX Services LLC is positioned to support properties anywhere in Texas. Regional expertise. Local understanding. Statewide availability.
+                From the boundaries to the center, HomeProX Services LLC serves properties anywhere throughout Texas. Specialized knowledge. Regional connections. Statewide infrastructure.
               </p>
               <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
-                Serving Dallas, Houston, Austin, San Antonio, and beyond
+                Supporting Dallas, Houston, Austin, San Antonio, and surrounding areas
               </p>
             </div>
           </AnimatedSection>
@@ -255,10 +255,10 @@ export default function AboutPage() {
           <AnimatedSection variant="fadeUp">
             <div className="text-center">
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-                Ready to Get Started?
+                Want to Begin?
               </h2>
               <p className="font-body text-lg text-surface-300 mb-10 max-w-2xl mx-auto">
-                Join hundreds of satisfied property managers and investors across Texas who trust HomeProX for their maintenance needs.
+                Join hundreds of successful property professionals across Texas who depend on HomeProX for dependable maintenance solutions.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button variant="primary" size="lg" asChild>

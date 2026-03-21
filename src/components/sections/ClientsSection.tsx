@@ -17,8 +17,8 @@ export function ClientsSection() {
         <AnimatedSection variant="fadeUp">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <SectionHeading
-              title="Industry Expertise"
-              subtitle="Solutions tailored for property managers, financiers, real estate professionals, and investors"
+              title="Client Expertise Areas"
+              subtitle="Custom solutions for asset managers, banks, brokers, and investment organizations"
               align="left"
             />
             <Link

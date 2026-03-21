@@ -8,20 +8,20 @@ const steps = [
   {
     number: "01",
     icon: Camera,
-    title: "Comprehensive Documentation",
-    description: "Complete visual records from start to finish—before shots, progress photos, and final results—ensuring complete transparency and accountability."
+    title: "Complete Documentation",
+    description: "Full photo and video documentation from beginning to end—initial assessment, progress tracking, and final verification—ensuring total transparency and complete accountability."
   },
   {
     number: "02",
     icon: ShieldCheck,
-    title: "Professional Team Vetting",
-    description: "Rigorous background checks and credential verification guaranteeing only trusted, qualified professionals represent HomeProX on client properties."
+    title: "Verified Team Members",
+    description: "Comprehensive screening procedures and certification validation guaranteeing only the most reliable, experienced professionals deliver HomeProX services on your properties."
   },
   {
     number: "03",
     icon: Bell,
-    title: "Continuous Engagement",
-    description: "Proactive updates and communication before, during, and after each service—stakeholders stay informed at every milestone."
+    title: "Proactive Communication",
+    description: "Regular touchpoints and status updates preceding, occurring during, and following all services—keeping you fully informed at every stage."
   }
 ];
 
@@ -31,8 +31,8 @@ export function QualityProcess() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
-            title="Our Commitment to Excellence"
-            subtitle="Three-step process designed to maintain the highest standards across every Texas project."
+            title="Our Quality Assurance Process"
+            subtitle="Three-stage approach designed to maintain peak standards on every property throughout Texas."
             align="center"
           />
         </AnimatedSection>

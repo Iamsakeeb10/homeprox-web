@@ -24,7 +24,7 @@ export default function VendorHero() {
           <div className="h-px w-16 bg-teal/50" />
         </div>
         <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto mb-10">
-          Connect with a professional network built on consistent demand, reliable partnerships, and clear advancement opportunities across Texas property management.
+          Partner with a trusted network built on consistent opportunity, dependable collaborations, and real growth potential throughout Texas property services.
         </p>
         <Button
           variant="primary"

@@ -38,7 +38,7 @@ export default function ServicesPage() {
             <div className="h-px w-16 bg-teal/50" />
           </div>
           <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
-            Seven specialized service categories addressing every property maintenance need across Texas. From routine upkeep to emergency repairs, we deliver professional results for residential, commercial, and investment properties.
+            Seven specialized maintenance areas addressing every property requirement across Texas. From regular maintenance to urgent service calls, we deliver expert results for homes, commercial spaces, and investment portfolios.
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />
@@ -51,10 +51,10 @@ export default function ServicesPage() {
           <AnimatedSection variant="fadeUp" className="mb-20">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-6">
-                Seven Service Categories
+                Seven Specialized Services
               </h2>
               <p className="font-body text-lg text-text-muted mb-8">
-                HomeProX delivers specialized expertise across every property maintenance need. From routine upkeep to emergency repairs, we have the right solution for your portfolio.
+                HomeProX provides specialized support across all property maintenance areas. From preventive maintenance through urgent repairs, we deliver the right solution for your investment.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
                 <span className="inline-flex items-center px-4 py-2 bg-teal/10 border border-teal/20 rounded-full text-sm font-body text-teal">
@@ -89,10 +89,10 @@ export default function ServicesPage() {
           <AnimatedSection variant="fadeUp">
             <div className="bg-charcoal text-white rounded-2xl p-10 md:p-14 text-center">
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-                Ready to Get Started?
+                Prepared to Begin?
               </h2>
               <p className="font-body text-surface-200 mb-8 max-w-2xl mx-auto">
-                Request a customized quote for your specific property maintenance needs. Our team will respond within 24 hours.
+                Get a personalized estimate tailored to your property maintenance requirements. We'll get back to you within 24 hours.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button variant="primary" size="lg" asChild>
