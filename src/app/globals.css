@@ -2,64 +2,67 @@
 
 @theme {
   /* === PRIMARY SURFACES === */
-  --color-white:        #FFFFFF;
-  --color-surface-50:   #F7F9FA;
-  --color-surface-100:  #E9EDF0;
-  --color-surface-200:  #CBD2D8;
-  --color-surface-300:  #AFC2CC;
+  --color-white: #ffffff;
+  --color-surface-50: #f7f9fa;
+  --color-surface-100: #e9edf0;
+  --color-surface-200: #cbd2d8;
+  --color-surface-300: #afc2cc;
 
   /* === COOL CHARCOAL (Primary Dark) === */
-  --color-charcoal:       #1F2A33;
-  --color-charcoal-light: #323F4B;
+  --color-charcoal: #1f2a33;
+  --color-charcoal-light: #323f4b;
   --color-charcoal-muted: #637381;
 
   /* === TEAL (Primary Accent) === */
-  --color-teal:         #14B8A6;
-  --color-teal-dark:    #0D9488;
-  --color-teal-light:   #E6FFFA;
-  --color-teal-muted:   rgba(20,184,166,0.12);
+  --color-teal: #14b8a6;
+  --color-teal-dark: #0d9488;
+  --color-teal-light: #e6fffa;
+  --color-teal-muted: rgba(20, 184, 166, 0.12);
 
   /* === SKY BLUE (Prestige Accent — stars & badges) === */
-  --color-skyblue:      #0EA5E9;
-  --color-skyblue-light: #EFF8FF;
+  --color-skyblue: #0ea5e9;
+  --color-skyblue-light: #eff8ff;
 
   /* === TEXT === */
-  --color-text-primary:   #1F2A33;
-  --color-text-body:     #3E4C59;
-  --color-text-muted:     #64748B;
-  --color-text-inverse:   #FFFFFF;
+  --color-text-primary: #1f2a33;
+  --color-text-body: #3e4c59;
+  --color-text-muted: #64748b;
+  --color-text-inverse: #ffffff;
 
   /* === HERO (preserved — do not change hero background) === */
-  --color-hero-bg:        #374151;
-  --color-hero-bg-dark:   #1F2937;
-  --color-hero-text:      #FFFFFF;
-  --color-hero-muted:     #CBD5E1;
+  --color-hero-bg: #374151;
+  --color-hero-bg-dark: #1f2937;
+  --color-hero-text: #ffffff;
+  --color-hero-muted: #cbd5e1;
 
   /* === UTILITY === */
-  --color-error:        #EF4444;
-  --color-success:      #22C55E;
-  --color-divider:      #CBD2D8;
+  --color-error: #ef4444;
+  --color-success: #22c55e;
+  --color-divider: #cbd2d8;
 
   /* Fonts */
-  --font-display: 'Outfit', sans-serif;
-  --font-body:    'Plus Jakarta Sans', sans-serif;
-  --font-accent:  'Outfit', sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  --font-accent: "Outfit", sans-serif;
 
   /* Box shadows */
-  --shadow-card:        0 1px 3px rgba(31,42,51,0.06), 0 4px 12px rgba(31,42,51,0.05);
-  --shadow-card-hover:  0 4px 16px rgba(20,184,166,0.12), 0 12px 32px rgba(31,42,51,0.10);
-  --shadow-teal-glow:   0 0 0 3px rgba(20,184,166,0.22);
-  --shadow-navbar:      0 1px 0 rgba(31,42,51,0.06), 0 4px 16px rgba(31,42,51,0.08);
+  --shadow-card:
+    0 1px 3px rgba(31, 42, 51, 0.06), 0 4px 12px rgba(31, 42, 51, 0.05);
+  --shadow-card-hover:
+    0 4px 16px rgba(20, 184, 166, 0.12), 0 12px 32px rgba(31, 42, 51, 0.1);
+  --shadow-teal-glow: 0 0 0 3px rgba(20, 184, 166, 0.22);
+  --shadow-navbar:
+    0 1px 0 rgba(31, 42, 51, 0.06), 0 4px 16px rgba(31, 42, 51, 0.08);
 
   /* Keyframe animations */
   --animate-fade-up: fadeUp 0.6s ease forwards;
-  --animate-float:   float 4s ease-in-out infinite;
+  --animate-float: float 4s ease-in-out infinite;
 }
 
 /* Prevent flash of unstyled content and horizontal overflow */
 html,
 body {
-  background-color: #FFFFFF;
+  background-color: var(--color-white);
   color: var(--color-text-body);
   font-family: var(--font-body);
   overflow-x: hidden;
@@ -68,38 +71,56 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Top accent line — orange brand signature */
+/* Top accent line — teal brand signature */
 body::before {
-  content: '';
+  content: "";
   display: block;
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-charcoal) 0%, var(--color-orange) 50%, var(--color-charcoal) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--color-charcoal) 0%,
+    var(--color-teal) 50%,
+    var(--color-charcoal) 100%
+  );
   z-index: 100;
 }
 
 /* Focus ring global update */
 :focus-visible {
-  outline: 2px solid var(--color-orange);
+  outline: 2px solid var(--color-teal);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 /* Selection color */
 ::selection {
-  background-color: var(--color-orange-light);
+  background-color: var(--color-teal-light);
   color: var(--color-charcoal);
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-16px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
 }
 
 .animate-float {
@@ -109,14 +130,18 @@ body::before {
 /* Diagonal geometric crack/line texture — hero background */
 .hero-texture {
   background-image:
-    linear-gradient(135deg, rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(225deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(225deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .animate-shimmer {

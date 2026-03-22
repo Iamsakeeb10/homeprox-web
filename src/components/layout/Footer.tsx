@@ -1,4 +1,12 @@
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Twitter,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,24 +14,33 @@ export function Footer() {
   return (
     <footer className="bg-charcoal text-white border-t-0 relative">
       {/* Optional accent strip */}
-      <div className="h-0.5 bg-gradient-to-r from-transparent via-teal to-transparent opacity-40" aria-hidden="true" />
+      <div
+        className="h-0.5 bg-gradient-to-r from-transparent via-teal to-transparent opacity-40"
+        aria-hidden="true"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Column 1: Company Info */}
           <div>
-            <Image
-              src="/images/logo.png"
-              alt="HomeProX Services LLC"
-              width={220}
-              height={66}
-              className="h-16 w-auto object-contain mb-4"
-            />
+            <div className="inline-flex bg-white rounded-md  mb-4">
+              <Image
+                src="/images/logo.png"
+                alt="HomeProX Services LLC"
+                width={220}
+                height={10}
+                className="h-16 w-auto object-contain"
+              />
+            </div>
             <p className="font-body text-surface-300 text-sm mb-4">
-              Statewide property maintenance company supporting managers, operators, and institutions across Texas with professional service delivery.
+              Statewide property maintenance company supporting managers,
+              operators, and institutions across Texas with professional service
+              delivery.
             </p>
             <div className="flex items-center gap-2 text-surface-300">
-              <span className="text-xs font-accent uppercase">Fully Insured</span>
+              <span className="text-xs font-accent uppercase">
+                Fully Insured
+              </span>
               <span>•</span>
               <span className="text-xs font-accent uppercase">Licensed</span>
             </div>
@@ -31,40 +48,63 @@ export function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="font-display text-lg font-bold text-white mb-4">Quick Links</h3>
+            <h3 className="font-display text-lg font-bold text-white mb-4">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="font-body text-surface-300 hover:text-white transition-colors duration-200">
+                <Link
+                  href="/"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200"
+                >
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/clients" className="font-body text-surface-300 hover:text-white transition-colors duration-200">
+                <Link
+                  href="/clients"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200"
+                >
                   Our Clients
                 </Link>
               </li>
               <li>
-                <Link href="/vendors" className="font-body text-surface-300 hover:text-white transition-colors duration-200">
+                <Link
+                  href="/vendors"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200"
+                >
                   Vendors
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="font-body text-surface-300 hover:text-white transition-colors duration-200">
+                <Link
+                  href="/about"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200"
+                >
                   About
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="font-body text-surface-300 hover:text-white transition-colors duration-200">
+                <Link
+                  href="/contact"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200"
+                >
                   Contact
                 </Link>
               </li>
               <li>
-                <Link href="/quote" className="font-body text-surface-300 hover:text-white transition-colors duration-200">
+                <Link
+                  href="/quote"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200"
+                >
                   Get a Quote
                 </Link>
               </li>
@@ -73,40 +113,63 @@ export function Footer() {
 
           {/* Column 3: Services */}
           <div>
-            <h3 className="font-display text-lg font-bold text-white mb-4">Services</h3>
+            <h3 className="font-display text-lg font-bold text-white mb-4">
+              Services
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
+                >
                   General Maintenance
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
+                >
                   Gutter Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
+                >
                   Drywall & Painting
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
+                >
                   Property Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
+                >
                   Landscaping
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
+                >
                   Siding & Exterior
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm">
+                <Link
+                  href="/services"
+                  className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
+                >
                   Property Cleanouts
                 </Link>
               </li>
@@ -115,7 +178,9 @@ export function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h3 className="font-display text-lg font-bold text-white mb-4">Contact Us</h3>
+            <h3 className="font-display text-lg font-bold text-white mb-4">
+              Contact Us
+            </h3>
             <ul className="space-y-3">
               <li>
                 <a
@@ -136,9 +201,13 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-teal mt-1 flex-shrink-0" aria-hidden="true" />
+                <MapPin
+                  className="w-4 h-4 text-teal mt-1 flex-shrink-0"
+                  aria-hidden="true"
+                />
                 <span className="font-body text-surface-300 text-sm">
-                  517 WATERVIEW DR, COPPELL, TX 75019<br />
+                  517 WATERVIEW DR, COPPELL, TX 75019
+                  <br />
                   <span className="text-teal">Serving All of Texas</span>
                 </span>
               </li>
@@ -149,16 +218,40 @@ export function Footer() {
         {/* Social Icons */}
         <div className="border-t border-white/10 pt-8 mb-8">
           <div className="flex justify-center gap-6">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110" aria-label="Facebook">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
+              aria-label="Facebook"
+            >
               <Facebook className="w-5 h-5" aria-hidden="true" />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110" aria-label="Twitter">
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
+              aria-label="Twitter"
+            >
               <Twitter className="w-5 h-5" aria-hidden="true" />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110" aria-label="LinkedIn">
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
+              aria-label="LinkedIn"
+            >
               <Linkedin className="w-5 h-5" aria-hidden="true" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110" aria-label="Instagram">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
+              aria-label="Instagram"
+            >
               <Instagram className="w-5 h-5" aria-hidden="true" />
             </a>
           </div>
