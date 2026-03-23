@@ -7,13 +7,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
+// const navLinks = [
+//   { label: "Home", href: "/" },
+//   { label: "Services", href: "/services" },
+//   { label: "Client", href: "/clients" },
+//   { label: "Vendor", href: "/vendors" },
+//   { label: "About", href: "/about" },
+//   { label: "Contact", href: "/contact" },
+// ];
+
+// const ctaLink = { label: "Get a Quote", href: "/quote" };
+
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
-  { label: "Client", href: "/clients" },
-  { label: "Vendor", href: "/vendors" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Services & Solutions", href: "/services" },
+  { label: "Our Clients", href: "/clients" },
+  { label: "Vendor Network", href: "/vendors" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const ctaLink = { label: "Get a Quote", href: "/quote" };
@@ -83,9 +94,17 @@ export function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, height: 0 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, height: "auto" }}
-            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            initial={
+              shouldReduceMotion ? { opacity: 1 } : { opacity: 0, height: 0 }
+            }
+            animate={
+              shouldReduceMotion
+                ? { opacity: 1 }
+                : { opacity: 1, height: "auto" }
+            }
+            exit={
+              shouldReduceMotion ? { opacity: 0 } : { opacity: 0, height: 0 }
+            }
             transition={{ duration: 0.3 }}
             className="lg:hidden bg-white border-t border-surface-200"
           >
@@ -96,7 +115,9 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block font-accent text-lg py-2 transition-colors duration-300 ${
-                    pathname === link.href ? "text-teal" : "text-charcoal hover:text-teal"
+                    pathname === link.href
+                      ? "text-teal"
+                      : "text-charcoal hover:text-teal"
                   }`}
                 >
                   {link.label}

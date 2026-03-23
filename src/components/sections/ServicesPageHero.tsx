@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const PAGE_HERO_IMAGE = "/images/heroes/hero-services.jpg";
+const PAGE_HERO_IMAGE = "/images/heroes/hero.jpg";
 
 interface ServicesPageHeroProps {
   children: React.ReactNode;

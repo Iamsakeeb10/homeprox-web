@@ -1,11 +1,7 @@
-import { ServiceCard } from "@/components/cards/ServiceCard";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
 import { services } from "@/lib/data/services";
 import { generatePageMetadata } from "@/lib/metadata";
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import {
   CheckCircle,
   Droplets,
@@ -14,14 +10,18 @@ import {
   Paintbrush,
   Sparkles,
   Trash2,
-  Wrench
+  Wrench,
 } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Our Services | HomeProX Services LLC",
-  description: "Professional property maintenance services across Texas including plumbing, gutter cleaning, drywall repair, landscaping, and more.",
-  path: "/services"
+  description:
+    "Professional property maintenance services across Texas including plumbing, gutter cleaning, drywall repair, landscaping, and more.",
+  path: "/services",
 });
 
 // Icon mapping for service cards
@@ -32,17 +32,23 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Sparkles,
   Leaf,
   Home,
-  Trash2
+  Trash2,
 };
 
 // Helper component to render service icons
-function ServiceIconComponent({ iconName, className }: { iconName: string; className?: string }) {
+function ServiceIconComponent({
+  iconName,
+  className,
+}: {
+  iconName: string;
+  className?: string;
+}) {
   const Icon = iconMap[iconName] || Wrench;
   return <Icon className={className} aria-hidden="true" />;
 }
 
 export default function ServicesPage() {
-  const heroImageUrl = "/images/heroes/hero-services.jpg";
+  const heroImageUrl = "/images/heroes/hero.jpg";
 
   return (
     <>
@@ -58,7 +64,10 @@ export default function ServicesPage() {
               <div className="h-px w-16 bg-teal/50" />
             </div>
             <p className="font-body text-base sm:text-lg text-surface-200">
-              Seven specialized maintenance areas addressing every property requirement across Texas. From regular maintenance to urgent service calls, we deliver expert results for homes, commercial spaces, and investment portfolios.
+              Seven specialized maintenance areas addressing every property
+              requirement across Texas. From regular maintenance to urgent
+              service calls, we deliver expert results for homes, commercial
+              spaces, and investment portfolios.
             </p>
           </div>
         </div>
@@ -85,7 +94,9 @@ export default function ServicesPage() {
                 Seven Specialized Services
               </h2>
               <p className="font-body text-lg text-text-muted max-w-3xl">
-                HomeProX provides specialized support across all property maintenance areas. From preventive maintenance through urgent repairs, we deliver the right solution for your investment.
+                HomeProX provides specialized support across all property
+                maintenance areas. From preventive maintenance through urgent
+                repairs, we deliver the right solution for your investment.
               </p>
             </div>
           </AnimatedSection>
@@ -94,15 +105,21 @@ export default function ServicesPage() {
           <AnimatedSection variant="fadeUp" className="mb-16">
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-surface-200 bg-surface-50 rounded-2xl overflow-hidden">
               <div className="px-6 sm:px-8 py-8 text-center">
-                <span className="font-display text-teal font-bold text-2xl md:text-3xl block mb-1">Statewide</span>
+                <span className="font-display text-teal font-bold text-2xl md:text-3xl block mb-1">
+                  Statewide
+                </span>
                 <p className="font-body text-sm text-text-muted">Coverage</p>
               </div>
               <div className="px-6 sm:px-8 py-8 text-center">
-                <span className="font-display text-teal font-bold text-2xl md:text-3xl block mb-1">Licensed</span>
+                <span className="font-display text-teal font-bold text-2xl md:text-3xl block mb-1">
+                  Licensed
+                </span>
                 <p className="font-body text-sm text-text-muted">& Insured</p>
               </div>
               <div className="px-6 sm:px-8 py-8 text-center">
-                <span className="font-display text-teal font-bold text-2xl md:text-3xl block mb-1">24-Hour</span>
+                <span className="font-display text-teal font-bold text-2xl md:text-3xl block mb-1">
+                  24-Hour
+                </span>
                 <p className="font-body text-sm text-text-muted">Response</p>
               </div>
             </div>
@@ -135,7 +152,10 @@ export default function ServicesPage() {
                   <div className="flex flex-col justify-between p-6 sm:p-8 w-full md:w-3/5">
                     {/* Icon Badge */}
                     <div className="w-10 h-10 rounded-xl bg-teal-muted flex items-center justify-center mb-3">
-                      <ServiceIconComponent iconName={service.icon} className="w-5 h-5 text-teal" />
+                      <ServiceIconComponent
+                        iconName={service.icon}
+                        className="w-5 h-5 text-teal"
+                      />
                     </div>
 
                     {/* Title */}
@@ -159,14 +179,24 @@ export default function ServicesPage() {
                     <ul className="space-y-2 mb-6 flex-grow">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle className="w-5 h-5 text-teal mt-0.5 flex-shrink-0" aria-hidden="true" />
-                          <span className="font-body text-text-muted text-sm">{feature}</span>
+                          <CheckCircle
+                            className="w-5 h-5 text-teal mt-0.5 flex-shrink-0"
+                            aria-hidden="true"
+                          />
+                          <span className="font-body text-text-muted text-sm">
+                            {feature}
+                          </span>
                         </li>
                       ))}
                     </ul>
 
                     {/* CTA Button */}
-                    <Button variant="secondary" size="md" className="mt-auto" asChild>
+                    <Button
+                      variant="secondary"
+                      size="md"
+                      className="mt-auto"
+                      asChild
+                    >
                       <Link href="/quote">Get a Quote</Link>
                     </Button>
                   </div>
@@ -184,7 +214,9 @@ export default function ServicesPage() {
                   Prepared to Begin?
                 </h2>
                 <p className="font-body text-surface-200">
-                  Get a personalized estimate tailored to your property maintenance requirements. We'll get back to you within 24 hours.
+                  Get a personalized estimate tailored to your property
+                  maintenance requirements. We'll get back to you within 24
+                  hours.
                 </p>
               </div>
 

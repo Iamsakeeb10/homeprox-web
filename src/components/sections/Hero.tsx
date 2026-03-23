@@ -14,7 +14,7 @@ const HERO_STATS = [
   { icon: Wrench, value: "7", label: "Specialized Service Categories" },
 ];
 
-const HERO_IMAGE_URL = "/images/heroes/hero-services.jpg";
+const HERO_IMAGE_URL = "/images/heroes/hero.jpg";
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -31,7 +31,6 @@ export function Hero() {
         />
       </div>
 
-      <div className="absolute inset-0 bg-charcoal/70 z-10" />
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/72 to-charcoal/88 z-10" />
 
       {/* Subtle texture overlay — diagonal lines, low opacity */}
