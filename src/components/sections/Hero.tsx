@@ -2,72 +2,180 @@
 
 import { Button } from "@/components/ui/Button";
 import { motion, useReducedMotion } from "framer-motion";
-import { Building2, CalendarCheck, ShieldCheck, Wrench } from "lucide-react";
-import Image from "next/image";
+import {
+  BadgeCheck,
+  Building2,
+  CalendarCheck,
+  Camera,
+  CheckCircle2,
+  Clock,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
-const HERO_STATS = [
-  { icon: Building2, value: "500+", label: "Properties Maintained Statewide" },
-  { icon: CalendarCheck, value: "10+", label: "Years of Industry Leadership" },
-  { icon: ShieldCheck, value: "100%", label: "Fully Certified & Bonded" },
-  { icon: Wrench, value: "7", label: "Specialized Service Categories" },
+/* ─── Stat cards inside the right glass panel ─────────────────── */
+const STATS = [
+  { icon: Building2, value: "500+", label: "Properties Maintained" },
+  { icon: CalendarCheck, value: "10+", label: "Years of Leadership" },
+  { icon: ShieldCheck, value: "100%", label: "Certified & Bonded" },
+  { icon: Wrench, value: "7", label: "Service Categories" },
 ];
 
-const HERO_IMAGE_URL = "/images/heroes/hero.jpg";
+/* ─── Trust chips below buttons ───────────────────────────────── */
+const TRUST_CHIPS = [
+  { icon: BadgeCheck, label: "Licensed & Insured" },
+  { icon: Clock, label: "Fast Scheduling" },
+  { icon: Camera, label: "Photo Docs" },
+  { icon: MapPin, label: "Statewide Coverage" },
+];
+
+/* ─── Right-panel service highlights ─────────────────────────── */
+const HIGHLIGHTS = [
+  "REO & Bank-Owned Properties",
+  "Portfolio & Institutional Management",
+  "Emergency Repair Services (24/7)",
+  "Renovation & Property Preservation",
+];
+
+/* ─── Marquee items ────────────────────────────────────────────── */
+const MARQUEE_ITEMS = [
+  "Licensed & Insured",
+  "Statewide Coverage",
+  "Photo Documentation",
+  "Fast Response",
+  "Background-Checked Crews",
+  "No Hidden Fees",
+  "Portfolio Management",
+  "REO Specialists",
+  "General Repairs & Handyman Services",
+  "Renovation & Remodeling",
+  "Property Maintenance",
+  "Property Preservation",
+  "Exterior Services",
+  "Cleaning & Sanitization",
+  "Electrical & Plumbing",
+  "HVAC & Energy Efficiency",
+  "Smart Home Upgrades",
+  "Preventive Maintenance Plans",
+  "Emergency Repair Services (24/7)",
+  "Commercial Property Services",
+];
+
+const Diamond = () => (
+  <span
+    aria-hidden="true"
+    className="inline-block w-[5px] h-[5px] bg-teal rotate-45 mx-6 flex-shrink-0 opacity-70"
+  />
+);
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const doubled = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+
+  const slide = (delay: number, x = 0, y = 0) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, x, y },
+          animate: { opacity: 1, x: 0, y: 0 },
+          transition: { delay, duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+        };
 
   return (
-    <section className="relative min-h-screen flex flex-col bg-hero-bg overflow-hidden pt-20">
+    /*
+     * The section is exactly 100dvh tall so the video fills the screen
+     * and the marquee strip sits flush at the viewport bottom.
+     */
+    <section
+      className="relative flex flex-col bg-hero-bg-dark overflow-hidden pt-20"
+      style={{ minHeight: "100dvh" }}
+    >
+      {/* ── Full-cover video ────────────────────────────────────── */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={HERO_IMAGE_URL}
-          alt="HomeProX team providing statewide property maintenance services"
-          fill
-          priority
-          className="object-cover object-center brightness-[0.62] contrast-110"
+        <video
+          src="/videos/hero.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center"
         />
+        {/* Base dark layer */}
+        <div className="absolute inset-0 bg-charcoal/72" />
+        {/* Stronger vignette on right so glass card pops */}
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-charcoal/30 to-charcoal/55" />
+        {/* Bottom gradient so marquee strip transitions cleanly */}
+        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-charcoal/80 to-transparent" />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/80 via-charcoal/72 to-charcoal/88 z-10" />
-
-      {/* Subtle texture overlay — diagonal lines, low opacity */}
+      {/* ── Subtle diagonal texture ──────────────────────────────── */}
       <div className="hero-texture absolute inset-0 z-10 pointer-events-none" />
 
-      {/* Teal top accent line */}
-      <div className="absolute top-0 left-0 right-0 z-20 h-[3px] bg-gradient-to-r from-transparent via-teal to-transparent opacity-60" />
+      {/* ── Top teal accent bar ──────────────────────────────────── */}
+      <div className="absolute top-0 inset-x-0 z-20 h-[3px] bg-gradient-to-r from-transparent via-teal to-transparent opacity-60" />
 
-      {/* Main content grid */}
+      {/* ════════════════════════════════════════════════════════════
+          MAIN LAYOUT — left text / right glass card
+          flex-1 so it expands and pushes marquee to the bottom
+      ════════════════════════════════════════════════════════════ */}
       <div className="relative z-20 flex-1 flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 sm:py-20 lg:py-24">
-          <div className="grid grid-cols-1 min-[1131px]:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* LEFT: Text column */}
-            <div className="flex flex-col gap-6 text-center min-[1131px]:text-left">
-              {/* Eyebrow badge */}
-              <div className="inline-flex items-center gap-2 self-center min-[1131px]:self-start bg-teal/15 border border-teal/30 rounded-full px-4 py-1.5">
-                <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-                <span className="font-accent text-sm font-medium text-teal tracking-wide uppercase">
-                  Texas Statewide Property Maintenance
-                </span>
-              </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-10 xl:gap-14 items-center">
+            {/* ════════════════════════════════════════════════════
+                LEFT COLUMN — primary message
+            ════════════════════════════════════════════════════ */}
+            <div className="flex flex-col gap-5">
+              {/* Eyebrow */}
+              <motion.div
+                {...slide(0, -20)}
+                className="flex items-center gap-3"
+              >
+                {/* Teal vertical accent bar */}
+                <span className="hidden sm:block w-[3px] h-10 bg-teal rounded-full flex-shrink-0" />
+                <div className="inline-flex items-center gap-2 bg-teal/12 border border-teal/28 rounded-full px-4 py-1.5">
+                  <span className="w-2 h-2 rounded-full bg-teal animate-pulse flex-shrink-0" />
+                  <span className="font-accent text-xs sm:text-sm font-semibold text-teal tracking-widest uppercase">
+                    Texas Statewide Property Maintenance
+                  </span>
+                </div>
+              </motion.div>
 
               {/* H1 */}
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Expert Property Maintenance{" "}
-                <span className="text-teal">Across Texas</span>
-              </h1>
+              <motion.h1
+                {...slide(0.1, -24)}
+                className="font-display text-4xl sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-bold text-white leading-[1.08] tracking-tight"
+              >
+                Expert Property
+                <br />
+                <span className="relative">
+                  <span className="text-teal">Maintenance</span> Services
+                </span>
+                <br />
+                <span className="text-surface-200 text-3xl sm:text-4xl lg:text-[2.5rem] xl:text-[2.85rem] font-semibold">
+                  Across Texas
+                </span>
+              </motion.h1>
 
-              {/* Body copy */}
-              <p className="font-body text-lg text-hero-muted max-w-xl mx-auto min-[1131px]:mx-0 leading-relaxed">
-                Keeping your properties in top condition, anywhere in Texas.
-                Trusted by property managers, investors, and institutions for
-                fast, reliable, and high-quality service.
-              </p>
+              {/* Body */}
+              <motion.p
+                {...slide(0.18, -20)}
+                className="font-body text-base sm:text-lg text-hero-muted max-w-lg leading-relaxed"
+              >
+                Trusted by property managers, investors, banks, and institutions
+                for reliable statewide maintenance — delivered with speed,
+                documentation, and institutional quality.
+              </motion.p>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4 justify-center min-[1131px]:justify-start mt-2">
+              {/* CTA row */}
+              <motion.div
+                {...slide(0.26, -16)}
+                className="flex flex-wrap gap-3 sm:gap-4"
+              >
                 <Button size="lg" asChild>
                   <Link href="/quote">Get a Free Quote</Link>
                 </Button>
@@ -75,70 +183,172 @@ export function Hero() {
                   variant="secondary"
                   size="lg"
                   asChild
-                  className="border-white/30 text-white hover:bg-white/10 hover:border-white/60"
+                  className="border-white/30 text-white hover:bg-white/10 hover:border-white/55 bg-white/5 backdrop-blur-sm"
                 >
-                  <Link href="/services">View Our Services</Link>
+                  <Link href="/services">Explore Services</Link>
                 </Button>
-              </div>
+              </motion.div>
+
+              {/* Trust chips */}
+              <motion.div
+                {...slide(0.34, -12)}
+                className="flex flex-wrap gap-2"
+              >
+                {TRUST_CHIPS.map((chip) => (
+                  <div
+                    key={chip.label}
+                    className="inline-flex items-center gap-1.5 bg-white/6 border border-white/14 rounded-full px-3 py-1.5 backdrop-blur-sm"
+                  >
+                    <chip.icon className="w-3.5 h-3.5 text-teal flex-shrink-0" />
+                    <span className="font-body text-xs font-medium text-white/85 tracking-wide">
+                      {chip.label}
+                    </span>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* Quick contact strip */}
+              <motion.div
+                {...slide(0.4, -10)}
+                className="flex items-center gap-2 pt-1"
+              >
+                <Phone className="w-4 h-4 text-teal flex-shrink-0" />
+                <span className="font-body text-sm text-surface-300">
+                  Available statewide —&nbsp;
+                  <a
+                    href="tel:+1-800-000-0000"
+                    className="text-white hover:text-teal transition-colors font-medium"
+                  >
+                    Call us for same-day response
+                  </a>
+                </span>
+              </motion.div>
             </div>
 
-            {/* RIGHT: Stat cards grid */}
-            <div className="grid grid-cols-2 gap-4 lg:gap-5">
-              {HERO_STATS.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={prefersReducedMotion ? {} : { opacity: 0, y: 24 }}
-                  animate={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
-                  transition={{
-                    delay: 0.15 + i * 0.1,
-                    duration: 0.55,
-                    ease: "easeOut",
-                  }}
-                  className="bg-charcoal/5 border border-white/25 rounded-2xl p-5 lg:p-6 flex flex-col gap-3 backdrop-blur-md shadow-card hover:bg-charcoal/45 hover:border-teal/40 transition-all duration-300 group"
+            {/* ════════════════════════════════════════════════════
+                RIGHT COLUMN — floating glass card
+            ════════════════════════════════════════════════════ */}
+            <motion.div
+              {...slide(0.22, 30)}
+              className="hidden lg:flex flex-col gap-0 rounded-2xl overflow-hidden border border-white/14 shadow-[0_8px_40px_rgba(0,0,0,0.45)] backdrop-blur-xl"
+              style={{ background: "rgba(31,42,51,0.62)" }}
+            >
+              {/* Card header */}
+              <div className="px-6 py-5 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <p className="font-accent text-xs font-semibold text-teal tracking-widest uppercase mb-0.5">
+                    HomeProX Services
+                  </p>
+                  <p className="font-display text-base font-bold text-white">
+                    Why Clients Choose Us
+                  </p>
+                </div>
+                {/* Live indicator dot */}
+                <div className="flex items-center gap-1.5 bg-teal/15 border border-teal/30 rounded-full px-2.5 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
+                  <span className="font-accent text-[10px] font-semibold text-teal tracking-wider uppercase">
+                    Live
+                  </span>
+                </div>
+              </div>
+
+              {/* Stats 2×2 grid */}
+              <div className="grid grid-cols-2 divide-x divide-y divide-white/10">
+                {STATS.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="flex flex-col gap-2 p-5 group hover:bg-white/5 transition-colors duration-200"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-teal/18 flex items-center justify-center group-hover:bg-teal/28 transition-colors">
+                      <stat.icon className="w-4 h-4 text-teal" />
+                    </div>
+                    <div className="font-display text-2xl font-bold text-white leading-none">
+                      {stat.value}
+                    </div>
+                    <div className="font-body text-[11px] text-surface-300 leading-snug">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-white/10" />
+
+              {/* Service highlights list */}
+              <div className="px-6 py-5 flex flex-col gap-3">
+                <p className="font-accent text-[10px] font-semibold text-surface-300 tracking-widest uppercase">
+                  Specialized In
+                </p>
+                {HIGHLIGHTS.map((item) => (
+                  <div key={item} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-teal flex-shrink-0 mt-px" />
+                    <span className="font-body text-sm text-white/80 leading-snug">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Card CTA footer */}
+              <div className="px-6 py-4 border-t border-white/10 bg-teal/8">
+                <Link
+                  href="/quote"
+                  className="font-accent text-sm font-semibold text-teal hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
-                  {/* Icon circle */}
-                  <div className="w-10 h-10 rounded-xl bg-teal/20 flex items-center justify-center group-hover:bg-teal/30 transition-colors">
-                    <stat.icon className="w-5 h-5 text-teal" />
-                  </div>
-                  {/* Big number */}
-                  <div className="font-display text-3xl lg:text-4xl font-bold text-white">
-                    {stat.value}
-                  </div>
-                  {/* Label */}
-                  <div className="font-body text-sm text-surface-200 leading-snug">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                  Request a free property assessment
+                  <span className="group-hover:translate-x-1 transition-transform duration-200">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* BOTTOM: Trust strip */}
-      <div className="relative z-20 border-t border-white/10 bg-charcoal/60 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-surface-300">
-            <span className="font-accent font-semibold text-white tracking-wide">
-              HomeProX
-            </span>
-            <span className="hidden sm:block w-px h-4 bg-white/20" />
-            {[
-              "Comprehensive Regional Coverage",
-              "Custom Property Solutions",
-              "Professional Portfolio Management",
-              "Institutional Quality Standards",
-            ].map((item, i) => (
-              <React.Fragment key={item}>
-                {i > 0 && (
-                  <span className="hidden sm:block w-px h-4 bg-white/20" />
-                )}
-                <span>{item}</span>
+      {/* ════════════════════════════════════════════════════════════
+          MARQUEE STRIP — flush at viewport bottom
+      ════════════════════════════════════════════════════════════ */}
+      <div className="relative z-20 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden flex-shrink-0">
+        {/* Edge fade masks */}
+        <div className="absolute left-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-r from-charcoal/65 to-transparent pointer-events-none" />
+        <div className="absolute right-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-l from-charcoal/65 to-transparent pointer-events-none" />
+
+        {prefersReducedMotion ? (
+          <div className="flex flex-wrap gap-x-6 gap-y-1 items-center justify-center py-3.5 px-8 text-sm text-surface-300">
+            {MARQUEE_ITEMS.slice(0, 8).map((item) => (
+              <span key={item} className="font-body">
+                {item}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <div
+            className="flex items-center whitespace-nowrap"
+            style={{
+              animation: "marquee 60s linear infinite",
+              willChange: "transform",
+            }}
+          >
+            {doubled.map((item, idx) => (
+              <React.Fragment key={`${item}-${idx}`}>
+                <span className="font-body text-[13px] font-medium text-surface-300 tracking-wide flex-shrink-0 py-3.5">
+                  {item}
+                </span>
+                <Diamond />
               </React.Fragment>
             ))}
           </div>
-        </div>
+        )}
       </div>
+
+      <style>{`
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
   );
 }
