@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { motion, useReducedMotion } from "framer-motion";
+import { easeOut, motion, useReducedMotion } from "framer-motion";
 import {
   BadgeCheck,
   Building2,
@@ -82,7 +82,7 @@ export function Hero() {
       : {
           initial: { opacity: 0, x, y },
           animate: { opacity: 1, x: 0, y: 0 },
-          transition: { delay, duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+          transition: { delay, duration: 0.65, ease: easeOut },
         };
 
   return (
@@ -327,7 +327,7 @@ export function Hero() {
           <div
             className="flex items-center whitespace-nowrap"
             style={{
-              animation: "marquee 60s linear infinite",
+              animation: "marquee 10s linear infinite",
               willChange: "transform",
             }}
           >

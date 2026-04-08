@@ -8,23 +8,23 @@
 
 ### 1.1 Company & Audience
 
-| Field | Value |
-|-------|--------|
-| **Company** | HomeProX Services LLC |
-| **Industry** | Statewide Property Maintenance, Texas |
-| **Target audience** | Property managers, banks, asset managers, real estate investors, REO specialists, portfolio owners |
+| Field                 | Value                                                                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| **Company**           | HomeProX Services LLC                                                                                                 |
+| **Industry**          | Statewide Property Maintenance, Texas                                                                                 |
+| **Target audience**   | Property managers, banks, asset managers, real estate investors, REO specialists, portfolio owners                    |
 | **Value proposition** | Reliable, professional property maintenance across Texas — residential, commercial, rental, and investment properties |
 
 ### 1.2 Tech Stack
 
-| Technology | Version / Notes |
-|------------|------------------|
-| **Framework** | Next.js (App Router) |
-| **Language** | TypeScript (`.tsx` only for components) |
-| **Styling** | Tailwind CSS v4 (theme via `@theme {}` in `globals.css` — no `tailwind.config.ts`) |
-| **Animations** | Framer Motion |
-| **Structure** | `src/` directory; Turbopack enabled |
-| **Linting** | ESLint configured |
+| Technology     | Version / Notes                                                                    |
+| -------------- | ---------------------------------------------------------------------------------- |
+| **Framework**  | Next.js (App Router)                                                               |
+| **Language**   | TypeScript (`.tsx` only for components)                                            |
+| **Styling**    | Tailwind CSS v4 (theme via `@theme {}` in `globals.css` — no `tailwind.config.ts`) |
+| **Animations** | Framer Motion                                                                      |
+| **Structure**  | `src/` directory; Turbopack enabled                                                |
+| **Linting**    | ESLint configured                                                                  |
 
 ### 1.3 Design Philosophy
 
@@ -63,7 +63,7 @@ src/
 │   └── robots.ts               # Robots.txt
 ├── components/
 │   ├── layout/
-│   │   ├── Navbar.tsx          # Fixed nav: logo, links, CTA pill, mobile menu
+│   │   ├── Navbar.tsx          # Fixed nav: centered links, inline Get a Quote, right-aligned phone pill, mobile menu
 │   │   ├── Footer.tsx          # 4-column footer: logo, Quick Links, Services, Contact; social; copyright
 │   │   └── PageWrapper.tsx     # Framer Motion page transition wrapper; scroll reset on route change
 │   ├── ui/
@@ -72,7 +72,7 @@ src/
 │   │   ├── AnimatedSection.tsx # Scroll-triggered fade/slide (fadeUp, fadeLeft, fadeRight, scaleIn); reduced motion support
 │   │   └── Skeleton.tsx        # Loading skeleton: text | card | image variant; shimmer
 │   ├── sections/
-│   │   ├── Hero.tsx            # Home hero: bg-hero-bg, headline + CTAs, stacked image cards (Plumbing, Electrical, General Repairs)
+│   │   ├── Hero.tsx            # Home hero: full-screen video background, left headline + CTA, right glass stats card, bottom marquee
 │   │   ├── StatsBar.tsx        # Stats strip: 10+ Years, 500+ Properties, Statewide, 100% Insured; count-up animation
 │   │   ├── ServicesSection.tsx # SectionHeading + service cards grid + "View All Services" button
 │   │   ├── ClientsSection.tsx  # SectionHeading + ClientTypeCard grid + "Learn More About Our Clients"
@@ -122,17 +122,17 @@ src/
 
 ## 3. Pages & Routes
 
-| Route | Purpose | Hero | Key sections | CTA placement |
-|-------|---------|------|----------------|----------------|
-| **/** | Home | Full-screen hero: solid `bg-hero-bg`, headline + 3 pill CTAs, stacked image cards (Plumbing, Electrical, General Repairs) | StatsBar, Services, Clients, WhyChooseUs, QualityProcess, Testimonials, CTABanner (dark), ContactSection | Hero (Get a Free Quote, View Our Services, Our Clients); each section links; CTABanner; ContactSection |
-| **/services** | Services overview | Solid `bg-hero-bg`, h1 "Our Services", intro paragraph | Featured service grid (ServiceCard featured), "View All Services" button | Bottom CTA area |
-| **/clients** | Who we serve | Solid `bg-hero-bg`, h1 "Our Clients", tagline | Intro, client type cards, process steps, "Ready to Partner" CTA | Learn more link; CTA section with phone/email + Get Started |
-| **/about** | About company | Solid `bg-hero-bg`, h1 "About HomeProX...", tagline | Mission, service categories, coverage map (image + overlay), regions, values, CTA block | Buttons in CTA block |
-| **/contact** | General contact | Hero with background image + dark overlay, h1 "Contact HomeProX", tagline | Two-column layout: contact details (phone, email, coverage, hours) + `ContactForm` card; trust strip; final CTA strip | Contact links; contact form submit; phone CTA in final strip |
-| **/quote** | Dedicated quote request | Hero with background image + dark overlay, h1 "Get a Quote", tagline | Split layout: `QuoteForm` (left) + contact info panel (right); bottom info cards | QuoteForm submit; phone/email CTAs in side panel |
-| **/vendors** | Vendor partners | Solid `bg-hero-bg`, h1 "Join the HomeProX Property Maintenance Network", Apply Now / Vendor Login | Subtext strip, Why Partner (4 cards), 3-step Onboarding, Requirements (required/preferred), Services We Assign (6 icons), **Vendor Application** (4-step form in `#vendor-application`), FAQ accordion, dark CTA banner | Hero + CTA banner → #vendor-application; form Submit on Step 4 |
-| **/terms** | Terms & Conditions | Text hero | TOC + content | — |
-| **404** | Not found | — | Message + Home / Contact buttons | — |
+| Route         | Purpose                 | Hero                                                                                                                                                | Key sections                                                                                                                                                                                                            | CTA placement                                                                                                  |
+| ------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **/**         | Home                    | Full-screen hero: dark video background with charcoal overlays, left text CTA content, right floating glass stats panel, and a bottom marquee strip | StatsBar, Services, Clients, WhyChooseUs, QualityProcess, Testimonials, CTABanner (dark), ContactSection                                                                                                                | Hero (Get a Free Quote, Explore Services, phone contact prompt); each section links; CTABanner; ContactSection |
+| **/services** | Services overview       | Solid `bg-hero-bg`, h1 "Our Services", intro paragraph                                                                                              | Featured service grid (ServiceCard featured), "View All Services" button                                                                                                                                                | Bottom CTA area                                                                                                |
+| **/clients**  | Who we serve            | Solid `bg-hero-bg`, h1 "Our Clients", tagline                                                                                                       | Intro, client type cards, process steps, "Ready to Partner" CTA                                                                                                                                                         | Learn more link; CTA section with phone/email + Get Started                                                    |
+| **/about**    | About company           | Solid `bg-hero-bg`, h1 "About HomeProX...", tagline                                                                                                 | Mission, service categories, coverage map (image + overlay), regions, values, CTA block                                                                                                                                 | Buttons in CTA block                                                                                           |
+| **/contact**  | General contact         | Hero with background image + dark overlay, h1 "Contact HomeProX", tagline                                                                           | Two-column layout: contact details (phone, email, coverage, hours) + `ContactForm` card; trust strip; final CTA strip                                                                                                   | Contact links; contact form submit; phone CTA in final strip                                                   |
+| **/quote**    | Dedicated quote request | Hero with background image + dark overlay, h1 "Get a Quote", tagline                                                                                | Split layout: `QuoteForm` (left) + contact info panel (right); bottom info cards                                                                                                                                        | QuoteForm submit; phone/email CTAs in side panel                                                               |
+| **/vendors**  | Vendor partners         | Solid `bg-hero-bg`, h1 "Join the HomeProX Property Maintenance Network", Apply Now / Vendor Login                                                   | Subtext strip, Why Partner (4 cards), 3-step Onboarding, Requirements (required/preferred), Services We Assign (6 icons), **Vendor Application** (4-step form in `#vendor-application`), FAQ accordion, dark CTA banner | Hero + CTA banner → #vendor-application; form Submit on Step 4                                                 |
+| **/terms**    | Terms & Conditions      | Text hero                                                                                                                                           | TOC + content                                                                                                                                                                                                           | —                                                                                                              |
+| **404**       | Not found               | —                                                                                                                                                   | Message + Home / Contact buttons                                                                                                                                                                                        | —                                                                                                              |
 
 ### 3.1 Clients Page (`/clients`)
 
@@ -167,9 +167,10 @@ src/
 
 - Fixed, full width; `z-50`. Background: `bg-white/98 backdrop-blur-md shadow-navbar border-b border-surface-200`.
 - Logo: `/images/logo.png`, `h-14 sm:h-20`, link to `/`.
-- Links: Home, Services, Our Clients, Vendor, About, Contact — `text-charcoal hover:text-teal`; active route: `h-0.5 bg-teal` underline.
-- CTA: "Get a Quote" → `/quote`, `bg-teal text-white hover:bg-teal-dark`, rounded-full, `px-6 py-2`.
-- Mobile: Hamburger (Menu/X); drawer with same links + CTA; `lg:hidden` / `hidden lg:flex`.
+- Links: Home, Services, Our Clients, Vendor Network, About Us, Contact Us — centered on desktop with `text-charcoal hover:text-teal`; active route: `h-0.5 bg-teal` underline.
+- CTA: "Get a Quote" appears as an inline nav link in the centered menu.
+- Phone contact: right-aligned teal pill with icon, `(469) 378-9262`, and hover state `bg-teal-dark`.
+- Mobile: Hamburger (Menu/X); drawer with the same links, quote link, and a teal phone CTA; `lg:hidden` / `hidden lg:flex`.
 - Uses `usePathname()`; no scroll state in current implementation (navbar always solid).
 
 **Footer** (`src/components/layout/Footer.tsx`)
@@ -272,51 +273,51 @@ src/
 
 ### 5.1 Colors (Tailwind v4 `@theme` in `globals.css`)
 
-| Token | Hex / Value | Usage |
-|-------|-------------|--------|
-| `white` | `#FFFFFF` | Primary backgrounds, inverse text |
-| `surface-50` | `#F7F9FA` | Section alt background |
-| `surface-100` | `#E9EDF0` | Cards, form inputs, stats bar |
-| `surface-200` | `#CBD2D8` | Card borders, dividers |
-| `surface-300` | `#AFC2CC` | Stronger borders |
-| `charcoal` | `#1F2A33` | Headings, footer bg |
-| `charcoal-light` | `#323F4B` | Hover on dark |
-| `charcoal-muted` | `#637381` | Subdued text on dark |
-| `teal` | `#14B8A6` | Buttons, links, active states, icons |
-| `teal-dark` | `#0D9488` | Button/link hover |
-| `teal-light` | `#E6FFFA` | Ghost hover bg, focus tint |
-| `teal-muted` | `rgba(20,184,166,0.12)` | Subtle card/badge tint |
-| `skyblue` | `#0EA5E9` | Badge highlights, secondary elements |
-| `skyblue-light` | `#EFF8FF` | Badge background |
-| `text-primary` | `#1F2A33` | Headings |
-| `text-body` | `#3E4C59` | Body |
-| `text-muted` | `#64748B` | Captions, placeholders |
-| `text-inverse` | `#FFFFFF` | Text on dark |
-| `hero-bg` | `#374151` | Home hero background |
-| `hero-bg-dark` | `#1F2937` | Hero fallback/cards |
-| `hero-text` | `#FFFFFF` | Hero headline |
-| `hero-muted` | `#CBD5E1` | Hero subtitle |
-| `error` | `#EF4444` | Form error |
-| `success` | `#22C55E` | Success state |
+| Token            | Hex / Value             | Usage                                |
+| ---------------- | ----------------------- | ------------------------------------ |
+| `white`          | `#FFFFFF`               | Primary backgrounds, inverse text    |
+| `surface-50`     | `#F7F9FA`               | Section alt background               |
+| `surface-100`    | `#E9EDF0`               | Cards, form inputs, stats bar        |
+| `surface-200`    | `#CBD2D8`               | Card borders, dividers               |
+| `surface-300`    | `#AFC2CC`               | Stronger borders                     |
+| `charcoal`       | `#1F2A33`               | Headings, footer bg                  |
+| `charcoal-light` | `#323F4B`               | Hover on dark                        |
+| `charcoal-muted` | `#637381`               | Subdued text on dark                 |
+| `teal`           | `#14B8A6`               | Buttons, links, active states, icons |
+| `teal-dark`      | `#0D9488`               | Button/link hover                    |
+| `teal-light`     | `#E6FFFA`               | Ghost hover bg, focus tint           |
+| `teal-muted`     | `rgba(20,184,166,0.12)` | Subtle card/badge tint               |
+| `skyblue`        | `#0EA5E9`               | Badge highlights, secondary elements |
+| `skyblue-light`  | `#EFF8FF`               | Badge background                     |
+| `text-primary`   | `#1F2A33`               | Headings                             |
+| `text-body`      | `#3E4C59`               | Body                                 |
+| `text-muted`     | `#64748B`               | Captions, placeholders               |
+| `text-inverse`   | `#FFFFFF`               | Text on dark                         |
+| `hero-bg`        | `#374151`               | Home hero background                 |
+| `hero-bg-dark`   | `#1F2937`               | Hero fallback/cards                  |
+| `hero-text`      | `#FFFFFF`               | Hero headline                        |
+| `hero-muted`     | `#CBD5E1`               | Hero subtitle                        |
+| `error`          | `#EF4444`               | Form error                           |
+| `success`        | `#22C55E`               | Success state                        |
 
 ### 5.2 Fonts
 
-| Variable | Font | Usage |
-|----------|------|--------|
-| `--font-display` | Outfit (600, 700, 800) | Headings |
-| `--font-body` | Plus Jakarta Sans (400, 500, 600) | Body, descriptions |
-| `--font-accent` | Outfit | Buttons, nav, labels |
+| Variable         | Font                              | Usage                |
+| ---------------- | --------------------------------- | -------------------- |
+| `--font-display` | Outfit (600, 700, 800)            | Headings             |
+| `--font-body`    | Plus Jakarta Sans (400, 500, 600) | Body, descriptions   |
+| `--font-accent`  | Outfit                            | Buttons, nav, labels |
 
 Loaded in `layout.tsx` via `next/font/google`: `Outfit`, `Plus_Jakarta_Sans`; applied as CSS variables on `<html>`.
 
 ### 5.3 Shadows
 
-| Token | Value |
-|-------|--------|
-| `shadow-card` | `0 1px 3px rgba(31,42,51,0.06), 0 4px 12px rgba(31,42,51,0.05)` |
+| Token               | Value                                                               |
+| ------------------- | ------------------------------------------------------------------- |
+| `shadow-card`       | `0 1px 3px rgba(31,42,51,0.06), 0 4px 12px rgba(31,42,51,0.05)`     |
 | `shadow-card-hover` | `0 4px 16px rgba(20,184,166,0.12), 0 12px 32px rgba(31,42,51,0.10)` |
-| `shadow-teal-glow` | `0 0 0 3px rgba(20,184,166,0.22)` |
-| `shadow-navbar` | `0 1px 0 rgba(31,42,51,0.06), 0 4px 16px rgba(31,42,51,0.08)` |
+| `shadow-teal-glow`  | `0 0 0 3px rgba(20,184,166,0.22)`                                   |
+| `shadow-navbar`     | `0 1px 0 rgba(31,42,51,0.06), 0 4px 16px rgba(31,42,51,0.08)`       |
 
 ### 5.4 Spacing & Breakpoints
 
@@ -585,7 +586,7 @@ Loaded in `layout.tsx` via `next/font/google`: `Outfit`, `Plus_Jakarta_Sans`; ap
 import { QuoteForm } from "@/components/forms/QuoteForm";
 
 // In the dedicated quote page or any CTA section:
-<QuoteForm />
+<QuoteForm />;
 // Form includes: fullName, companyName, email, phone, propertyType, serviceNeeded, location, message, agreeToTerms
 // Validates via validateForm(); submits to POST /api/contact with formSource="quote"
 // Success: orange/40-muted box with thank-you message
@@ -628,6 +629,7 @@ import { QuoteForm } from "@/components/forms/QuoteForm";
 ### 14.1 Page / Component Hierarchy (ASCII)
 
 **Home:**
+
 ```
 layout (Navbar + PageWrapper(main) + Footer + ScrollToTop)
   └── main#main-content
@@ -643,6 +645,7 @@ layout (Navbar + PageWrapper(main) + Footer + ScrollToTop)
 ```
 
 **Vendors (`/vendors`):**
+
 ```
   └── vendors/page.tsx
         ├── VendorHero (Apply Now / Vendor Login → #vendor-application)
@@ -657,30 +660,30 @@ layout (Navbar + PageWrapper(main) + Footer + ScrollToTop)
 
 ### 14.2 Color Utility Mapping (Tailwind class → theme)
 
-| Tailwind class | Theme variable |
-|----------------|----------------|
-| `bg-white` | `--color-white` |
-| `bg-surface-50` … `bg-surface-300` | `--color-surface-*` |
-| `bg-charcoal`, `text-charcoal` | `--color-charcoal` |
-| `bg-teal`, `text-teal`, `border-teal` | `--color-orange/40` |
-| `hover:bg-teal-dark` | `--color-orange/40-dark` |
-| `text-skyblue`, `fill-skyblue` | `--color-skyblue` (badges) |
-| `text-text-muted` | `--color-text-muted` |
-| `bg-hero-bg`, `text-hero-text` | `--color-hero-*` |
-| `shadow-card`, `shadow-card-hover`, `shadow-teal-glow` | `--shadow-*` |
+| Tailwind class                                         | Theme variable             |
+| ------------------------------------------------------ | -------------------------- |
+| `bg-white`                                             | `--color-white`            |
+| `bg-surface-50` … `bg-surface-300`                     | `--color-surface-*`        |
+| `bg-charcoal`, `text-charcoal`                         | `--color-charcoal`         |
+| `bg-teal`, `text-teal`, `border-teal`                  | `--color-orange/40`        |
+| `hover:bg-teal-dark`                                   | `--color-orange/40-dark`   |
+| `text-skyblue`, `fill-skyblue`                         | `--color-skyblue` (badges) |
+| `text-text-muted`                                      | `--color-text-muted`       |
+| `bg-hero-bg`, `text-hero-text`                         | `--color-hero-*`           |
+| `shadow-card`, `shadow-card-hover`, `shadow-teal-glow` | `--shadow-*`               |
 
 ### 14.3 Component Variants Summary
 
-| Component | Prop | Values | Notes |
-|-----------|------|--------|--------|
-| Button | variant | primary, secondary, ghost | — |
-| Button | size | sm, md, lg | — |
-| SectionHeading | align | left, center | — |
-| AnimatedSection | variant | fadeUp, fadeLeft, fadeRight, scaleIn | — |
-| ServiceCard | variant | grid, list, featured | grid = default |
-| ClientTypeCard | variant | compact, full | compact = default |
-| CTABanner | variant | dark, light | dark = image + overlay; light = surface-50 |
+| Component       | Prop    | Values                               | Notes                                      |
+| --------------- | ------- | ------------------------------------ | ------------------------------------------ |
+| Button          | variant | primary, secondary, ghost            | —                                          |
+| Button          | size    | sm, md, lg                           | —                                          |
+| SectionHeading  | align   | left, center                         | —                                          |
+| AnimatedSection | variant | fadeUp, fadeLeft, fadeRight, scaleIn | —                                          |
+| ServiceCard     | variant | grid, list, featured                 | grid = default                             |
+| ClientTypeCard  | variant | compact, full                        | compact = default                          |
+| CTABanner       | variant | dark, light                          | dark = image + overlay; light = surface-50 |
 
 ---
 
-*End of documentation. For live implementation details, refer to the source files under `src/`. This document is intended for developers and AI to understand, extend, and customize the HomeProX Services LLC Next.js website.*
+_End of documentation. For live implementation details, refer to the source files under `src/`. This document is intended for developers and AI to understand, extend, and customize the HomeProX Services LLC Next.js website._

@@ -2,105 +2,96 @@
 
 ## Overview
 
-The Home Page hero section is a full-screen, immersive hero block designed to position HomeProX as a premium statewide property maintenance provider.
+The Home Page hero is a bold, full-screen video hero designed for a premium B2B property maintenance brand.
 
-- Layout: full-screen hero section with a dark image background and layered overlays.
-- Structure: 2-column responsive grid with a main headline/call-to-action column on the left and a feature-stat cards column on the right.
-- Visual style: dark charcoal/teal branding, soft blurred glass cards, tinted image overlay, and subtle geometric texture.
+- Layout: full viewport-height video hero with dark overlays and a glass-panel feature card.
+- Structure: left-focused headline and CTAs, right-side floating glass card on large screens, bottom marquee strip.
+- Visual style: charcoal/teal contrast, blurred glass surfaces, subtle diagonal texture, and a polished motion-driven entrance.
 
 ## Core Visuals
 
 ### Background
 
-- Full-screen background image: `src/images/heroes/hero.jpg`
-- Image treatment:
+- Full-screen video background: `/videos/hero.mp4`
+- Video treatment:
   - `object-cover` to fill the section
-  - `brightness-[0.62]` for darkening
-  - `contrast-110`
+  - dark overlay with `bg-charcoal/72`
+  - vignette gradient from `from-charcoal/60 via-charcoal/30 to-charcoal/55`
 - Overlay:
-  - solid gradient overlay from `from-charcoal/80` through `via-charcoal/72` to `to-charcoal/88`
-  - additional `.hero-texture` overlay with diagonal line texture at very low opacity
+  - `.hero-texture` diagonal line texture overlay on top of the video
+  - bottom gradient panel so the marquee strip transitions cleanly
 - Top accent line:
-  - thin teal gradient bar across the top inside the hero section
+  - thin horizontal teal gradient bar across the top of the hero section
 
 ### Section Container
 
-- Section classes: `relative min-h-screen flex flex-col bg-hero-bg overflow-hidden pt-20`
-- The hero is intentionally stretched to viewport height with room for navigation spacing.
+- Section wrapper: `relative flex flex-col bg-hero-bg-dark overflow-hidden pt-20`
+- Height is locked to `100dvh` so the hero and marquee occupy the viewport cleanly.
 
 ## Content Layout
 
-### Left Column (Text)
+### Left Column (Primary Messaging)
 
-- Responsive positioning:
-  - centered text on smaller screens
-  - left-aligned text on larger screens
+- Heading area designed for large, dramatic copy with strong hierarchy.
 - Elements:
-  - Eyebrow badge: `Texas Statewide Property Maintenance`
-    - uses `bg-teal/15`, border, rounded-full pill style, and animated pulse dot
-  - Main headline:
-    - H1 text: `Expert Property Maintenance Across Texas`
-    - accent color: `text-teal` on the phrase `Across Texas`
-  - Body copy:
-    - descriptive text focusing on trusted service for property managers, investors, and institutions
-  - CTA buttons:
+  - Eyebrow: `Texas Statewide Property Maintenance` inside a pill-shaped badge with teal pulse dot and subtle border.
+  - Headline: stacked text with `Expert Property`, `Maintenance Services`, and a secondary `Across Texas` line.
+  - Subheadline: trusted by property managers, investors, banks, and institutions for reliable statewide maintenance.
+  - CTA row:
     - primary button: `Get a Free Quote`
-    - secondary button: `View Our Services`
-    - styled with white text over transparent/dark border on the secondary CTA
+    - secondary button: `Explore Services`
+  - Trust chips row:
+    - `Licensed & Insured`
+    - `Fast Scheduling`
+    - `Photo Docs`
+    - `Statewide Coverage`
+  - Quick contact strip:
+    - phone icon + supporting copy with same-day response call link
 
-### Right Column (Stat Cards)
+### Right Column (Glass Feature Panel)
 
-- Grid of 4 cards arranged as 2 columns
-- Each card includes:
-  - icon circle with teal accent
-  - bold metric value
-  - supporting label text
-- Metrics:
-  1. `500+ Properties Maintained Statewide`
-  2. `10+ Years of Industry Leadership`
-  3. `100% Fully Certified & Bonded`
-  4. `7 Specialized Service Categories`
-- Card interaction:
-  - subtle fade-up animation using Framer Motion
-  - hover state with darker blurred surface and teal border glow
-  - cards use `backdrop-blur-md`, `shadow-card`, and `rounded-2xl`
+- Visible only on `lg` and above.
+- Styled as a floating glass card with blurred background, charcoal-tinted panel, white border, and shadow.
+- Header: `HomeProX Services` label + `Why Clients Choose Us` title with a live indicator pill.
+- Stats grid:
+  - `500+ Properties Maintained`
+  - `10+ Years of Leadership`
+  - `100% Certified & Bonded`
+  - `7 Service Categories`
+- Highlights list: four service-focus items with teal check icons.
+- Card footer CTA: `Request a free property assessment`.
 
-## Bottom Trust Strip
+## Bottom Marquee Strip
 
-- A full-width bottom bar sits below the hero content.
-- Includes light text on a translucent dark background with a soft top border.
-- Trust points shown inline:
-  - `HomeProX`
-  - `Comprehensive Regional Coverage`
-  - `Custom Property Solutions`
-  - `Professional Portfolio Management`
-  - `Institutional Quality Standards`
-- Uses responsive separators that appear on `sm` and above.
+- Full-width strip pinned to the bottom of the hero.
+- Uses edge fade masks on both sides for a smooth visual transition.
+- Includes a continuous marquee of service items and company differentiators.
+- Reduced-motion mode falls back to a wrapped list of items instead of animation.
 
 ## Typography & Branding
 
 - Font usage:
-  - `font-display` for headings and prominent text
-  - `font-accent` for badges and accent copy
-  - `font-body` for paragraph text and labels
+  - `font-display` for the main headline and stat values
+  - `font-accent` for badges, labels, and CTA highlights
+  - `font-body` for subheadings, copy, chips, and lists
 - Colors:
-  - primary dark/charcoal: `--color-charcoal`
+  - primary dark: `--color-hero-bg-dark` / `--color-charcoal`
   - accent teal: `--color-teal`
   - hero text: `--color-hero-text` (white)
-  - muted hero copy: `--color-hero-muted`
+  - muted body: `--color-hero-muted`
 
 ## Responsive Behavior
 
-- On smaller screens, the hero uses a single-column layout and centers content.
-- On large screens (`min-[1131px]`), the hero switches to two columns with text left and stats right.
-- CTA buttons and trust strip adapt to width, keeping spacing and alignment consistent.
+- Mobile: content stacks in a single column with centered layout.
+- Desktop: two-column layout with text on the left and a large glass card on the right.
+- The marquee remains visible at the bottom across breakpoints.
 
 ## Accessibility & UX
 
-- Uses semantic section and heading structure.
-- Clear contrast with light text over dark overlay.
-- Buttons are large and easy to tap on mobile.
-- Motion respects reduced motion preference using `useReducedMotion()`.
+- Motion transitions respect `useReducedMotion()`.
+- Text contrast is high over dark backgrounds and overlays.
+- Buttons are large and accessible for mobile tap targets.
+- The hero uses semantic section structure and meaningful link targets.
 
 ## File Reference
 
