@@ -9,7 +9,8 @@ const features = [
   {
     icon: Zap,
     title: "Rapid Response",
-    description: "Swift scheduling and transparent communication throughout every project engagement.",
+    description:
+      "Swift scheduling and transparent communication throughout every project engagement.",
   },
   {
     icon: Award,
@@ -20,7 +21,8 @@ const features = [
   {
     icon: BarChart,
     title: "Scalable Services",
-    description: "Flexible solutions available for individual properties through large-scale portfolios.",
+    description:
+      "Flexible solutions available for individual properties through large-scale portfolios.",
   },
 ];
 
@@ -40,7 +42,9 @@ export function WhyChooseUs() {
             title="Why Partner With HomeProX"
             subtitle="Industry-leading maintenance with responsive team members, demonstrated quality outcomes, and complete professionalism."
             align="center"
-            className="titleClassName text-white"
+            className="text-white"
+            titleClassName="text-white"
+            subtitleClassName="text-surface-200"
           />
         </AnimatedSection>
 
@@ -56,10 +60,7 @@ export function WhyChooseUs() {
               >
                 <div className="bg-white/5 border border-white/10 rounded-2xl p-5 lg:p-6 h-full hover:bg-white/10 hover:border-teal/30 transition-all duration-300">
                   <div className="w-10 h-10 bg-teal/20 rounded-lg flex items-center justify-center mb-4">
-                    <Icon
-                      className="w-5 h-5 text-teal"
-                      aria-hidden="true"
-                    />
+                    <Icon className="w-5 h-5 text-teal" aria-hidden="true" />
                   </div>
                   <h3 className="font-display text-xl font-bold text-white mb-3">
                     {feature.title}
