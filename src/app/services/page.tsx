@@ -38,7 +38,7 @@ export default function ServicesPage() {
             <div className="h-px w-16 bg-teal/50" />
           </div>
           <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
-            Seven specialized maintenance areas addressing every property
+            Eleven specialized maintenance areas addressing every property
             requirement across Texas. From regular maintenance to urgent service
             calls, we deliver expert results for homes, commercial spaces, and
             investment portfolios.
@@ -54,7 +54,7 @@ export default function ServicesPage() {
           <AnimatedSection variant="fadeUp" className="mb-12">
             <div className="border-l-4 border-teal pl-6 mb-12">
               <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-4">
-                Seven Specialized Services
+                Eleven Specialized Services
               </h2>
               <p className="font-body text-lg text-text-muted max-w-3xl">
                 HomeProX provides specialized support across all property
