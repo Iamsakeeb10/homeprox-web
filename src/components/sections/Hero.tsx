@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { easeOut, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   BadgeCheck,
   Building2,
@@ -82,7 +82,7 @@ export function Hero() {
       : {
           initial: { opacity: 0, x, y },
           animate: { opacity: 1, x: 0, y: 0 },
-          transition: { delay, duration: 0.65, ease: easeOut },
+          transition: { delay, duration: 0.65, ease: [0.22, 1, 0.36, 1] },
         };
 
   return (
@@ -124,7 +124,7 @@ export function Hero() {
           flex-1 so it expands and pushes marquee to the bottom
       ════════════════════════════════════════════════════════════ */}
       <div className="relative z-20 flex-1 flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 lg:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-10 xl:gap-14 items-center">
             {/* ════════════════════════════════════════════════════
                 LEFT COLUMN — primary message
@@ -327,7 +327,7 @@ export function Hero() {
           <div
             className="flex items-center whitespace-nowrap"
             style={{
-              animation: "marquee 10s linear infinite",
+              animation: "marquee 20s linear infinite",
               willChange: "transform",
             }}
           >

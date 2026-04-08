@@ -49,25 +49,26 @@ export function Navbar() {
             />
           </Link>
 
-          <div className="hidden lg:flex flex-1 justify-center items-center gap-8">
+          <div className="hidden lg:flex flex-1 justify-center items-center gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-accent text-base text-charcoal hover:text-teal transition-colors duration-300 relative group"
+                className={`font-accent text-base transition duration-300 ease-out px-3 py-1 rounded-full ${
+                  pathname === link.href
+                    ? "text-teal font-semibold"
+                    : "text-charcoal hover:text-teal"
+                }`}
               >
                 {link.label}
-                <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-teal transition-all duration-300 ${
-                    pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
-                />
               </Link>
             ))}
             <Link
               href={ctaLink.href}
-              className={`font-accent text-base text-charcoal hover:text-teal transition-colors duration-300 ${
-                pathname === ctaLink.href ? "font-semibold" : "font-medium"
+              className={`font-accent text-base transition duration-300 ease-out px-3 py-1 rounded-full ${
+                pathname === ctaLink.href
+                  ? "text-teal font-semibold"
+                  : "text-charcoal hover:text-teal"
               }`}
             >
               {ctaLink.label}
@@ -121,7 +122,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block font-accent text-lg py-2 transition-colors duration-300 ${
+                  className={`block font-accent text-lg py-2 px-3 rounded-full transition duration-300 ease-out ${
                     pathname === link.href
                       ? "text-teal"
                       : "text-charcoal hover:text-teal"
@@ -133,7 +134,7 @@ export function Navbar() {
               <Link
                 href={ctaLink.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block w-full text-center font-accent text-lg text-charcoal hover:text-teal transition-colors duration-300 py-3"
+                className="block w-full text-center font-accent text-lg text-charcoal hover:text-teal rounded-full transition duration-300 py-3"
               >
                 {ctaLink.label}
               </Link>
