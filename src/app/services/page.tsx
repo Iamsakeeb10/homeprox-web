@@ -1,6 +1,6 @@
+import { ServicesSection } from "@/components/sections/ServicesSection";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
-import { ServicesSection } from "@/components/sections/ServicesSection";
 import { generatePageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -18,28 +18,9 @@ export default function ServicesPage() {
 
   return (
     <>
-      {/* Page Hero — Split Layout: Text Left (Charcoal), Image Right */}
-      <section className="flex flex-col md:flex-row min-h-[60vh] md:min-h-[55vh] overflow-hidden pt-20 md:pt-28">
-        {/* Left: Charcoal Text Section */}
-        <div className="w-full md:w-1/2 bg-charcoal flex items-center justify-center px-6 sm:px-8 md:px-12 py-16 sm:py-20 md:py-24">
-          <div className="text-center md:text-left max-w-2xl">
-            <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Complete Maintenance Solutions
-            </h1>
-            <div className="flex justify-center md:justify-start mb-6">
-              <div className="h-px w-16 bg-teal/50" />
-            </div>
-            <p className="font-body text-base sm:text-lg text-surface-200">
-              Seven specialized maintenance areas addressing every property
-              requirement across Texas. From regular maintenance to urgent
-              service calls, we deliver expert results for homes, commercial
-              spaces, and investment portfolios.
-            </p>
-          </div>
-        </div>
-
-        {/* Right: Image Section */}
-        <div className="relative w-full md:w-1/2 h-48 md:h-auto overflow-hidden">
+      {/* Page Hero — Centered image background with overlay and centered text */}
+      <section className="relative h-[40vh] min-h-[320px] md:h-[50vh] lg:h-[55vh] flex items-center justify-center overflow-hidden pt-28 sm:pt-32">
+        <div className="absolute inset-0 z-0">
           <Image
             src={heroImageUrl}
             alt="Professional property maintenance services"
@@ -48,6 +29,22 @@ export default function ServicesPage() {
             className="object-cover"
           />
         </div>
+        <div className="absolute inset-0 bg-charcoal/72 z-10" />
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 sm:py-20 lg:py-24 text-center">
+          <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Our Services
+          </h1>
+          <div className="flex justify-center my-3">
+            <div className="h-px w-16 bg-teal/50" />
+          </div>
+          <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
+            Seven specialized maintenance areas addressing every property
+            requirement across Texas. From regular maintenance to urgent service
+            calls, we deliver expert results for homes, commercial spaces, and
+            investment portfolios.
+          </p>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />
       </section>
 
       {/* Services: Introduction Section with Stat Strip */}
