@@ -335,7 +335,7 @@ export function Hero() {
         className={
           hasScrolled
             ? "relative z-20 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden flex-shrink-0"
-            : "fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden"
+            : "relative lg:fixed lg:bottom-0 lg:left-0 lg:right-0 z-40 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden"
         }
       >
         {/* Edge fade masks */}

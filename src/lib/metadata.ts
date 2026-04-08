@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://homeproxsvcs.com";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://homeproxsvcs.com";
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     template: "%s | HomeProX Services LLC",
-    default: "HomeProX Services LLC | Texas Statewide Property Maintenance"
+    default: "HomeProX Services LLC | Texas Statewide Property Maintenance",
   },
-  description: "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide.",
+  description:
+    "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide.",
   keywords: [
     "property maintenance",
     "Texas property services",
@@ -19,7 +21,7 @@ export const defaultMetadata: Metadata = {
     "property cleaning",
     "gutter cleaning",
     "drywall repair",
-    "landscaping services"
+    "landscaping services",
   ],
   authors: [{ name: "HomeProX Services LLC" }],
   creator: "HomeProX Services LLC",
@@ -30,21 +32,34 @@ export const defaultMetadata: Metadata = {
     url: SITE_URL,
     siteName: "HomeProX Services LLC",
     title: "HomeProX Services LLC | Texas Statewide Property Maintenance",
-    description: "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide.",
+    description:
+      "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide.",
     images: [
       {
         url: `${SITE_URL}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "HomeProX Services LLC"
-      }
-    ]
+        alt: "HomeProX Services LLC",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "HomeProX Services LLC | Texas Statewide Property Maintenance",
-    description: "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide.",
-    images: [`${SITE_URL}/og-image.jpg`]
+    description:
+      "Professional property maintenance services across Texas. Serving property managers, investors, banks, and REO departments statewide.",
+    images: [`${SITE_URL}/og-image.jpg`],
+  },
+  icons: {
+    icon: [
+      {
+        url: "/fabicon.co.png",
+        type: "image/png",
+        sizes: "any",
+      },
+    ],
+    shortcut: "/fabicon.co.png",
+    apple: "/fabicon.co.png",
   },
   robots: {
     index: true,
@@ -54,15 +69,15 @@ export const defaultMetadata: Metadata = {
       follow: true,
       "max-video-preview": -1,
       "max-image-preview": "large",
-      "max-snippet": -1
-    }
-  }
+      "max-snippet": -1,
+    },
+  },
 };
 
 export function generatePageMetadata({
   title,
   description,
-  path
+  path,
 }: {
   title: string;
   description: string;
@@ -75,18 +90,18 @@ export function generatePageMetadata({
     title,
     description,
     alternates: {
-      canonical: url
+      canonical: url,
     },
     openGraph: {
       ...defaultMetadata.openGraph,
       url,
       title,
-      description
+      description,
     },
     twitter: {
       ...defaultMetadata.twitter,
       title,
-      description
-    }
+      description,
+    },
   };
 }
