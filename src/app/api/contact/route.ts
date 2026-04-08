@@ -1,22 +1,62 @@
 import { NextResponse } from 'next/server'
 import { transporter } from '@/lib/utils/mailer'
-import type { ContactFormData } from '@/types'
+import nodemailer from 'nodemailer'
+
+const MAX_FILE_BYTES = 10 * 1024 * 1024
+const ALLOWED_MIME_TYPES = new Set([
+  'application/pdf',
+  'image/jpeg',
+  'image/png',
+])
+const ALLOWED_EXTENSIONS = new Set(['pdf', 'jpg', 'jpeg', 'png'])
 
 export async function POST(req: Request) {
   try {
-    const body: ContactFormData = await req.json()
+    const data = await req.formData()
+    const getString = (key: string) => {
+      const value = data.get(key)
+      return typeof value === 'string' ? value.trim() : ''
+    }
 
-    const {
-      fullName,
-      companyName,
-      email,
-      phone,
-      propertyType,
-      serviceNeeded,
-      location,
-      message,
-      formSource,
-    } = body
+    const fullName = getString('fullName')
+    const companyName = getString('companyName')
+    const email = getString('email')
+    const phone = getString('phone')
+    const propertyType = getString('propertyType')
+    const serviceNeeded = getString('serviceNeeded')
+    const location = getString('location')
+    const message = getString('message')
+    const formSource = getString('formSource')
+
+    const attachments: nodemailer.SendMailOptions['attachments'] = []
+    let i = 0
+    while (data.get(`attachment_${i}`)) {
+      const file = data.get(`attachment_${i}`)
+      if (file instanceof File && file.size > 0) {
+        if (file.size > MAX_FILE_BYTES) {
+          return NextResponse.json(
+            { success: false, error: `File "${file.name}" exceeds the 10 MB size limit.` },
+            { status: 400 }
+          )
+        }
+
+        const extension = file.name.split('.').pop()?.toLowerCase() ?? ''
+        if (!ALLOWED_MIME_TYPES.has(file.type) || !ALLOWED_EXTENSIONS.has(extension)) {
+          return NextResponse.json(
+            { success: false, error: `File "${file.name}" has an unsupported format.` },
+            { status: 400 }
+          )
+        }
+
+        const buffer = Buffer.from(await file.arrayBuffer())
+        attachments.push({
+          filename: file.name,
+          content: buffer,
+          contentType: file.type,
+        })
+      }
+      i++
+    }
 
     const source = formSource ?? 'quote'
     const isContactForm = source === 'contact'
@@ -45,6 +85,7 @@ export async function POST(req: Request) {
       from: `"HomeProX Website" <${process.env.EMAIL_USER}>`,
       to: process.env.CONTACT_EMAIL,
       subject: ownerSubject,
+      attachments,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: #F5EFE0; padding: 24px; text-align: center;">
@@ -61,6 +102,14 @@ export async function POST(req: Request) {
               <tr><td style="padding: 10px 0; color: #7A6A52;">Service Needed</td><td style="padding: 10px 0; color: #1C1410;">${serviceNeeded}</td></tr>
               <tr><td style="padding: 10px 0; color: #7A6A52;">${isClientOnboarding ? 'Property Locations' : 'Location'}</td><td style="padding: 10px 0; color: #1C1410;">${location}</td></tr>
             </table>
+            <div style="margin-top: 16px; padding: 16px; background: #F5EFE0; border-left: 4px solid #14B8A6; border-radius: 4px;">
+              <p style="color: #7A6A52; margin: 0 0 8px; font-size: 13px;">Attachments</p>
+              <p style="color: #1C1410; margin: 0;">${
+                attachments.length > 0
+                  ? `${attachments.length} file(s) attached: ${attachments.map((a) => a.filename).join(', ')}`
+                  : 'No files uploaded.'
+              }</p>
+            </div>
             <div style="margin-top: 24px; padding: 16px; background: #F5EFE0; border-left: 4px solid #14B8A6; border-radius: 4px;">
               <p style="color: #7A6A52; margin: 0 0 8px; font-size: 13px;">${
                 isClientOnboarding ? 'Additional Notes / Portfolio Details' : 'Message / Project Details'

@@ -1,9 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2, ChevronDown, Loader2, Send } from "lucide-react";
+import { CheckCircle2, ChevronDown, FileText, Loader2, Send, Upload, X } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const INQUIRY_OPTIONS: { value: string; label: string; disabled?: boolean }[] = [
   { value: "", label: "Select an option...", disabled: true },
@@ -31,8 +31,10 @@ interface FormErrors {
   inquiryType?: string;
   message?: string;
   agreeToTerms?: string;
+  attachments?: string;
 }
 
+const MAX_FILE_BYTES = 10 * 1024 * 1024;
 const inputBase =
   "bg-surface-50 border border-surface-200 rounded-lg px-4 py-3 font-body text-charcoal placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal transition-colors duration-200 w-full";
 const inputError = "border-error focus:ring-error/30";
@@ -56,6 +58,8 @@ export function ContactForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [attachments, setAttachments] = useState<File[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -84,6 +88,37 @@ export function ContactForm() {
     return Object.keys(e).length === 0;
   };
 
+  const addAttachments = (newFiles: File[]) => {
+    const oversized = newFiles.filter((f) => f.size > MAX_FILE_BYTES);
+    if (oversized.length > 0) {
+      setErrors((prev) => ({
+        ...prev,
+        attachments: `Some files exceed the 10 MB limit: ${oversized.map((f) => f.name).join(", ")}`,
+      }));
+      return;
+    }
+    setErrors((prev) => ({ ...prev, attachments: undefined }));
+    setAttachments((prev) => [...prev, ...newFiles]);
+    setSubmitError(null);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFiles = Array.from(e.target.files || []);
+    addAttachments(newFiles);
+    e.target.value = "";
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    addAttachments(droppedFiles);
+  };
+
+  const removeAttachment = (index: number) => {
+    setAttachments((prev) => prev.filter((_, i) => i !== index));
+    setErrors((prev) => ({ ...prev, attachments: undefined }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError(null);
@@ -91,23 +126,24 @@ export function ContactForm() {
 
     setIsLoading(true);
     try {
-      const payload = {
-        fullName: form.name.trim(),
-        companyName: "",
-        email: form.email.trim(),
-        phone: form.phone.trim() || "",
-        propertyType: "",
-        serviceNeeded: getServiceNeededLabel(form.inquiryType),
-        location: "",
-        message: form.message.trim(),
-        agreeToTerms: form.agreeToTerms,
-        formSource: "contact" as const,
-      };
+      const payload = new FormData();
+      payload.append("fullName", form.name.trim());
+      payload.append("companyName", "");
+      payload.append("email", form.email.trim());
+      payload.append("phone", form.phone.trim() || "");
+      payload.append("propertyType", "");
+      payload.append("serviceNeeded", getServiceNeededLabel(form.inquiryType));
+      payload.append("location", "");
+      payload.append("message", form.message.trim());
+      payload.append("agreeToTerms", String(form.agreeToTerms));
+      payload.append("formSource", "contact");
+      attachments.forEach((file, i) => {
+        payload.append(`attachment_${i}`, file, file.name);
+      });
 
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: payload,
       });
       const data = await res.json();
 
@@ -249,6 +285,82 @@ export function ContactForm() {
         {errors.message && (
           <p id="contact-message-error" className="mt-1.5 text-sm text-error font-body" role="alert">
             {errors.message}
+          </p>
+        )}
+      </div>
+
+      <div>
+        <label className={labelBase}>
+          Attachments <span className="text-text-muted font-normal">(Optional)</span>
+        </label>
+        <div
+          role="button"
+          tabIndex={0}
+          className="border-2 border-dashed border-surface-300 rounded-xl p-6 text-center hover:border-teal/50 transition-colors cursor-pointer"
+          onClick={() => fileInputRef.current?.click()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              fileInputRef.current?.click();
+            }
+          }}
+          onDragOver={(e) => e.preventDefault()}
+          onDrop={handleDrop}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-teal-muted flex items-center justify-center">
+              <Upload className="w-5 h-5 text-teal" />
+            </div>
+            <div>
+              <p className="font-body font-medium text-charcoal">
+                Click to upload or drag &amp; drop files
+              </p>
+              <p className="font-body text-sm text-text-muted mt-1">
+                PDF, JPG, PNG - up to 10 MB per file
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {attachments.length > 0 && (
+          <ul className="space-y-2 mt-3">
+            {attachments.map((file, index) => (
+              <li
+                key={`${file.name}-${index}`}
+                className="flex items-center justify-between bg-surface-50 border border-surface-200 rounded-lg px-4 py-3"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <FileText className="w-4 h-4 text-teal shrink-0" />
+                  <span className="font-body text-sm text-charcoal truncate">
+                    {file.name}
+                  </span>
+                  <span className="font-body text-xs text-text-muted shrink-0">
+                    {(file.size / 1024 / 1024).toFixed(2)} MB
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => removeAttachment(index)}
+                  className="ml-3 text-text-muted hover:text-error transition-colors shrink-0"
+                  aria-label={`Remove ${file.name}`}
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {errors.attachments && (
+          <p className="mt-1.5 text-sm text-error font-body" role="alert">
+            {errors.attachments}
           </p>
         )}
       </div>
