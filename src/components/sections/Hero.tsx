@@ -74,7 +74,26 @@ const Diamond = () => (
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const [hasScrolled, setHasScrolled] = React.useState(false);
   const doubled = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+  const marqueeHeightClass = "pb-[52px]";
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setHasScrolled(true);
+      } else {
+        setHasScrolled(false);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const slide = (delay: number, x = 0, y = 0) =>
     prefersReducedMotion
@@ -123,7 +142,9 @@ export function Hero() {
           MAIN LAYOUT — left text / right glass card
           flex-1 so it expands and pushes marquee to the bottom
       ════════════════════════════════════════════════════════════ */}
-      <div className="relative z-20 flex-1 flex items-center">
+      <div
+        className={`relative z-20 flex-1 flex items-center ${!hasScrolled ? marqueeHeightClass : ""}`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-10 xl:gap-14 items-center">
             {/* ════════════════════════════════════════════════════
@@ -310,7 +331,13 @@ export function Hero() {
       {/* ════════════════════════════════════════════════════════════
           MARQUEE STRIP — flush at viewport bottom
       ════════════════════════════════════════════════════════════ */}
-      <div className="relative z-20 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden flex-shrink-0">
+      <div
+        className={
+          hasScrolled
+            ? "relative z-20 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden flex-shrink-0"
+            : "fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden"
+        }
+      >
         {/* Edge fade masks */}
         <div className="absolute left-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-r from-charcoal/65 to-transparent pointer-events-none" />
         <div className="absolute right-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-l from-charcoal/65 to-transparent pointer-events-none" />
