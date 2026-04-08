@@ -71,24 +71,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Top accent line — teal brand signature */
-body::before {
-  content: "";
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--color-charcoal) 0%,
-    var(--color-teal) 50%,
-    var(--color-charcoal) 100%
-  );
-  z-index: 100;
-}
-
 /* Focus ring global update */
 :focus-visible {
   outline: 2px solid var(--color-teal);
