@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { Building2, Clock, MapPin, ShieldCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { Clock, Building2, MapPin, ShieldCheck } from "lucide-react";
 
 interface StatItem {
   value: string;
@@ -80,7 +80,9 @@ function CountUpNumber({ value, label }: StatItem) {
         {value.includes("+") && !displayValue.includes("+") && "+"}
         {value.includes("%") && !displayValue.includes("%") && "%"}
       </div>
-      <div className="font-body text-text-muted text-sm md:text-base">{label}</div>
+      <div className="font-body text-text-muted text-sm md:text-base">
+        {label}
+      </div>
     </div>
   );
 }

@@ -124,7 +124,7 @@ export function Hero() {
           flex-1 so it expands and pushes marquee to the bottom
       ════════════════════════════════════════════════════════════ */}
       <div className="relative z-20 flex-1 flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 lg:py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8 lg:py-10">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-10 xl:gap-14 items-center">
             {/* ════════════════════════════════════════════════════
                 LEFT COLUMN — primary message
