@@ -7,7 +7,7 @@ export const services: Service[] = [
     description:
       "Quick and reliable fixes for common household issues, handled with care and efficiency.",
     icon: "Wrench",
-    image: "",
+    image: "/images/services/handyman-two.jpg",
     slug: "everyday-repairs-handyman-solutions",
     features: [
       "Plumbing and basic electrical repairs",
@@ -22,7 +22,7 @@ export const services: Service[] = [
     description:
       "Revamp your space with tailored renovation services that boost comfort and property value.",
     icon: "Paintbrush",
-    image: "",
+    image: "/images/services/renovation.jpg",
     slug: "home-renovation-upgrades",
     features: [
       "Kitchen and bathroom makeovers",
@@ -36,7 +36,7 @@ export const services: Service[] = [
     description:
       "Flexible maintenance services to keep your property running smoothly at all times.",
     icon: "Wrench",
-    image: "",
+    image: "/images/services/maintenance.jpg",
     slug: "ongoing-property-care",
     features: [
       "Routine property checks",
@@ -51,7 +51,7 @@ export const services: Service[] = [
     description:
       "End-to-end property preservation solutions for landlords, banks, and managers.",
     icon: "Home",
-    image: "",
+    image: "/images/services/service-cleanout.jpg",
     slug: "asset-protection-preservation",
     features: [
       "Cleanouts and debris removal",
@@ -65,7 +65,7 @@ export const services: Service[] = [
     description:
       "Keep your exterior spaces clean, safe, and visually appealing year-round.",
     icon: "Leaf",
-    image: "",
+    image: "/images/services/outdoor.jpg",
     slug: "outdoor-repair-maintenance",
     features: [
       "High-pressure washing",
@@ -80,7 +80,7 @@ export const services: Service[] = [
     description:
       "Comprehensive cleaning for residential and commercial environments.",
     icon: "Sparkles",
-    image: "",
+    image: "/images/services/cleaning-two.jpg",
     slug: "professional-cleaning-services",
     features: [
       "Intensive deep cleaning",
@@ -94,7 +94,7 @@ export const services: Service[] = [
     description:
       "Dependable solutions for essential home systems, installed and repaired safely.",
     icon: "Droplets",
-    image: "",
+    image: "/images/services/service-maintenance.jpg",
     slug: "electrical-plumbing-services",
     features: [
       "Lighting upgrades and rewiring",
@@ -108,7 +108,7 @@ export const services: Service[] = [
     description:
       "Improve indoor comfort and reduce energy use with modern HVAC solutions.",
     icon: "Home",
-    image: "",
+    image: "/images/services/hvac.jpg",
     slug: "climate-control-efficiency",
     features: [
       "Heating and cooling system installation",
@@ -122,7 +122,7 @@ export const services: Service[] = [
     description:
       "Upgrade your home with smart systems for better control, safety, and convenience.",
     icon: "Wrench",
-    image: "",
+    image: "/images/services/smart.jpg",
     slug: "smart-living-enhancements",
     features: [
       "Smart locks and surveillance cameras",
@@ -136,7 +136,7 @@ export const services: Service[] = [
     description:
       "Prevent issues before they arise with planned maintenance and priority support.",
     icon: "CheckCircle",
-    image: "",
+    image: "/images/services/regular.jpg",
     slug: "scheduled-maintenance-plans",
     features: [
       "Regular inspection schedules",
@@ -150,7 +150,7 @@ export const services: Service[] = [
     description:
       "Immediate assistance for unexpected issues, anytime you need it.",
     icon: "Wrench",
-    image: "",
+    image: "/images/services/emergency.jpg",
     slug: "emergency-repairs-24-7",
     features: [
       "Burst pipes and active leaks",
@@ -164,7 +164,7 @@ export const services: Service[] = [
     description:
       "Efficient maintenance and repair services designed for business properties.",
     icon: "Trash2",
-    image: "",
+    image: "/images/services/commercial.jpg",
     slug: "commercial-property-support",
     features: [
       "Building and facility upkeep",
