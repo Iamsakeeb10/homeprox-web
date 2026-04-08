@@ -2,7 +2,6 @@ import { ClientsSection } from "@/components/sections/ClientsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { Hero } from "@/components/sections/Hero";
 import { QualityProcess } from "@/components/sections/QualityProcess";
-import { ServicesSection } from "@/components/sections/ServicesSection";
 // import { StatsBar } from "@/components/sections/StatsBar";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
@@ -25,7 +24,6 @@ export default function Home() {
         className="h-px bg-gradient-to-r from-transparent via-surface-300 to-transparent"
         aria-hidden="true"
       />
-      <ServicesSection />
       <ClientsSection />
       <WhyChooseUs />
       <div

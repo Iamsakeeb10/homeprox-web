@@ -1,21 +1,10 @@
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
-import { services } from "@/lib/data/services";
+import { ServicesSection } from "@/components/sections/ServicesSection";
 import { generatePageMetadata } from "@/lib/metadata";
-import {
-  CheckCircle,
-  Droplets,
-  Home,
-  Leaf,
-  Paintbrush,
-  Sparkles,
-  Trash2,
-  Wrench,
-} from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Our Services | HomeProX Services LLC",
@@ -23,29 +12,6 @@ export const metadata: Metadata = generatePageMetadata({
     "Professional property maintenance services across Texas including plumbing, gutter cleaning, drywall repair, landscaping, and more.",
   path: "/services",
 });
-
-// Icon mapping for service cards
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Wrench,
-  Droplets,
-  Paintbrush,
-  Sparkles,
-  Leaf,
-  Home,
-  Trash2,
-};
-
-// Helper component to render service icons
-function ServiceIconComponent({
-  iconName,
-  className,
-}: {
-  iconName: string;
-  className?: string;
-}) {
-  const Icon = iconMap[iconName] || Wrench;
-  return <Icon className={className} aria-hidden="true" />;
-}
 
 export default function ServicesPage() {
   const heroImageUrl = "/images/heroes/hero.jpg";
@@ -125,84 +91,8 @@ export default function ServicesPage() {
             </div>
           </AnimatedSection>
 
-          {/* Services Gallery — Alternating Horizontal Rows */}
-          <div className="mb-16 space-y-6">
-            {services.map((service, index) => (
-              <AnimatedSection
-                key={service.id}
-                variant="fadeUp"
-                delay={index * 0.08}
-              >
-                <div
-                  className={`flex flex-col ${
-                    index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
-                  } border border-surface-200 rounded-2xl overflow-hidden hover:border-teal/40 hover:shadow-card-hover transition-all duration-300`}
-                >
-                  {/* Image: 40% on desktop, full on mobile */}
-                  <div className="relative w-full md:w-2/5 h-48 md:h-auto md:min-h-[320px] flex-shrink-0">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-
-                  {/* Content: 60% on desktop, full on mobile */}
-                  <div className="flex flex-col justify-between p-6 sm:p-8 w-full md:w-3/5">
-                    {/* Icon Badge */}
-                    <div className="w-10 h-10 rounded-xl bg-teal-muted flex items-center justify-center mb-3">
-                      <ServiceIconComponent
-                        iconName={service.icon}
-                        className="w-5 h-5 text-teal"
-                      />
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="font-display text-2xl font-bold text-charcoal mb-3">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="font-body text-text-muted mb-4">
-                      {service.description}
-                    </p>
-
-                    {/* Coverage Badge */}
-                    <div className="mb-4">
-                      <span className="inline-flex items-center px-3 py-1 bg-skyblue-light rounded-full text-xs font-accent text-skyblue">
-                        Available Statewide Across Texas
-                      </span>
-                    </div>
-
-                    {/* Features List */}
-                    <ul className="space-y-2 mb-6 flex-grow">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <CheckCircle
-                            className="w-5 h-5 text-teal mt-0.5 flex-shrink-0"
-                            aria-hidden="true"
-                          />
-                          <span className="font-body text-text-muted text-sm">
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* CTA Button */}
-                    <Button
-                      variant="secondary"
-                      size="md"
-                      className="mt-auto"
-                      asChild
-                    >
-                      <Link href="/quote">Get a Quote</Link>
-                    </Button>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
+          <div className="mb-16">
+            <ServicesSection />
           </div>
 
           {/* Bottom CTA Banner — Two Column Layout */}
@@ -215,7 +105,7 @@ export default function ServicesPage() {
                 </h2>
                 <p className="font-body text-surface-200">
                   Get a personalized estimate tailored to your property
-                  maintenance requirements. We'll get back to you within 24
+                  maintenance requirements. We&apos;ll get back to you within 24
                   hours.
                 </p>
               </div>
