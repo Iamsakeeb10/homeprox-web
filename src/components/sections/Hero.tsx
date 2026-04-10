@@ -17,14 +17,6 @@ import {
 import Link from "next/link";
 import React from "react";
 
-/* ─── Stat cards inside the right glass panel ─────────────────── */
-const STATS = [
-  { icon: Building2, value: "500+", label: "Properties Maintained" },
-  { icon: CalendarCheck, value: "10+", label: "Years of Leadership" },
-  { icon: ShieldCheck, value: "100%", label: "Certified & Bonded" },
-  { icon: Wrench, value: "7", label: "Service Categories" },
-];
-
 /* ─── Trust chips below buttons ───────────────────────────────── */
 const TRUST_CHIPS = [
   { icon: BadgeCheck, label: "Licensed & Insured" },
@@ -33,12 +25,14 @@ const TRUST_CHIPS = [
   { icon: MapPin, label: "Statewide Coverage" },
 ];
 
-/* ─── Right-panel service highlights ─────────────────────────── */
+/* ─── Right-panel service highlights (expanded) ─────────────────────────── */
 const HIGHLIGHTS = [
-  "REO & Bank-Owned Properties",
-  "Portfolio & Institutional Management",
-  "Emergency Repair Services (24/7)",
-  "Renovation & Property Preservation",
+  { icon: Building2, label: "REO & Bank-Owned Properties" },
+  { icon: ShieldCheck, label: "Portfolio & Institutional Management" },
+  { icon: Clock, label: "Emergency Repair Services (24/7)" },
+  { icon: Wrench, label: "Renovation & Property Preservation" },
+  { icon: CalendarCheck, label: "Preventive Maintenance Plans" },
+  { icon: CheckCircle2, label: "Photo Documentation & Reporting" },
 ];
 
 /* ─── Marquee items ────────────────────────────────────────────── */
@@ -247,7 +241,7 @@ export function Hero() {
             </div>
 
             {/* ════════════════════════════════════════════════════
-                RIGHT COLUMN — floating glass card
+                RIGHT COLUMN — floating glass card (redesigned)
             ════════════════════════════════════════════════════ */}
             <motion.div
               {...slide(0.22, 30)}
@@ -261,7 +255,7 @@ export function Hero() {
                     HomeProX Services
                   </p>
                   <p className="font-display text-base font-bold text-white">
-                    Why Clients Choose Us
+                    We Specialize In
                   </p>
                 </div>
                 {/* Live indicator dot */}
@@ -273,42 +267,23 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* Stats 2×2 grid */}
-              <div className="grid grid-cols-2 divide-x divide-y divide-white/10">
-                {STATS.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="flex flex-col gap-2 p-5 group hover:bg-white/5 transition-colors duration-200"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-teal/18 flex items-center justify-center group-hover:bg-teal/28 transition-colors">
-                      <stat.icon className="w-4 h-4 text-teal" />
+              {/* Service highlights list - redesigned as icon grid */}
+              <div className="px-6 py-6">
+                <div className="grid grid-cols-2 gap-4">
+                  {HIGHLIGHTS.map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex flex-col gap-2.5 p-4 rounded-lg bg-white/5 border border-white/8 hover:bg-white/8 hover:border-teal/30 transition-all duration-200 group"
+                    >
+                      <div className="w-9 h-9 rounded-lg bg-teal/18 flex items-center justify-center group-hover:bg-teal/28 transition-colors">
+                        <item.icon className="w-4.5 h-4.5 text-teal" />
+                      </div>
+                      <span className="font-body text-[13px] text-white/90 leading-snug font-medium">
+                        {item.label}
+                      </span>
                     </div>
-                    <div className="font-display text-2xl font-bold text-white leading-none">
-                      {stat.value}
-                    </div>
-                    <div className="font-body text-[11px] text-surface-300 leading-snug">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Divider */}
-              <div className="h-px bg-white/10" />
-
-              {/* Service highlights list */}
-              <div className="px-6 py-5 flex flex-col gap-3">
-                <p className="font-accent text-[10px] font-semibold text-surface-300 tracking-widest uppercase">
-                  Specialized In
-                </p>
-                {HIGHLIGHTS.map((item) => (
-                  <div key={item} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-teal flex-shrink-0 mt-px" />
-                    <span className="font-body text-sm text-white/80 leading-snug">
-                      {item}
-                    </span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
               {/* Card CTA footer */}
@@ -329,23 +304,26 @@ export function Hero() {
       </div>
 
       {/* ════════════════════════════════════════════════════════════
-          MARQUEE STRIP — flush at viewport bottom
+          MARQUEE STRIP — flush at viewport bottom with teal background
       ════════════════════════════════════════════════════════════ */}
       <div
         className={
           hasScrolled
-            ? "relative z-20 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden flex-shrink-0"
-            : "relative lg:fixed lg:bottom-0 lg:left-0 lg:right-0 z-40 border-t border-white/10 bg-charcoal/65 backdrop-blur-sm overflow-hidden"
+            ? "relative z-20 border-t border-teal/40 bg-gradient-to-r from-teal via-teal-dark to-teal shadow-[0_0_20px_rgba(20,184,166,0.35)] overflow-hidden flex-shrink-0"
+            : "relative lg:fixed lg:bottom-0 lg:left-0 lg:right-0 z-40 border-t border-teal/40 bg-gradient-to-r from-teal via-teal-dark to-teal shadow-[0_0_20px_rgba(20,184,166,0.35)] overflow-hidden"
         }
       >
         {/* Edge fade masks */}
-        <div className="absolute left-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-r from-charcoal/65 to-transparent pointer-events-none" />
-        <div className="absolute right-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-l from-charcoal/65 to-transparent pointer-events-none" />
+        <div className="absolute left-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-r from-teal to-transparent pointer-events-none" />
+        <div className="absolute right-0 inset-y-0 w-16 sm:w-24 z-10 bg-gradient-to-l from-teal to-transparent pointer-events-none" />
 
         {prefersReducedMotion ? (
-          <div className="flex flex-wrap gap-x-6 gap-y-1 items-center justify-center py-3.5 px-8 text-sm text-surface-300">
+          <div className="flex flex-wrap gap-x-6 gap-y-1 items-center justify-center py-3.5 px-8 text-sm text-white">
             {MARQUEE_ITEMS.slice(0, 8).map((item) => (
-              <span key={item} className="font-body">
+              <span
+                key={item}
+                className="font-body font-semibold text-white/95"
+              >
                 {item}
               </span>
             ))}
@@ -360,10 +338,12 @@ export function Hero() {
           >
             {doubled.map((item, idx) => (
               <React.Fragment key={`${item}-${idx}`}>
-                <span className="font-body text-[13px] font-medium text-surface-300 tracking-wide flex-shrink-0 py-3.5">
+                <span className="font-body text-[13px] font-semibold text-white/95 tracking-wide flex-shrink-0 py-3.5">
                   {item}
                 </span>
-                <Diamond />
+
+                {/* Diamond separator */}
+                <span className="inline-block w-[5px] h-[5px] bg-white rotate-45 mx-6 flex-shrink-0 opacity-80" />
               </React.Fragment>
             ))}
           </div>
