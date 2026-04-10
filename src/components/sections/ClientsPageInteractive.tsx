@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import ClientOnboardingForm from "@/components/forms/ClientOnboardingForm";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import ClientOnboardingForm from "@/components/forms/ClientOnboardingForm";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { CheckCircle2, Mail, Phone } from "lucide-react";
+import { useRef, useState } from "react";
 
 const BENEFITS = [
   "Reliable Vendor Network",
@@ -77,16 +77,16 @@ export default function ClientsPageInteractive() {
               <p className="font-body text-lg text-text-muted mb-8 max-w-2xl mx-auto">
                 At HomeProX Services LLC, our clients are at the center of
                 everything we do. We are committed to exceeding expectations and
-                delivering consistent, professional property maintenance services
-                across Texas.
+                delivering consistent, professional property maintenance
+                services across Texas.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
                 <a
-                  href="tel:4693789262"
+                  href="tel:6822773555"
                   className="flex items-center gap-2 font-body text-charcoal hover:text-teal transition-colors duration-300"
                 >
                   <Phone className="w-5 h-5 text-teal" aria-hidden="true" />
-                  (469) 378-9262
+                  (682) 277-3555
                 </a>
                 <a
                   href="mailto:info@homeproxsvcs.com"
@@ -115,9 +115,7 @@ export default function ClientsPageInteractive() {
             initial={
               shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 60 }
             }
-            animate={
-              shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
-            }
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -40 }}
             transition={{
               duration: 0.55,
@@ -137,11 +135,7 @@ export default function ClientsPageInteractive() {
                     <motion.div
                       key={benefit}
                       className="flex items-center gap-2"
-                      initial={
-                        shouldReduceMotion
-                          ? {}
-                          : { opacity: 0, x: -10 }
-                      }
+                      initial={shouldReduceMotion ? {} : { opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{
                         delay: 0.25 + index * 0.07,
@@ -172,9 +166,7 @@ export default function ClientsPageInteractive() {
               <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <motion.div
-                  initial={
-                    shouldReduceMotion ? {} : { opacity: 0, y: 20 }
-                  }
+                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
                 >
@@ -188,9 +180,7 @@ export default function ClientsPageInteractive() {
                 {/* Form Card */}
                 <motion.div
                   className="mt-10 bg-white rounded-2xl shadow-card border border-surface-200 p-8 sm:p-10"
-                  initial={
-                    shouldReduceMotion ? {} : { opacity: 0, y: 30 }
-                  }
+                  initial={shouldReduceMotion ? {} : { opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                 >
@@ -204,4 +194,3 @@ export default function ClientsPageInteractive() {
     </>
   );
 }
-

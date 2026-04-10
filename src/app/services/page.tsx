@@ -114,10 +114,10 @@ export default function ServicesPage() {
                 </Button>
                 <div className="h-px w-12 bg-teal my-4" />
                 <a
-                  href="tel:4693789262"
+                  href="tel:6822773555 "
                   className="font-body text-teal hover:text-teal-light transition-colors"
                 >
-                  (469) 378-9262
+                  (682) 277-3555
                 </a>
               </div>
             </div>

@@ -13,7 +13,7 @@ const propertyTypes = [
   "Commercial",
   "Multi-Unit",
   "REO/Bank Owned",
-  "Other"
+  "Other",
 ];
 
 export function QuoteForm() {
@@ -33,16 +33,19 @@ export function QuoteForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submitError, setSubmitError] = useState('');
+  const [submitError, setSubmitError] = useState("");
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value, type } = e.target;
-    const checked = type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+    const checked =
+      type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
 
     if (errors[name]) {
@@ -64,39 +67,44 @@ export function QuoteForm() {
     }
 
     setIsSubmitting(true);
-    setSubmitError('');
+    setSubmitError("");
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, formSource: "quote" }),
-      })
+      });
 
-      const data = await res.json()
+      const data = await res.json();
 
       if (res.ok && data.success) {
-        setIsSuccess(true)
+        setIsSuccess(true);
         setFormData({
-          fullName: '',
-          companyName: '',
-          email: '',
-          phone: '',
-          propertyType: '',
-          serviceNeeded: '',
-          location: '',
-          message: '',
+          fullName: "",
+          companyName: "",
+          email: "",
+          phone: "",
+          propertyType: "",
+          serviceNeeded: "",
+          location: "",
+          message: "",
           agreeToTerms: false,
           formSource: "quote",
-        })
-        setErrors({})
+        });
+        setErrors({});
       } else {
-        setSubmitError(data.error || 'Something went wrong. Please call us directly at (469) 378-9262.')
+        setSubmitError(
+          data.error ||
+            "Something went wrong. Please call us directly at (682) 277-3555.",
+        );
       }
     } catch {
-      setSubmitError('Network error. Please check your connection or call us at (469) 378-9262.')
+      setSubmitError(
+        "Network error. Please check your connection or call us at (682) 277-3555.",
+      );
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
   };
 
@@ -112,7 +120,8 @@ export function QuoteForm() {
           <div>
             <h3 className="font-display text-lg font-bold mb-2">Thank you!</h3>
             <p className="font-body">
-              We&apos;ll be in touch within 24 hours. Our team at HomeProX Services LLC will review your request and contact you shortly.
+              We&apos;ll be in touch within 24 hours. Our team at HomeProX
+              Services LLC will review your request and contact you shortly.
             </p>
           </div>
         </div>
@@ -127,7 +136,10 @@ export function QuoteForm() {
 
       {/* Full Name */}
       <div>
-        <label htmlFor="fullName" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="fullName"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Full Name <span className="text-teal">*</span>
         </label>
         <input
@@ -145,7 +157,11 @@ export function QuoteForm() {
           suppressHydrationWarning
         />
         {errors.fullName && (
-          <p id="fullName-error" className="mt-1 text-sm text-error" role="alert">
+          <p
+            id="fullName-error"
+            className="mt-1 text-sm text-error"
+            role="alert"
+          >
             {errors.fullName}
           </p>
         )}
@@ -153,7 +169,10 @@ export function QuoteForm() {
 
       {/* Company Name */}
       <div>
-        <label htmlFor="companyName" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="companyName"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Company Name (Optional)
         </label>
         <input
@@ -170,7 +189,10 @@ export function QuoteForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="email"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Email Address <span className="text-teal">*</span>
         </label>
         <input
@@ -196,7 +218,10 @@ export function QuoteForm() {
 
       {/* Phone */}
       <div>
-        <label htmlFor="phone" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="phone"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Phone Number <span className="text-teal">*</span>
         </label>
         <input
@@ -222,7 +247,10 @@ export function QuoteForm() {
 
       {/* Property Type */}
       <div>
-        <label htmlFor="propertyType" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="propertyType"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Property Type <span className="text-teal">*</span>
         </label>
         <div className="relative">
@@ -234,10 +262,14 @@ export function QuoteForm() {
             className={`w-full px-4 py-3 pr-10 bg-white border ${
               errors.propertyType ? "border-error" : "border-surface-200"
             } rounded-lg text-charcoal focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
-            aria-describedby={errors.propertyType ? "propertyType-error" : undefined}
+            aria-describedby={
+              errors.propertyType ? "propertyType-error" : undefined
+            }
             aria-invalid={errors.propertyType ? "true" : "false"}
           >
-            <option value="" disabled>Select Property Type</option>
+            <option value="" disabled>
+              Select Property Type
+            </option>
             {propertyTypes.map((type) => (
               <option key={type} value={type} className="bg-white">
                 {type}
@@ -250,7 +282,11 @@ export function QuoteForm() {
           />
         </div>
         {errors.propertyType && (
-          <p id="propertyType-error" className="mt-1 text-sm text-error" role="alert">
+          <p
+            id="propertyType-error"
+            className="mt-1 text-sm text-error"
+            role="alert"
+          >
             {errors.propertyType}
           </p>
         )}
@@ -258,7 +294,10 @@ export function QuoteForm() {
 
       {/* Service Needed */}
       <div>
-        <label htmlFor="serviceNeeded" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="serviceNeeded"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Service Needed <span className="text-teal">*</span>
         </label>
         <div className="relative">
@@ -270,12 +309,20 @@ export function QuoteForm() {
             className={`w-full px-4 py-3 pr-10 bg-white border ${
               errors.serviceNeeded ? "border-error" : "border-surface-200"
             } rounded-lg text-charcoal focus:outline-none focus:ring-2 focus:ring-teal focus:border-transparent transition-all duration-300 appearance-none cursor-pointer`}
-            aria-describedby={errors.serviceNeeded ? "serviceNeeded-error" : undefined}
+            aria-describedby={
+              errors.serviceNeeded ? "serviceNeeded-error" : undefined
+            }
             aria-invalid={errors.serviceNeeded ? "true" : "false"}
           >
-            <option value="" disabled>Select a Service</option>
+            <option value="" disabled>
+              Select a Service
+            </option>
             {services.map((service) => (
-              <option key={service.id} value={service.title} className="bg-white">
+              <option
+                key={service.id}
+                value={service.title}
+                className="bg-white"
+              >
                 {service.title}
               </option>
             ))}
@@ -289,7 +336,11 @@ export function QuoteForm() {
           />
         </div>
         {errors.serviceNeeded && (
-          <p id="serviceNeeded-error" className="mt-1 text-sm text-error" role="alert">
+          <p
+            id="serviceNeeded-error"
+            className="mt-1 text-sm text-error"
+            role="alert"
+          >
             {errors.serviceNeeded}
           </p>
         )}
@@ -297,7 +348,10 @@ export function QuoteForm() {
 
       {/* Location */}
       <div>
-        <label htmlFor="location" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="location"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Property Location / City, TX <span className="text-teal">*</span>
         </label>
         <input
@@ -314,7 +368,11 @@ export function QuoteForm() {
           aria-invalid={errors.location ? "true" : "false"}
         />
         {errors.location && (
-          <p id="location-error" className="mt-1 text-sm text-error" role="alert">
+          <p
+            id="location-error"
+            className="mt-1 text-sm text-error"
+            role="alert"
+          >
             {errors.location}
           </p>
         )}
@@ -322,7 +380,10 @@ export function QuoteForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block font-body text-sm font-medium text-charcoal mb-2">
+        <label
+          htmlFor="message"
+          className="block font-body text-sm font-medium text-charcoal mb-2"
+        >
           Message / Project Details <span className="text-teal">*</span>
         </label>
         <textarea
@@ -339,7 +400,11 @@ export function QuoteForm() {
           aria-invalid={errors.message ? "true" : "false"}
         />
         {errors.message && (
-          <p id="message-error" className="mt-1 text-sm text-error" role="alert">
+          <p
+            id="message-error"
+            className="mt-1 text-sm text-error"
+            role="alert"
+          >
             {errors.message}
           </p>
         )}
@@ -355,10 +420,15 @@ export function QuoteForm() {
             checked={formData.agreeToTerms}
             onChange={handleChange}
             className="mt-1 h-4 w-4 rounded border-surface-300 text-teal focus:ring-teal focus:ring-offset-0 cursor-pointer"
-            aria-describedby={errors.agreeToTerms ? "agreeToTerms-error" : undefined}
+            aria-describedby={
+              errors.agreeToTerms ? "agreeToTerms-error" : undefined
+            }
             aria-invalid={errors.agreeToTerms ? "true" : "false"}
           />
-          <label htmlFor="agreeToTerms" className="font-body text-sm text-charcoal cursor-pointer">
+          <label
+            htmlFor="agreeToTerms"
+            className="font-body text-sm text-charcoal cursor-pointer"
+          >
             I agree to the{" "}
             <Link
               href="/terms"
@@ -366,11 +436,16 @@ export function QuoteForm() {
             >
               Terms and Conditions
             </Link>{" "}
-            provided by the company. By providing my phone number, I agree to receive text messages from HomeProX Services LLC.
+            provided by the company. By providing my phone number, I agree to
+            receive text messages from HomeProX Services LLC.
           </label>
         </div>
         {errors.agreeToTerms && (
-          <p id="agreeToTerms-error" className="mt-1 text-sm text-error" role="alert">
+          <p
+            id="agreeToTerms-error"
+            className="mt-1 text-sm text-error"
+            role="alert"
+          >
             {errors.agreeToTerms}
           </p>
         )}
@@ -387,7 +462,9 @@ export function QuoteForm() {
         Send Request
       </Button>
       {submitError && (
-        <p className="text-error text-sm text-center mt-2" role="alert">{submitError}</p>
+        <p className="text-error text-sm text-center mt-2" role="alert">
+          {submitError}
+        </p>
       )}
     </form>
   );

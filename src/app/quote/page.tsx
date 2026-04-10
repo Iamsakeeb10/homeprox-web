@@ -1,6 +1,6 @@
 import { QuoteForm } from "@/components/forms/QuoteForm";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { CheckCircle2, Clock, Mail, Map, MapPin, Phone, Tag } from "lucide-react";
+import { CheckCircle2, Clock, Mail, MapPin, Phone, Tag } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -35,8 +35,8 @@ export default function QuotePage() {
             Get a Quote
           </h1>
           <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
-            Let&apos;s talk about your property needs. Fill out the form and we&apos;ll respond within
-            24 hours.
+            Let&apos;s talk about your property needs. Fill out the form and
+            we&apos;ll respond within 24 hours.
           </p>
         </div>
       </section>
@@ -52,7 +52,9 @@ export default function QuotePage() {
                   Request Your Quote
                 </h2>
                 <p className="font-body text-base sm:text-lg text-text-muted mb-10">
-                  Tell us about your property needs and we'll provide a customized quote within 24 hours. No hidden fees—just transparent, professional pricing.
+                  Tell us about your property needs and we'll provide a
+                  customized quote within 24 hours. No hidden fees—just
+                  transparent, professional pricing.
                 </p>
                 <QuoteForm />
               </AnimatedSection>
@@ -68,18 +70,24 @@ export default function QuotePage() {
                   </h3>
                   <div className="space-y-3">
                     <a
-                      href="tel:4693789262"
+                      href="tel:6822773555 "
                       className="flex items-center gap-3 font-body text-charcoal hover:text-teal transition-colors duration-300"
                     >
-                      <Phone className="w-5 h-5 text-teal flex-shrink-0" aria-hidden="true" />
-                      <span className="text-sm">(469) 378-9262</span>
+                      <Phone
+                        className="w-5 h-5 text-teal flex-shrink-0"
+                        aria-hidden="true"
+                      />
+                      <span className="text-sm">(682) 277-3555</span>
                     </a>
 
                     <a
                       href="mailto:info@homeproxsvcs.com"
                       className="flex items-center gap-3 font-body text-charcoal hover:text-teal transition-colors duration-300"
                     >
-                      <Mail className="w-5 h-5 text-teal flex-shrink-0" aria-hidden="true" />
+                      <Mail
+                        className="w-5 h-5 text-teal flex-shrink-0"
+                        aria-hidden="true"
+                      />
                       <span className="text-sm">info@homeproxsvcs.com</span>
                     </a>
                   </div>
@@ -92,13 +100,19 @@ export default function QuotePage() {
                   </h3>
                   <div className="space-y-2">
                     <div className="flex items-start gap-2">
-                      <MapPin className="w-4 h-4 text-teal mt-1 flex-shrink-0" aria-hidden="true" />
+                      <MapPin
+                        className="w-4 h-4 text-teal mt-1 flex-shrink-0"
+                        aria-hidden="true"
+                      />
                       <span className="font-body text-sm text-text-muted">
                         All of Texas Statewide
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Clock className="w-4 h-4 text-teal mt-1 flex-shrink-0" aria-hidden="true" />
+                      <Clock
+                        className="w-4 h-4 text-teal mt-1 flex-shrink-0"
+                        aria-hidden="true"
+                      />
                       <span className="font-body text-sm text-text-muted">
                         M-F: 8am–6pm
                       </span>
@@ -114,15 +128,21 @@ export default function QuotePage() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="text-teal font-bold">✓</span>
-                      <span className="font-body text-sm text-charcoal">Fully Insured</span>
+                      <span className="font-body text-sm text-charcoal">
+                        Fully Insured
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-teal font-bold">✓</span>
-                      <span className="font-body text-sm text-charcoal">Licensed</span>
+                      <span className="font-body text-sm text-charcoal">
+                        Licensed
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="text-teal font-bold">✓</span>
-                      <span className="font-body text-sm text-charcoal">10+ Years</span>
+                      <span className="font-body text-sm text-charcoal">
+                        10+ Years
+                      </span>
                     </div>
                   </div>
                 </div>

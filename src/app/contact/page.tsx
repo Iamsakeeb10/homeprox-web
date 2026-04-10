@@ -1,19 +1,8 @@
 import { ContactForm } from "@/components/forms/ContactForm";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import {
-  Building2,
-  CheckCircle2,
-  ChevronRight,
-  ClipboardList,
-  Clock,
-  Mail,
-  MapPin,
-  Phone,
-  Wrench,
-} from "lucide-react";
+import { CheckCircle2, Clock, Mail, MapPin, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
 import { generatePageMetadata } from "@/lib/metadata";
 
@@ -55,7 +44,9 @@ export default function ContactPage() {
             <div className="h-px w-16 bg-teal/50" />
           </div>
           <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto">
-            Questions about available services, business development, or partnership opportunities? Reach out to discuss your property care requirements.
+            Questions about available services, business development, or
+            partnership opportunities? Reach out to discuss your property care
+            requirements.
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none" />
@@ -82,12 +73,14 @@ export default function ContactPage() {
                         Phone
                       </h3>
                       <a
-                        href="tel:4693789262"
+                        href="tel:6822773555 "
                         className="font-body text-lg text-teal hover:text-teal-dark transition-colors"
                       >
-                        (469) 378-9262
+                        (682) 277-3555
                       </a>
-                      <p className="font-body text-sm text-text-muted mt-1">Available during business hours</p>
+                      <p className="font-body text-sm text-text-muted mt-1">
+                        Available during business hours
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -110,7 +103,9 @@ export default function ContactPage() {
                       >
                         info@homeproxsvcs.com
                       </a>
-                      <p className="font-body text-sm text-text-muted mt-1">Responded within 24 hours</p>
+                      <p className="font-body text-sm text-text-muted mt-1">
+                        Responded within 24 hours
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -130,7 +125,9 @@ export default function ContactPage() {
                       <p className="font-body text-lg text-charcoal">
                         All of Texas Statewide
                       </p>
-                      <p className="font-body text-sm text-text-muted mt-1">Comprehensive coverage everywhere</p>
+                      <p className="font-body text-sm text-text-muted mt-1">
+                        Comprehensive coverage everywhere
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -147,8 +144,12 @@ export default function ContactPage() {
                       <h3 className="font-display text-xl font-bold text-charcoal mb-2">
                         Hours
                       </h3>
-                      <p className="font-body text-charcoal">Mon–Fri: 8am–6pm</p>
-                      <p className="font-body text-text-muted text-sm mt-1">Closed weekends</p>
+                      <p className="font-body text-charcoal">
+                        Mon–Fri: 8am–6pm
+                      </p>
+                      <p className="font-body text-text-muted text-sm mt-1">
+                        Closed weekends
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -164,7 +165,8 @@ export default function ContactPage() {
                   Send us a Message
                 </h2>
                 <p className="font-body text-text-muted text-center mb-10">
-                  Have questions? Fill out the form below and we'll get back to you shortly.
+                  Have questions? Fill out the form below and we'll get back to
+                  you shortly.
                 </p>
                 <ContactForm />
               </div>
@@ -178,10 +180,20 @@ export default function ContactPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
             {TRUST_ITEMS.map((label, index) => (
-              <AnimatedSection key={label} variant="fadeUp" delay={index * 0.05}>
+              <AnimatedSection
+                key={label}
+                variant="fadeUp"
+                delay={index * 0.05}
+              >
                 <div className="flex flex-col items-center gap-2">
-                  <CheckCircle2 className="text-teal" size={24} aria-hidden="true" />
-                  <span className="font-body font-medium text-charcoal text-sm">{label}</span>
+                  <CheckCircle2
+                    className="text-teal"
+                    size={24}
+                    aria-hidden="true"
+                  />
+                  <span className="font-body font-medium text-charcoal text-sm">
+                    {label}
+                  </span>
                 </div>
               </AnimatedSection>
             ))}
@@ -197,14 +209,15 @@ export default function ContactPage() {
               Prefer to talk?
             </p>
             <a
-              href="tel:+14693789262"
+              href="tel:+6822773555 "
               className="font-display text-2xl sm:text-3xl font-bold text-white hover:text-teal transition-colors duration-200 flex items-center justify-center gap-3"
             >
               <Phone className="text-teal" size={28} aria-hidden="true" />
-              (469) 378-9262
+              (682) 277-3555
             </a>
             <p className="font-body text-surface-300 mt-2 text-sm">
-              Monday – Friday: 8:00 AM – 6:00 PM &nbsp;·&nbsp; Saturday: closed &nbsp;·&nbsp; Sunday: Closed
+              Monday – Friday: 8:00 AM – 6:00 PM &nbsp;·&nbsp; Saturday: closed
+              &nbsp;·&nbsp; Sunday: Closed
             </p>
           </div>
         </AnimatedSection>

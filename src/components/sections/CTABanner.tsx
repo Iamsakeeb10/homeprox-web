@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { useState } from "react";
 
 interface CTABannerProps {
   variant?: "dark" | "light";
@@ -24,13 +24,16 @@ export function CTABanner({ variant = "dark" }: CTABannerProps) {
                 Quality Maintenance, Reliable Operations
               </h2>
               <p className="font-body text-lg text-text-muted mb-8 max-w-2xl mx-auto">
-                See how HomeProX delivers results across Texas properties and portfolios.
+                See how HomeProX delivers results across Texas properties and
+                portfolios.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button variant="primary" size="lg" asChild>
                   <Link href="/contact">Contact Us Today</Link>
                 </Button>
-                <span className="hidden sm:block text-text-muted/30 text-sm">or</span>
+                <span className="hidden sm:block text-text-muted/30 text-sm">
+                  or
+                </span>
                 <Button variant="secondary" size="lg" asChild>
                   <Link href="/quote">Get a Quote</Link>
                 </Button>
@@ -77,9 +80,7 @@ export function CTABanner({ variant = "dark" }: CTABannerProps) {
               </Button>
               <span className="hidden sm:block text-white/30 text-sm">or</span>
               <Button variant="secondary" size="lg" asChild>
-                <a href="tel:4693789262">
-                  Call Now: (469) 378-9262
-                </a>
+                <a href="tel:6822773555">Call Now: (682) 277-3555</a>
               </Button>
             </div>
           </div>

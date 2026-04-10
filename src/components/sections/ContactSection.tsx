@@ -1,24 +1,40 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
 
 export function ContactSection() {
   const contactItems = [
-    { icon: Phone, label: "Phone", value: "(469) 378-9262", href: "tel:4693789262" },
-    { icon: Mail, label: "Email", value: "info@homeproxsvcs.com", href: "mailto:info@homeproxsvcs.com" },
-    { icon: MapPin, label: "Location", value: "Serving Texas Statewide", href: null },
-    { icon: Clock, label: "Hours", value: "Available 7 days a week", href: null },
+    {
+      icon: Phone,
+      label: "Phone",
+      value: "(682) 277-3555",
+      href: "tel:6822773555",
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: "info@homeproxsvcs.com",
+      href: "mailto:info@homeproxsvcs.com",
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Serving Texas Statewide",
+      href: null,
+    },
+    {
+      icon: Clock,
+      label: "Hours",
+      value: "Available 7 days a week",
+      href: null,
+    },
   ];
 
   return (
-    <section
-      id="contact"
-      className="relative py-24 lg:py-32 bg-white"
-    >
+    <section id="contact" className="relative py-24 lg:py-32 bg-white">
       {/* Subtle diagonal accent overlay (matches vendor CTA pattern, but on light bg) */}
       <div
         className="absolute inset-0 opacity-5"
@@ -37,31 +53,42 @@ export function ContactSection() {
                 Tell Us About Your Property Maintenance Requirements
               </h2>
               <p className="font-body text-text-muted mb-8 text-center">
-                Contact our team with questions, project details, or collaboration ideas. We respond quickly and adapt to your schedule.
+                Contact our team with questions, project details, or
+                collaboration ideas. We respond quickly and adapt to your
+                schedule.
               </p>
-              
+
               {/* Contact Info with Left Border Accents */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 {contactItems.map((item, index) => {
                   const Icon = item.icon;
                   const content = (
                     <div className="flex items-start gap-3 pl-3 border-l-2 border-teal/40">
-                      <Icon className="text-teal mt-0.5 w-5 h-5 flex-shrink-0" aria-hidden="true" />
+                      <Icon
+                        className="text-teal mt-0.5 w-5 h-5 flex-shrink-0"
+                        aria-hidden="true"
+                      />
                       <div>
-                        <div className="font-body text-sm text-text-muted">{item.label}</div>
-                        <div className="font-body font-medium text-charcoal">{item.value}</div>
+                        <div className="font-body text-sm text-text-muted">
+                          {item.label}
+                        </div>
+                        <div className="font-body font-medium text-charcoal">
+                          {item.value}
+                        </div>
                       </div>
                     </div>
                   );
 
                   return item.href ? (
-                    <a key={index} href={item.href} className="hover:opacity-80 transition-opacity duration-300">
+                    <a
+                      key={index}
+                      href={item.href}
+                      className="hover:opacity-80 transition-opacity duration-300"
+                    >
                       {content}
                     </a>
                   ) : (
-                    <div key={index}>
-                      {content}
-                    </div>
+                    <div key={index}>{content}</div>
                   );
                 })}
               </div>

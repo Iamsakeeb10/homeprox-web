@@ -76,11 +76,11 @@ export function Navbar() {
           </div>
           <div className="hidden lg:flex items-center gap-3">
             <Link
-              href="tel:+14693789262"
+              href="tel:+6822773555 "
               className="inline-flex items-center gap-2 bg-teal text-white px-5 py-2 rounded-full font-accent font-medium text-sm transition-all duration-300 hover:bg-teal-dark"
             >
               <Phone className="w-4 h-4" aria-hidden="true" />
-              (469) 378-9262
+              (682) 277-3555
             </Link>
           </div>
 
@@ -139,12 +139,12 @@ export function Navbar() {
                 {ctaLink.label}
               </Link>
               <a
-                href="tel:+14693789262"
+                href="tel:+6822773555"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center w-full bg-teal text-white hover:bg-teal-dark px-6 py-3 rounded-full font-accent font-medium transition-all duration-300"
               >
                 <Phone className="w-4 h-4 mr-2" aria-hidden="true" />
-                (469) 378-9262
+                (682) 277-3555
               </a>
             </div>
           </motion.div>
