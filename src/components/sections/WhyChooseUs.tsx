@@ -2,41 +2,39 @@
 
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Award, BarChart, Zap } from "lucide-react";
-import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, Award, Sparkles, Zap } from "lucide-react";
+import Link from "next/link";
 
 const features = [
   {
     icon: Zap,
     title: "Rapid Response",
     description:
-      "Swift scheduling and transparent communication throughout every project engagement.",
+      "Fast scheduling and clear communication from first request to completion.",
   },
   {
     icon: Award,
     title: "Superior Workmanship",
     description:
-      "Expert execution with meticulous attention to detail and guaranteed lasting value.",
+      "Consistent, professional outcomes backed by detailed execution standards.",
   },
-  {
-    icon: BarChart,
-    title: "Scalable Services",
-    description:
-      "Flexible solutions available for individual properties through large-scale portfolios.",
-  },
-];
-
-const stats = [
-  { value: "10+ Years", label: "Experience" },
-  { value: "500+ Properties", label: "Maintained" },
-  { value: "Statewide", label: "Coverage" },
-  { value: "Fully Insured", label: "Protection" },
 ];
 
 export function WhyChooseUs() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <section id="why-us" className="py-24 lg:py-32 bg-charcoal">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="why-us"
+      className="py-20 lg:py-24 bg-charcoal relative overflow-hidden"
+    >
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <AnimatedSection variant="fadeUp">
           <SectionHeading
             title="Why Partner With HomeProX"
@@ -48,52 +46,87 @@ export function WhyChooseUs() {
           />
         </AnimatedSection>
 
-        {/* Feature Cards Grid — 3 items */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <AnimatedSection
-                key={feature.title}
-                variant="fadeUp"
-                delay={index * 0.1}
-              >
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 lg:p-6 h-full hover:bg-white/10 hover:border-teal/30 transition-all duration-300">
-                  <div className="w-10 h-10 bg-teal/20 rounded-lg flex items-center justify-center mb-4">
-                    <Icon className="w-5 h-5 text-teal" aria-hidden="true" />
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-white mb-3">
-                    {feature.title}
+        <motion.div
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
+          whileInView={
+            shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }
+          }
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden shadow-card">
+            <div className="bg-gradient-to-r from-teal/10 via-white/0 to-white/0 p-6 lg:p-8 border-b border-white/10">
+              <div className="flex items-start gap-4">
+                <div className="w-11 h-11 bg-teal/20 rounded-xl flex items-center justify-center shrink-0">
+                  <Sparkles className="w-5 h-5 text-teal" />
+                </div>
+                <div>
+                  <h3 className="font-display text-2xl font-bold text-white mb-2">
+                    Built for Long-Term Partnership
                   </h3>
-                  <p className="font-body text-surface-300">
-                    {feature.description}
+                  <p className="font-body text-surface-200 text-sm lg:text-base max-w-3xl">
+                    HomeProX combines rapid response, dependable workmanship,
+                    and proactive communication to keep operations smooth across
+                    single sites and growing portfolios.
                   </p>
                 </div>
-              </AnimatedSection>
-            );
-          })}
-        </div>
+              </div>
+            </div>
 
-        {/* Stats Row */}
-        <AnimatedSection variant="fadeUp" delay={0.5}>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 pt-8 border-t border-white/15">
-            {stats.map((stat, index) => (
-              <React.Fragment key={stat.value}>
-                <div className="text-center">
-                  <div className="font-display text-2xl md:text-3xl font-bold text-teal mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="font-body text-surface-300 text-sm">
-                    {stat.label}
-                  </div>
-                </div>
-                {index < stats.length - 1 && (
-                  <div className="hidden md:block w-px h-12 bg-white/15" />
-                )}
-              </React.Fragment>
-            ))}
+            <div className="p-6 lg:p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {features.map((feature, index) => {
+                  const Icon = feature.icon;
+                  return (
+                    <motion.div
+                      key={feature.title}
+                      initial={
+                        shouldReduceMotion
+                          ? { opacity: 1 }
+                          : { opacity: 0, x: -20 }
+                      }
+                      whileInView={
+                        shouldReduceMotion
+                          ? { opacity: 1 }
+                          : { opacity: 1, x: 0 }
+                      }
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="rounded-xl border border-white/10 bg-white/5 p-4"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-lg bg-teal/20 flex items-center justify-center shrink-0">
+                          <Icon className="w-4 h-4 text-teal" aria-hidden="true" />
+                        </div>
+                        <div>
+                          <h4 className="font-display text-lg font-semibold text-white mb-1">
+                            {feature.title}
+                          </h4>
+                          <p className="font-body text-surface-300 text-sm leading-relaxed">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-5 border-t border-white/10 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <p className="font-body text-surface-300 text-sm">
+                  Need a dependable maintenance partner for your properties?
+                </p>
+                <Link
+                  href="/quote"
+                  className="inline-flex items-center gap-2 text-teal font-accent font-medium text-sm hover:text-teal-dark transition-colors duration-300"
+                >
+                  Request a Quote
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
           </div>
-        </AnimatedSection>
+        </motion.div>
       </div>
     </section>
   );
