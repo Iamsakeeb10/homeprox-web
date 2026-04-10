@@ -30,7 +30,7 @@ const steps = [
 
 export function QualityProcess() {
   return (
-    <section className="py-0 lg:pt-32 bg-surface-50 relative overflow-hidden">
+    <section className="pt-24 lg:pt-32 bg-surface-50 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 right-0 w-80 h-80 rounded-full bg-teal/10 blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-skyblue/10 blur-3xl" />
