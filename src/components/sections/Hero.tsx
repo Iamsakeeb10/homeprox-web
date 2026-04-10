@@ -110,7 +110,7 @@ export function Hero() {
       {/* ── Full-cover video ────────────────────────────────────── */}
       <div className="absolute inset-0 z-0">
         <video
-          src="/videos/hero.mp4"
+          src="/videos/hero-three.mp4"
           autoPlay
           muted
           loop
