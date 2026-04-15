@@ -122,7 +122,7 @@ export function Footer() {
                   href="/services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  General Maintenance
+                  Everyday Repairs & Handyman Solutions
                 </Link>
               </li>
               <li>
@@ -130,7 +130,7 @@ export function Footer() {
                   href="/services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  Gutter Cleaning
+                  Home Renovation & Upgrades
                 </Link>
               </li>
               <li>
@@ -138,7 +138,7 @@ export function Footer() {
                   href="/services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  Drywall & Painting
+                  Ongoing Property Care
                 </Link>
               </li>
               <li>
@@ -146,7 +146,7 @@ export function Footer() {
                   href="/services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  Property Cleaning
+                  Asset Protection & Preservation
                 </Link>
               </li>
               <li>
@@ -154,7 +154,7 @@ export function Footer() {
                   href="/services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  Landscaping
+                  Outdoor Repair & Maintenance
                 </Link>
               </li>
               <li>
@@ -162,7 +162,7 @@ export function Footer() {
                   href="/services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  Siding & Exterior
+                  Professional Cleaning Services
                 </Link>
               </li>
               <li>
@@ -170,7 +170,7 @@ export function Footer() {
                   href="/services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  Property Cleanouts
+                  Electrical & Plumbing Services
                 </Link>
               </li>
             </ul>
@@ -219,7 +219,7 @@ export function Footer() {
         <div className="border-t border-white/10 pt-8 mb-8">
           <div className="flex justify-center gap-6">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/HomeProxx"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
@@ -228,16 +228,16 @@ export function Footer() {
               <Facebook className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/pro_home57777"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
-              aria-label="Twitter"
+              aria-label="X"
             >
               <Twitter className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/homeprox"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
@@ -246,7 +246,7 @@ export function Footer() {
               <Linkedin className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/home_prox"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
