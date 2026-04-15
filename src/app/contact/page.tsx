@@ -22,13 +22,14 @@ const TRUST_ITEMS = [
 ];
 
 type ContactPageProps = {
-  searchParams?: {
+  searchParams?: Promise<{
     tab?: string | string[];
-  };
+  }>;
 };
 
-export default function ContactPage({ searchParams }: ContactPageProps) {
-  const tabParam = searchParams?.tab;
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const resolvedSearchParams = await searchParams;
+  const tabParam = resolvedSearchParams?.tab;
   const activeTab =
     (Array.isArray(tabParam) ? tabParam[0] : tabParam) === "quote"
       ? "quote"
