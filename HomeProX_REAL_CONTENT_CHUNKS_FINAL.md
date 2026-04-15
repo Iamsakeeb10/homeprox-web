@@ -1,9 +1,11 @@
 # HomeProX Home Services LLC — Final Real Content Integration Prompts
+
 ### Complete Client-Approved Copy | Use These Chunks in Cursor to Replace All Placeholder Text
 
 ---
 
 > **How to Use:**
+>
 > - Feed each chunk **one at a time** in a fresh Cursor Chat.
 > - Always type `@codebase` first so Cursor sees all existing files.
 > - Run `npm run dev` after each chunk to verify nothing broke.
@@ -676,7 +678,7 @@ Only update text content.
     Service Coverage value: "Serving Residential & Investment Properties"
     Hours heading: "Business Hours"
     Hours:
-      Monday – Friday: 8:00 AM – 5:00 PM
+      Monday – Friday: 8:00 AM – 5:00 PM (CST)
       Saturday: Closed
       Sunday: Closed
 
@@ -1358,44 +1360,44 @@ npm run build completes with zero errors.
 
 ## MASTER REFERENCE — All Real Content At A Glance
 
-| Item | Real Value |
-|---|---|
-| Company Name | HomeProX Home Services LLC |
-| Phone | (469) 378-9262 |
-| Phone Link | tel:4693789262 |
-| Email | info@homeproxsvcs.com |
-| Location | Collin County, Texas |
-| Service Area | All of Texas Statewide |
-| Website | https://homeproxsvcs.com |
-| Business Hours | Mon–Fri 8:00 AM – 5:00 PM |
-| T&C Last Updated | February 24, 2026 |
-| Copyright Year | 2026 |
-| Governing Law | State of Texas, Collin County courts |
-| Total Services | 7 |
-| Total Client Types | 4 |
-| Total T&C Sections | 14 |
-| Total Vendor FAQ Items | 4 |
+| Item                   | Real Value                           |
+| ---------------------- | ------------------------------------ |
+| Company Name           | HomeProX Home Services LLC           |
+| Phone                  | (469) 378-9262                       |
+| Phone Link             | tel:4693789262                       |
+| Email                  | info@homeproxsvcs.com                |
+| Location               | Collin County, Texas                 |
+| Service Area           | All of Texas Statewide               |
+| Website                | https://homeproxsvcs.com             |
+| Business Hours         | Mon–Fri 8:00 AM – 5:00 PM (CST)      |
+| T&C Last Updated       | February 24, 2026                    |
+| Copyright Year         | 2026                                 |
+| Governing Law          | State of Texas, Collin County courts |
+| Total Services         | 7                                    |
+| Total Client Types     | 4                                    |
+| Total T&C Sections     | 14                                   |
+| Total Vendor FAQ Items | 4                                    |
 
 ---
 
 ## WHAT CHANGED FROM PREVIOUS VERSION vs. CLIENT'S NEW CONTENT
 
-| Section | Previous | Updated To |
-|---|---|---|
-| WhyChooseUs titles | Reliability / Quality Workmanship / Scalable Solutions / Professional Communication | Fast Response / Reliable Quality / Scalable Support / Professional Communication |
-| WhyChooseUs subtitle | "Built on reliability, quality, and long-term partnerships" | "Responsive property maintenance backed by dependable service and professional support." |
-| Contact page subtitle | "Let's talk about your property needs" | "Have a question about property maintenance, partnerships, or vendor opportunities? Send us a message..." |
-| Contact hours | Mon–Fri 8AM–6PM | Mon–Fri 8AM–5PM |
-| Contact service coverage | "Collin County, Texas" | "Serving Residential & Investment Properties" |
-| Contact trust strip | Fast Response / Free Estimates / Statewide Coverage | Reliable Property Maintenance / Fast Response Times / Serving Residential & Investment Properties |
-| Contact final CTA | Generic | "Prefer to talk? Call us directly: (469) 378-9262" |
-| Contact quick links | Not present | Become a Client / Become a Vendor / Request Service |
-| Vendor subtext strip | Not present | "Serving Residential Portfolios • Investment Properties • Managed Communities • Institutional Assets" |
-| Vendor benefit card titles | Generic | Consistent Work Opportunities / Fast & Transparent Payments / Professional Work Environment / Statewide Coverage Opportunities |
-| Services page regions | Not present | North–South Texas + major cities section |
-| Services page why-choose strip | Not present | 6-item checkmark strip |
+| Section                        | Previous                                                                            | Updated To                                                                                                                     |
+| ------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| WhyChooseUs titles             | Reliability / Quality Workmanship / Scalable Solutions / Professional Communication | Fast Response / Reliable Quality / Scalable Support / Professional Communication                                               |
+| WhyChooseUs subtitle           | "Built on reliability, quality, and long-term partnerships"                         | "Responsive property maintenance backed by dependable service and professional support."                                       |
+| Contact page subtitle          | "Let's talk about your property needs"                                              | "Have a question about property maintenance, partnerships, or vendor opportunities? Send us a message..."                      |
+| Contact hours                  | Mon–Fri 8AM–6PM (CST)                                                               | Mon–Fri 8AM–5PM (CST)                                                                                                          |
+| Contact service coverage       | "Collin County, Texas"                                                              | "Serving Residential & Investment Properties"                                                                                  |
+| Contact trust strip            | Fast Response / Free Estimates / Statewide Coverage                                 | Reliable Property Maintenance / Fast Response Times / Serving Residential & Investment Properties                              |
+| Contact final CTA              | Generic                                                                             | "Prefer to talk? Call us directly: (469) 378-9262"                                                                             |
+| Contact quick links            | Not present                                                                         | Become a Client / Become a Vendor / Request Service                                                                            |
+| Vendor subtext strip           | Not present                                                                         | "Serving Residential Portfolios • Investment Properties • Managed Communities • Institutional Assets"                          |
+| Vendor benefit card titles     | Generic                                                                             | Consistent Work Opportunities / Fast & Transparent Payments / Professional Work Environment / Statewide Coverage Opportunities |
+| Services page regions          | Not present                                                                         | North–South Texas + major cities section                                                                                       |
+| Services page why-choose strip | Not present                                                                         | 6-item checkmark strip                                                                                                         |
 
 ---
 
-*End of file. Run chunks A through H in order in separate Cursor Chat sessions.
-Use `@codebase` at the start of every session.*
+_End of file. Run chunks A through H in order in separate Cursor Chat sessions.
+Use `@codebase` at the start of every session._

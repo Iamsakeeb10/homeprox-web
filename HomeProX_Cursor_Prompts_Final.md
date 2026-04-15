@@ -1,9 +1,11 @@
 # HomeProX Home Services LLC — Cursor-Ready Chunked Prompts
+
 ### Next.js 16 | TypeScript | Tailwind CSS v4 | App Router | Production Grade
 
 ---
 
 > **How to Use These Prompts:**
+>
 > - Feed each chunk **one at a time** to Cursor.
 > - Always attach the reference website URL and demo images when prompted to do so.
 > - Wait for each chunk to fully complete before moving to the next.
@@ -48,6 +50,7 @@ Design Philosophy (INSPIRED BY VERISK.COM):
 
 [ATTACH YOUR REFERENCE WEBSITE URL AND DEMO IMAGES HERE]
 ```
+
 https://www.verisk.com/
 
 ---
@@ -842,7 +845,7 @@ bg-navy-800 card with left border border-l-4 border-gold:
 - Email: info@homeproxsvcs.com — Mail icon, clickable mailto: link
 - Location: Collin County, Texas — MapPin icon
 - Serving: "All of Texas Statewide" — Map icon
-- Hours: Monday – Friday: 8:00 AM – 6:00 PM | Saturday: closed | Sunday: Closed
+- Hours: Monday – Friday: 8:00 AM – 6:00 PM (CST) | Saturday: closed | Sunday: Closed
 - "Fully Insured" badge + "Licensed Professionals" badge in text-gold
 
 c) Bottom: 3 horizontal info cards
@@ -1220,18 +1223,18 @@ FINAL DELIVERABLE CHECK:
 
 ## QUICK REFERENCE — Design Tokens
 
-| Token | Value | Tailwind Class | Usage |
-|---|---|---|---|
-| Primary Dark | `#0A0F1E` | `bg-navy-950` | Page backgrounds |
-| Secondary Navy | `#1A2340` | `bg-navy-900` | Section backgrounds |
-| Surface | `#111827` | `bg-navy-800` | Cards |
-| Border | `#1F2D47` | `border-navy-700` | Card borders |
-| Accent Gold | `#C89B3C` | `bg-gold` / `text-gold` | Primary accent, icons, CTAs |
-| Accent Orange | `#E07B39` | `bg-orange` / `text-orange` | CTA hover, warm accents |
-| Text Primary | `#FFFFFF` | `text-white` | Headings |
-| Text Secondary | `#A0AEC0` | `text-muted` | Body, labels |
-| Display Font | Barlow Condensed | `font-display` | All headings |
-| Body Font | DM Sans | `font-body` | All body text |
+| Token          | Value            | Tailwind Class              | Usage                       |
+| -------------- | ---------------- | --------------------------- | --------------------------- |
+| Primary Dark   | `#0A0F1E`        | `bg-navy-950`               | Page backgrounds            |
+| Secondary Navy | `#1A2340`        | `bg-navy-900`               | Section backgrounds         |
+| Surface        | `#111827`        | `bg-navy-800`               | Cards                       |
+| Border         | `#1F2D47`        | `border-navy-700`           | Card borders                |
+| Accent Gold    | `#C89B3C`        | `bg-gold` / `text-gold`     | Primary accent, icons, CTAs |
+| Accent Orange  | `#E07B39`        | `bg-orange` / `text-orange` | CTA hover, warm accents     |
+| Text Primary   | `#FFFFFF`        | `text-white`                | Headings                    |
+| Text Secondary | `#A0AEC0`        | `text-muted`                | Body, labels                |
+| Display Font   | Barlow Condensed | `font-display`              | All headings                |
+| Body Font      | DM Sans          | `font-body`                 | All body text               |
 
 > All tokens defined in `globals.css` under `@theme {}` — no tailwind.config.ts needed.
 
@@ -1239,34 +1242,34 @@ FINAL DELIVERABLE CHECK:
 
 ## QUICK REFERENCE — Image URLs by Section
 
-| Section | Source | Full URL |
-|---|---|---|
-| Hero background | Unsplash | `https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1920&q=85` |
-| Hero right card | Unsplash | `https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80` |
-| Service: Maintenance & Plumbing | Unsplash | `https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80` |
-| Service: Gutter Cleaning | Unsplash | `https://images.unsplash.com/photo-1628348070889-cb656235b4eb?auto=format&fit=crop&w=800&q=80` |
-| Service: Drywall & Painting | Unsplash | `https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80` |
-| Service: Property Cleaning | Unsplash | `https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80` |
-| Service: Landscaping | Unsplash | `https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80` |
-| Service: Siding & Exterior | Unsplash | `https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80` |
-| Service: Cleanouts | Unsplash | `https://images.unsplash.com/photo-1603796846097-bee99e4a601f?auto=format&fit=crop&w=800&q=80` |
-| Client: Property Mgmt | Unsplash | `https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80` |
-| Client: Financial | Unsplash | `https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80` |
-| Client: Real Estate | Unsplash | `https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80` |
-| Client: Investors | Unsplash | `https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=900&q=80` |
-| About: Team | Unsplash | `https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80` |
-| About: Coverage bg | Unsplash | `https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80` |
-| CTA Banner | Unsplash | `https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1920&q=80` |
-| Page Hero: Services | Unsplash | `https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80` |
-| Page Hero: Clients | Unsplash | `https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80` |
-| Page Hero: About | Unsplash | `https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80` |
-| Page Hero: Contact | Unsplash | `https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80` |
-| Avatar: Sarah M. | Pexels | `https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=150` |
-| Avatar: David K. | Pexels | `https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150` |
-| Avatar: Jennifer L. | Pexels | `https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=150` |
-| Avatar: Marcus T. | Pexels | `https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150` |
-| Avatar: Rachel C. | Pexels | `https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=150` |
-| Avatar: Brian W. | Pexels | `https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=150` |
+| Section                         | Source   | Full URL                                                                                             |
+| ------------------------------- | -------- | ---------------------------------------------------------------------------------------------------- |
+| Hero background                 | Unsplash | `https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1920&q=85`      |
+| Hero right card                 | Unsplash | `https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80`       |
+| Service: Maintenance & Plumbing | Unsplash | `https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80`          |
+| Service: Gutter Cleaning        | Unsplash | `https://images.unsplash.com/photo-1628348070889-cb656235b4eb?auto=format&fit=crop&w=800&q=80`       |
+| Service: Drywall & Painting     | Unsplash | `https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80`          |
+| Service: Property Cleaning      | Unsplash | `https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80`       |
+| Service: Landscaping            | Unsplash | `https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80`       |
+| Service: Siding & Exterior      | Unsplash | `https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80`       |
+| Service: Cleanouts              | Unsplash | `https://images.unsplash.com/photo-1603796846097-bee99e4a601f?auto=format&fit=crop&w=800&q=80`       |
+| Client: Property Mgmt           | Unsplash | `https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80`       |
+| Client: Financial               | Unsplash | `https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80`          |
+| Client: Real Estate             | Unsplash | `https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80`          |
+| Client: Investors               | Unsplash | `https://images.unsplash.com/photo-1460472178825-e5240623afd5?auto=format&fit=crop&w=900&q=80`       |
+| About: Team                     | Unsplash | `https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80`       |
+| About: Coverage bg              | Unsplash | `https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80`      |
+| CTA Banner                      | Unsplash | `https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1920&q=80`      |
+| Page Hero: Services             | Unsplash | `https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80`      |
+| Page Hero: Clients              | Unsplash | `https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80`      |
+| Page Hero: About                | Unsplash | `https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80`      |
+| Page Hero: Contact              | Unsplash | `https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=1920&q=80`      |
+| Avatar: Sarah M.                | Pexels   | `https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=150` |
+| Avatar: David K.                | Pexels   | `https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150` |
+| Avatar: Jennifer L.             | Pexels   | `https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=150` |
+| Avatar: Marcus T.               | Pexels   | `https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=150` |
+| Avatar: Rachel C.               | Pexels   | `https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=150` |
+| Avatar: Brian W.                | Pexels   | `https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=150` |
 
 ---
 
@@ -1275,8 +1278,8 @@ FINAL DELIVERABLE CHECK:
 1. **Start fresh conversation** for each chunk — paste project context first, then the chunk.
 2. **Attach reference URL and images** every time (Cursor can see them).
 3. If Cursor tries to create `tailwind.config.ts`, stop it immediately and say:
-   *"This project uses Tailwind v4. Do not create tailwind.config.ts. All theme config lives in globals.css inside @theme {}."*
-4. If Cursor skips something, say: *"You missed [X] from the chunk instructions — please implement it now."*
+   _"This project uses Tailwind v4. Do not create tailwind.config.ts. All theme config lives in globals.css inside @theme {}."_
+4. If Cursor skips something, say: _"You missed [X] from the chunk instructions — please implement it now."_
 5. After each chunk: run `npm run dev` and screenshot any issues for Cursor to fix.
 6. Before Chunk 9, run `npm run build` and paste any errors back to Cursor.
 7. Use `@codebase` in Cursor to give it full context when fixing cross-file issues.

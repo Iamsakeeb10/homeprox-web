@@ -158,13 +158,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                         Hours
                       </h3>
                       <p className="font-body text-charcoal">
-                        Mon–Fri: 8am–6pm
-                      </p>
-                      <p className="font-body text-text-muted text-sm mt-1">
-                        Saturday: Closed
-                      </p>
-                      <p className="font-body text-text-muted text-sm mt-1">
-                        Sunday: Closed
+                        Monday – Friday | 8:00 AM – 6:00 PM (CST)
                       </p>
                     </div>
                   </div>
@@ -221,8 +215,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               (682) 277-3555
             </a>
             <p className="font-body text-surface-300 mt-2 text-sm">
-              Monday – Friday: 8:00 AM – 6:00 PM &nbsp;·&nbsp; Saturday: closed
-              &nbsp;·&nbsp; Sunday: Closed
+              Monday – Friday | 8:00 AM – 6:00 PM (CST)
             </p>
           </div>
         </AnimatedSection>

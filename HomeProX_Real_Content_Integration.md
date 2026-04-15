@@ -1,9 +1,11 @@
 # HomeProX Home Services LLC — Real Content Integration Prompts
+
 ### Replace All Dummy/Placeholder Content with Real Client-Provided Copy
 
 ---
 
 > **How to Use These Prompts:**
+>
 > - The website is already fully built (all 9 chunks complete).
 > - These prompts replace any dummy/placeholder text with real client-provided content.
 > - Feed each Content Chunk **one at a time** to Cursor in a fresh conversation.
@@ -619,7 +621,7 @@ Only update text content.
     Location: Collin County, Texas
     Serving: "All of Texas Statewide"
     Hours:
-      Monday – Friday: 8:00 AM – 6:00 PM
+      Monday – Friday: 8:00 AM – 6:00 PM (CST)
       Saturday: closed
       Sunday: Closed
     Badges: "Fully Insured" | "Licensed Professionals"
@@ -1092,20 +1094,20 @@ npm run build completes with zero errors.
 
 ## QUICK REFERENCE — All Real Content At A Glance
 
-| Item | Real Value |
-|---|---|
-| Company Name | HomeProX Home Services LLC |
-| Phone | (469) 378-9262 |
-| Email | info@homeproxsvcs.com |
-| Location | Collin County, Texas |
-| Service Area | All of Texas Statewide |
-| Website | https://homeproxsvcs.com |
-| T&C Last Updated | February 24, 2026 |
-| Copyright Year | 2026 |
-| Governing Law | State of Texas, Collin County courts |
-| Total Services | 7 |
-| Total Client Types | 4 |
-| Total T&C Sections | 14 |
+| Item               | Real Value                           |
+| ------------------ | ------------------------------------ |
+| Company Name       | HomeProX Home Services LLC           |
+| Phone              | (469) 378-9262                       |
+| Email              | info@homeproxsvcs.com                |
+| Location           | Collin County, Texas                 |
+| Service Area       | All of Texas Statewide               |
+| Website            | https://homeproxsvcs.com             |
+| T&C Last Updated   | February 24, 2026                    |
+| Copyright Year     | 2026                                 |
+| Governing Law      | State of Texas, Collin County courts |
+| Total Services     | 7                                    |
+| Total Client Types | 4                                    |
+| Total T&C Sections | 14                                   |
 
 ---
 
@@ -1115,11 +1117,11 @@ npm run build completes with zero errors.
 2. Use `@codebase` at the start of **every conversation** so Cursor sees all files.
 3. Run `npm run dev` after every chunk — catch issues immediately.
 4. If Cursor starts changing styles or layout, stop it and say:
-   *"Do NOT change any Tailwind classes, styling, or component structure.
-   Only update the text content as specified."*
+   _"Do NOT change any Tailwind classes, styling, or component structure.
+   Only update the text content as specified."_
 5. If Cursor misses a section, say:
-   *"You missed [section name] — please update it now using the exact text
-   from the chunk instructions."*
+   _"You missed [section name] — please update it now using the exact text
+   from the chunk instructions."_
 6. Run `npm run build` after Chunk G to confirm zero errors before deployment.
 7. The order matters: A (services data) → B (clients data) → C (about page) →
    D (homepage sections) → E (contact + footer) → F (T&C page) → G (audit).

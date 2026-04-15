@@ -1,5 +1,4 @@
 import { ClientImage } from "@/components/cards/ClientImage";
-import { ClientTypeCard } from "@/components/cards/ClientTypeCard";
 import ClientsPageInteractive from "@/components/sections/ClientsPageInteractive";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
@@ -58,10 +57,16 @@ export default function ClientsPage() {
                   Excellence Through Collaboration
                 </h2>
                 <p className="font-body text-lg text-text-muted mb-4">
-                  HomeProX Home Services LLC partners with Texas business leaders and institutions seeking consistent maintenance, measurable results, and reliable service delivery. Our track record centers on dependable operations, transparent communication, and proven success managing hundreds of properties.
+                  HomeProX Services LLC partners with Texas business leaders and
+                  institutions seeking consistent maintenance, measurable
+                  results, and reliable service delivery. Our track record
+                  centers on dependable operations, transparent communication,
+                  and proven success managing hundreds of properties.
                 </p>
                 <p className="font-body text-lg text-text-muted mb-4">
-                  Property professionals, banking organizations, real estate specialists, and asset managers depend on us for maintenance, emergency support, asset care, and property compliance.
+                  Property professionals, banking organizations, real estate
+                  specialists, and asset managers depend on us for maintenance,
+                  emergency support, asset care, and property compliance.
                 </p>
                 <p className="font-body text-lg text-teal italic font-medium">
                   &quot;Real outcomes create lasting partnerships.&quot;
@@ -131,7 +136,7 @@ export default function ClientsPage() {
               {/* Section number badge */}
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal/10 border border-teal/30 mb-6">
                 <span className="font-display text-lg font-bold text-teal">
-                  {String(index + 1).padStart(2, '0')}
+                  {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
 
@@ -148,8 +153,12 @@ export default function ClientsPage() {
                     <div className="space-y-3">
                       {client.benefits.map((benefit, idx) => (
                         <div key={idx} className="flex items-start gap-3">
-                          <span className="text-teal font-bold text-lg mt-0.5">→</span>
-                          <span className="font-body text-text-muted">{benefit}</span>
+                          <span className="text-teal font-bold text-lg mt-0.5">
+                            →
+                          </span>
+                          <span className="font-body text-text-muted">
+                            {benefit}
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -190,7 +199,9 @@ export default function ClientsPage() {
                 How We Ensure Quality
               </h2>
               <p className="font-body text-lg text-text-muted text-center">
-                Every HomeProX engagement follows a rigorous three-step quality protocol designed to protect your investment and ensure professional outcomes.
+                Every HomeProX engagement follows a rigorous three-step quality
+                protocol designed to protect your investment and ensure
+                professional outcomes.
               </p>
             </div>
           </AnimatedSection>
@@ -232,9 +243,7 @@ export default function ClientsPage() {
                     <div className="w-12 h-12 rounded-full bg-teal text-white flex items-center justify-center font-display font-bold text-lg mb-4">
                       {step.number}
                     </div>
-                    {index < 2 && (
-                      <div className="w-1 h-24 bg-teal/20" />
-                    )}
+                    {index < 2 && <div className="w-1 h-24 bg-teal/20" />}
                   </div>
 
                   {/* Content */}

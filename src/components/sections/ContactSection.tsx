@@ -28,7 +28,7 @@ export function ContactSection() {
     {
       icon: Clock,
       label: "Hours",
-      value: "Available 7 days a week",
+      value: "Monday – Friday | 8:00 AM – 6:00 PM (CST)",
       href: null,
     },
   ];
