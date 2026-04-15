@@ -2,11 +2,15 @@ import { TeamPhoto } from "@/components/cards/TeamPhoto";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { Button } from "@/components/ui/Button";
 import {
-  Award,
-  Clock,
+  BadgeCheck,
+  Briefcase,
+  Building2,
+  FileCheck2,
   Home,
+  Mail,
+  MapPin,
   Paintbrush,
-  ShieldCheck,
+  Shield,
   Trash2,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -43,24 +47,57 @@ const serviceCategories = [
   },
 ];
 
-const values = [
+const complianceCards = [
   {
-    icon: ShieldCheck,
-    title: "Honesty",
-    description:
-      "We practice complete transparency — straightforward pricing, realistic timelines, and no unexpected charges.",
+    icon: Shield,
+    title: "General Liability",
+    subtitle: "GL Insurance",
+    status: "Active Coverage",
+    certificate: "COI Available",
   },
   {
-    icon: Clock,
-    title: "Dependability",
-    description:
-      "We show up on schedule, fulfill our commitments, and deliver results consistently across all properties.",
+    icon: Briefcase,
+    title: "Workers’ Compensation",
+    subtitle: "WC Insurance",
+    status: "Active Coverage",
+    certificate: "COI Available",
   },
   {
-    icon: Award,
-    title: "Excellence",
-    description:
-      "We maintain high standards on every project. Every task receives professional-level execution with proven durability.",
+    icon: FileCheck2,
+    title: "Errors & Omissions",
+    subtitle: "E&O Insurance",
+    status: "Active Coverage",
+    certificate: "COI Available",
+  },
+  {
+    icon: Building2,
+    title: "Texas LLC",
+    subtitle: "Registered Entity",
+    status: "Active Registration",
+    certificate: "Certificate Available",
+  },
+];
+
+const trustDetails = [
+  {
+    icon: Building2,
+    label: "Business Entity",
+    value: "HomeProX Services LLC — Texas Registered · EIN on File",
+  },
+  {
+    icon: MapPin,
+    label: "Primary Market",
+    value: "Dallas–Fort Worth · Texas Statewide",
+  },
+  {
+    icon: Mail,
+    label: "Request Documents",
+    value: "info@homeproxsvcs.com",
+  },
+  {
+    icon: BadgeCheck,
+    label: "Vendor Compliance",
+    value: "All vendors background-checked & insured",
   },
 ];
 
@@ -250,32 +287,79 @@ export default function AboutPage() {
       <section className="py-24 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection variant="fadeUp">
-            <div className="text-center mb-12">
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal mb-4">
-                Our Values
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <p className="font-accent text-xs sm:text-sm tracking-[0.22em] text-teal uppercase mb-4">
+                Compliance & Trust
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-charcoal mb-5">
+                Fully Licensed, Insured & Verified
               </h2>
-              <div className="w-20 h-1 bg-teal rounded-full mx-auto" />
+              <div className="w-24 h-1 bg-teal rounded-full mx-auto mb-5" />
+              <p className="font-body text-base sm:text-lg text-text-muted">
+                HomeProX Services operates as a registered Texas LLC. We carry
+                comprehensive insurance and make all certificates available on
+                request.
+              </p>
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {values.map((value, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+            {complianceCards.map((card, index) => (
               <AnimatedSection
-                key={value.title}
+                key={card.title}
                 variant="fadeUp"
                 delay={index * 0.1}
               >
-                <div className="pl-4 border-l-2 border-teal/40">
-                  <h3 className="font-display font-semibold text-charcoal mb-2 text-xl">
-                    {value.title}
-                  </h3>
-                  <p className="font-body text-text-muted">
-                    {value.description}
-                  </p>
+                <div className="group h-full bg-white border border-surface-200 rounded-2xl shadow-card hover:border-teal/40 hover:shadow-card-hover transition-all duration-300 overflow-hidden">
+                  <div className="h-1.5 w-full bg-gradient-to-r from-teal to-skyblue" />
+                  <div className="p-6">
+                    <card.icon
+                      className="w-10 h-10 text-teal mb-4"
+                      aria-hidden="true"
+                    />
+                    <h3 className="font-display font-bold text-charcoal text-xl mb-1">
+                      {card.title}
+                    </h3>
+                    <p className="font-accent text-[11px] uppercase tracking-[0.14em] text-text-muted mb-4">
+                      {card.subtitle}
+                    </p>
+                    <p className="font-body text-sm text-teal-dark font-medium mb-4">
+                      ✓ {card.status}
+                    </p>
+                    <span className="inline-flex items-center rounded-md bg-teal-muted px-3 py-1.5 font-accent text-[10px] uppercase tracking-[0.12em] text-charcoal">
+                      {card.certificate}
+                    </span>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
           </div>
+
+          <AnimatedSection variant="fadeUp" delay={0.15}>
+            <div className="rounded-2xl border border-surface-200 bg-surface-50 shadow-card px-4 py-4 sm:px-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                {trustDetails.map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-start gap-3 border-b border-surface-200 pb-4 last:border-b-0 last:pb-0 md:border-b-0 md:pb-0 xl:border-r xl:pr-4 last:xl:border-r-0"
+                  >
+                    <item.icon
+                      className="w-5 h-5 text-teal shrink-0 mt-0.5"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <p className="font-accent text-[10px] uppercase tracking-[0.14em] text-charcoal-muted mb-1">
+                        {item.label}
+                      </p>
+                      <p className="font-body text-sm text-charcoal leading-snug">
+                        {item.value}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

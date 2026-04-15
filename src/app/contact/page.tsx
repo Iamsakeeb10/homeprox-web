@@ -29,7 +29,10 @@ type ContactPageProps = {
 
 export default function ContactPage({ searchParams }: ContactPageProps) {
   const tabParam = searchParams?.tab;
-  const activeTab = (Array.isArray(tabParam) ? tabParam[0] : tabParam) === "quote" ? "quote" : "contact";
+  const activeTab =
+    (Array.isArray(tabParam) ? tabParam[0] : tabParam) === "quote"
+      ? "quote"
+      : "contact";
 
   return (
     <>
@@ -157,7 +160,10 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
                         Mon–Fri: 8am–6pm
                       </p>
                       <p className="font-body text-text-muted text-sm mt-1">
-                        Closed weekends
+                        Saturday: Closed
+                      </p>
+                      <p className="font-body text-text-muted text-sm mt-1">
+                        Sunday: Closed
                       </p>
                     </div>
                   </div>
