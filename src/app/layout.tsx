@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
-import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { ScrollToTop } from "@/components/shared/ScrollToTop";
 import { defaultMetadata } from "@/lib/metadata";
+import type { Metadata } from "next";
+import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import "./globals.css";
 
 const display = Outfit({
   subsets: ["latin"],
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body className="antialiased bg-white">
+      <body suppressHydrationWarning className="antialiased bg-white">
         {/* Skip Navigation Link */}
         <a
           href="#main-content"
