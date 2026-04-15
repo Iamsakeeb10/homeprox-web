@@ -1,4 +1,4 @@
-import { transporter } from "@/lib/utils/mailer";
+import { getMailerConfigError, transporter } from "@/lib/utils/mailer";
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
@@ -7,6 +7,14 @@ const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
 export async function POST(request: NextRequest) {
   try {
+    const mailerConfigError = getMailerConfigError();
+    if (mailerConfigError) {
+      return NextResponse.json(
+        { error: `Server email configuration error: ${mailerConfigError}` },
+        { status: 500 },
+      );
+    }
+
     const data = await request.formData();
 
     // ── Extract text fields ──────────────────────────────────
@@ -92,12 +100,13 @@ export async function POST(request: NextRequest) {
 
     const toAddress = process.env.CONTACT_EMAIL ?? process.env.EMAIL_USER;
     if (!toAddress || !process.env.EMAIL_USER) {
-      console.error("[/api/vendor] Missing env: CONTACT_EMAIL or EMAIL_USER");
       return NextResponse.json(
         { error: "Server email configuration is missing." },
         { status: 500 },
       );
     }
+
+    await transporter.verify();
 
     await transporter.sendMail({
       from: `"HomeProX Vendor Portal" <${process.env.EMAIL_USER}>`,
@@ -108,11 +117,19 @@ export async function POST(request: NextRequest) {
       attachments,
     });
 
-    console.log(
-      `[/api/vendor] Vendor application email sent to ${toAddress} (${companyName})`,
-    );
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
+  } catch (error: unknown) {
+    const smtpError = error as { code?: string };
+    if (smtpError?.code === "EAUTH") {
+      return NextResponse.json(
+        {
+          error:
+            "Email authentication failed. Verify EMAIL_USER and EMAIL_PASS in your environment variables.",
+        },
+        { status: 500 },
+      );
+    }
+
     console.error("[/api/vendor] Error:", error);
     return NextResponse.json(
       { error: "Internal server error. Please try again later." },
