@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components/forms/ContactForm";
+import { ContactTabsForms } from "@/components/sections/ContactTabsForms";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { CheckCircle2, Clock, Mail, MapPin, Phone } from "lucide-react";
 import type { Metadata } from "next";
@@ -21,7 +21,16 @@ const TRUST_ITEMS = [
   "Supporting Residential & Commercial Properties",
 ];
 
-export default function ContactPage() {
+type ContactPageProps = {
+  searchParams?: {
+    tab?: string | string[];
+  };
+};
+
+export default function ContactPage({ searchParams }: ContactPageProps) {
+  const tabParam = searchParams?.tab;
+  const activeTab = (Array.isArray(tabParam) ? tabParam[0] : tabParam) === "quote" ? "quote" : "contact";
+
   return (
     <>
       {/* Page Hero — same overlay and font styles as Services, About */}
@@ -159,18 +168,7 @@ export default function ContactPage() {
 
           {/* Contact Form */}
           <AnimatedSection variant="fadeUp">
-            <div className="max-w-2xl mx-auto">
-              <div className="bg-surface-50 rounded-2xl p-10 md:p-14 border border-surface-200">
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal mb-2 text-center">
-                  Send us a Message
-                </h2>
-                <p className="font-body text-text-muted text-center mb-10">
-                  Have questions? Fill out the form below and we'll get back to
-                  you shortly.
-                </p>
-                <ContactForm />
-              </div>
-            </div>
+            <ContactTabsForms initialTab={activeTab} />
           </AnimatedSection>
         </div>
       </section>

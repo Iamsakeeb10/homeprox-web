@@ -163,7 +163,7 @@ export function ServiceCard({ service, variant = "grid" }: ServiceCardProps) {
 
           {/* CTA Button */}
           <Button variant="secondary" size="md" className="mt-auto" asChild>
-            <Link href="/quote">Get a Quote</Link>
+            <Link href="/contact?tab=quote">Get a Quote</Link>
           </Button>
         </div>
       </motion.div>

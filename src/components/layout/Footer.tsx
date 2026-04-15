@@ -102,7 +102,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/quote"
+                  href="/contact?tab=quote"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200"
                 >
                   Get a Quote

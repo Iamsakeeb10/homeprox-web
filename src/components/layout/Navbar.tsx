@@ -7,17 +7,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-// const navLinks = [
-//   { label: "Home", href: "/" },
-//   { label: "Services", href: "/services" },
-//   { label: "Client", href: "/clients" },
-//   { label: "Vendor", href: "/vendors" },
-//   { label: "About", href: "/about" },
-//   { label: "Contact", href: "/contact" },
-// ];
-
-// const ctaLink = { label: "Get a Quote", href: "/quote" };
-
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
@@ -26,8 +15,6 @@ const navLinks = [
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
-
-const ctaLink = { label: "Get a Quote", href: "/quote" };
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -63,16 +50,6 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href={ctaLink.href}
-              className={`font-accent text-base transition duration-300 ease-out px-3 py-1 rounded-full ${
-                pathname === ctaLink.href
-                  ? "text-teal font-semibold"
-                  : "text-charcoal hover:text-teal"
-              }`}
-            >
-              {ctaLink.label}
-            </Link>
           </div>
           <div className="hidden lg:flex items-center gap-3">
             <Link
@@ -131,13 +108,6 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href={ctaLink.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block w-full text-center font-accent text-lg text-charcoal hover:text-teal rounded-full transition duration-300 py-3"
-              >
-                {ctaLink.label}
-              </Link>
               <a
                 href="tel:+6822773555"
                 onClick={() => setMobileMenuOpen(false)}

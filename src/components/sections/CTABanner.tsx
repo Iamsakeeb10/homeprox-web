@@ -35,7 +35,7 @@ export function CTABanner({ variant = "dark" }: CTABannerProps) {
                   or
                 </span>
                 <Button variant="secondary" size="lg" asChild>
-                  <Link href="/quote">Get a Quote</Link>
+                  <Link href="/contact?tab=quote">Get a Quote</Link>
                 </Button>
               </div>
             </div>
@@ -76,7 +76,7 @@ export function CTABanner({ variant = "dark" }: CTABannerProps) {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button variant="primary" size="lg" asChild>
-                <Link href="/quote">Get a Free Quote</Link>
+                <Link href="/contact?tab=quote">Get a Free Quote</Link>
               </Button>
               <span className="hidden sm:block text-white/30 text-sm">or</span>
               <Button variant="secondary" size="lg" asChild>
