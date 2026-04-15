@@ -23,13 +23,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Column 1: Company Info */}
           <div>
-            <div className="inline-flex bg-white rounded-md  mb-4">
+            <div className="inline-flex bg-white rounded-md mb-4">
               <Image
                 src="/images/logo.png"
                 alt="HomeProX Services LLC"
-                width={220}
-                height={10}
-                className="h-16 w-auto object-contain"
+                width={150}
+                height={40}
+                className="h-12 w-auto object-contain"
               />
             </div>
             <p className="font-body text-surface-300 text-sm mb-4">

@@ -1,13 +1,13 @@
+import { Button } from "@/components/ui/Button";
+import { generatePageMetadata } from "@/lib/metadata";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { generatePageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "404 - Page Not Found | HomeProX Services LLC",
   description: "The page you're looking for doesn't exist.",
-  path: "/404"
+  path: "/404",
 });
 
 export default function NotFound() {
@@ -16,7 +16,10 @@ export default function NotFound() {
       {/* Animated Background Element */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-surface-100 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-surface-200 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-surface-200 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
       </div>
 
       {/* Content */}
@@ -25,9 +28,9 @@ export default function NotFound() {
           <Image
             src="/images/logo.png"
             alt="HomeProX Services LLC"
-            width={220}
-            height={66}
-            className="h-16 w-auto object-contain mx-auto"
+            width={150}
+            height={45}
+            className="h-8 w-auto object-contain mx-auto"
             priority
           />
         </div>

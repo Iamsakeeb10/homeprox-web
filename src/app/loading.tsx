@@ -23,9 +23,9 @@ export default function Loading() {
           <Image
             src="/images/logo.png"
             alt="HomeProX Services LLC"
-            width={240}
-            height={72}
-            className="h-20 w-auto object-contain mx-auto"
+            width={150}
+            height={45}
+            className="h-8 w-auto object-contain mx-auto"
             priority
           />
         </motion.div>

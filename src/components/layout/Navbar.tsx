@@ -29,9 +29,9 @@ export function Navbar() {
             <Image
               src="/images/logo.png"
               alt="HomeProX Services LLC"
-              width={220}
-              height={66}
-              className="relative z-10 w-auto h-14 sm:h-20 object-contain"
+              width={150}
+              height={45}
+              className="relative z-10 w-auto h-7 sm:h-8 object-contain"
               priority
             />
           </Link>
