@@ -58,12 +58,12 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
         </div>
       </div>
 
-      {/* Stars — skyblue for prestige accent */}
+      {/* Stars — yellow accent */}
       <div className="flex gap-1 mb-4">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
-            className="w-5 h-5 text-skyblue fill-skyblue"
+            className="w-5 h-5 text-yellow-400 fill-yellow-400"
             aria-hidden="true"
           />
         ))}
