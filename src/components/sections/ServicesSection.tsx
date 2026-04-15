@@ -1,12 +1,9 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
-import { services } from "@/lib/data/services";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import Image from "next/image";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { services } from "@/lib/data/services";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle,
@@ -16,8 +13,11 @@ import {
   Paintbrush,
   Sparkles,
   Trash2,
-  Wrench
+  Wrench,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 // Icon mapping for service cards
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -28,7 +28,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Leaf,
   Home,
   Trash2,
-  CheckCircle
+  CheckCircle,
 };
 
 function ServiceCard({
@@ -44,16 +44,19 @@ function ServiceCard({
   const [showAllFeatures, setShowAllFeatures] = React.useState(false);
   const IconComponent = iconMap[service.icon] || Wrench;
   const hasImage = Boolean(service.image?.trim()) && !imgError;
-  const visibleFeatures = showAllFeatures ? service.features : service.features.slice(0, 3);
+  const visibleFeatures = showAllFeatures
+    ? service.features
+    : service.features.slice(0, 3);
 
   return (
     <motion.div
+      id={service.slug}
       key={service.id}
       initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
       whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.08 }}
-      className="h-full"
+      className="h-full scroll-mt-36"
     >
       <div className="bg-white border border-surface-200 rounded-2xl overflow-hidden flex flex-col sm:flex-row h-full shadow-card hover:border-teal/40 hover:shadow-card-hover transition-all duration-300 group hover:-translate-y-1">
         <div className="relative w-full sm:w-2/5 h-48 sm:h-auto sm:min-h-[280px] flex-shrink-0">
@@ -67,7 +70,10 @@ function ServiceCard({
             />
           ) : (
             <div className="w-full h-full bg-surface-100 border-r border-surface-200 flex flex-col items-center justify-center text-center p-4">
-              <IconComponent className="w-10 h-10 text-teal mb-2" aria-hidden="true" />
+              <IconComponent
+                className="w-10 h-10 text-teal mb-2"
+                aria-hidden="true"
+              />
               <p className="font-body text-sm text-text-muted">Image needed</p>
               <p className="font-body text-xs text-text-muted/80">
                 Add local service image
@@ -105,7 +111,9 @@ function ServiceCard({
                     className="w-3.5 h-3.5 text-teal mt-0.5 flex-shrink-0"
                     aria-hidden="true"
                   />
-                  <span className="font-body text-text-muted text-xs">{feature}</span>
+                  <span className="font-body text-text-muted text-xs">
+                    {feature}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -141,6 +149,44 @@ function ServiceCard({
 
 export function ServicesSection() {
   const shouldReduceMotion = useReducedMotion();
+
+  React.useEffect(() => {
+    const scrollToHashTarget = () => {
+      const hash = window.location.hash.slice(1);
+      if (!hash) {
+        return;
+      }
+
+      const targetId = decodeURIComponent(hash);
+      let attempts = 0;
+      const maxAttempts = 8;
+
+      const tryScroll = () => {
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({
+            behavior: shouldReduceMotion ? "auto" : "smooth",
+            block: "start",
+          });
+          return;
+        }
+
+        attempts += 1;
+        if (attempts < maxAttempts) {
+          window.setTimeout(tryScroll, 120);
+        }
+      };
+
+      window.requestAnimationFrame(tryScroll);
+    };
+
+    scrollToHashTarget();
+    window.addEventListener("hashchange", scrollToHashTarget);
+
+    return () => {
+      window.removeEventListener("hashchange", scrollToHashTarget);
+    };
+  }, [shouldReduceMotion]);
 
   return (
     <section id="services" className="py-24 lg:py-32 bg-white">

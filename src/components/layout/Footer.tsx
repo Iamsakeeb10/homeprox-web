@@ -119,7 +119,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/services"
+                  href="/services#everyday-repairs-handyman-solutions"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
                   Everyday Repairs & Handyman Solutions
@@ -127,7 +127,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services#home-renovation-upgrades"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
                   Home Renovation & Upgrades
@@ -135,7 +135,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services#ongoing-property-care"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
                   Ongoing Property Care
@@ -143,7 +143,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services#asset-protection-preservation"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
                   Asset Protection & Preservation
@@ -151,7 +151,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services#outdoor-repair-maintenance"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
                   Outdoor Repair & Maintenance
@@ -159,7 +159,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services#professional-cleaning-services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
                   Professional Cleaning Services
@@ -167,7 +167,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services"
+                  href="/services#electrical-plumbing-services"
                   className="font-body text-surface-300 hover:text-white transition-colors duration-200 text-sm"
                 >
                   Electrical & Plumbing Services

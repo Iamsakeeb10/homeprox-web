@@ -1,18 +1,27 @@
 "use client";
 
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2, ChevronDown, FileText, Loader2, Send, Upload, X } from "lucide-react";
+import {
+  CheckCircle2,
+  ChevronDown,
+  FileText,
+  Loader2,
+  Send,
+  Upload,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 
-const INQUIRY_OPTIONS: { value: string; label: string; disabled?: boolean }[] = [
-  { value: "", label: "Select an option...", disabled: true },
-  { value: "maintenance", label: "Property Maintenance Service" },
-  { value: "client", label: "Client Partnership" },
-  { value: "vendor", label: "Vendor Application" },
-  { value: "inquiry", label: "General Inquiry" },
-  { value: "support", label: "Support" },
-];
+const INQUIRY_OPTIONS: { value: string; label: string; disabled?: boolean }[] =
+  [
+    { value: "", label: "Select an option...", disabled: true },
+    { value: "maintenance", label: "Property Maintenance Service" },
+    { value: "client", label: "Client Partnership" },
+    { value: "vendor", label: "Vendor Application" },
+    { value: "inquiry", label: "General Inquiry" },
+    { value: "support", label: "Support" },
+  ];
 
 type InquiryValue = string;
 
@@ -38,7 +47,8 @@ const MAX_FILE_BYTES = 10 * 1024 * 1024;
 const inputBase =
   "bg-surface-50 border border-surface-200 rounded-lg px-4 py-3 font-body text-charcoal placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal transition-colors duration-200 w-full";
 const inputError = "border-error focus:ring-error/30";
-const labelBase = "block font-accent text-sm font-semibold text-charcoal mb-1.5";
+const labelBase =
+  "block font-accent text-sm font-semibold text-charcoal mb-1.5";
 
 function getServiceNeededLabel(value: InquiryValue): string {
   const option = INQUIRY_OPTIONS.find((o) => o.value === value);
@@ -62,11 +72,17 @@ export function ContactForm() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value, type } = e.target;
-    const checked = type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
-    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+    const checked =
+      type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -83,7 +99,8 @@ export function ContactForm() {
     if (!form.message.trim()) e.message = "Message is required.";
     else if (form.message.trim().length < 10)
       e.message = "Message must be at least 10 characters.";
-    if (!form.agreeToTerms) e.agreeToTerms = "You must agree to the Terms and Conditions to submit.";
+    if (!form.agreeToTerms)
+      e.agreeToTerms = "You must agree to the Terms and Conditions to submit.";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -150,7 +167,9 @@ export function ContactForm() {
       if (res.ok && data.success) {
         setSuccess(true);
       } else {
-        setSubmitError(data?.error ?? "Something went wrong. Please try again.");
+        setSubmitError(
+          data?.error ?? "Something went wrong. Please try again.",
+        );
       }
     } catch {
       setSubmitError("Failed to send. Please try again.");
@@ -165,9 +184,12 @@ export function ContactForm() {
         <div className="w-16 h-16 rounded-full bg-teal-muted flex items-center justify-center mx-auto mb-4">
           <CheckCircle2 className="text-teal" size={32} />
         </div>
-        <h3 className="font-display text-2xl font-bold text-charcoal mb-2">Message Sent!</h3>
+        <h3 className="font-display text-2xl font-bold text-charcoal mb-2">
+          Message Sent!
+        </h3>
         <p className="font-body text-text-muted max-w-sm mx-auto">
-          Thank you for reaching out. Our team will respond within 1 business day.
+          Thank you for reaching out. Our team will respond within 1 business
+          day.
         </p>
       </div>
     );
@@ -177,7 +199,10 @@ export function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       <div>
         <label htmlFor="contact-name" className={labelBase}>
-          Name<span className="text-teal ml-0.5" aria-hidden="true">*</span>
+          Name
+          <span className="text-teal ml-0.5" aria-hidden="true">
+            *
+          </span>
         </label>
         <input
           id="contact-name"
@@ -191,7 +216,11 @@ export function ContactForm() {
           aria-describedby={errors.name ? "contact-name-error" : undefined}
         />
         {errors.name && (
-          <p id="contact-name-error" className="mt-1.5 text-sm text-error font-body" role="alert">
+          <p
+            id="contact-name-error"
+            className="mt-1.5 text-sm text-error font-body"
+            role="alert"
+          >
             {errors.name}
           </p>
         )}
@@ -199,7 +228,10 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="contact-email" className={labelBase}>
-          Email<span className="text-teal ml-0.5" aria-hidden="true">*</span>
+          Email
+          <span className="text-teal ml-0.5" aria-hidden="true">
+            *
+          </span>
         </label>
         <input
           id="contact-email"
@@ -211,9 +243,14 @@ export function ContactForm() {
           className={`${inputBase} ${errors.email ? inputError : ""}`}
           aria-invalid={!!errors.email}
           aria-describedby={errors.email ? "contact-email-error" : undefined}
+          suppressHydrationWarning
         />
         {errors.email && (
-          <p id="contact-email-error" className="mt-1.5 text-sm text-error font-body" role="alert">
+          <p
+            id="contact-email-error"
+            className="mt-1.5 text-sm text-error font-body"
+            role="alert"
+          >
             {errors.email}
           </p>
         )}
@@ -236,7 +273,10 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="contact-inquiryType" className={labelBase}>
-          What can we help you with?<span className="text-teal ml-0.5" aria-hidden="true">*</span>
+          What can we help you with?
+          <span className="text-teal ml-0.5" aria-hidden="true">
+            *
+          </span>
         </label>
         <div className="relative">
           <select
@@ -246,10 +286,16 @@ export function ContactForm() {
             onChange={handleChange}
             className={`${inputBase} appearance-none pr-10 ${errors.inquiryType ? inputError : ""}`}
             aria-invalid={!!errors.inquiryType}
-            aria-describedby={errors.inquiryType ? "contact-inquiryType-error" : undefined}
+            aria-describedby={
+              errors.inquiryType ? "contact-inquiryType-error" : undefined
+            }
           >
             {INQUIRY_OPTIONS.map((opt) => (
-              <option key={opt.value || "empty"} value={opt.value} disabled={opt.disabled === true}>
+              <option
+                key={opt.value || "empty"}
+                value={opt.value}
+                disabled={opt.disabled === true}
+              >
                 {opt.label}
               </option>
             ))}
@@ -261,7 +307,11 @@ export function ContactForm() {
           />
         </div>
         {errors.inquiryType && (
-          <p id="contact-inquiryType-error" className="mt-1.5 text-sm text-error font-body" role="alert">
+          <p
+            id="contact-inquiryType-error"
+            className="mt-1.5 text-sm text-error font-body"
+            role="alert"
+          >
             {errors.inquiryType}
           </p>
         )}
@@ -269,7 +319,10 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="contact-message" className={labelBase}>
-          Message<span className="text-teal ml-0.5" aria-hidden="true">*</span>
+          Message
+          <span className="text-teal ml-0.5" aria-hidden="true">
+            *
+          </span>
         </label>
         <textarea
           id="contact-message"
@@ -280,10 +333,16 @@ export function ContactForm() {
           placeholder="Please tell us how we can assist you."
           className={`${inputBase} resize-y min-h-[120px] ${errors.message ? inputError : ""}`}
           aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? "contact-message-error" : undefined}
+          aria-describedby={
+            errors.message ? "contact-message-error" : undefined
+          }
         />
         {errors.message && (
-          <p id="contact-message-error" className="mt-1.5 text-sm text-error font-body" role="alert">
+          <p
+            id="contact-message-error"
+            className="mt-1.5 text-sm text-error font-body"
+            role="alert"
+          >
             {errors.message}
           </p>
         )}
@@ -291,7 +350,8 @@ export function ContactForm() {
 
       <div>
         <label className={labelBase}>
-          Attachments <span className="text-text-muted font-normal">(Optional)</span>
+          Attachments{" "}
+          <span className="text-text-muted font-normal">(Optional)</span>
         </label>
         <div
           role="button"
@@ -374,10 +434,15 @@ export function ContactForm() {
             checked={form.agreeToTerms}
             onChange={handleChange}
             className="mt-1 h-4 w-4 rounded border-surface-300 text-teal focus:ring-teal focus:ring-offset-0 cursor-pointer"
-            aria-describedby={errors.agreeToTerms ? "contact-agreeToTerms-error" : undefined}
+            aria-describedby={
+              errors.agreeToTerms ? "contact-agreeToTerms-error" : undefined
+            }
             aria-invalid={errors.agreeToTerms ? "true" : "false"}
           />
-          <label htmlFor="contact-agreeToTerms" className="font-body text-sm text-charcoal cursor-pointer">
+          <label
+            htmlFor="contact-agreeToTerms"
+            className="font-body text-sm text-charcoal cursor-pointer"
+          >
             I agree to the{" "}
             <Link
               href="/terms"
@@ -385,8 +450,8 @@ export function ContactForm() {
             >
               Terms and Conditions
             </Link>{" "}
-            provided by the company. By providing my phone number, I agree to receive text messages from
-            HomeProX Services LLC.
+            provided by the company. By providing my phone number, I agree to
+            receive text messages from HomeProX Services LLC.
           </label>
         </div>
         {errors.agreeToTerms && (
@@ -401,7 +466,11 @@ export function ContactForm() {
       </div>
 
       {submitError && (
-        <p className="text-sm text-error font-body" role="alert" aria-live="polite">
+        <p
+          className="text-sm text-error font-body"
+          role="alert"
+          aria-live="polite"
+        >
           {submitError}
         </p>
       )}
