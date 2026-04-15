@@ -192,7 +192,7 @@ export function Hero() {
                 className="flex flex-wrap gap-3 sm:gap-4"
               >
                 <Button size="lg" asChild>
-                  <Link href="/quote">Get a Free Quote</Link>
+                  <Link href="/contact?tab=quote">Get a Free Quote</Link>
                 </Button>
                 <Button
                   variant="secondary"
@@ -289,7 +289,7 @@ export function Hero() {
               {/* Card CTA footer */}
               <div className="px-6 py-4 border-t border-white/10 bg-teal/8">
                 <Link
-                  href="/quote"
+                  href="/contact?tab=quote"
                   className="font-accent text-sm font-semibold text-teal hover:text-white transition-colors flex items-center gap-1.5 group"
                 >
                   Request a free property assessment

@@ -117,7 +117,7 @@ export function WhyChooseUs() {
                   Need a dependable maintenance partner for your properties?
                 </p>
                 <Link
-                  href="/quote"
+                  href="/contact?tab=quote"
                   className="inline-flex items-center gap-2 text-teal font-accent font-medium text-sm hover:text-teal-dark transition-colors duration-300"
                 >
                   Request a Quote

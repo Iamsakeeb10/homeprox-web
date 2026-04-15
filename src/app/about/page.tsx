@@ -293,7 +293,7 @@ export default function AboutPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button variant="primary" size="lg" asChild>
-                  <Link href="/quote">Get a Free Quote</Link>
+                  <Link href="/contact?tab=quote">Get a Free Quote</Link>
                 </Button>
                 <span className="text-surface-300">or</span>
                 <a

@@ -2,7 +2,7 @@
 
 import { ContactForm } from "@/components/forms/ContactForm";
 import { QuoteForm } from "@/components/forms/QuoteForm";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ContactTab = "contact" | "quote";
 
@@ -15,14 +15,25 @@ const TAB_STYLES =
 
 export function ContactTabsForms({ initialTab }: ContactTabsFormsProps) {
   const [activeTab, setActiveTab] = useState<ContactTab>(initialTab);
+  const quoteFormRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setActiveTab(initialTab);
   }, [initialTab]);
 
+  useEffect(() => {
+    if (activeTab !== "quote" || !quoteFormRef.current) {
+      return;
+    }
+
+    const yPosition =
+      quoteFormRef.current.getBoundingClientRect().top + window.scrollY - 120;
+    window.scrollTo({ top: Math.max(yPosition, 0), behavior: "smooth" });
+  }, [activeTab]);
+
   return (
     <div className="max-w-3xl mx-auto">
-      <div className="mb-8 flex flex-wrap items-center justify-center gap-3 rounded-2xl border border-surface-200 bg-white p-3">
+      <div className="mb-8 flex flex-wrap items-center justify-center gap-3 rounded-2xl bg-white p-3">
         <button
           type="button"
           onClick={() => setActiveTab("contact")}
@@ -49,7 +60,10 @@ export function ContactTabsForms({ initialTab }: ContactTabsFormsProps) {
         </button>
       </div>
 
-      <div className="bg-surface-50 rounded-2xl p-10 md:p-14 border border-surface-200">
+      <div
+        ref={quoteFormRef}
+        className="bg-surface-50 rounded-2xl p-10 md:p-14 border border-surface-200"
+      >
         <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal mb-2 text-center">
           {activeTab === "contact" ? "Send us a Message" : "Request a Quote"}
         </h2>

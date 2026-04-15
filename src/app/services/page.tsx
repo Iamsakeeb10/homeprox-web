@@ -110,7 +110,7 @@ export default function ServicesPage() {
               {/* Right: CTA Buttons Stack */}
               <div className="flex flex-col items-center gap-0">
                 <Button variant="primary" size="lg" asChild>
-                  <Link href="/quote">Get a Free Quote</Link>
+                  <Link href="/contact?tab=quote">Get a Free Quote</Link>
                 </Button>
                 <div className="h-px w-12 bg-teal my-4" />
                 <a
