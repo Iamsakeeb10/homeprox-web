@@ -119,9 +119,7 @@ export function Hero() {
           className="w-full h-full object-cover object-center"
         />
         {/* Base dark layer */}
-        <div className="absolute inset-0 bg-charcoal/72" />
-        {/* Stronger vignette on right so glass card pops */}
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 via-charcoal/30 to-charcoal/55" />
+        <div className="absolute inset-0 bg-charcoal/65" />
         {/* Bottom gradient so marquee strip transitions cleanly */}
         <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-charcoal/80 to-transparent" />
       </div>
