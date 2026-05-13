@@ -59,7 +59,15 @@ export async function POST(request: NextRequest) {
       const label =
         (data.get(`document_label_${i}`) as string) || `Document ${i + 1}`;
 
-      if (file && file.size > 0) {
+      if (file) {
+        console.log(
+          `[api/vendor] Received file: name=${file.name} size=${file.size} type=${file.type}`,
+        );
+        if (file.size === 0) {
+          console.warn(`[api/vendor] Skipping zero-byte file: ${file.name}`);
+          continue;
+        }
+
         if (file.size > MAX_FILE_BYTES) {
           return NextResponse.json(
             { error: `File "${file.name}" exceeds the 10 MB size limit.` },
@@ -75,7 +83,6 @@ export async function POST(request: NextRequest) {
         });
         uploadedDocumentLabels.push(`${label}: ${file.name}`);
       }
-      // ← NO i++ here
     }
 
     // ── Build email HTML ─────────────────────────────────────────────────────

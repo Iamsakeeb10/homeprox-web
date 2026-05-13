@@ -1,3 +1,9 @@
+export interface DocumentMeta {
+  name: string;
+  size: number;
+  type: string;
+}
+
 export interface VendorFormData {
   // Step 1 — Company Information
   companyName: string;
@@ -25,8 +31,8 @@ export interface VendorFormData {
   turnaround2448: string; // "Yes" | "No"
   additionalNotes: string; // optional
 
-  // Step 5 — Document Uploads (keyed by document id → File | null)
-  documentUploads: Record<string, File | null>;
+  // Step 5 — Document Uploads (keyed by document id → File | DocumentMeta | null)
+  documentUploads: Record<string, File | DocumentMeta | null>;
 
   // Terms acceptance (required before submit)
   agreeToTerms: boolean;

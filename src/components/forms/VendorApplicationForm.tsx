@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type {
+  DocumentMeta,
   VendorFormData,
   VendorFormErrors,
   VendorSuccessPayload,
@@ -277,14 +278,25 @@ const MIN_STEP = 1;
 const MAX_STEP = STEPS.length;
 
 type VendorDraftData = Omit<VendorFormData, "documentUploads"> & {
-  documentUploads: Record<string, null>;
+  documentUploads: Record<string, DocumentMeta | null>;
 };
 
 function serializeDraftFormData(formData: VendorFormData): VendorDraftData {
   return {
     ...formData,
     documentUploads: Object.fromEntries(
-      Object.keys(formData.documentUploads).map((id) => [id, null]),
+      Object.entries(formData.documentUploads).map(([id, val]) => {
+        if (!val) return [id, null];
+        // If it's a File, persist only metadata; if it's already metadata, keep it
+        if ((val as File).name && typeof (val as File).size === "number") {
+          const f = val as File;
+          return [
+            id,
+            { name: f.name, size: f.size, type: f.type } as DocumentMeta,
+          ];
+        }
+        return [id, val as DocumentMeta];
+      }),
     ),
   };
 }
@@ -297,7 +309,11 @@ function persistVendorDraft(currentStep: number, formData: VendorFormData) {
   );
 }
 
-function validateStep(step: number, data: VendorFormData): VendorFormErrors {
+function validateStep(
+  step: number,
+  data: VendorFormData,
+  fileRefs?: Record<string, File | null>,
+): VendorFormErrors {
   const errors: VendorFormErrors = {};
 
   if (step === 1) {
@@ -347,7 +363,12 @@ function validateStep(step: number, data: VendorFormData): VendorFormErrors {
 
   // ── Step 5: W-9 is mandatory ──────────────────────────────────────────────
   if (step === 5) {
-    if (!data.documentUploads["w9"]) {
+    // If fileRefs provided (in-memory Files), require actual File objects;
+    // otherwise fall back to persisted metadata in formData.
+    const w9Present = fileRefs
+      ? Boolean(fileRefs["w9"])
+      : Boolean(data.documentUploads["w9"]);
+    if (!w9Present) {
       errors.documentUploads = "A completed W-9 form is required to continue.";
     }
   }
@@ -383,6 +404,7 @@ function UploadCard({
   description,
   required,
   file,
+  cleared,
   onUpload,
   onRemove,
 }: {
@@ -391,6 +413,7 @@ function UploadCard({
   description: string;
   required?: boolean;
   file: File | null;
+  cleared?: boolean;
   onUpload: (id: string, file: File | null) => void;
   onRemove: (id: string) => void;
 }) {
@@ -426,26 +449,33 @@ function UploadCard({
 
       {/* Upload / preview area */}
       {!file ? (
-        <label
-          htmlFor={`doc-${id}`}
-          className="flex flex-col items-center justify-center gap-1.5 border-2 border-dashed border-surface-300 rounded-lg p-4 cursor-pointer hover:border-teal/50 hover:bg-white transition-colors bg-white text-center"
-        >
-          <Upload className="w-4 h-4 text-teal" aria-hidden />
-          <span className="font-body text-sm font-medium text-charcoal">
-            Upload File
-          </span>
-          <span className="font-body text-xs text-text-muted">
-            or drag and drop
-          </span>
-          <input
-            id={`doc-${id}`}
-            type="file"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="hidden"
-            onChange={(e) => onUpload(id, e.target.files?.[0] ?? null)}
-            aria-label={`Upload ${label}`}
-          />
-        </label>
+        <>
+          <label
+            htmlFor={`doc-${id}`}
+            className="flex flex-col items-center justify-center gap-1.5 border-2 border-dashed border-surface-300 rounded-lg p-4 cursor-pointer hover:border-teal/50 hover:bg-white transition-colors bg-white text-center"
+          >
+            <Upload className="w-4 h-4 text-teal" aria-hidden />
+            <span className="font-body text-sm font-medium text-charcoal">
+              Upload File
+            </span>
+            <span className="font-body text-xs text-text-muted">
+              or drag and drop
+            </span>
+            <input
+              id={`doc-${id}`}
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="hidden"
+              onChange={(e) => onUpload(id, e.target.files?.[0] ?? null)}
+              aria-label={`Upload ${label}`}
+            />
+          </label>
+          {cleared && (
+            <p className="text-xs text-error mt-1">
+              File cleared — please re-upload.
+            </p>
+          )}
+        </>
       ) : (
         <div className="flex items-center justify-between gap-3 bg-white border border-surface-200 rounded-lg px-4 py-3">
           <div className="flex items-center gap-2.5 min-w-0">
@@ -481,6 +511,8 @@ export default function VendorApplicationForm() {
   const router = useRouter();
   const hasRestoredDraftRef = useRef(false);
   const skipNextPersistRef = useRef(true);
+  // Store actual File objects in a ref so they survive in-memory navigation and retries.
+  const fileUploadsRef = useRef<Record<string, File | null>>({});
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<VendorFormData>(INITIAL_DATA);
   const [errors, setErrors] = useState<VendorFormErrors>({});
@@ -509,7 +541,9 @@ export default function VendorApplicationForm() {
           serviceCategories: Array.isArray(draftFormData.serviceCategories)
             ? draftFormData.serviceCategories
             : prev.serviceCategories,
-          documentUploads: prev.documentUploads,
+          documentUploads:
+            (draftFormData as Partial<VendorDraftData>).documentUploads ??
+            prev.documentUploads,
         }));
       }
       if (typeof parsed.currentStep === "number") {
@@ -583,14 +617,21 @@ export default function VendorApplicationForm() {
       toast.error(`File exceeds the 10 MB size limit: ${file.name}`);
       return;
     }
+    // Keep the real File in a ref (not serializable). Store only metadata in state.
+    fileUploadsRef.current[id] = file;
     toast.success(`File "${file.name}" uploaded successfully`);
     setFormData((prev) => ({
       ...prev,
-      documentUploads: { ...prev.documentUploads, [id]: file },
+      documentUploads: {
+        ...prev.documentUploads,
+        [id]: { name: file.name, size: file.size, type: file.type },
+      },
     }));
   };
 
   const removeDocument = (id: string) => {
+    // Clear both the File ref and the persisted metadata
+    fileUploadsRef.current[id] = null;
     setFormData((prev) => ({
       ...prev,
       documentUploads: { ...prev.documentUploads, [id]: null },
@@ -598,7 +639,11 @@ export default function VendorApplicationForm() {
   };
 
   const handleNext = () => {
-    const stepErrors = validateStep(currentStep, formData);
+    const stepErrors = validateStep(
+      currentStep,
+      formData,
+      currentStep === 5 ? fileUploadsRef.current : undefined,
+    );
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
       // Show toast for the first error
@@ -618,13 +663,20 @@ export default function VendorApplicationForm() {
   };
 
   const handleSubmit = async () => {
-    const stepErrors = validateStep(4, formData);
-    if (Object.keys(stepErrors).length > 0) {
-      setErrors(stepErrors);
-      const firstErrorMessage = Object.values(stepErrors)[0] as string;
-      if (firstErrorMessage) {
-        toast.error(firstErrorMessage);
-      }
+    // Validate operational step and documents step (W-9 required)
+    const stepErrors4 = validateStep(4, formData);
+    const stepErrors5 = validateStep(5, formData, fileUploadsRef.current);
+    if (Object.keys(stepErrors4).length > 0) {
+      setErrors(stepErrors4);
+      const firstErrorMessage = Object.values(stepErrors4)[0] as string;
+      if (firstErrorMessage) toast.error(firstErrorMessage);
+      return;
+    }
+    if (Object.keys(stepErrors5).length > 0) {
+      setErrors(stepErrors5);
+      const firstErrorMessage = Object.values(stepErrors5)[0] as string;
+      if (firstErrorMessage) toast.error(firstErrorMessage);
+      setCurrentStep(5);
       return;
     }
     if (!formData.agreeToTerms) {
@@ -634,6 +686,23 @@ export default function VendorApplicationForm() {
       }));
       toast.error("You must agree to the terms and conditions to submit.");
       return;
+    }
+    // File ref guards — check before starting submit/loading state
+    if (!fileUploadsRef.current["w9"]) {
+      toast.error("A completed W-9 form is required. Please upload the W-9.");
+      setCurrentStep(5);
+      return;
+    }
+
+    for (const [id, f] of Object.entries(fileUploadsRef.current)) {
+      if (!f) continue;
+      if (f.size === 0) {
+        toast.error(
+          `File \"${f.name}\" appears to be empty. Please re-upload.`,
+        );
+        setCurrentStep(5);
+        return;
+      }
     }
 
     setIsSubmitting(true);
@@ -663,7 +732,7 @@ export default function VendorApplicationForm() {
       // AFTER
       let docIndex = 0;
       ALL_DOCUMENT_IDS.forEach((id) => {
-        const file = formData.documentUploads[id];
+        const file = fileUploadsRef.current[id];
         if (file) {
           body.append(`document_${docIndex}`, file, file.name);
           body.append(`document_label_${docIndex}`, id);
@@ -717,12 +786,14 @@ export default function VendorApplicationForm() {
   };
 
   // ── Derived values for Review step ────────────────────────────────────────
+  // Count persisted metadata entries (these persist across refresh), but actual
+  // File objects live in `fileUploadsRef`.
   const uploadedCount = Object.values(formData.documentUploads).filter(
     Boolean,
   ).length;
   const uploadedDocuments = Object.entries(formData.documentUploads).filter(
-    ([, file]) => Boolean(file),
-  ) as Array<[string, File]>;
+    ([, v]) => Boolean(v),
+  ) as Array<[string, DocumentMeta]>;
 
   const formatList = (value: string) =>
     value
@@ -1219,7 +1290,11 @@ export default function VendorApplicationForm() {
                       label={doc.label}
                       description={doc.description}
                       required
-                      file={formData.documentUploads[doc.id] as File | null}
+                      file={fileUploadsRef.current[doc.id] ?? null}
+                      cleared={
+                        Boolean(formData.documentUploads[doc.id]) &&
+                        !fileUploadsRef.current[doc.id]
+                      }
                       onUpload={handleDocumentUpload}
                       onRemove={removeDocument}
                     />
@@ -1259,8 +1334,10 @@ export default function VendorApplicationForm() {
                             label={doc.label}
                             description={doc.description}
                             required={false}
-                            file={
-                              formData.documentUploads[doc.id] as File | null
+                            file={fileUploadsRef.current[doc.id] ?? null}
+                            cleared={
+                              Boolean(formData.documentUploads[doc.id]) &&
+                              !fileUploadsRef.current[doc.id]
                             }
                             onUpload={handleDocumentUpload}
                             onRemove={removeDocument}
