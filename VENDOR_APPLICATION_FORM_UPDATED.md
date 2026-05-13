@@ -1,274 +1,273 @@
 "use client";
 
+import { Button } from "@/components/ui/Button";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import type {
+VendorFormData,
+VendorFormErrors,
+VendorSuccessPayload,
+} from "@/types/vendor";
 import {
-  CheckCircle2,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  FileText,
-  Pencil,
-  ShieldCheck,
-  Upload,
-  X,
+CheckCircle2,
+ChevronDown,
+ChevronLeft,
+ChevronRight,
+FileText,
+Pencil,
+ShieldCheck,
+Upload,
+X,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/Button";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import type {
-  VendorFormData,
-  VendorFormErrors,
-  VendorSuccessPayload,
-} from "@/types/vendor";
-
 // ─────────────────────────────────────────────────────────────────────────────
 // DOCUMENT FIELDS — updated per client brief
 // ─────────────────────────────────────────────────────────────────────────────
 
 const REQUIRED_DOCUMENT_FIELDS = [
-  {
-    id: "w9",
-    label: "Completed W-9 Form",
-    description: "Please upload a current W-9 form.",
-  },
+{
+id: "w9",
+label: "Completed W-9 Form",
+description: "Please upload a current W-9 form.",
+},
 ] as const;
 
 const OPTIONAL_DOCUMENT_GROUPS = [
-  {
-    groupTitle: "Business & Insurance",
-    docs: [
-      {
-        id: "coi",
-        label: "Certificate of Insurance (COI)",
-        description: "Proof of general liability insurance.",
-      },
-      {
-        id: "business_license",
-        label: "Business License",
-        description: "Your current business license (if applicable).",
-      },
-      {
-        id: "workers_comp",
-        label: "Workers' Compensation Insurance",
-        description:
-          "Proof of workers' compensation insurance (if applicable).",
-      },
-      {
-        id: "voided_check",
-        label: "Voided Check (Bank)",
-        description: "Voided check or bank letter for payment setup.",
-      },
-    ],
-  },
-  {
-    groupTitle: "Identity & Licensing",
-    docs: [
-      {
-        id: "drivers_license",
-        label: "Driver's License / Government ID",
-        description: "Only required if specifically requested.",
-      },
-      {
-        id: "trade_license",
-        label: "Trade License / Certification",
-        description: "Professional license or certification (if applicable).",
-      },
-    ],
-  },
-  {
-    groupTitle: "Agreements & Authorization",
-    docs: [
-      {
-        id: "direct_deposit",
-        label: "Direct Deposit Authorization",
-        description: "Authorization form for direct payments.",
-      },
-      {
-        id: "background_check",
-        label: "Background Check Authorization",
-        description: "Authorization for background check (if requested).",
-      },
-      {
-        id: "other",
-        label: "Other Supporting Documents",
-        description:
-          "Upload any other documents that support your application.",
-      },
-    ],
-  },
+{
+groupTitle: "Business & Insurance",
+docs: [
+{
+id: "coi",
+label: "Certificate of Insurance (COI)",
+description: "Proof of general liability insurance.",
+},
+{
+id: "business_license",
+label: "Business License",
+description: "Your current business license (if applicable).",
+},
+{
+id: "workers_comp",
+label: "Workers' Compensation Insurance",
+description:
+"Proof of workers' compensation insurance (if applicable).",
+},
+{
+id: "voided_check",
+label: "Voided Check (Bank)",
+description: "Voided check or bank letter for payment setup.",
+},
+],
+},
+{
+groupTitle: "Identity & Licensing",
+docs: [
+{
+id: "drivers_license",
+label: "Driver's License / Government ID",
+description: "Only required if specifically requested.",
+},
+{
+id: "trade_license",
+label: "Trade License / Certification",
+description: "Professional license or certification (if applicable).",
+},
+],
+},
+{
+groupTitle: "Agreements & Authorization",
+docs: [
+{
+id: "direct_deposit",
+label: "Direct Deposit Authorization",
+description: "Authorization form for direct payments.",
+},
+{
+id: "background_check",
+label: "Background Check Authorization",
+description: "Authorization for background check (if requested).",
+},
+{
+id: "other",
+label: "Other Supporting Documents",
+description:
+"Upload any other documents that support your application.",
+},
+],
+},
 ] as const;
 
 // Flat list of ALL document IDs — used to key the documentUploads map
 type RequiredDocId = (typeof REQUIRED_DOCUMENT_FIELDS)[number]["id"];
 type OptionalDocId =
-  (typeof OPTIONAL_DOCUMENT_GROUPS)[number]["docs"][number]["id"];
+(typeof OPTIONAL_DOCUMENT_GROUPS)[number]["docs"][number]["id"];
 export type DocumentId = RequiredDocId | OptionalDocId;
 
 const ALL_DOCUMENT_IDS: DocumentId[] = [
-  ...REQUIRED_DOCUMENT_FIELDS.map((d) => d.id),
-  ...OPTIONAL_DOCUMENT_GROUPS.reduce<DocumentId[]>(
-    (acc, g) => [...acc, ...g.docs.map((d) => d.id)],
-    [],
-  ),
+...REQUIRED_DOCUMENT_FIELDS.map((d) => d.id),
+...OPTIONAL_DOCUMENT_GROUPS.reduce<DocumentId[]>(
+(acc, g) => [...acc, ...g.docs.map((d) => d.id)],
+[],
+),
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// REST OF CONSTANTS
+// REST OF CONSTANTS (unchanged from original)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SERVICE_GROUPS = [
-  {
-    title: "General Maintenance",
-    services: [
-      "General Property Maintenance",
-      "Handyman Services",
-      "Preventive Maintenance",
-      "Emergency Maintenance",
-      "Occupied Property Services",
-      "Vacant Property Services",
-    ],
-  },
-  {
-    title: "Turnovers / Make-Ready",
-    services: [
-      "Rental Turnovers / Unit Turns",
-      "Make-Ready Services",
-      "Move-in / Move-Out Repairs",
-      "Punch List Completion",
-      "Tenant Damage Repairs",
-    ],
-  },
-  {
-    title: "Property Preservation",
-    services: [
-      "Property Preservation",
-      "REO Services",
-      "Foreclosure Cleanouts",
-      "Winterization / De-Winterization",
-      "Lock Changes & Securing",
-      "Board-Ups",
-      "Vacancy Checks",
-      "Eviction Support / Lockouts",
-    ],
-  },
-  {
-    title: "Trash Outs & Cleanouts",
-    services: [
-      "Trash Outs & Cleanouts",
-      "Junk Removal / Hauling",
-      "Deep Cleaning / Janitorial",
-      "Carpet Cleaning",
-      "Pressure Washing",
-    ],
-  },
-  {
-    title: "Landscaping & Exterior",
-    services: [
-      "Landscaping & Lawn Care",
-      "Tree Trimming",
-      "Fence & Gate Repair",
-      "Exterior Repairs",
-      "Gutter Cleaning",
-      "Seasonal Maintenance",
-    ],
-  },
-  {
-    title: "Trades",
-    services: [
-      "Painting (Interior & Exterior)",
-      "Flooring Installation & Repair",
-      "Carpentry",
-      "Doors & Windows",
-      "Fencing",
-      "Plumbing",
-      "Electrical",
-      "HVAC / HVACR",
-      "Appliance Repair",
-      "Roofing",
-      "Drywall & Sheetrock",
-    ],
-  },
-  {
-    title: "Inspections & Documentation",
-    services: [
-      "Property Inspections",
-      "Move-in / Move-Out Inspections",
-      "Photo Documentation",
-      "Insurance Claim Inspections",
-      "Estimate Services",
-    ],
-  },
-  {
-    title: "Other Services",
-    services: [
-      "Mold / Water Damage Mitigation",
-      "Smoke Detector Compliance",
-      "Pool & Spa Maintenance",
-      "Pest Control Coordination",
-      "Other (Please Specify)",
-    ],
-  },
+{
+title: "General Maintenance",
+services: [
+"General Property Maintenance",
+"Handyman Services",
+"Preventive Maintenance",
+"Emergency Maintenance",
+"Occupied Property Services",
+"Vacant Property Services",
+],
+},
+{
+title: "Turnovers / Make-Ready",
+services: [
+"Rental Turnovers / Unit Turns",
+"Make-Ready Services",
+"Move-in / Move-Out Repairs",
+"Punch List Completion",
+"Tenant Damage Repairs",
+],
+},
+{
+title: "Property Preservation",
+services: [
+"Property Preservation",
+"REO Services",
+"Foreclosure Cleanouts",
+"Winterization / De-Winterization",
+"Lock Changes & Securing",
+"Board-Ups",
+"Vacancy Checks",
+"Eviction Support / Lockouts",
+],
+},
+{
+title: "Trash Outs & Cleanouts",
+services: [
+"Trash Outs & Cleanouts",
+"Junk Removal / Hauling",
+"Deep Cleaning / Janitorial",
+"Carpet Cleaning",
+"Pressure Washing",
+],
+},
+{
+title: "Landscaping & Exterior",
+services: [
+"Landscaping & Lawn Care",
+"Tree Trimming",
+"Fence & Gate Repair",
+"Exterior Repairs",
+"Gutter Cleaning",
+"Seasonal Maintenance",
+],
+},
+{
+title: "Trades",
+services: [
+"Painting (Interior & Exterior)",
+"Flooring Installation & Repair",
+"Carpentry",
+"Doors & Windows",
+"Fencing",
+"Plumbing",
+"Electrical",
+"HVAC / HVACR",
+"Appliance Repair",
+"Roofing",
+"Drywall & Sheetrock",
+],
+},
+{
+title: "Inspections & Documentation",
+services: [
+"Property Inspections",
+"Move-in / Move-Out Inspections",
+"Photo Documentation",
+"Insurance Claim Inspections",
+"Estimate Services",
+],
+},
+{
+title: "Other Services",
+services: [
+"Mold / Water Damage Mitigation",
+"Smoke Detector Compliance",
+"Pool & Spa Maintenance",
+"Pest Control Coordination",
+"Other (Please Specify)",
+],
+},
 ] as const;
 
 const OTHER_SERVICE_OPTION = "Other (Please Specify)";
 
 const STEPS = [
-  {
-    id: 1,
-    title: "Company Information",
-    description: "Tell us about your business",
-  },
-  {
-    id: 2,
-    title: "Services Offered",
-    description: "Select all services your business is qualified to perform",
-  },
-  {
-    id: 3,
-    title: "Coverage Area",
-    description: "Where are you available to provide services?",
-  },
-  {
-    id: 4,
-    title: "Operational Capabilities",
-    description: "Tell us more about your business operations",
-  },
-  {
-    id: 5,
-    title: "Document Upload / Checklist",
-    description: "Upload supporting documents",
-  },
-  {
-    id: 6,
-    title: "Review & Submit",
-    description: "Confirm your details before submitting",
-  },
+{
+id: 1,
+title: "Company Information",
+description: "Tell us about your business",
+},
+{
+id: 2,
+title: "Services Offered",
+description: "Select all services your business is qualified to perform",
+},
+{
+id: 3,
+title: "Coverage Area",
+description: "Where are you available to provide services?",
+},
+{
+id: 4,
+title: "Operational Capabilities",
+description: "Tell us more about your business operations",
+},
+{
+id: 5,
+title: "Document Upload / Checklist",
+description: "Upload supporting documents",
+},
+{
+id: 6,
+title: "Review & Submit",
+description: "Confirm your details before submitting",
+},
 ];
 
 const INITIAL_DATA: VendorFormData = {
-  companyName: "",
-  contactPerson: "",
-  phone: "",
-  email: "",
-  website: "",
-  yearsInBusiness: "",
-  serviceCategories: [],
-  serviceOtherDetails: "",
-  serviceCities: "",
-  serviceCounties: "",
-  zipCodes: "",
-  serviceRadius: "",
-  travelOutsideArea: "",
-  epaCertified: "",
-  backgroundCheck: "",
-  sameDayService: "",
-  turnaround2448: "",
-  additionalNotes: "",
-  documentUploads: Object.fromEntries(ALL_DOCUMENT_IDS.map((id) => [id, null])),
-  agreeToTerms: false,
+companyName: "",
+contactPerson: "",
+phone: "",
+email: "",
+website: "",
+yearsInBusiness: "",
+serviceCategories: [],
+serviceOtherDetails: "",
+serviceCities: "",
+serviceCounties: "",
+zipCodes: "",
+serviceRadius: "",
+travelOutsideArea: "",
+epaCertified: "",
+backgroundCheck: "",
+sameDayService: "",
+turnaround2448: "",
+additionalNotes: "",
+documentUploads: Object.fromEntries(ALL_DOCUMENT_IDS.map((id) => [id, null])),
+agreeToTerms: false,
 };
 
 const VENDOR_SUCCESS_STORAGE_KEY = "vendorApplicationSuccessPayload";
@@ -277,82 +276,82 @@ const MIN_STEP = 1;
 const MAX_STEP = STEPS.length;
 
 type VendorDraftData = Omit<VendorFormData, "documentUploads"> & {
-  documentUploads: Record<string, null>;
+documentUploads: Record<string, null>;
 };
 
 function serializeDraftFormData(formData: VendorFormData): VendorDraftData {
-  return {
-    ...formData,
-    documentUploads: Object.fromEntries(
-      Object.keys(formData.documentUploads).map((id) => [id, null]),
-    ),
-  };
+return {
+...formData,
+documentUploads: Object.fromEntries(
+Object.keys(formData.documentUploads).map((id) => [id, null]),
+),
+};
 }
 
 function persistVendorDraft(currentStep: number, formData: VendorFormData) {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(
-    VENDOR_FORM_DRAFT_STORAGE_KEY,
-    JSON.stringify({ currentStep, formData: serializeDraftFormData(formData) }),
-  );
+if (typeof window === "undefined") return;
+localStorage.setItem(
+VENDOR_FORM_DRAFT_STORAGE_KEY,
+JSON.stringify({ currentStep, formData: serializeDraftFormData(formData) }),
+);
 }
 
 function validateStep(step: number, data: VendorFormData): VendorFormErrors {
-  const errors: VendorFormErrors = {};
+const errors: VendorFormErrors = {};
 
-  if (step === 1) {
-    if (!data.companyName.trim())
-      errors.companyName = "Company name is required.";
-    if (!data.contactPerson.trim())
-      errors.contactPerson = "Contact person is required.";
-    if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-      errors.email = "A valid email address is required.";
-    if (!data.phone.trim() || data.phone.replace(/\D/g, "").length < 10)
-      errors.phone = "A valid phone number (at least 10 digits) is required.";
-    if (!data.yearsInBusiness.trim())
-      errors.yearsInBusiness = "Years in business is required.";
-  }
+if (step === 1) {
+if (!data.companyName.trim())
+errors.companyName = "Company name is required.";
+if (!data.contactPerson.trim())
+errors.contactPerson = "Contact person is required.";
+if (!data.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
+errors.email = "A valid email address is required.";
+if (!data.phone.trim() || data.phone.replace(/\D/g, "").length < 10)
+errors.phone = "A valid phone number (at least 10 digits) is required.";
+if (!data.yearsInBusiness.trim())
+errors.yearsInBusiness = "Years in business is required.";
+}
 
-  if (step === 2) {
-    if (data.serviceCategories.length === 0)
-      errors.serviceCategories = "Select at least one service.";
-    if (
-      data.serviceCategories.includes(OTHER_SERVICE_OPTION) &&
-      !data.serviceOtherDetails.trim()
-    )
-      errors.serviceOtherDetails =
-        "Please specify the other service you offer.";
-  }
+if (step === 2) {
+if (data.serviceCategories.length === 0)
+errors.serviceCategories = "Select at least one service.";
+if (
+data.serviceCategories.includes(OTHER_SERVICE_OPTION) &&
+!data.serviceOtherDetails.trim()
+)
+errors.serviceOtherDetails =
+"Please specify the other service you offer.";
+}
 
-  if (step === 3) {
-    if (!data.serviceCities.trim())
-      errors.serviceCities = "Service cities are required.";
-    if (!data.serviceCounties.trim())
-      errors.serviceCounties = "Service counties are required.";
-    if (!data.serviceRadius.trim())
-      errors.serviceRadius = "Service radius is required.";
-    if (!data.travelOutsideArea.trim())
-      errors.travelOutsideArea = "Please select one option.";
-  }
+if (step === 3) {
+if (!data.serviceCities.trim())
+errors.serviceCities = "Service cities are required.";
+if (!data.serviceCounties.trim())
+errors.serviceCounties = "Service counties are required.";
+if (!data.serviceRadius.trim())
+errors.serviceRadius = "Service radius is required.";
+if (!data.travelOutsideArea.trim())
+errors.travelOutsideArea = "Please select one option.";
+}
 
-  if (step === 4) {
-    if (!data.epaCertified) errors.epaCertified = "Please select Yes or No.";
-    if (!data.backgroundCheck)
-      errors.backgroundCheck = "Please select Yes or No.";
-    if (!data.sameDayService)
-      errors.sameDayService = "Please select Yes or No.";
-    if (!data.turnaround2448)
-      errors.turnaround2448 = "Please select Yes or No.";
-  }
+if (step === 4) {
+if (!data.epaCertified) errors.epaCertified = "Please select Yes or No.";
+if (!data.backgroundCheck)
+errors.backgroundCheck = "Please select Yes or No.";
+if (!data.sameDayService)
+errors.sameDayService = "Please select Yes or No.";
+if (!data.turnaround2448)
+errors.turnaround2448 = "Please select Yes or No.";
+}
 
-  // ── Step 5: W-9 is mandatory ──────────────────────────────────────────────
-  if (step === 5) {
-    if (!data.documentUploads["w9"]) {
-      errors.documentUploads = "A completed W-9 form is required to continue.";
-    }
-  }
+// ── Step 5: W-9 is mandatory ──────────────────────────────────────────────
+if (step === 5) {
+if (!data.documentUploads["w9"]) {
+errors.documentUploads = "A completed W-9 form is required to continue.";
+}
+}
 
-  return errors;
+return errors;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -360,77 +359,77 @@ function validateStep(step: number, data: VendorFormData): VendorFormErrors {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function ReviewRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-3 border-b border-surface-100 last:border-0">
-      <span className="font-body text-xs uppercase tracking-wider text-text-muted sm:w-52 flex-shrink-0 pt-0.5">
-        {label}
-      </span>
-      <span className="font-body text-sm text-charcoal font-medium break-words">
-        {value || (
-          <span className="text-text-muted italic font-normal">
-            Not provided
-          </span>
-        )}
-      </span>
-    </div>
-  );
+return (
+
+<div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-3 border-b border-surface-100 last:border-0">
+<span className="font-body text-xs uppercase tracking-wider text-text-muted sm:w-52 flex-shrink-0 pt-0.5">
+{label}
+</span>
+<span className="font-body text-sm text-charcoal font-medium break-words">
+{value || (
+<span className="text-text-muted italic font-normal">
+Not provided
+</span>
+)}
+</span>
+</div>
+);
 }
 
-/** Single upload card — shared between required and optional docs */
+/\*_ Single upload card — shared between required and optional docs _/
 function UploadCard({
-  id,
-  label,
-  description,
-  required,
-  file,
-  onUpload,
-  onRemove,
+id,
+label,
+description,
+required,
+file,
+onUpload,
+onRemove,
 }: {
-  id: string;
-  label: string;
-  description: string;
-  required?: boolean;
-  file: File | null;
-  onUpload: (id: string, file: File | null) => void;
-  onRemove: (id: string) => void;
+id: string;
+label: string;
+description: string;
+required?: boolean;
+file: File | null;
+onUpload: (id: string, file: File | null) => void;
+onRemove: (id: string) => void;
 }) {
-  return (
-    <div
-      className={`border rounded-xl p-4 bg-surface-50 h-full flex flex-col gap-3 ${
+return (
+
+<div
+className={`border rounded-xl p-4 bg-surface-50 h-full flex flex-col gap-3 ${
         required && !file
-          ? "border-teal/40 bg-teal-muted/30"
+          ? "border-orange/40 bg-orange-light/30"
           : "border-surface-200"
-      }`}
-    >
-      {/* Label row */}
-      <div className="flex items-start justify-between gap-2">
-        <div>
-          <p className="font-body text-sm font-semibold text-charcoal leading-snug">
-            {label}
-            {required && (
-              <span className="ml-1 text-teal" aria-label="required">
-                *
-              </span>
-            )}
-          </p>
-          <p className="font-body text-xs text-text-muted mt-0.5">
-            {description}
-          </p>
-        </div>
-        {required && (
-          <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-teal-muted px-2 py-0.5 text-[10px] font-accent font-semibold text-charcoal uppercase tracking-wide">
-            Required
-          </span>
-        )}
-      </div>
+      }`} >
+{/_ Label row _/}
+<div className="flex items-start justify-between gap-2">
+<div>
+<p className="font-body text-sm font-semibold text-charcoal leading-snug">
+{label}
+{required && (
+<span className="ml-1 text-orange" aria-label="required"> \*
+</span>
+)}
+</p>
+<p className="font-body text-xs text-text-muted mt-0.5">
+{description}
+</p>
+</div>
+{required && (
+<span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-orange-muted px-2 py-0.5 text-[10px] font-accent font-semibold text-charcoal uppercase tracking-wide">
+Required
+</span>
+)}
+</div>
 
       {/* Upload / preview area */}
       {!file ? (
         <label
           htmlFor={`doc-${id}`}
-          className="flex flex-col items-center justify-center gap-1.5 border-2 border-dashed border-surface-300 rounded-lg p-4 cursor-pointer hover:border-teal/50 hover:bg-white transition-colors bg-white text-center"
+          className="flex flex-col items-center justify-center gap-1.5 border-2 border-dashed border-surface-300 rounded-lg p-4 cursor-pointer hover:border-orange/50 hover:bg-white transition-colors bg-white text-center"
         >
-          <Upload className="w-4 h-4 text-teal" aria-hidden />
+          <Upload className="w-4 h-4 text-orange" aria-hidden />
           <span className="font-body text-sm font-medium text-charcoal">
             Upload File
           </span>
@@ -449,7 +448,7 @@ function UploadCard({
       ) : (
         <div className="flex items-center justify-between gap-3 bg-white border border-surface-200 rounded-lg px-4 py-3">
           <div className="flex items-center gap-2.5 min-w-0">
-            <FileText className="w-4 h-4 text-teal shrink-0" aria-hidden />
+            <FileText className="w-4 h-4 text-orange shrink-0" aria-hidden />
             <div className="min-w-0">
               <p className="font-body text-sm text-charcoal font-medium truncate">
                 {file.name}
@@ -470,7 +469,8 @@ function UploadCard({
         </div>
       )}
     </div>
-  );
+
+);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -478,163 +478,163 @@ function UploadCard({
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function VendorApplicationForm() {
-  const router = useRouter();
-  const hasRestoredDraftRef = useRef(false);
-  const skipNextPersistRef = useRef(true);
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<VendorFormData>(INITIAL_DATA);
-  const [errors, setErrors] = useState<VendorFormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState("");
+const router = useRouter();
+const hasRestoredDraftRef = useRef(false);
+const skipNextPersistRef = useRef(true);
+const [currentStep, setCurrentStep] = useState(1);
+const [formData, setFormData] = useState<VendorFormData>(INITIAL_DATA);
+const [errors, setErrors] = useState<VendorFormErrors>({});
+const [isSubmitting, setIsSubmitting] = useState(false);
+const [submitError, setSubmitError] = useState("");
 
-  // ── Draft restore ──────────────────────────────────────────────────────────
-  useEffect(() => {
-    const savedDraft =
-      localStorage.getItem(VENDOR_FORM_DRAFT_STORAGE_KEY) ??
-      sessionStorage.getItem(VENDOR_FORM_DRAFT_STORAGE_KEY);
-    if (!savedDraft) {
-      hasRestoredDraftRef.current = true;
-      return;
-    }
-    try {
-      const parsed = JSON.parse(savedDraft) as {
-        currentStep?: number;
-        formData?: Partial<VendorDraftData>;
-      };
-      const draftFormData = parsed.formData;
-      if (draftFormData) {
-        setFormData((prev) => ({
-          ...prev,
-          ...draftFormData,
-          serviceCategories: Array.isArray(draftFormData.serviceCategories)
-            ? draftFormData.serviceCategories
-            : prev.serviceCategories,
-          documentUploads: prev.documentUploads,
-        }));
-      }
-      if (typeof parsed.currentStep === "number") {
-        setCurrentStep(
-          Math.min(
-            MAX_STEP,
-            Math.max(MIN_STEP, Math.floor(parsed.currentStep)),
-          ),
-        );
-      }
-    } catch {
-      localStorage.removeItem(VENDOR_FORM_DRAFT_STORAGE_KEY);
-      sessionStorage.removeItem(VENDOR_FORM_DRAFT_STORAGE_KEY);
-    } finally {
-      hasRestoredDraftRef.current = true;
-    }
-  }, []);
+// ── Draft restore ──────────────────────────────────────────────────────────
+useEffect(() => {
+const savedDraft =
+localStorage.getItem(VENDOR_FORM_DRAFT_STORAGE_KEY) ??
+sessionStorage.getItem(VENDOR_FORM_DRAFT_STORAGE_KEY);
+if (!savedDraft) {
+hasRestoredDraftRef.current = true;
+return;
+}
+try {
+const parsed = JSON.parse(savedDraft) as {
+currentStep?: number;
+formData?: Partial<VendorDraftData>;
+};
+const draftFormData = parsed.formData;
+if (draftFormData) {
+setFormData((prev) => ({
+...prev,
+...draftFormData,
+serviceCategories: Array.isArray(draftFormData.serviceCategories)
+? draftFormData.serviceCategories
+: prev.serviceCategories,
+documentUploads: prev.documentUploads,
+}));
+}
+if (typeof parsed.currentStep === "number") {
+setCurrentStep(
+Math.min(
+MAX_STEP,
+Math.max(MIN_STEP, Math.floor(parsed.currentStep)),
+),
+);
+}
+} catch {
+localStorage.removeItem(VENDOR_FORM_DRAFT_STORAGE_KEY);
+sessionStorage.removeItem(VENDOR_FORM_DRAFT_STORAGE_KEY);
+} finally {
+hasRestoredDraftRef.current = true;
+}
+}, []);
 
-  useEffect(() => {
-    if (!hasRestoredDraftRef.current) return;
-    if (skipNextPersistRef.current) {
-      skipNextPersistRef.current = false;
-      return;
-    }
-    persistVendorDraft(currentStep, formData);
-  }, [currentStep, formData]);
+useEffect(() => {
+if (!hasRestoredDraftRef.current) return;
+if (skipNextPersistRef.current) {
+skipNextPersistRef.current = false;
+return;
+}
+persistVendorDraft(currentStep, formData);
+}, [currentStep, formData]);
 
-  // ── Helpers ────────────────────────────────────────────────────────────────
-  const inputClass = (field: keyof VendorFormErrors) =>
-    `w-full font-body text-sm px-4 py-3 border rounded-lg bg-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal focus:border-teal placeholder:text-text-muted ${
+// ── Helpers ────────────────────────────────────────────────────────────────
+const inputClass = (field: keyof VendorFormErrors) =>
+`w-full font-body text-sm px-4 py-3 border rounded-lg bg-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange focus:border-orange placeholder:text-text-muted ${
       errors[field]
         ? "border-error text-error"
         : "border-surface-200 text-text-body"
     }`;
 
-  const handleChange = (
-    field: keyof VendorFormData,
-    value: string | boolean,
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    if (errors[field as keyof VendorFormErrors]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    }
-  };
+const handleChange = (
+field: keyof VendorFormData,
+value: string | boolean,
+) => {
+setFormData((prev) => ({ ...prev, [field]: value }));
+if (errors[field as keyof VendorFormErrors]) {
+setErrors((prev) => ({ ...prev, [field]: undefined }));
+}
+};
 
-  const toggleServiceCategory = (service: string) => {
-    const isRemoving = formData.serviceCategories.includes(service);
-    setFormData((prev) => ({
-      ...prev,
-      serviceCategories: isRemoving
-        ? prev.serviceCategories.filter((item) => item !== service)
-        : [...prev.serviceCategories, service],
-      serviceOtherDetails:
-        isRemoving && service === OTHER_SERVICE_OPTION
-          ? ""
-          : prev.serviceOtherDetails,
-    }));
-    if (errors.serviceCategories)
-      setErrors((prev) => ({ ...prev, serviceCategories: undefined }));
-    if (
-      isRemoving &&
-      service === OTHER_SERVICE_OPTION &&
-      errors.serviceOtherDetails
-    )
-      setErrors((prev) => ({ ...prev, serviceOtherDetails: undefined }));
-  };
+const toggleServiceCategory = (service: string) => {
+const isRemoving = formData.serviceCategories.includes(service);
+setFormData((prev) => ({
+...prev,
+serviceCategories: isRemoving
+? prev.serviceCategories.filter((item) => item !== service)
+: [...prev.serviceCategories, service],
+serviceOtherDetails:
+isRemoving && service === OTHER_SERVICE_OPTION
+? ""
+: prev.serviceOtherDetails,
+}));
+if (errors.serviceCategories)
+setErrors((prev) => ({ ...prev, serviceCategories: undefined }));
+if (
+isRemoving &&
+service === OTHER_SERVICE_OPTION &&
+errors.serviceOtherDetails
+)
+setErrors((prev) => ({ ...prev, serviceOtherDetails: undefined }));
+};
 
-  const handleDocumentUpload = (id: string, file: File | null) => {
-    if (!file) return;
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error(`File exceeds the 10 MB size limit: ${file.name}`);
-      return;
-    }
-    toast.success(`File "${file.name}" uploaded successfully`);
-    setFormData((prev) => ({
-      ...prev,
-      documentUploads: { ...prev.documentUploads, [id]: file },
-    }));
-  };
+const handleDocumentUpload = (id: string, file: File | null) => {
+if (!file) return;
+if (file.size > 10 _ 1024 _ 1024) {
+toast.error(`File exceeds the 10 MB size limit: ${file.name}`);
+return;
+}
+toast.success(`File "${file.name}" uploaded successfully`);
+setFormData((prev) => ({
+...prev,
+documentUploads: { ...prev.documentUploads, [id]: file },
+}));
+};
 
-  const removeDocument = (id: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      documentUploads: { ...prev.documentUploads, [id]: null },
-    }));
-  };
+const removeDocument = (id: string) => {
+setFormData((prev) => ({
+...prev,
+documentUploads: { ...prev.documentUploads, [id]: null },
+}));
+};
 
-  const handleNext = () => {
-    const stepErrors = validateStep(currentStep, formData);
-    if (Object.keys(stepErrors).length > 0) {
-      setErrors(stepErrors);
-      // Show toast for the first error
-      const firstErrorMessage = Object.values(stepErrors)[0] as string;
-      if (firstErrorMessage) {
-        toast.error(firstErrorMessage);
-      }
-      return;
-    }
-    setErrors({});
-    setCurrentStep((prev) => prev + 1);
-  };
+const handleNext = () => {
+const stepErrors = validateStep(currentStep, formData);
+if (Object.keys(stepErrors).length > 0) {
+setErrors(stepErrors);
+// Show toast for the first error
+const firstErrorMessage = Object.values(stepErrors)[0] as string;
+if (firstErrorMessage) {
+toast.error(firstErrorMessage);
+}
+return;
+}
+setErrors({});
+setCurrentStep((prev) => prev + 1);
+};
 
-  const handleBack = () => {
-    setErrors({});
-    setCurrentStep((prev) => prev - 1);
-  };
+const handleBack = () => {
+setErrors({});
+setCurrentStep((prev) => prev - 1);
+};
 
-  const handleSubmit = async () => {
-    const stepErrors = validateStep(4, formData);
-    if (Object.keys(stepErrors).length > 0) {
-      setErrors(stepErrors);
-      const firstErrorMessage = Object.values(stepErrors)[0] as string;
-      if (firstErrorMessage) {
-        toast.error(firstErrorMessage);
-      }
-      return;
-    }
-    if (!formData.agreeToTerms) {
-      setErrors((prev) => ({
-        ...prev,
-        agreeToTerms: "You must agree before submitting.",
-      }));
-      toast.error("You must agree to the terms and conditions to submit.");
-      return;
-    }
+const handleSubmit = async () => {
+const stepErrors = validateStep(4, formData);
+if (Object.keys(stepErrors).length > 0) {
+setErrors(stepErrors);
+const firstErrorMessage = Object.values(stepErrors)[0] as string;
+if (firstErrorMessage) {
+toast.error(firstErrorMessage);
+}
+return;
+}
+if (!formData.agreeToTerms) {
+setErrors((prev) => ({
+...prev,
+agreeToTerms: "You must agree before submitting.",
+}));
+toast.error("You must agree to the terms and conditions to submit.");
+return;
+}
 
     setIsSubmitting(true);
     setSubmitError("");
@@ -710,107 +710,103 @@ export default function VendorApplicationForm() {
     } finally {
       setIsSubmitting(false);
     }
-  };
 
-  // ── Derived values for Review step ────────────────────────────────────────
-  const uploadedCount = Object.values(formData.documentUploads).filter(
-    Boolean,
-  ).length;
-  const uploadedDocuments = Object.entries(formData.documentUploads).filter(
-    ([, file]) => Boolean(file),
-  ) as Array<[string, File]>;
+};
 
-  const formatList = (value: string) =>
-    value
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
+// ── Derived values for Review step ────────────────────────────────────────
+const uploadedCount = Object.values(formData.documentUploads).filter(
+Boolean,
+).length;
+const uploadedDocuments = Object.entries(formData.documentUploads).filter(
+([, file]) => Boolean(file),
+) as Array<[string, File]>;
 
-  const applicationDate = new Date().toLocaleDateString("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  });
+const formatList = (value: string) =>
+value
+.split(",")
+.map((item) => item.trim())
+.filter(Boolean);
 
-  const sectionComplete = {
-    company:
-      Boolean(formData.companyName.trim()) &&
-      Boolean(formData.contactPerson.trim()) &&
-      Boolean(formData.phone.trim()) &&
-      Boolean(formData.email.trim()) &&
-      Boolean(formData.yearsInBusiness.trim()),
-    services: formData.serviceCategories.length > 0,
-    coverage:
-      Boolean(formData.serviceCities.trim()) &&
-      Boolean(formData.serviceCounties.trim()) &&
-      Boolean(formData.serviceRadius.trim()) &&
-      Boolean(formData.travelOutsideArea.trim()),
-    operational:
-      Boolean(formData.epaCertified) &&
-      Boolean(formData.backgroundCheck) &&
-      Boolean(formData.sameDayService) &&
-      Boolean(formData.turnaround2448),
-    // W-9 required; all others optional
-    documents: Boolean(formData.documentUploads["w9"]),
-  };
-  const allSectionsComplete = Object.values(sectionComplete).every(Boolean);
+const applicationDate = new Date().toLocaleDateString("en-US", {
+month: "short",
+day: "2-digit",
+year: "numeric",
+});
 
-  // ── Step indicator ─────────────────────────────────────────────────────────
-  // ── Step indicator ─────────────────────────────────────────────────────────
-  const StepIndicator = () => (
-    <div className="w-full max-w-6xl mx-auto mb-10 px-4">
-      {/* Desktop — centered flex with consistent gaps */}
-      <div className="hidden xl:flex items-center justify-center gap-4">
-        {STEPS.map((step, i) => (
-          <div key={step.id} className="flex items-center gap-3">
-            {/* Step circle */}
-            <div
-              className={`flex items-center justify-center w-8 h-8 rounded-full font-accent text-xs font-semibold transition-colors duration-300 ${
-                currentStep === step.id
-                  ? "bg-teal text-white shadow-teal-glow"
-                  : currentStep > step.id
-                    ? "bg-charcoal text-white"
-                    : "bg-surface-100 text-text-muted border border-surface-200"
-              }`}
-            >
-              {currentStep > step.id ? (
-                <CheckCircle2 className="w-4 h-4" />
-              ) : (
-                step.id
-              )}
-            </div>
+const sectionComplete = {
+company:
+Boolean(formData.companyName.trim()) &&
+Boolean(formData.contactPerson.trim()) &&
+Boolean(formData.phone.trim()) &&
+Boolean(formData.email.trim()) &&
+Boolean(formData.yearsInBusiness.trim()),
+services: formData.serviceCategories.length > 0,
+coverage:
+Boolean(formData.serviceCities.trim()) &&
+Boolean(formData.serviceCounties.trim()) &&
+Boolean(formData.serviceRadius.trim()) &&
+Boolean(formData.travelOutsideArea.trim()),
+operational:
+Boolean(formData.epaCertified) &&
+Boolean(formData.backgroundCheck) &&
+Boolean(formData.sameDayService) &&
+Boolean(formData.turnaround2448),
+// W-9 required; all others optional
+documents: Boolean(formData.documentUploads["w9"]),
+};
+const allSectionsComplete = Object.values(sectionComplete).every(Boolean);
 
-            {/* Step label */}
-            <span
-              className={`font-accent text-xs whitespace-nowrap ${
-                currentStep === step.id
-                  ? "text-charcoal font-semibold"
-                  : "text-text-muted"
-              }`}
-            >
-              {step.title}
-            </span>
+// ── Step indicator ─────────────────────────────────────────────────────────
+const StepIndicator = () => (
 
-            {/* Connector line (not after last step) */}
-            {i < STEPS.length - 1 && (
-              <div
-                className={`w-10 h-0.5 rounded-full transition-colors duration-300 ${
+<div className="w-full max-w-6xl mx-auto mb-10 px-2">
+{/_ Desktop _/}
+<div className="hidden xl:flex items-center">
+{STEPS.map((step, i) => (
+<div key={step.id} className="contents">
+<div className="shrink-0 flex items-center gap-2">
+<div
+className={`flex items-center justify-center w-8 h-8 rounded-full font-accent text-xs font-semibold transition-colors duration-300 ${
+                  currentStep === step.id
+                    ? "bg-orange text-white shadow-orange-glow"
+                    : currentStep > step.id
+                      ? "bg-charcoal text-white"
+                      : "bg-surface-100 text-text-muted border border-surface-200"
+                }`} >
+{currentStep > step.id ? (
+<CheckCircle2 className="w-4 h-4" />
+) : (
+step.id
+)}
+</div>
+<span
+className={`font-accent text-xs whitespace-nowrap ${
+                  currentStep === step.id
+                    ? "text-charcoal font-semibold"
+                    : "text-text-muted"
+                }`} >
+{step.title}
+</span>
+</div>
+{i < STEPS.length - 1 && (
+<div
+className={`flex-1 h-0.5 mx-3 rounded-full transition-colors duration-300 ${
                   currentStep > step.id ? "bg-charcoal" : "bg-surface-200"
                 }`}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+/>
+)}
+</div>
+))}
+</div>
 
-      {/* Mobile/Tablet — circles only, centered */}
+      {/* Mobile — circles only */}
       <div className="flex xl:hidden items-center justify-center gap-2">
         {STEPS.map((step, i) => (
-          <div key={step.id} className="flex items-center">
+          <div key={step.id} className="flex items-center gap-2">
             <div
               className={`flex items-center justify-center w-8 h-8 rounded-full font-accent text-xs font-semibold transition-colors duration-300 ${
                 currentStep === step.id
-                  ? "bg-teal text-white shadow-teal-glow"
+                  ? "bg-orange text-white shadow-orange-glow"
                   : currentStep > step.id
                     ? "bg-charcoal text-white"
                     : "bg-surface-100 text-text-muted border border-surface-200"
@@ -824,7 +820,7 @@ export default function VendorApplicationForm() {
             </div>
             {i < STEPS.length - 1 && (
               <div
-                className={`w-4 h-0.5 mx-1 rounded-full transition-colors duration-300 ${
+                className={`w-5 h-0.5 rounded-full transition-colors duration-300 ${
                   currentStep > step.id ? "bg-charcoal" : "bg-surface-200"
                 }`}
               />
@@ -833,14 +829,16 @@ export default function VendorApplicationForm() {
         ))}
       </div>
     </div>
-  );
 
-  // ─────────────────────────────────────────────────────────────────────────
-  // RENDER
-  // ─────────────────────────────────────────────────────────────────────────
-  return (
-    <div>
-      <SectionHeading
+);
+
+// ─────────────────────────────────────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────────────────────────────────────
+return (
+
+<div>
+<SectionHeading
         title="Vendor Application"
         subtitle="Complete all six steps to submit your application."
         align="center"
@@ -850,7 +848,7 @@ export default function VendorApplicationForm() {
         <StepIndicator />
 
         <div className="max-w-4xl mx-auto bg-white border border-surface-200 rounded-2xl shadow-card p-8 sm:p-10">
-          <p className="font-accent text-xs uppercase tracking-widest text-teal mb-1">
+          <p className="font-accent text-xs uppercase tracking-widest text-orange mb-1">
             Step {currentStep} of {STEPS.length}
           </p>
           <h3 className="font-display text-2xl font-bold text-charcoal mb-1">
@@ -866,7 +864,7 @@ export default function VendorApplicationForm() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                    Company Name <span className="text-teal">*</span>
+                    Company Name <span className="text-orange">*</span>
                   </label>
                   <input
                     type="text"
@@ -880,7 +878,7 @@ export default function VendorApplicationForm() {
                 </div>
                 <div>
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                    Contact Person <span className="text-teal">*</span>
+                    Contact Person <span className="text-orange">*</span>
                   </label>
                   <input
                     type="text"
@@ -897,7 +895,7 @@ export default function VendorApplicationForm() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                    Phone Number <span className="text-teal">*</span>
+                    Phone Number <span className="text-orange">*</span>
                   </label>
                   <input
                     type="tel"
@@ -909,7 +907,7 @@ export default function VendorApplicationForm() {
                 </div>
                 <div>
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                    Email Address <span className="text-teal">*</span>
+                    Email Address <span className="text-orange">*</span>
                   </label>
                   <input
                     type="email"
@@ -937,7 +935,7 @@ export default function VendorApplicationForm() {
                 </div>
                 <div>
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                    Years in Business <span className="text-teal">*</span>
+                    Years in Business <span className="text-orange">*</span>
                   </label>
                   <div className="relative">
                     <select
@@ -987,14 +985,14 @@ export default function VendorApplicationForm() {
                           onClick={() => toggleServiceCategory(service)}
                           className={`flex items-center gap-3 px-4 py-3 rounded-lg border text-left font-body text-sm transition-all duration-200 ${
                             selected
-                              ? "border-teal bg-teal-muted text-charcoal font-medium"
-                              : "border-surface-200 text-text-muted hover:border-teal/50 hover:bg-surface-50"
+                              ? "border-orange bg-orange-muted text-charcoal font-medium"
+                              : "border-surface-200 text-text-muted hover:border-orange/50 hover:bg-surface-50"
                           }`}
                         >
                           <span
                             className={`w-4 h-4 rounded border flex-shrink-0 flex items-center justify-center transition-colors ${
                               selected
-                                ? "bg-teal border-teal"
+                                ? "bg-orange border-orange"
                                 : "border-surface-300"
                             }`}
                           >
@@ -1016,7 +1014,7 @@ export default function VendorApplicationForm() {
                 <div>
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
                     Other Service (Please Specify){" "}
-                    <span className="text-teal">*</span>
+                    <span className="text-orange">*</span>
                   </label>
                   <input
                     type="text"
@@ -1037,7 +1035,7 @@ export default function VendorApplicationForm() {
             <div className="space-y-5">
               <div>
                 <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                  Service Cities <span className="text-teal">*</span>
+                  Service Cities <span className="text-orange">*</span>
                 </label>
                 <input
                   type="text"
@@ -1051,7 +1049,7 @@ export default function VendorApplicationForm() {
               </div>
               <div>
                 <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                  Service Counties <span className="text-teal">*</span>
+                  Service Counties <span className="text-orange">*</span>
                 </label>
                 <input
                   type="text"
@@ -1077,7 +1075,7 @@ export default function VendorApplicationForm() {
               </div>
               <div>
                 <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                  Service Radius <span className="text-teal">*</span>
+                  Service Radius <span className="text-orange">*</span>
                 </label>
                 <div className="relative">
                   <select
@@ -1101,7 +1099,7 @@ export default function VendorApplicationForm() {
               <div>
                 <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
                   Willing to travel outside regular area?{" "}
-                  <span className="text-teal">*</span>
+                  <span className="text-orange">*</span>
                 </label>
                 <div className="relative">
                   <select
@@ -1143,7 +1141,7 @@ export default function VendorApplicationForm() {
               ).map(({ field, label }) => (
                 <div key={field}>
                   <label className="block font-body text-sm font-medium text-charcoal mb-1.5">
-                    {label} <span className="text-teal">*</span>
+                    {label} <span className="text-orange">*</span>
                   </label>
                   <div className="relative">
                     <select
@@ -1184,7 +1182,10 @@ export default function VendorApplicationForm() {
             <div className="space-y-8">
               {/* File-type notice */}
               <div className="flex items-center gap-3 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3">
-                <FileText className="w-4 h-4 text-teal shrink-0" aria-hidden />
+                <FileText
+                  className="w-4 h-4 text-orange shrink-0"
+                  aria-hidden
+                />
                 <p className="font-body text-sm text-charcoal">
                   Accepted file types:{" "}
                   <span className="font-medium">PDF, JPG, PNG</span> &mdash; Max
@@ -1202,7 +1203,7 @@ export default function VendorApplicationForm() {
                     Required Documents
                   </h4>
                   <span
-                    className="h-0.5 w-8 rounded-full bg-teal"
+                    className="h-0.5 w-8 rounded-full bg-orange"
                     aria-hidden
                   />
                 </div>
@@ -1271,7 +1272,7 @@ export default function VendorApplicationForm() {
               {/* Security notice */}
               <div className="flex items-start gap-3 rounded-xl border border-surface-200 bg-surface-50 p-4">
                 <ShieldCheck
-                  className="w-5 h-5 text-teal shrink-0 mt-0.5"
+                  className="w-5 h-5 text-orange shrink-0 mt-0.5"
                   aria-hidden
                 />
                 <p className="font-body text-sm text-charcoal">
@@ -1299,7 +1300,7 @@ export default function VendorApplicationForm() {
                   </div>
 
                   <div className="flex items-start gap-3 p-4 bg-surface-50 border border-surface-200 rounded-xl">
-                    <CheckCircle2 className="w-5 h-5 text-teal mt-0.5 shrink-0" />
+                    <CheckCircle2 className="w-5 h-5 text-orange mt-0.5 shrink-0" />
                     <p className="font-body text-sm text-charcoal">
                       Make sure all information is correct and up to date. You
                       can edit any section if needed.
@@ -1315,7 +1316,7 @@ export default function VendorApplicationForm() {
                       <button
                         type="button"
                         onClick={() => setCurrentStep(1)}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-teal/50 hover:text-teal transition-colors"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-orange/50 hover:text-orange transition-colors"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                         Edit
@@ -1347,14 +1348,14 @@ export default function VendorApplicationForm() {
                         <h5 className="font-display text-lg font-bold text-charcoal">
                           2. Services Offered
                         </h5>
-                        <span className="px-2 py-1 rounded-full bg-teal-muted text-charcoal text-xs font-body font-medium">
+                        <span className="px-2 py-1 rounded-full bg-orange-muted text-charcoal text-xs font-body font-medium">
                           {formData.serviceCategories.length} Selected
                         </span>
                       </div>
                       <button
                         type="button"
                         onClick={() => setCurrentStep(2)}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-teal/50 hover:text-teal transition-colors"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-orange/50 hover:text-orange transition-colors"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                         Edit
@@ -1367,7 +1368,7 @@ export default function VendorApplicationForm() {
                             key={service}
                             className="inline-flex items-center gap-1.5 rounded-full bg-surface-50 border border-surface-200 px-3 py-1.5 text-xs font-body text-charcoal"
                           >
-                            <CheckCircle2 className="w-3.5 h-3.5 text-teal" />
+                            <CheckCircle2 className="w-3.5 h-3.5 text-orange" />
                             {service}
                           </span>
                         ))
@@ -1398,7 +1399,7 @@ export default function VendorApplicationForm() {
                       <button
                         type="button"
                         onClick={() => setCurrentStep(3)}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-teal/50 hover:text-teal transition-colors"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-orange/50 hover:text-orange transition-colors"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                         Edit
@@ -1456,7 +1457,7 @@ export default function VendorApplicationForm() {
                       <button
                         type="button"
                         onClick={() => setCurrentStep(4)}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-teal/50 hover:text-teal transition-colors"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-orange/50 hover:text-orange transition-colors"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                         Edit
@@ -1493,7 +1494,7 @@ export default function VendorApplicationForm() {
                         <h5 className="font-display text-lg font-bold text-charcoal">
                           5. Documents Uploaded
                         </h5>
-                        <span className="px-2 py-1 rounded-full bg-teal-muted text-charcoal text-xs font-body font-medium">
+                        <span className="px-2 py-1 rounded-full bg-orange-muted text-charcoal text-xs font-body font-medium">
                           {uploadedCount}{" "}
                           {uploadedCount === 1 ? "Document" : "Documents"}
                         </span>
@@ -1501,7 +1502,7 @@ export default function VendorApplicationForm() {
                       <button
                         type="button"
                         onClick={() => setCurrentStep(5)}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-teal/50 hover:text-teal transition-colors"
+                        className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 px-3 py-1.5 text-sm font-body text-charcoal hover:border-orange/50 hover:text-orange transition-colors"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                         Edit
@@ -1515,11 +1516,12 @@ export default function VendorApplicationForm() {
                             className="rounded-lg border border-surface-200 bg-surface-50 p-3 flex items-start gap-2.5"
                           >
                             <FileText
-                              className="w-4 h-4 text-teal shrink-0 mt-0.5"
+                              className="w-4 h-4 text-orange shrink-0 mt-0.5"
                               aria-hidden
                             />
                             <div className="min-w-0">
                               <p className="font-body text-sm font-medium text-charcoal">
+                                {/* Resolve human-readable label from id */}
                                 {(
                                   [
                                     ...REQUIRED_DOCUMENT_FIELDS,
@@ -1579,8 +1581,8 @@ export default function VendorApplicationForm() {
                         <p className="font-body text-xs text-text-muted uppercase tracking-wide">
                           Status
                         </p>
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-teal-muted text-charcoal text-xs font-body font-medium px-2.5 py-1">
-                          <ShieldCheck className="w-3.5 h-3.5 text-teal" />
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-muted text-charcoal text-xs font-body font-medium px-2.5 py-1">
+                          <ShieldCheck className="w-3.5 h-3.5 text-orange" />
                           {allSectionsComplete
                             ? "Ready to Submit"
                             : "In Progress"}
@@ -1609,7 +1611,7 @@ export default function VendorApplicationForm() {
                       ).map(([label, done]) => (
                         <div key={label} className="flex items-center gap-2">
                           <CheckCircle2
-                            className={`w-4 h-4 ${done ? "text-teal" : "text-surface-300"}`}
+                            className={`w-4 h-4 ${done ? "text-green-600" : "text-surface-300"}`}
                           />
                           <span className="font-body text-sm text-charcoal">
                             {label}
@@ -1627,7 +1629,7 @@ export default function VendorApplicationForm() {
                   </div>
 
                   {/* Terms agreement */}
-                  <div className="rounded-xl border border-teal/20 bg-teal-muted/40 p-5">
+                  <div className="rounded-xl border border-orange/20 bg-orange-muted/40 p-5">
                     <h5 className="font-display text-lg font-bold text-charcoal mb-3">
                       I Agree
                     </h5>
@@ -1639,7 +1641,7 @@ export default function VendorApplicationForm() {
                         onChange={(e) =>
                           handleChange("agreeToTerms", e.target.checked)
                         }
-                        className="mt-1 h-4 w-4 rounded border-surface-300 text-teal focus:ring-teal focus:ring-offset-0 cursor-pointer"
+                        className="mt-1 h-4 w-4 rounded border-surface-300 text-orange focus:ring-orange focus:ring-offset-0 cursor-pointer"
                         aria-describedby={
                           errors.agreeToTerms
                             ? "vendor-agreeToTerms-error"
@@ -1657,7 +1659,7 @@ export default function VendorApplicationForm() {
                           onClick={() =>
                             persistVendorDraft(currentStep, formData)
                           }
-                          className="text-teal hover:text-teal-dark underline underline-offset-2"
+                          className="text-orange hover:text-orange-dark underline underline-offset-2"
                         >
                           Vendor Terms & Onboarding Agreement
                         </Link>
@@ -1708,7 +1710,7 @@ export default function VendorApplicationForm() {
                       your application.
                     </p>
                     <div className="mt-3 rounded-lg bg-surface-50 border border-surface-200 p-3 flex items-center gap-2">
-                      <FileText className="w-4 h-4 text-teal" aria-hidden />
+                      <FileText className="w-4 h-4 text-orange" aria-hidden />
                       <p className="font-body text-xs text-charcoal">
                         Your information is secure and used only for vendor
                         onboarding and verification.
@@ -1757,5 +1759,6 @@ export default function VendorApplicationForm() {
         </div>
       </div>
     </div>
-  );
+
+);
 }

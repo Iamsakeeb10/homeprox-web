@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { ScrollToTop } from "@/components/shared/ScrollToTop";
 import { defaultMetadata } from "@/lib/metadata";
+import { Toaster } from "sonner";
 
 const display = Outfit({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
         </PageWrapper>
         <Footer />
         <ScrollToTop />
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

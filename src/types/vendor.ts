@@ -9,11 +9,24 @@ export interface VendorFormData {
 
   // Step 2 — Services Offered
   serviceCategories: string[];
-  coverageAreas: string;
-  serviceRadius: string;
+  serviceOtherDetails: string; // required when "Other (Please Specify)" is selected
 
-  // Step 3 — Documents & Attachments (optional)
-  attachments?: File[];
+  // Step 3 — Coverage Area
+  serviceCities: string;
+  serviceCounties: string;
+  zipCodes: string; // optional
+  serviceRadius: string;
+  travelOutsideArea: string; // "Yes" | "No"
+
+  // Step 4 — Operational Capabilities
+  epaCertified: string; // "Yes" | "No"
+  backgroundCheck: string; // "Yes" | "No"
+  sameDayService: string; // "Yes" | "No"
+  turnaround2448: string; // "Yes" | "No"
+  additionalNotes: string; // optional
+
+  // Step 5 — Document Uploads (keyed by document id → File | null)
+  documentUploads: Record<string, File | null>;
 
   // Terms acceptance (required before submit)
   agreeToTerms: boolean;
@@ -26,9 +39,16 @@ export interface VendorFormErrors {
   email?: string;
   yearsInBusiness?: string;
   serviceCategories?: string;
-  coverageAreas?: string;
+  serviceOtherDetails?: string;
+  serviceCities?: string;
+  serviceCounties?: string;
   serviceRadius?: string;
-  attachments?: string;
+  travelOutsideArea?: string;
+  epaCertified?: string;
+  backgroundCheck?: string;
+  sameDayService?: string;
+  turnaround2448?: string;
+  documentUploads?: string;
   agreeToTerms?: string;
   general?: string;
 }
@@ -37,4 +57,18 @@ export interface VendorFormStep {
   id: number;
   title: string;
   description: string;
+}
+
+export interface VendorSuccessPayload {
+  companyName: string;
+  contactPerson: string;
+  phone: string;
+  email: string;
+  servicesOffered: string[];
+  serviceCities: string;
+  serviceCounties: string;
+  serviceRadius: string;
+  travelOutsideArea: string;
+  applicationDate: string;
+  status: string;
 }
