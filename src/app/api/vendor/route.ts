@@ -162,7 +162,10 @@ export async function POST(request: NextRequest) {
 </div>
     `;
 
-    const toAddress = process.env.CONTACT_EMAIL ?? process.env.EMAIL_USER;
+    const toAddress =
+      process.env.VENDOR_EMAIL ??
+      process.env.CONTACT_EMAIL ??
+      process.env.EMAIL_USER;
     if (!toAddress || !process.env.EMAIL_USER) {
       return NextResponse.json(
         { error: "Server email configuration is missing." },
@@ -186,7 +189,17 @@ export async function POST(request: NextRequest) {
     );
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error: unknown) {
-    const smtpError = error as { code?: string };
+    const smtpError = error as {
+      code?: string;
+      message?: string;
+      response?: string;
+    };
+    console.error("[/api/vendor] SMTP Error details:", {
+      code: smtpError?.code,
+      message: smtpError?.message,
+      response: smtpError?.response,
+    });
+
     if (smtpError?.code === "EAUTH") {
       return NextResponse.json(
         {
@@ -197,7 +210,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.error("[/api/vendor] Error:", error);
     return NextResponse.json(
       { error: "Internal server error. Please try again later." },
       { status: 500 },

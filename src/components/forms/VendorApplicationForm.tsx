@@ -365,7 +365,7 @@ function ReviewRow({ label, value }: { label: string; value: string }) {
       <span className="font-body text-xs uppercase tracking-wider text-text-muted sm:w-52 flex-shrink-0 pt-0.5">
         {label}
       </span>
-      <span className="font-body text-sm text-charcoal font-medium break-words">
+      <span className="font-body text-sm text-charcoal font-medium break-words line-clamp-3">
         {value || (
           <span className="text-text-muted italic font-normal">
             Not provided
@@ -405,7 +405,7 @@ function UploadCard({
       {/* Label row */}
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className="font-body text-sm font-semibold text-charcoal leading-snug">
+          <p className="font-body text-sm font-semibold text-charcoal leading-snug truncate">
             {label}
             {required && (
               <span className="ml-1 text-teal" aria-label="required">
@@ -413,7 +413,7 @@ function UploadCard({
               </span>
             )}
           </p>
-          <p className="font-body text-xs text-text-muted mt-0.5">
+          <p className="font-body text-xs text-text-muted mt-0.5 line-clamp-2">
             {description}
           </p>
         </div>
@@ -849,14 +849,14 @@ export default function VendorApplicationForm() {
       <div className="mt-10" suppressHydrationWarning>
         <StepIndicator />
 
-        <div className="max-w-4xl mx-auto bg-white border border-surface-200 rounded-2xl shadow-card p-8 sm:p-10">
+        <div className="max-w-6xl mx-auto bg-white border border-surface-200 rounded-2xl shadow-card p-8 sm:p-10">
           <p className="font-accent text-xs uppercase tracking-widest text-teal mb-1">
             Step {currentStep} of {STEPS.length}
           </p>
-          <h3 className="font-display text-2xl font-bold text-charcoal mb-1">
+          <h3 className="font-display text-2xl font-bold text-charcoal mb-1 truncate">
             {STEPS[currentStep - 1].title}
           </h3>
-          <p className="font-body text-text-muted mb-8">
+          <p className="font-body text-text-muted mb-8 truncate">
             {STEPS[currentStep - 1].description}
           </p>
 

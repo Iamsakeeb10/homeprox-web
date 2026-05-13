@@ -14,7 +14,7 @@ A production-grade, fully responsive Next.js website for HomeProX Services LLC, 
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm, yarn, pnpm, or bun
 
 ### Installation
@@ -32,17 +32,18 @@ npm install
 cp .env.local.example .env.local
 ```
 
-4. Update `.env.local` with your site URL and (for the contact form) email settings:
+4. Update `.env.local` with your site URL and email settings:
 
 ```
 NEXT_PUBLIC_SITE_URL=https://homeproxsvcs.com
 
-# Contact form (Nodemailer)
+# Email Configuration (Nodemailer)
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=465
-EMAIL_USER=your-gmail@gmail.com
-EMAIL_PASS=your-app-password
-CONTACT_EMAIL=your-gmail@gmail.com
+EMAIL_USER=client@homeproxsvcs.com
+EMAIL_PASS=HomeProX#517
+CONTACT_EMAIL=info@homeproxsvcs.com
+VENDOR_EMAIL=vendor@homeproxsvcs.com
 ```
 
 5. Run the development server:
@@ -99,7 +100,8 @@ src/
 - `EMAIL_PORT` - SMTP port (e.g. `465` for TLS)
 - `EMAIL_USER` - SMTP auth email (e.g. your Gmail)
 - `EMAIL_PASS` - SMTP auth password (use a Gmail App Password, not your account password)
-- `CONTACT_EMAIL` - Address where contact form submissions are sent
+- `CONTACT_EMAIL` - Address where contact and quote form submissions are sent
+- `VENDOR_EMAIL` - Address where vendor application submissions are sent
 
 ## Design System
 
@@ -112,6 +114,7 @@ The project uses Tailwind CSS v4 with a CSS-based theme configuration. All desig
 ## Image Credits
 
 All images are sourced from:
+
 - **Unsplash** - Free for commercial use
 - **Pexels** - Free for commercial use
 

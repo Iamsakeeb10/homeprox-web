@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import nodemailer from "nodemailer";
 
 export function getMailerConfigError(): string | null {
   if (!process.env.EMAIL_HOST) return "EMAIL_HOST is not configured.";
@@ -16,4 +16,4 @@ export const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-})
+});
