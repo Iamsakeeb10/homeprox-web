@@ -660,13 +660,17 @@ export default function VendorApplicationForm() {
       body.append("turnaround2448", formData.turnaround2448);
       body.append("additionalNotes", formData.additionalNotes);
 
-      ALL_DOCUMENT_IDS.forEach((id, i) => {
+      // AFTER
+      let docIndex = 0;
+      ALL_DOCUMENT_IDS.forEach((id) => {
         const file = formData.documentUploads[id];
         if (file) {
-          body.append(`document_${i}`, file, file.name);
-          body.append(`document_label_${i}`, id);
+          body.append(`document_${docIndex}`, file, file.name);
+          body.append(`document_label_${docIndex}`, id);
+          docIndex++;
         }
       });
+      body.append("documentCount", String(docIndex));
 
       const res = await fetch("/api/vendor", { method: "POST", body });
       if (!res.ok) throw new Error("Submission failed. Please try again.");

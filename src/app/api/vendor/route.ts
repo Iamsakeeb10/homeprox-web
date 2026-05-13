@@ -50,9 +50,11 @@ export async function POST(request: NextRequest) {
     // ── Extract file attachments (document_0, document_1, ...) ───────────────
     const attachments: nodemailer.SendMailOptions["attachments"] = [];
     const uploadedDocumentLabels: string[] = [];
-    let i = 0;
+    const documentCount = parseInt(
+      (data.get("documentCount") as string) ?? "0",
+    );
 
-    while (data.get(`document_${i}`)) {
+    for (let i = 0; i < documentCount; i++) {
       const file = data.get(`document_${i}`) as File;
       const label =
         (data.get(`document_label_${i}`) as string) || `Document ${i + 1}`;
@@ -73,7 +75,7 @@ export async function POST(request: NextRequest) {
         });
         uploadedDocumentLabels.push(`${label}: ${file.name}`);
       }
-      i++;
+      // ← NO i++ here
     }
 
     // ── Build email HTML ─────────────────────────────────────────────────────
