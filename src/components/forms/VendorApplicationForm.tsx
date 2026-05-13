@@ -303,9 +303,14 @@ function serializeDraftFormData(formData: VendorFormData): VendorDraftData {
 
 function persistVendorDraft(currentStep: number, formData: VendorFormData) {
   if (typeof window === "undefined") return;
+  // Cap at step 5 — step 6 requires live file uploads which are lost on reload
+  const stepToSave = currentStep >= 6 ? 5 : currentStep;
   localStorage.setItem(
     VENDOR_FORM_DRAFT_STORAGE_KEY,
-    JSON.stringify({ currentStep, formData: serializeDraftFormData(formData) }),
+    JSON.stringify({
+      currentStep: stepToSave,
+      formData: serializeDraftFormData(formData),
+    }),
   );
 }
 
@@ -404,7 +409,6 @@ function UploadCard({
   description,
   required,
   file,
-  cleared,
   onUpload,
   onRemove,
 }: {
@@ -413,7 +417,6 @@ function UploadCard({
   description: string;
   required?: boolean;
   file: File | null;
-  cleared?: boolean;
   onUpload: (id: string, file: File | null) => void;
   onRemove: (id: string) => void;
 }) {
@@ -470,11 +473,7 @@ function UploadCard({
               aria-label={`Upload ${label}`}
             />
           </label>
-          {cleared && (
-            <p className="text-xs text-error mt-1">
-              File cleared — please re-upload.
-            </p>
-          )}
+          {/* no cleared state — metadata is cleared on restore */}
         </>
       ) : (
         <div className="flex items-center justify-between gap-3 bg-white border border-surface-200 rounded-lg px-4 py-3">
@@ -515,6 +514,7 @@ export default function VendorApplicationForm() {
   const fileUploadsRef = useRef<Record<string, File | null>>({});
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<VendorFormData>(INITIAL_DATA);
+  const [w9Uploaded, setW9Uploaded] = useState(false);
   const [errors, setErrors] = useState<VendorFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -535,24 +535,32 @@ export default function VendorApplicationForm() {
       };
       const draftFormData = parsed.formData;
       if (draftFormData) {
+        // Always restore form fields except uploaded file metadata.
+        // File objects cannot be recovered after a page reload — treat all
+        // document uploads as empty so state stays honest with the in-memory
+        // `fileUploadsRef` (which will be empty after refresh).
         setFormData((prev) => ({
           ...prev,
           ...draftFormData,
           serviceCategories: Array.isArray(draftFormData.serviceCategories)
             ? draftFormData.serviceCategories
             : prev.serviceCategories,
-          documentUploads:
-            (draftFormData as Partial<VendorDraftData>).documentUploads ??
-            prev.documentUploads,
+          // Wipe persisted metadata on restore; users must re-upload files.
+          documentUploads: Object.fromEntries(
+            ALL_DOCUMENT_IDS.map((id) => [id, null]),
+          ),
+          agreeToTerms: false,
         }));
       }
+
       if (typeof parsed.currentStep === "number") {
-        setCurrentStep(
-          Math.min(
-            MAX_STEP,
-            Math.max(MIN_STEP, Math.floor(parsed.currentStep)),
-          ),
-        );
+        const raw = Math.floor(parsed.currentStep);
+        // Always cap at step 5 — step 6 requires live W-9 in memory which
+        // is lost on reload. Using explicit check rather than MAX_STEP - 1
+        // to be unambiguous about intent.
+        const restoredStep =
+          raw >= 6 ? 5 : Math.min(MAX_STEP, Math.max(MIN_STEP, raw));
+        setCurrentStep(restoredStep);
       }
     } catch {
       localStorage.removeItem(VENDOR_FORM_DRAFT_STORAGE_KEY);
@@ -570,6 +578,13 @@ export default function VendorApplicationForm() {
     }
     persistVendorDraft(currentStep, formData);
   }, [currentStep, formData]);
+
+  // Safety net: if we ever land on step 6 without a W-9, kick back to step 5
+  useEffect(() => {
+    if (currentStep === 6 && !w9Uploaded) {
+      setCurrentStep(5);
+    }
+  }, [currentStep, w9Uploaded]);
 
   // ── Helpers ────────────────────────────────────────────────────────────────
   const inputClass = (field: keyof VendorFormErrors) =>
@@ -619,6 +634,7 @@ export default function VendorApplicationForm() {
     }
     // Keep the real File in a ref (not serializable). Store only metadata in state.
     fileUploadsRef.current[id] = file;
+    if (id === "w9") setW9Uploaded(true);
     toast.success(`File "${file.name}" uploaded successfully`);
     setFormData((prev) => ({
       ...prev,
@@ -627,11 +643,15 @@ export default function VendorApplicationForm() {
         [id]: { name: file.name, size: file.size, type: file.type },
       },
     }));
+    if (id === "w9" && errors.documentUploads) {
+      setErrors((prev) => ({ ...prev, documentUploads: undefined }));
+    }
   };
 
   const removeDocument = (id: string) => {
     // Clear both the File ref and the persisted metadata
     fileUploadsRef.current[id] = null;
+    if (id === "w9") setW9Uploaded(false);
     setFormData((prev) => ({
       ...prev,
       documentUploads: { ...prev.documentUploads, [id]: null },
@@ -651,6 +671,13 @@ export default function VendorApplicationForm() {
       if (firstErrorMessage) {
         toast.error(firstErrorMessage);
       }
+      return;
+    }
+    // Extra guard: never advance to step 6 without W-9 in memory
+    if (currentStep === 5 && !w9Uploaded) {
+      const msg = "A completed W-9 form is required to continue.";
+      setErrors({ documentUploads: msg });
+      toast.error(msg);
       return;
     }
     setErrors({});
@@ -689,6 +716,10 @@ export default function VendorApplicationForm() {
     }
     // File ref guards — check before starting submit/loading state
     if (!fileUploadsRef.current["w9"]) {
+      setErrors((prev) => ({
+        ...prev,
+        documentUploads: "A completed W-9 form is required to continue.",
+      }));
       toast.error("A completed W-9 form is required. Please upload the W-9.");
       setCurrentStep(5);
       return;
@@ -786,14 +817,12 @@ export default function VendorApplicationForm() {
   };
 
   // ── Derived values for Review step ────────────────────────────────────────
-  // Count persisted metadata entries (these persist across refresh), but actual
-  // File objects live in `fileUploadsRef`.
-  const uploadedCount = Object.values(formData.documentUploads).filter(
-    Boolean,
-  ).length;
-  const uploadedDocuments = Object.entries(formData.documentUploads).filter(
-    ([, v]) => Boolean(v),
-  ) as Array<[string, DocumentMeta]>;
+  // Keep Review step in sync with submit validation by reading actual in-memory
+  // File uploads (the same source used during submit).
+  const uploadedDocuments = Object.entries(fileUploadsRef.current).filter(
+    ([, file]) => Boolean(file),
+  ) as Array<[string, File]>;
+  const uploadedCount = uploadedDocuments.length;
 
   const formatList = (value: string) =>
     value
@@ -826,7 +855,7 @@ export default function VendorApplicationForm() {
       Boolean(formData.sameDayService) &&
       Boolean(formData.turnaround2448),
     // W-9 required; all others optional
-    documents: Boolean(formData.documentUploads["w9"]),
+    documents: w9Uploaded,
   };
   const allSectionsComplete = Object.values(sectionComplete).every(Boolean);
 
@@ -1291,15 +1320,26 @@ export default function VendorApplicationForm() {
                       description={doc.description}
                       required
                       file={fileUploadsRef.current[doc.id] ?? null}
-                      cleared={
-                        Boolean(formData.documentUploads[doc.id]) &&
-                        !fileUploadsRef.current[doc.id]
-                      }
                       onUpload={handleDocumentUpload}
                       onRemove={removeDocument}
                     />
                   ))}
                 </div>
+
+                {errors.documentUploads && (
+                  <div
+                    role="alert"
+                    className="mt-4 flex items-start gap-2.5 rounded-lg border border-error/30 bg-error/5 px-4 py-3"
+                  >
+                    <X
+                      className="w-4 h-4 text-error shrink-0 mt-0.5"
+                      aria-hidden
+                    />
+                    <p className="font-body text-sm text-error">
+                      {errors.documentUploads}
+                    </p>
+                  </div>
+                )}
               </section>
 
               {/* ── Optional documents (grouped) ─────────────────────────── */}
@@ -1335,10 +1375,6 @@ export default function VendorApplicationForm() {
                             description={doc.description}
                             required={false}
                             file={fileUploadsRef.current[doc.id] ?? null}
-                            cleared={
-                              Boolean(formData.documentUploads[doc.id]) &&
-                              !fileUploadsRef.current[doc.id]
-                            }
                             onUpload={handleDocumentUpload}
                             onRemove={removeDocument}
                           />
@@ -1588,6 +1624,27 @@ export default function VendorApplicationForm() {
                         Edit
                       </button>
                     </div>
+                    {errors.documentUploads && (
+                      <div
+                        role="alert"
+                        className="mt-4 flex items-start gap-2.5 rounded-lg border border-error/30 bg-error/5 px-4 py-3"
+                      >
+                        <X
+                          className="w-4 h-4 text-error shrink-0 mt-0.5"
+                          aria-hidden
+                        />
+                        <p className="font-body text-sm text-error">
+                          {errors.documentUploads}{" "}
+                          <button
+                            type="button"
+                            onClick={() => setCurrentStep(5)}
+                            className="underline underline-offset-2 font-medium hover:opacity-80"
+                          >
+                            Go to Documents
+                          </button>
+                        </p>
+                      </div>
+                    )}
                     <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
                       {uploadedDocuments.length > 0 ? (
                         uploadedDocuments.map(([id, file]) => (
@@ -1688,13 +1745,20 @@ export default function VendorApplicationForm() {
                           ["W-9 Uploaded", sectionComplete.documents],
                         ] as [string, boolean][]
                       ).map(([label, done]) => (
-                        <div key={label} className="flex items-center gap-2">
-                          <CheckCircle2
-                            className={`w-4 h-4 ${done ? "text-teal" : "text-surface-300"}`}
-                          />
-                          <span className="font-body text-sm text-charcoal">
-                            {label}
-                          </span>
+                        <div key={label}>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2
+                              className={`w-4 h-4 ${done ? "text-teal" : "text-surface-300"}`}
+                            />
+                            <span className="font-body text-sm text-charcoal">
+                              {label}
+                            </span>
+                          </div>
+                          {label === "W-9 Uploaded" && !done && (
+                            <p className="font-body text-xs text-error ml-6 mt-0.5">
+                              Required — please upload before submitting.
+                            </p>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -1828,7 +1892,7 @@ export default function VendorApplicationForm() {
                   size="md"
                   onClick={handleSubmit}
                   loading={isSubmitting}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !w9Uploaded}
                 >
                   {isSubmitting ? "Submitting..." : "Submit Application"}
                 </Button>
