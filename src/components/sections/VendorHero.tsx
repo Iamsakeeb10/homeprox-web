@@ -5,7 +5,7 @@ const VENDOR_HERO_IMAGE = "/images/heroes/hero-vendor.jpg";
 
 export default function VendorHero() {
   return (
-    <section className="relative h-[40vh] min-h-[320px] md:h-[50vh] lg:h-[55vh] flex items-center justify-center overflow-hidden pt-28 sm:pt-32">
+    <section className="relative min-h-[480px] h-auto md:h-[50vh] md:min-h-[480px] lg:h-[55vh] lg:min-h-[520px] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28">
       <div className="absolute inset-0 z-0">
         <Image
           src={VENDOR_HERO_IMAGE}
@@ -16,7 +16,7 @@ export default function VendorHero() {
         />
       </div>
       <div className="absolute inset-0 bg-charcoal/72 z-10" />
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 sm:py-20 lg:py-24 text-center">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10 sm:py-12 lg:py-20 text-center">
         <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
           Join the HomeProX Property Maintenance Network
         </h1>
@@ -24,7 +24,9 @@ export default function VendorHero() {
           <div className="h-px w-16 bg-teal/50" />
         </div>
         <p className="font-body text-lg text-surface-200 max-w-2xl mx-auto mb-10">
-          Partner with a trusted network built on consistent opportunity, dependable collaborations, and real growth potential throughout Texas property services.
+          Partner with a trusted network built on consistent opportunity,
+          dependable collaborations, and real growth potential throughout Texas
+          property services.
         </p>
         <Button
           variant="primary"
