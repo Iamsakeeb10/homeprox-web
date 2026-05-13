@@ -219,7 +219,7 @@ export function Footer() {
         <div className="border-t border-white/10 pt-8 mb-8">
           <div className="flex justify-center gap-6">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/HomeProxx"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
@@ -228,7 +228,7 @@ export function Footer() {
               <Facebook className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/pro_home57777"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
@@ -237,7 +237,7 @@ export function Footer() {
               <Twitter className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/homeprox"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
@@ -246,7 +246,7 @@ export function Footer() {
               <Linkedin className="w-5 h-5" aria-hidden="true" />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/home_prox"
               target="_blank"
               rel="noopener noreferrer"
               className="text-surface-300 hover:text-white transition-colors duration-200 hover:scale-110"
